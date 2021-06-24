@@ -105,7 +105,7 @@ import ErrorBag from '../../atoms/ErrorBag.vue';
 
 export default {
   components: { ErrorBag },
-  name: 'LoginForm',
+  name: 'AuthForm',
   emits: {
       submit: null
   },

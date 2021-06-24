@@ -4,6 +4,8 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
+    "create-index-files": "node scripts/create-index-files.js",
+    "prepublish": "npm create-index-files",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -29,7 +31,13 @@
   },
   "name": "atmosphere-ui",
   "description": "UI for jetstream inertia",
-  "main": "postcss.config.js",
+  "main": "./index.js",
+  "module": "./index.js",
+  "files": [
+    "scripts/*",
+    "src/*",
+    "index.js"
+  ],
   "author": "Jesus Guerrero",
   "license": "ISC"
 }

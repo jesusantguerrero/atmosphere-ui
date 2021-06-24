@@ -1,15 +1,15 @@
-import LoginForm from '../../../components/organisms/auth/LoginForm.vue';
+import AuthForm from './AuthForm.vue';
 import AuthFormGroup from '../../../components/molecules/auth/AuthFormGroup.vue';
 import AuthInput from '../../../components/molecules/auth/AuthInput.vue';
 import AuthTemplate from '../../../components/templates/Auth.vue';
 
 export default {
-  title: 'Organisms/Auth/LoginForm',
-  component: LoginForm,
+  title: 'Organisms/Auth/AuthForm',
+  component: AuthForm,
 };
 
 const Template = (args) => ({
-  components: { LoginForm, AuthTemplate },
+  components: { AuthForm, AuthTemplate },
   setup() {
     return { args };
   },
@@ -28,7 +28,7 @@ Register.args = {
 };
 
 export const ForgotPassword = (args) => ({
-  components: { LoginForm, AuthFormGroup, AuthInput, AuthTemplate},
+  components: { AuthForm, AuthFormGroup, AuthInput, AuthTemplate},
   setup() {
     return { args };
   },

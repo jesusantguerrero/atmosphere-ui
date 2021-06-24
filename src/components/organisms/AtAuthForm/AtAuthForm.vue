@@ -101,7 +101,7 @@
 
 <script>
 import { reactive, ref, computed, toRefs } from "vue";
-import ErrorBag from '../../atoms/ErrorBag.vue';
+import ErrorBag from '../../atoms/AtErrorBag/AtErrorBag.vue';
 
 export default {
   components: { ErrorBag },

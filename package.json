@@ -1,11 +1,11 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run create-index-files && vite build",
     "serve": "vite preview",
     "create-index-files": "node scripts/create-index-files.js",
-    "prepublish": "npm create-index-files",
+    "prepublish": "npm run build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -36,7 +36,8 @@
   "files": [
     "scripts/*",
     "src/*",
-    "index.js"
+    "index.js",
+    "dist/*"
   ],
   "author": "Jesus Guerrero",
   "license": "ISC"

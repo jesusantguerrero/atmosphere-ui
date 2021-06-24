@@ -1,7 +1,7 @@
-import AuthForm from './AuthForm.vue';
-import AuthFormGroup from '../../../components/molecules/auth/AuthFormGroup.vue';
-import AuthInput from '../../../components/molecules/auth/AuthInput.vue';
-import AuthTemplate from '../../../components/templates/Auth.vue';
+import AuthForm from './AtAuthForm.vue';
+import AuthFormGroup from '../../molecules/AtFormGroup/AtFormGroup.vue';
+import AuthInput from '../../molecules/AtAuthInput/AtAuthInput.vue';
+import AuthTemplate from '../../templates/AtAuthBox/AtAuthBox.vue';
 
 export default {
   title: 'Organisms/Auth/AuthForm',
@@ -13,7 +13,7 @@ const Template = (args) => ({
   setup() {
     return { args };
   },
-  template: '<auth-template><login-form v-bind="args" /></auth-template>',
+  template: '<auth-template><auth-form v-bind="args" /></auth-template>',
 });
 
 export const Default = Template.bind({});
@@ -33,14 +33,14 @@ export const ForgotPassword = (args) => ({
     return { args };
   },
   template: `<auth-template>
-      <login-form v-bind="args">
+      <auth-form v-bind="args">
       <template #content>
         <p> {{ description }}</p>
         <auth-form-group label="Email">
             <auth-input v-model="args.form.email" required type="email" />
         </auth-form-group>
       </template>
-    </login-form>
+    </-form>
   </auth-template>`,
 });
 

@@ -1,11 +1,10 @@
 <template>
     <div class="login-box">
-        <div class="login-box__form md:w-1/2 w-full px-12">
-          <slot></slot>
+        <div class="login-box__form md:w-1/2 w-full px-12 py-4 bg-white rounded-md z-10">
+            <slot></slot>
         </div>
     </div>
 </template>
-
 <style lang="scss">
 :root {
     --primary-color: blue;
@@ -23,7 +22,6 @@
     justify-content: center;
     align-items: center;
     background: linear-gradient(to left bottom,#3a4a73 0,#1b243f);
-    background: url(../../assets/background.jpg);
     background-position: center;
     background-size: cover;
     background-size: cover;
@@ -40,14 +38,6 @@
         opacity: .65;
         left: 0;
         height: 100%;
-    }
-
-    &__form {
-        color: white;
-        max-width: 450px;
-        border-radius: 4px;
-        // box-shadow: 0 0 10px 4px rgba($color: #000000, $alpha: 0.2);
-        z-index: 2;
     }
 
     .btn-action {

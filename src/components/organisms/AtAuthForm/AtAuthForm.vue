@@ -215,3 +215,31 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.form-group {
+    margin: 15px 0;
+
+    label {
+        margin: 0.5rem 0;
+    };
+
+    &--error {
+        @apply text-red-400;
+        input {
+            @apply shadow-sm;
+            @apply border-2;
+            @apply border-red-300;
+        }
+    }
+}
+
+.form-control {
+    @apply text-gray-400;
+    @apply px-2;
+
+    &:focus {
+        outline: none;
+    }
+}
+</style>

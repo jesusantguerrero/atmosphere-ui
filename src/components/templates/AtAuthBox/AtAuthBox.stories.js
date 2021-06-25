@@ -1,10 +1,10 @@
-import AuthForm from './AtAuthForm.vue';
+import AuthForm from '../../organisms/AtAuthForm/AtAuthForm.vue';
 import AuthFormGroup from '../../molecules/AtFormGroup/AtFormGroup.vue';
 import AuthInput from '../../atoms/AtAuthInput/AtAuthInput.vue';
 import AuthTemplate from '../../templates/AtAuthBox/AtAuthBox.vue';
 
 export default {
-  title: 'Organisms/AuthForm',
+  title: 'Templates/AtAuthBox',
   component: AuthForm,
 };
 
@@ -13,7 +13,7 @@ const Template = (args) => ({
   setup() {
     return { args };
   },
-  template: '<auth-form v-bind="args" />',
+  template: '<auth-template><auth-form v-bind="args" /></auth-template>',
 });
 
 export const Default = Template.bind({});
@@ -30,7 +30,7 @@ export const ForgotPassword = (args) => ({
   setup() {
     return { args };
   },
-  template: `
+  template: `<auth-template>
       <auth-form v-bind="args">
       <template #content>
         <p> {{ description }}</p>
@@ -38,7 +38,8 @@ export const ForgotPassword = (args) => ({
             <auth-input v-model="args.form.email" required type="email" />
         </auth-form-group>
       </template>
-    </auth-form>`,
+    </auth-form>
+  </auth-template>`,
 });
 
 ForgotPassword.args = {

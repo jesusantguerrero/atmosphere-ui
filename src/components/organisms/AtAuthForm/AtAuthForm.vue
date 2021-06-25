@@ -1,91 +1,70 @@
 <template>
-  <form @submit.prevent="loginUser()" @keydown.enter="loginUser()">
-      <div class="w-full flex justify-center items-center mb-20 sm:pt-20">
-          <div class="text-6xl text-center brand-font cursor-pointer" @click="$emit('home-pressed')">
-            <slot name="brand">
-              {{ appName }}
-            </slot>
-          </div>
-      </div>
-
-    <slot name="prependInput">
-
-    </slot>
-    <slot name="content">
-        <div
-            class="form-group text-left"
-        >
-            <label for="email" class="inline-block mb-2">Email</label>
-            <p :class="{ control: true }">
-                <input
-                    v-model.trim="formData.email"
-                    data-test-id="input-email"
-                    class="form-control input text-gray-400"
-                    :class="{ 'border-red-400 border-2': false }"
-                    name="email"
-                    type="text"
-                    required
-                />
-            </p>
-            <error-bag :errors="errors" field="email"></error-bag>
+    <form @submit.prevent="loginUser()" @keydown.enter="loginUser()" class="text-gray-700">
+        <div class="flex items-center justify-center w-full mb-20 sm:pt-20">
+            <div class="text-6xl text-center cursor-pointer brand-font" @click="$emit('home-pressed')">
+                <slot name="brand">
+                {{ appName }}
+                </slot>
+            </div>
         </div>
 
-        <div
-            class="form-group"
-        >
-            <label for="password" class="password-label"><span>Password</span></label
-            >
-            <p :class="{ control: true }">
-                <input
+        <slot name="prependInput" />
+
+        <slot name="content">
+            <at-field field="email" label="Email">
+                <at-input
+                    v-model.trim="formData.email"
+                    data-test-id="input-email"
+                    required
+                />
+                <template #error>
+                    <error-bag :errors="errors" field="email"></error-bag>
+                </template>
+            </at-field>
+
+            <at-field field="password" label="Password">
+                <at-input
                     type="password"
                     data-test-id="input-password"
                     v-model="formData.password"
-                    class="form-control input text-gray-400"
-                    :class="{ 'border-red-400 border-2': false }"
-                    name="password"
                     required
                 />
-            </p>
-            <error-bag :errors="errors" field="password"></error-bag>
-        </div>
+                <template #error>
+                    <at-error-bags :errors="errors" field="password"></at-error-bags>
+                </template>
+            </at-field>
 
-        <div
-            class="form-group"
-            v-if="mode!='login'"
-        >
-            <label for="password" class="password-label">
-                <span>Confirm Password</span>
-            </label>
-            <p class="true">
-                <input
+            <at-field
+                v-if="mode!='login'"
+                label="Confirm Password"
+                field="confirm_password"
+            >
+                <at-auth-input
                     type="password"
                     data-test-id="input-confirm-password"
                     v-model="formData.confirmPassword"
-                    class="form-control input text-gray-400"
                     @blur="isDirty=true"
                     :class="{ 'error-input': isConfirmationInvalid }"
-                    name="confirm-password"
                     required
                 />
                 <small v-if="isConfirmationInvalid" class="text-red-200"> Passwords are not equal </small>
-            </p>
-            <error-bag :errors="errors" field="confirm_password"></error-bag>
-        </div>
-       </slot>
+                <error-bag :errors="errors" field="confirm_password"></error-bag>
+            </at-field>
+        </slot>
 
-        <button
-            class="btn btn-action capitalize rounded-sm"
+        <at-button
+            class="w-full capitalize rounded-sm"
             :class="btnClass"
-            type="button"
+            type="primary"
             data-test-id="btn-submit"
             :disabled="isConfirmationInvalid"
             @click="loginUser()"
         >
             {{ modeLabel }}
-            <i v-if="isLoading" class="fa fa-spinner fa-pulse ml-2"></i>
-        </button>
+            <i v-if="isLoading" class="ml-2 fa fa-spinner fa-pulse"></i>
+        </at-button>
 
-        <div class="text-center" v-if="!hideLink">
+        <div class="text-center text-gray-700" v-if="!hideLink">
                 <div> {{ linkDescription }}
                 <slot name="link">
                 <a @click.prevent="$emit('link-pressed', mode)" class="font-bold cursor-pointer" :class="linkClass">
@@ -94,17 +73,21 @@
                 </slot>
             </div>
         </div>
-
-      <p class="copyrights pt-10">&copy; {{ currentYear }}</p>
-  </form>
+        
+        <p class="pt-10 text-center text-gray-700">&copy; {{ currentYear }}</p>
+    </form>
 </template>
 
 <script>
 import { reactive, ref, computed, toRefs } from "vue";
-import ErrorBag from '../../atoms/AtErrorBag/AtErrorBag.vue';
+import AtButton from '../../atoms/AtButton/AtButton.vue';
+import AtField from '../../atoms/AtField/AtField.vue';
+import AtAuthInput from '../../atoms/AtAuthInput/AtAuthInput.vue';
+import AtErrorBag from '../../atoms/AtErrorBag/AtErrorBag.vue';
+import AtInput from '../../atoms/AtInput/AtInput.vue';
 
 export default {
-  components: { ErrorBag },
+  components: { AtButton, AtAuthInput, AtField, AtErrorBag, AtInput },
   name: 'AuthForm',
   emits: {
       submit: null

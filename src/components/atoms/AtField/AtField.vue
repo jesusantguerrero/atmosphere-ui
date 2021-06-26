@@ -1,5 +1,5 @@
 <template>
-    <div class="text-gray-700 form-group">
+    <div class="form-group">
         <label :for="field">{{ label }}</label>
         <slot></slot>
         <slot name="error"></slot>

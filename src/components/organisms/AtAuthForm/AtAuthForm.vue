@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="loginUser()" @keydown.enter="loginUser()" class="text-gray-700">
+    <form @submit.prevent="loginUser()" @keydown.enter="loginUser()" class="text-white">
         <div class="flex items-center justify-center w-full mb-20 sm:pt-20">
             <div class="text-6xl text-center cursor-pointer brand-font" @click="$emit('home-pressed')">
                 <slot name="brand">
@@ -39,7 +39,7 @@
                 label="Confirm Password"
                 field="confirm_password"
             >
-                <at-auth-input
+                <at-input
                     type="password"
                     data-test-id="input-confirm-password"
                     v-model="formData.confirmPassword"
@@ -64,7 +64,7 @@
             <i v-if="isLoading" class="ml-2 fa fa-spinner fa-pulse"></i>
         </at-button>
 
-        <div class="text-center text-gray-700" v-if="!hideLink">
+        <div class="text-center" v-if="!hideLink">
                 <div> {{ linkDescription }}
                 <slot name="link">
                 <a @click.prevent="$emit('link-pressed', mode)" class="font-bold cursor-pointer" :class="linkClass">
@@ -74,12 +74,12 @@
             </div>
         </div>
         
-        <p class="pt-10 text-center text-gray-700">&copy; {{ currentYear }}</p>
+        <p class="pt-10 text-center">&copy; {{ currentYear }}</p>
     </form>
 </template>
 
 <script>
-import { reactive, ref, computed, toRefs } from "vue";
+import { reactive, computed, toRefs, provide } from "vue";
 import AtButton from '../../atoms/AtButton/AtButton.vue';
 import AtField from '../../atoms/AtField/AtField.vue';
 import AtAuthInput from '../../atoms/AtAuthInput/AtAuthInput.vue';
@@ -130,40 +130,44 @@ export default {
       isLoading: {
           type: Boolean,
           default: false
+      },
+      dark: {
+          type: Boolean,
+          default: false
       }
   },
   setup(props, { emit }) {
     const { mode, isLoading } = toRefs(props)
-    const formData = reactive({
-        email: '',
-        password: '',
-        confirmPassword: '',
-    });
+    const state = reactive({
+        formData: {
+            email: '',
+            password: '',
+            confirmPassword: '',
+        },
+        currentYear: computed(() =>{
+            const date = new Date();
+            return date.getFullYear();
+        }),
 
-    const currentYear = computed(() =>{
-        const date = new Date();
-        return date.getFullYear();
-    })
+        modeLabel: computed(() => {
+            if (props.submitLabel ) {
+                return props.submitLabel
+            }
+            return mode.value == 'register' ? 'Sign Up' : 'Sign In';
+        }),
 
-    const modeLabel = computed(() => {
-        if (props.submitLabel ) {
-            return props.submitLabel
-        }
-        return mode.value == 'register' ? 'Sign Up' : 'Sign In';
-    })
+        linkDescription: computed(() => {
+            return mode.value == 'register' ? ' Already have an account?' : 'Dont have an account?';
+        }),
 
-    const linkDescription = computed(() => {
-        return mode.value == 'register' ? ' Already have an account?' : 'Dont have an account?';
-    })
-
-    const linkLabel = computed(() => {
-        return mode.value == 'register' ? 'Login' : 'Create One';
-    })
-
-    // validation
-    const isDirty = ref(false)
-    const isConfirmationInvalid = computed(() => {
-        return isDirty.value && mode.value == 'register' && formData.password != formData.confirmPassword;
+        linkLabel: computed(() => {
+            return mode.value == 'register' ? 'Login' : 'Create One';
+        }),
+          // validation
+        isDirty: false,
+        isConfirmationInvalid: computed(() => {
+            return state.isDirty.value && mode.value == 'register' && state.formData.password != state.formData.confirmPassword;
+        })
     })
 
     // auth manipulation
@@ -173,27 +177,24 @@ export default {
             return
         }
 
-        emit('submit', {...formData})
+        emit('submit', {...state.formData})
     }
 
     const validateRegistration = () => {
-       if (mode.value == 'register' && formData.password != formData.confirmPassword) {
+       if (mode.value == 'register' && state.formData.password != state.formData.confirmPassword) {
 
             return false
         }
         return true
     }
 
+    provide('dark', props.dark)
+
     return {
-      mode,
-      modeLabel,
-      formData,
-      loginUser,
-      isConfirmationInvalid,
-      isLoading,
-      currentYear,
-      linkDescription,
-      linkLabel
+        ...toRefs(state),
+        mode,
+        isLoading,
+        loginUser,
     }
   }
 }

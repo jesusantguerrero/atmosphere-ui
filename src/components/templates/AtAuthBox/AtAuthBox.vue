@@ -1,10 +1,34 @@
 <template>
-    <div class="login-box">
-        <div class="z-10 w-full px-12 py-4 bg-white rounded-md login-box__form md:w-1/2">
+    <div class="login-box" ref="loginBox">
+        <div class="z-10 w-full px-12 py-4 login-box__form md:w-1/2" :class="boxClass">
             <slot/>
         </div>
     </div>
 </template>
+
+<script>
+import { ref } from '@vue/reactivity'
+
+export default {
+    props:{
+        boxClass: {
+            type: String,
+            default: 'text-wite'
+        },
+        backgroundImage: {
+            type: String,
+        }
+    },
+    setup() {
+        const loginBox = ref(null);
+        
+        return {
+            loginBox
+        }
+        
+    },
+}
+</script>
 <style lang="scss">
 
 .login-body {

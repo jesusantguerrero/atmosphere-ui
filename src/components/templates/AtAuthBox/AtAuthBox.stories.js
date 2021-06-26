@@ -1,6 +1,6 @@
 import AuthForm from '../../organisms/AtAuthForm/AtAuthForm.vue';
 import AuthFormGroup from '../../molecules/AtFormGroup/AtFormGroup.vue';
-import AuthInput from '../../atoms/AtAuthInput/AtAuthInput.vue';
+import AuthInput from '../../atoms/AtInput/AtInput.vue';
 import AuthTemplate from '../../templates/AtAuthBox/AtAuthBox.vue';
 
 export default {
@@ -31,7 +31,7 @@ export const ForgotPassword = (args) => ({
     return { args };
   },
   template: `<auth-template>
-      <auth-form v-bind="args">
+      <auth-form v-bind="args" background="http://neatlancer.test/images/background.jpg?9b8e89da443fac46097bbe70d87d01bc">
       <template #content>
         <p> {{ description }}</p>
         <auth-form-group label="Email">

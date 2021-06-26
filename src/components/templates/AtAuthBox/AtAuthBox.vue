@@ -61,6 +61,13 @@ export default {
         height: 100%;
     }
 
+     &__form {
+        color: white;
+        max-width: 450px;
+        border-radius: 4px;
+        z-index: 2;
+    }
+
     .btn-action {
         width: 100%;
         color: white;

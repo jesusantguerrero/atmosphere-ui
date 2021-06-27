@@ -1,27 +1,34 @@
-// import AtWeekPager from './AtWeekPager.vue';
+import AtWeekPager from './AtWeekPager.vue';
 
-// export default {
-//   title: 'Molecules/AtWeekPager',
-//   component: AtWeekPager,
-//   argTypes: {},
-// };
+export default {
+  title: 'Molecules/AtWeekPager',
+  component: AtWeekPager,
+  argTypes: {},
+};
 
-// const Template = (args) => ({
-//   // Components used in your story `template` are defined in the `components` object
-//   components: { AtWeekPager },
-//   // The story's `args` need to be mapped into the template through the `setup()` method
-//   setup() {
-//     return { args };
-//   },
-//   template: `
-//   <div class="w-60">
-//     <AtWeekPager v-bind="args" />
-//   </div>
-//   `,
-// });
+const Template = (args) => ({
+  // Components used in your story `template` are defined in the `components` object
+  components: { AtWeekPager },
+  // The story's `args` need to be mapped into the template through the `setup()` method
+  setup() {
+    return { args };
+  },
+  template: `
+  <div class="w-60">
+    <AtWeekPager v-model="args.value" v-bind="args" />
+  </div>
+  `,
+});
 
-// export const Default = Template.bind({});
-// Default.args = {
-//   value: "",
-//   placeholder: "Select a date"
-// };
+export const Default = Template.bind({});
+Default.args = {
+  value: new Date(),
+  placeholder: "Select a date"
+};
+
+export const WeekMode = Template.bind({});
+WeekMode.args = {
+  value: new Date(),
+  nextMode: 'week',
+  placeholder: "Select a date"
+};

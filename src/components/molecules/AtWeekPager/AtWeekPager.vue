@@ -1,12 +1,12 @@
 <template>
-   <div class="flex overflow-hidden border-2 border-gray-200 rounded-md date-pager dark:bg-gray-700 dark:border-gray-600">
+   <div class="flex justify-between overflow-hidden border-2 border-gray-200 rounded-md h-9 date-pager dark:bg-gray-700 dark:border-gray-600">
     <button
       class="px-2 transition-colors bg-white dark:bg-gray-700 dark:text-gray-300 dark:hover:text-gray-50 focus:outline-none hover:bg-gray-200"
       @click="controls.previous()"
     >
       <i class="fa fa-chevron-left"></i>
     </button>
-    <div v-if="selectedWeek" class="flex items-center text-sm font-bold text-gray-500 bg-white dark:bg-gray-700 dark:text-gray-300 dark:hover:text-gray-50">
+    <div v-if="selectedWeek && selectedWeek.length" class="flex items-center text-sm font-bold text-gray-500 bg-white dark:bg-gray-700 dark:text-gray-300 dark:hover:text-gray-50">
       {{ formatDate(selectedWeek[0]) }} - {{ formatDate(selectedWeek[6]) }}
     </div>
     <el-date-picker v-model="date" ref="input" type="date" @change="emitDate" v-if="false">
@@ -34,6 +34,10 @@ export default {
     week: {
       type: Array
     },
+    format: {
+      type: String,
+      default: 'MMM dd yyyy'
+    },
     nextMode: {
       type: String,
       default: "day"
@@ -42,8 +46,9 @@ export default {
   
   setup(props, { emit }) {
     const { modelValue, week, nextMode } = toRefs(props);
-    const { controls, selectedWeek, selectedDay,startDate, endDate } = useWeekPager({
-      nextMode: nextMode.value
+    const { controls, selectedWeek, selectedDay} = useWeekPager({
+      nextMode: nextMode.value,
+      initialDate: modelValue.value
     });
 
     const isMonthMode = computed(() => nextMode.value == "month");
@@ -68,7 +73,7 @@ export default {
     };
 
     const formatDate = (date) => {
-      return format(date,  'MMM dd yyyy')
+      return format(date,  props.format)
     }
 
     return {

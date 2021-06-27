@@ -2,17 +2,14 @@ import { isLastDayOfMonth } from "date-fns";
 import { watch, ref } from "vue";
 
 interface Props {
-  nextMode: string
+  nextMode: string,
+  initialDate: Date
 } 
 
 export const useWeekPager = (props: Props) => {
   const nextMode = ref(props.nextMode);
 
   // Utils
-  const getISODate = (date: Date): string => {
-    return date.toISOString().slice(0, 10);
-  };
-
   const getWeekDays = (date: Date): Array<Date> => {
     const firstDate = new Date(date.setDate(date.getDate() - 4));
     const selectedWeek: Array<Date> = [];
@@ -73,12 +70,10 @@ export const useWeekPager = (props: Props) => {
     selectedWeek.value = getWeek(new Date());
   };
 
-
-
   watch(nextMode, checkWeek, { immediate: true });
 
   // Day
-  const selectedDay = ref(new Date());
+  const selectedDay = ref(props.initialDate || new Date());
   const setDay = (value: Date) => {
     selectedDay.value = value || selectedDay.value;
   };

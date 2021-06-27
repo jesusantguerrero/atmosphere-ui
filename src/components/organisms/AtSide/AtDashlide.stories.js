@@ -1,21 +1,18 @@
-import AtDashlide from './AtDashlide.vue';
+import AtSide from './AtSide.vue';
 
 export default {
-  title: 'Organisms/AtDashlide',
-  component: AtDashlide,
+  title: 'Organisms/AtSide',
+  component: AtSide,
 };
 
 const Template = (args) => ({
-  components: { AtDashlide },
+  components: { AtSide },
   setup() {
     return { args };
   },
   template: `
     <div class="w-96">
-      <at-dashlide v-bind="args">
-        <template #one> One </template>
-        <template #two> Two </template>
-      </at-dashlide>
+      <at-side v-bind="args" />
     </div>
   `,
 });

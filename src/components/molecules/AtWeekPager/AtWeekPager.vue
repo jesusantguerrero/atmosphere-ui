@@ -9,7 +9,8 @@
     <div v-if="selectedWeek" class="flex items-center text-sm font-bold text-gray-500 bg-white dark:bg-gray-700 dark:text-gray-300 dark:hover:text-gray-50">
       {{ formatDate(selectedWeek[0]) }} - {{ formatDate(selectedWeek[6]) }}
     </div>
-   
+    <el-date-picker v-model="date" ref="input" type="date" @change="emitDate" v-if="false">
+    </el-date-picker>
     <button
       class="px-2 transition-colors bg-white dark:bg-gray-700 dark:text-gray-300 dark:hover:text-gray-50 focus:outline-none hover:bg-gray-200"
       @click="controls.next()"

@@ -1,12 +1,10 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <at-auth-form 
-    app-name="Neatlancer"
-  />
+  <at-week-pager></at-week-pager>
 </template>
 
 <script setup>
-import AtAuthForm from "./components/organisms/AtAuthForm/AtAuthForm.vue"
+import AtWeekPager from "./components/molecules/AtWeekPager/AtWeekPager.vue"
 // This starter template is using Vue 3 experimental <script setup> SFCs
 // Check out https://github.com/vuejs/rfcs/blob/script-setup-2/active-rfcs/0000-script-setup.md
 </script>

@@ -8,9 +8,11 @@ import AtInput from "./src/components/atoms/AtInput/AtInput.vue";
 import AtLink from "./src/components/atoms/AtLink/AtLink.vue";
 import AtTextarea from "./src/components/atoms/AtTextarea/AtTextarea.vue";
 import AtBackgroundIconCard from "./src/components/molecules/AtBackgroundIconCard/AtBackgroundIconCard.vue";
+import AtDateRange from "./src/components/molecules/AtDateRange/AtDateRange.vue";
 import AtFormGroup from "./src/components/molecules/AtFormGroup/AtFormGroup.vue";
 import AtSideItem from "./src/components/molecules/AtSideItem/AtSideItem.vue";
 import AtSideItemGroup from "./src/components/molecules/AtSideItemGroup/AtSideItemGroup.vue";
+import AtWeekControls from "./src/components/molecules/AtWeekControls/AtWeekControls.vue";
 import AtWeekPager from "./src/components/molecules/AtWeekPager/AtWeekPager.vue";
 import AtAuthForm from "./src/components/organisms/AtAuthForm/AtAuthForm.vue";
 import AtDashlide from "./src/components/organisms/AtDashlide/AtDashlide.vue";
@@ -27,9 +29,11 @@ export {
   AtLink,
   AtTextarea,
   AtBackgroundIconCard,
+  AtDateRange,
   AtFormGroup,
   AtSideItem,
   AtSideItemGroup,
+  AtWeekControls,
   AtWeekPager,
   AtAuthForm,
   AtDashlide,

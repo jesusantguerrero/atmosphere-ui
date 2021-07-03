@@ -1,4 +1,6 @@
 // Auto-generated file by create-index-files.js. Do not edit manually
+import AtBareRate from "./src/components/_core/AtBareRate/AtBareRate.vue";
+import AtBareRateButton from "./src/components/_core/AtBareRate/AtBareRateButton.vue";
 import AtAuthInput from "./src/components/atoms/AtAuthInput/AtAuthInput.vue";
 import AtBadge from "./src/components/atoms/AtBadge/AtBadge.vue";
 import AtButton from "./src/components/atoms/AtButton/AtButton.vue";
@@ -6,6 +8,7 @@ import AtErrorBag from "./src/components/atoms/AtErrorBag/AtErrorBag.vue";
 import AtField from "./src/components/atoms/AtField/AtField.vue";
 import AtInput from "./src/components/atoms/AtInput/AtInput.vue";
 import AtLink from "./src/components/atoms/AtLink/AtLink.vue";
+import AtRate from "./src/components/atoms/AtRate/AtRate.vue";
 import AtTextarea from "./src/components/atoms/AtTextarea/AtTextarea.vue";
 import AtBackgroundIconCard from "./src/components/molecules/AtBackgroundIconCard/AtBackgroundIconCard.vue";
 import AtDateRange from "./src/components/molecules/AtDateRange/AtDateRange.vue";
@@ -20,6 +23,8 @@ import AtSide from "./src/components/organisms/AtSide/AtSide.vue";
 import AtAuthBox from "./src/components/templates/AtAuthBox/AtAuthBox.vue";
 
 export {
+  AtBareRate,
+  AtBareRateButton,
   AtAuthInput,
   AtBadge,
   AtButton,
@@ -27,6 +32,7 @@ export {
   AtField,
   AtInput,
   AtLink,
+  AtRate,
   AtTextarea,
   AtBackgroundIconCard,
   AtDateRange,

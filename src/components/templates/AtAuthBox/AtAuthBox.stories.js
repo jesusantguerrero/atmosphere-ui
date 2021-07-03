@@ -25,13 +25,14 @@ Register.args = {
   mode: 'register',
   linkClass: 'text-blue-500 hover:text-blue-600'
 };
+
 export const ForgotPassword = (args) => ({
   components: { AuthForm, AuthFormGroup, AuthInput, AuthTemplate},
   setup() {
     return { args };
   },
-  template: `<auth-template>
-      <auth-form v-bind="args" background="http://neatlancer.test/images/background.jpg?9b8e89da443fac46097bbe70d87d01bc">
+  template: `<auth-template v-bind="args">
+      <auth-form v-bind="args">
       <template #content>
         <p> {{ description }}</p>
         <auth-form-group label="Email">
@@ -48,5 +49,15 @@ ForgotPassword.args = {
   },
   linkClass: 'text-blue-500 hover:text-blue-600',
   mode: 'register',
+  hideLink: true
+}
+
+export const WithBackgroundImage = Template.bind({});
+WithBackgroundImage.args = {
+  form: {
+    email: ''
+  },
+  backgroundImage: "http://neatlancer.test/images/background.jpg?9b8e89da443fac46097bbe70d87d01bc",
+  linkClass: 'text-blue-500 hover:text-blue-600',
   hideLink: true
 }

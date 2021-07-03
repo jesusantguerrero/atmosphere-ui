@@ -1,5 +1,5 @@
 <template>
-    <div class="login-box" ref="loginBox">
+    <div class="login-box" ref="loginBox" :style="`background-image: ${coverImage}`">
         <div class="z-10 w-full px-12 py-4 login-box__form md:w-1/2" :class="boxClass">
             <slot/>
         </div>
@@ -8,6 +8,7 @@
 
 <script>
 import { ref } from '@vue/reactivity'
+import { computed } from '@vue/runtime-core';
 
 export default {
     props:{
@@ -19,11 +20,13 @@ export default {
             type: String,
         }
     },
-    setup() {
+    setup(props) {
         const loginBox = ref(null);
         
         return {
-            loginBox
+            coverImage: computed(() => {
+                return props.backgroundImage ? `url(${props.backgroundImage})` : '';
+            })
         }
         
     },

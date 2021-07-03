@@ -4,16 +4,14 @@
     </div>
 
     <div v-else class="item" effect="dark" :content="label" placement="right">
-        <slot name="link" :to="to" :label="label" :active="isPath(to)" :icon="icon">
-            <inertia-link
-                class="flex items-center px-2 py-1 side-item"
-                :class="{ active: isPath(to) }"
-                :href="to"
-                :title="label"
-            >
-                <i :class="`fa fa-${icon}`" class="ic-icon" />
-            </inertia-link>
-        </slot>
+        <inertia-link
+            class="flex items-center w-full px-5 py-4 rounded-3xl"
+            :class="[ isPath(to) && 'active', classes ]"
+            :href="to"
+        >
+            <i :class="`fa fa-${icon}`"  class="mr-2"/>
+            {{ label }}
+        </inertia-link>
     </div>
 </template>
 
@@ -40,7 +38,7 @@ export default {
         }
     },
     methods: {
-        isPath(url) {
+        isPath(url = '') {
             const link = url.replace(window.location.origin, "");
             if (url == "/") {
                 return ["/", "/dashboard"].includes(window.location.pathname);
@@ -50,35 +48,3 @@ export default {
     }
 };
 </script>
-
-<style lang="scss">
-.divider {
-    height: 1px;
-    width: 100%;
-    padding: 0 5px;
-    margin: 20px 0;
-    &__inner {
-        height: 1px;
-        width: 100%;
-        background: white;
-    }
-}
-.side-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    min-width: 40px;
-    font-size: 22px;
-    height: 40px;
-    border-radius: 8px;
-    font-weight: bolder;
-    margin: 10px auto;
-    color: white;
-    transition: all ease .3s;
-
-    &:hover, &.active {
-        background-color: rgb(172, 148, 250);
-    }
-}
-</style>

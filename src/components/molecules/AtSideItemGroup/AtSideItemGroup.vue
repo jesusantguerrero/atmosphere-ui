@@ -1,17 +1,16 @@
 <template>
-  <div class="menu-item-group">
     <div
-      class="menu-item-group__toggle btn"
-      :class="{ active: isActive, current: !isActive && hasActiveChild }"
+      class="flex items-center justify-between px-5 transition rounded-full menu-item-group__toggle"
+      :class="[ isActive && active, !isActive && hasActiveChild && 'active', itemClass ]"
       @click="emitValue"
     >
-      <span class="content side-item">
-        <i :class="`fa fa-icon`" />
+      <span class="w-full px-5 py-4 side-item">
+        <i :class="`fa fa-${icon}`" />
         {{ label }}
       </span>
 
       <span class="indicator">
-        <i class="fa fa-arrowIcon" />
+        <i :class="`fa fa-${arrowIcon}`" />
       </span>
     </div>
 
@@ -19,22 +18,20 @@
       class="menu-item-group__childs"
       :class="{ 'my-collapse': isActive, 'custom-accordion': true }"
     >
-      <el-collapse-transition>
-        <div class="child-container" v-show="isActive">
+        <div class="mt-1 ml-5 child-container" v-show="isActive">
           <template v-for="item in childs">
             <at-side-item
-              :ref="`${label}-${item.label}`"
               v-if="!item.hide"
+              :ref="`${label}-${item.label}`"
               :key="`${label}-${item.label}`"
               :icon="item.icon"
               :label="item.label"
               :to="item.to"
+              :classes="itemClass"
             />
           </template>
         </div>
-      </el-collapse-transition>
     </div>
-  </div>
 </template>
 
 <script>
@@ -56,13 +53,23 @@ export default {
         return [];
       }
     },
-    value: {
+    modelValue: {
       type: String,
       required: true
     },
     trackId: {
       type: String,
       required: true
+    },
+    currentPath: {
+      type: String,
+      default: '/'
+    },
+    itemClass: {
+      type: String
+    },
+    itemActiveClass: {
+      type: String
     }
   },
   components: {
@@ -75,19 +82,19 @@ export default {
   },
   computed: {
     arrowIcon() {
-      return this.active ? "chevron-down" : "chevron-right";
+      return this.isActive ? "chevron-down" : "chevron-right";
     },
     isActive() {
-      return this.trackId == this.value;
+      return this.trackId == this.modelValue;
     },
     hasActiveChild() {
-      return !this.isActive &&  this.childs.find(item => item.to == this.$route.path)
+      return !this.isActive &&  this.childs.find(item => item.to == this.currentPath)
     }
   },
   methods: {
     emitValue() {
-      const current = this.value == this.trackId ? "" : this.trackId;
-      this.$emit("input", current);
+      const current = this.modelValue == this.trackId ? "" : this.trackId;
+      this.$emit("update:modelValue", current);
     },
   }
 };
@@ -99,7 +106,6 @@ export default {
     text-align: left;
     transition: all ease 0.3s;
     margin: 2px;
-    color: #777;
     display: flex;
     justify-content: space-between;
     cursor: pointer;
@@ -107,11 +113,6 @@ export default {
 
     .indicator {
       transition: all ease 0.3s;
-    }
-
-    &:hover {
-      color: #777 !important;
-      background: #eee !important;
     }
 
     &.active {

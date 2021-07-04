@@ -1,5 +1,5 @@
 {
-  "version": "0.1.10",
+  "version": "0.1.11",
   "scripts": {
     "dev": "vite",
     "build": "npm run create-index-files && vite build",
@@ -45,7 +45,10 @@
   "main": "./index.js",
   "module": "./index.js",
   "files": [
-    "dist"
+    "scripts/*",
+    "src/*",
+    "index.js",
+    "dist/*"
   ],
   "author": "Jesus Guerrero",
   "license": "MIT"

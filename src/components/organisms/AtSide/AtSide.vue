@@ -89,8 +89,7 @@ export default {
   },
   components: {
     AtSideItem,
-    AtSideItemGroup,
-    AtSideItem  
+    AtSideItemGroup
   },
   data() {
     return {

@@ -1,14 +1,13 @@
 <template>
     <div class="login-box" ref="loginBox" :style="`background-image: ${coverImage}`">
         <div class="z-10 w-full px-12 py-4 login-box__form md:w-1/2" :class="boxClass">
-            <slot/>
+            <slot></slot>
         </div>
     </div>
 </template>
 
 <script>
-import { ref } from '@vue/reactivity'
-import { computed } from '@vue/runtime-core';
+import { ref, computed } from 'vue'
 
 export default {
     props:{

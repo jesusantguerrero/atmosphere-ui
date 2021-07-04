@@ -80,11 +80,11 @@
 
 <script>
 import { reactive, computed, toRefs, provide } from "vue";
-import AtButton from '../../atoms/AtButton/AtButton.vue';
-import AtField from '../../atoms/AtField/AtField.vue';
-import AtAuthInput from '../../atoms/AtAuthInput/AtAuthInput.vue';
-import AtErrorBag from '../../atoms/AtErrorBag/AtErrorBag.vue';
-import AtInput from '../../atoms/AtInput/AtInput.vue';
+import AtButton from '/@atoms/AtButton/AtButton.vue';
+import AtField from '/@atoms/AtField/AtField.vue';
+import AtAuthInput from '/@atoms/AtAuthInput/AtAuthInput.vue';
+import AtErrorBag from '/@atoms/AtErrorBag/AtErrorBag.vue';
+import AtInput from '/@atoms/AtInput/AtInput.vue';
 
 export default {
   components: { AtButton, AtAuthInput, AtField, AtErrorBag, AtInput },

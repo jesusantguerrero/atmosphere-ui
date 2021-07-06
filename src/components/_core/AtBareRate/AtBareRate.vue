@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { computed, provide, ref, defineEmit, defineProps } from "vue";
+import { computed, provide, ref, defineEmits, defineProps } from "vue";
 
 const props = defineProps({
     modelValue: {
@@ -29,7 +29,7 @@ const props = defineProps({
     }
 });
 
-const emit = defineEmit(['update:modelValue']);
+const emit = defineEmits(['update:modelValue']);
 
 // selection ui management
 const currentHover = ref(0);

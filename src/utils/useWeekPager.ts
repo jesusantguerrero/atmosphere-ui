@@ -1,5 +1,5 @@
 import { isLastDayOfMonth } from "date-fns";
-import { watch, ref } from "vue";
+import { ref, watch } from "vue";
 
 interface Props {
   nextMode: string,

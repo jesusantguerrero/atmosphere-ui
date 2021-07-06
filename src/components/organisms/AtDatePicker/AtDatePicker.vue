@@ -4,6 +4,9 @@
             <at-field-date-time v-model="date" :include-time="includesTime" />
             <at-field-date-time v-model="date" :include-time="includesTime"  v-if="includesEndDate"/>
         </div>
+        <div>
+            The date is {{ date }}
+        </div>
         <div class="py-1 mt-2">
             <div class="px-2 py-1 text-gray-500 cursor-pointer hover:bg-gray-100"><i class="fa fa-clock"></i> Remind</div>
         </div>

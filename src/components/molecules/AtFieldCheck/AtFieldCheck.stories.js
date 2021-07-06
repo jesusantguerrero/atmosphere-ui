@@ -1,18 +1,18 @@
 import { ref } from 'vue';
-import AtFieldDateTime from './AtFieldDateTime.vue'
+import AtFieldCheck from './AtFieldCheck.vue'
 
 export default {
-  title: 'Molecules/AtFieldDateTime',
-  component: AtFieldDateTime,
+  title: 'Molecules/AtFieldCheck',
+  component: AtFieldCheck,
 };
 
 const Template = (args) => ({
-  components: { AtFieldDateTime },
+  components: { AtFieldCheck },
   setup() {
 
     return { args, value: ref(false) };
   },
-  template: `<AtFieldDateTime v-bind="args" v-model="value" />`,
+  template: `<AtFieldCheck v-bind="args" v-model="value" />`,
 });
 
 export const Default = Template.bind({});

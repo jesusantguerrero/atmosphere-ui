@@ -6,7 +6,8 @@
 </template>
 
 <script>
-import { isValid, toDate, format } from "date-fns"
+import { toDate, format } from "date-fns"
+import { validateStringDate } from "../../../utils/validators/dateValidator";
 import { reactive, toRefs } from '@vue/reactivity'
 import { watch } from '@vue/runtime-core';
 
@@ -40,7 +41,7 @@ export default {
         const { modelValue } = toRefs(props);
 
         const validateDate = () => {
-            return isValid(Date.parse(`${state.date} ${state.formattedTime}`));
+            return validateStringDate(`${state.date} ${state.formattedTime}`);
         }
         
         watch(() => modelValue.value, () => {

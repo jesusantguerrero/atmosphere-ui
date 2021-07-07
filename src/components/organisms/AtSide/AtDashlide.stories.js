@@ -12,27 +12,41 @@ const Template = (args) => ({
   },
   template: `
     <div class="w-96">
-      <at-side v-bind="args" />
+      <AtSide 
+        v-bind="args" class="bg-white text-gray-700"
+
+      />
     </div>
   `,
 });
 
 export const Default = Template.bind({});
 Default.args = {
-  slides: [
+  title: 'Atmosphere UI',
+  menu: [
     {
-        name: "one",
-        title: "First",
+      icon: 'users',
+      label: 'Users',
+      childs: [
+        { 
+          icon: 'user',
+          label: 'Edit',
+        }
+      ]
     },
     {
-        name: "two",
-        title: "Second",
-    },
-    {
-        name: "three",
-        title: "Third",
-    },
+      icon: 'home',
+      label: 'Dashboard',
+      childs: [
+        { 
+          icon: 'user',
+          label: 'Edit',
+        }
+      ]
+    }
   ],
+  itemClass:"text-gray-700 hover:bg-pink-500 hover:text-white",
+  itemActiveClass: "bg-pink-500 text-white"
 };
 
 

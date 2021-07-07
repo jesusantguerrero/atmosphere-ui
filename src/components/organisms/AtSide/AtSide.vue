@@ -1,16 +1,19 @@
 <template>
-  <div class="app-side">
+  <div class="border app-side">
       <div class="app-side__section-title">
-          <span class="side-logo">D</span><span class="dot">.</span>
+        <slot name="brand">
+          <h1>
+            {{ title }}
+          </h1>
+        </slot>
       </div>
     <div
-      class="nav flex-column nav-pills"
-      id="v-pills-tab"
+      class="px-5"
       role="tablist"
       aria-orientation="vertical"
     >
       <template v-for="route in menu">
-        <app-side-item
+        <AtSideItem
           :icon="route.icon"
           :label="route.label"
           :to="route.to"
@@ -18,12 +21,13 @@
           :key="route.label"
         />
 
-        <app-side-item-group
+        <AtSideItemGroup
           v-else
+          v-model="activeGroup"
+          :item-class="itemClass"
           :track-id="route.label"
           :icon="route.icon"
           :label="route.label"
-          v-model="activeGroup"
           :childs="route.childs"
           :key="route.label"
         />
@@ -32,11 +36,11 @@
 
     <div class="nav-container">
         <div
-        class="nav flex-column nav-pills"
-        id="v-pills-tab"
-        role="tablist"
-        aria-orientation="vertical"
-        v-if="headerMenu"
+          class="nav flex-column nav-pills"
+          id="v-pills-tab"
+          role="tablist"
+          aria-orientation="vertical"
+          v-if="headerMenu"
         >
         <template v-for="route in headerMenu">
             <at-side-item
@@ -68,19 +72,24 @@ import AtSideItem from '../../molecules/AtSideItem/AtSideItem.vue';
 
 export default {
   props: {
-    sideTitle: String,
+    title: String,
     menu: {
       type: Array,
       required: true
     },
     headerMenu: {
       type: Array,
+    },
+    itemClass: {
+      type: String
+    },
+    itemActiveClass: {
+      type: String
     }
   },
   components: {
     AtSideItem,
-    AtSideItemGroup,
-    AtSideItem  
+    AtSideItemGroup
   },
   data() {
     return {
@@ -92,13 +101,11 @@ export default {
 
 <style lang="scss" scoped>
 .app-side {
-  @apply bg-purple-900 text-white;
   height: 100vh;
   display: flex;
   flex-direction: column;
   width: 100%;
   overflow: hidden;
-  box-shadow: transparentize($color: #000000, $amount: 0.7) 3px 3px 5px;
   position: relative;
   display: grid;
   grid-template-rows: 64px 1fr 1fr;
@@ -143,9 +150,6 @@ export default {
 
 
   &__section-title {
-    @apply font-sans;
-    font-style: italic;
-    color: white;
     margin: 10px 0;
     padding-left: 15px;
     font-size: 40px;

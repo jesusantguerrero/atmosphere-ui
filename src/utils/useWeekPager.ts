@@ -1,5 +1,5 @@
 import { isLastDayOfMonth } from "date-fns";
-import { watch, ref } from "vue";
+import { ref, watch } from "vue";
 
 interface Props {
   nextMode: string,
@@ -45,9 +45,7 @@ export const useWeekPager = (props: Props) => {
   };
 
   const getCalendarMonth = (date: Date) => {
-    const firstDate = new Date(
-      date.setDate(date.getDate() - (date.getDate() - 1))
-    );
+    const firstDate = new Date(date.setDate(date.getDate() - (date.getDate() - 1)));
     const month = [new Date(firstDate)];
     while (!isLastDayOfMonth(firstDate)) {
       firstDate.setDate(firstDate.getDate() + 1);
@@ -56,7 +54,7 @@ export const useWeekPager = (props: Props) => {
     return month;
   };
 
-  const getWeek = (date: Date): Array<Date> => {
+  const getCalendar = (date: Date): Array<Date> => {
     const controls: { [ key: string ] : Function } = {
       "day": getWeekDays,
       "week": getCalendarWeek,
@@ -67,7 +65,7 @@ export const useWeekPager = (props: Props) => {
   };
 
   const checkWeek = () => {
-    selectedWeek.value = getWeek(new Date());
+    selectedWeek.value = getCalendar(new Date());
   };
 
   watch(nextMode, checkWeek, { immediate: true });
@@ -77,8 +75,9 @@ export const useWeekPager = (props: Props) => {
   const setDay = (value: Date) => {
     selectedDay.value = value || selectedDay.value;
   };
+
   watch(() => selectedDay.value, () => {
-    selectedWeek.value = getWeek(selectedDay.value);
+    selectedWeek.value = getCalendar(selectedDay.value);
   })
 
   // controls

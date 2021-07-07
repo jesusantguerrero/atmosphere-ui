@@ -1,7 +1,7 @@
 <template>
     <div class="flex py-1 border border-transparent divide-x" :class="{'border-red-400': isInvalid }">
-        <input v-model="date" :time="includeTime" class="w-full px-2 text-sm focus:outline-none" placeholder="mmm dd yyyy" @blur="onBlur"/>
-        <input v-model="time" v-if="includeTime" :time="includeTime" class="w-full px-2 text-sm focus:outline-none" placeholder="hh:mm a" />
+        <input v-model="date" :time="includeTime" class="w-full px-2 text-sm focus:outline-none" placeholder="mmm dd yyyy" @blur="onBlur" />
+        <input v-model="formattedTime" v-if="includeTime" :time="includeTime" @blur="onBlur" class="w-full px-2 text-sm focus:outline-none" placeholder="hh:mm a" />
     </div>
 </template>
 
@@ -33,27 +33,29 @@ export default {
     setup(props, {emit}) {
         const state = reactive({
             date: '',
-            time: '',
+            formattedTime: '',
             isInvalid: false,
         });
 
         const { modelValue } = toRefs(props);
 
-        watch(modelValue, () => {
-            state.date = format(props.modelValue, props.format)
-            state.time = format(props.modelValue, 'hh:mm');
-        }, { immediate: true})
-
         const validateDate = () => {
-            return isValid(Date.parse(state.date));
+            return isValid(Date.parse(`${state.date} ${state.formattedTime}`));
         }
+        
+        watch(() => modelValue.value, () => {
+            state.date = format(props.modelValue, props.format)
+            state.formattedTime = format(props.modelValue, 'hh:mm a');
+            state.isInvalid = !validateDate();
+        }, { immediate: true})
 
         const onBlur = () => {
             state.isInvalid = !validateDate();
             if (!state.isInvalid) {
-                emit('update:modelValue', toDate(Date.parse(state.date)));
+                emit('update:modelValue', toDate(Date.parse(`${state.date} ${state.formattedTime}`)));
             }
         }
+
         return {
             ...toRefs(state),
             onBlur,

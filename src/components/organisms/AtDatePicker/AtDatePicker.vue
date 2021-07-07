@@ -1,5 +1,5 @@
 <template>
-    <div class="divide-y w-72">
+    <div class="px-2 py-2 border divide-y w-72">
         <div class="flex flex-wrap">
             <at-field-date-time v-model="date" :include-time="includesTime" :selected="selected=='date'" @click="selected='date'"/>
             <at-field-date-time v-model="endDate" :include-time="includesTime" :selected="selected=='endDate'" v-if="includesEndDate" @click="selected='endDate'"/>

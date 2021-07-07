@@ -1,7 +1,7 @@
 <template>
     <div class="flex py-1 border border-transparent divide-x" :class="{'border-red-400': isInvalid }">
-        <input v-model="date" :time="includesTime" class="w-full px-2 text-sm focus:outline-none" placeholder="mmm dd yyyy" @blur="onBlur"/>
-        <input v-model="time" v-if="includeTime" :time="includesTime" class="w-full px-2 text-sm focus:outline-none" placeholder="hh:mm a" />
+        <input v-model="date" :time="includeTime" class="w-full px-2 text-sm focus:outline-none" placeholder="mmm dd yyyy" @blur="onBlur"/>
+        <input v-model="time" v-if="includeTime" :time="includeTime" class="w-full px-2 text-sm focus:outline-none" placeholder="hh:mm a" />
     </div>
 </template>
 
@@ -13,7 +13,7 @@ import { watch } from '@vue/runtime-core';
 export default {
     props: {
         modelValue: {
-            type: Boolean,
+            type: Date,
             required: true
         },
         includeTime: {
@@ -24,6 +24,10 @@ export default {
             type: Date,
             required: false,
         },
+        format: {
+            type: String,
+            default: 'MMM dd, yyyy'
+        }
     },
     emits: ['update:modelValue', 'update:time'],
     setup(props, {emit}) {
@@ -36,7 +40,7 @@ export default {
         const { modelValue } = toRefs(props);
 
         watch(modelValue, () => {
-            state.date = format(props.modelValue, 'MMM dd, yyyy')
+            state.date = format(props.modelValue, props.format)
             state.time = format(props.modelValue, 'hh:mm');
         }, { immediate: true})
 

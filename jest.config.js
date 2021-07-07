@@ -1,9 +1,14 @@
 // jest.config.js
 module.exports = {
+    testEnvironment: 'jsdom',
     moduleFileExtensions: [
       'js',
       'json',
-      'vue'
+      'vue',
+      'ts',
+      'tsx',
+      'jsx',
+      'node'
     ],
     transform: {
       '^.+\\.js$': 'babel-jest',

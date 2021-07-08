@@ -11,6 +11,7 @@ module.exports = {
       'node'
     ],
     transform: {
+      '^.+\\.ts$': 'ts-jest',
       '^.+\\.js$': 'babel-jest',
       '^.+\\.vue$': 'vue-jest'
     }

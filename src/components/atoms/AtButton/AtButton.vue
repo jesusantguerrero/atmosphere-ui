@@ -1,10 +1,10 @@
 <template>
   <button 
-    class="relative px-5 py-2 overflow-hidden rounded-md focus:outline-none" 
+    class="relative px-5 py-2 overflow-hidden text-white rounded-md focus:outline-none" 
     :class="[colorClass, disabled ? 'bg-opacity-20 text-gray-700 hover:bg-opacity-20 cursor-not-allowed' : 'hover:bg-opacity-80']" 
     ref="Button"
-    >
-    <slot></slot>
+   >
+        <slot />
   </button>
 </template>
 

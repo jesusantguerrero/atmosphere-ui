@@ -45,8 +45,8 @@ Default.args = {
       ]
     }
   ],
-  itemClass:"text-gray-700 hover:bg-pink-500 hover:text-white",
-  itemActiveClass: "bg-pink-500 text-white"
+  itemClass:"text-gray-700 hover:bg-gray-500 hover:text-white",
+  itemActiveClass: "bg-gray-500 text-white"
 };
 
 

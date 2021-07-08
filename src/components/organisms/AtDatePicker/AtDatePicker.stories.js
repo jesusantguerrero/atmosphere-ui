@@ -3,6 +3,11 @@ import AtDatePicker from './AtDatePicker.vue'
 export default {
   title: 'Organisms/AtDatePicker',
   component: AtDatePicker,
+  argTypes: {
+    acceptEndDate: {
+      type: Boolean
+    }
+  }
 };
 
 const Template = (args) => ({
@@ -15,12 +20,9 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  icon: 'users',
-  label: 'Users',
-  childs: [
-    { 
-      icon: 'user',
-      label: 'Edit',
-    }
-  ]
+  acceptEndDate: true,
+  acceptTime: true,
+  acceptReminders: true,
+  acceptRecurrence: true,
+  timeFormatConfig: true,
 };

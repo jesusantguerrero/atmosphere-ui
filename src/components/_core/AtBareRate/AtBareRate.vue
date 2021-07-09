@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { computed, provide, ref, defineEmits, defineProps } from "vue";
+import { computed, provide, ref } from "vue";
 
 const props = defineProps({
     modelValue: {

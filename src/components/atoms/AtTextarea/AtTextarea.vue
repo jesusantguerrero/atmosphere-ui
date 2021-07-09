@@ -10,12 +10,12 @@
 </template>
 
 <script setup>
-import { defineProps, watch, defineEmit, ref, onMounted } from "vue";
+import { watch, ref, onMounted } from "vue";
 
 const props = defineProps({
     modelValue: String
 });
-const emit = defineEmit({
+const emit = defineEmits({
     'update:modelValue': String
 })
 const localValue = ref('');

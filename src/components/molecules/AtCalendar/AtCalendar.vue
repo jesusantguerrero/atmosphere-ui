@@ -20,12 +20,18 @@
     <div
         v-for="day in displayWeek"
         :key="`item-${day}`"
-        class="flex justify-center w-full py-1 rounded-md cursor-pointer"
-        :class="{'hover:bg-gray-200': day, 'bg-gray-400 text-white hover:text-gray-700 font-bold': isSelectedDate(day)}"
+        class="flex justify-center w-full rounded-md cursor-pointer"
+        :class="{
+          'hover:bg-gray-200': day, 
+          'bg-blue-100' : isBetween(day) && !isSelectedDate(day),
+          'bg-gray-400 text-white hover:text-gray-700 font-bold': isSelectedDate(day),
+          }"
         @click="emitSelected(day)"
         v-bind="getDayAttributes(day)"
     >
-        <span class="block text-sm text-center" v-if="day">
+        <span class="block w-full py-1 text-sm text-center" v-if="day" :class="{
+          'bg-red-400 text-white font-bold rounded-full': isToday(day) && !isSelectedDate(day),
+        }">
             {{ format(day, 'dd') }}
         </span>
     </div>
@@ -36,13 +42,19 @@
 
 <script>
 import { computed, toRefs, watch } from "@vue/runtime-core";
-import { useWeekPager } from "../../../utils/useWeekPager";
-import { format, isSameDay } from "date-fns";
+import { useDatePager } from "../../../utils/useDatePager";
+import { format, isSameDay, isToday, isWithinInterval } from "date-fns";
 
 export default {
   props: {
     selected: {
-        type: Date,
+      type: Date,
+    },
+    startDate: {
+      type: Date
+    },
+    endDate: {
+      type: Date
     }
   },
   emits: {
@@ -53,7 +65,7 @@ export default {
       controls,
       selectedDay,
       selectedWeek,
-    } = useWeekPager({ nextMode: 'month', initialDate: props.selected || new Date() });
+    } = useDatePager({ nextMode: 'month', initialDate: props.selected || new Date() });
     
     const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const displayWeek = computed(() => {
@@ -71,15 +83,34 @@ export default {
     };
 
     const getDayAttributes = (day) => {
-      return { role: isSelectedDate(day) ? 'selected-day' : 'calendar-day'}
+      let role = 'calendar-day';
+      if (day && isToday(day)) {
+        role = 'today'
+      }
+
+      if (isSelectedDate(day)) {
+        role = 'selected-day'
+      }
+
+      return { 
+        role
+      }
     }
 
     const { selected } = toRefs(props);
     watch(selected, () => {
         if (!isSameDay(selectedDay, selected)) {
-            controls.setDay(new Date(selected.value));
+          controls.setDay(new Date(selected.value));
         }
     })
+
+    const isBetween = (date) => {
+      if (props.startDate && props.endDate) {
+        return isWithinInterval(date, {
+          start: props.startDate, end: props.endDate
+        })
+      }
+    }
 
     const emitSelected = (day) => {
         emit('selected', day)
@@ -99,6 +130,8 @@ export default {
       getDayAttributes,
       monthName,
       emitSelected,
+      isToday,
+      isBetween
     };
   },
 };

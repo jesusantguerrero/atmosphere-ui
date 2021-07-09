@@ -1,6 +1,6 @@
 import userEvent from "@testing-library/user-event";
 import { render, screen, waitFor} from "@testing-library/vue";
-import { addMonths, format } from "date-fns";
+import { addMonths, format, isLastDayOfMonth, addDays } from "date-fns";
 import AtCalendar from "./AtCalendar.vue";
 
 const renderComponent = (props) => {
@@ -20,7 +20,7 @@ it('should highlight the selected date', async () => {
     expect(selected.textContent).toBe(format(date, 'dd'));
 })
 
-it("It moves back and forward month", async () => {
+it("moves back and forward month", async () => {
     const date = new Date()
     const monthFormat = "MMMM, yyyy";
     renderComponent({ selected: date});
@@ -41,5 +41,31 @@ it("It moves back and forward month", async () => {
     waitFor(() => {
         expect(monthLabel.textContent).toBe(format(addMonths(date, 1), monthFormat));
     })
+});
+
+it("selects day on click", async () => {
+    const date = new Date(2021, 7, 8)
+    renderComponent({ selected: date});
     
-  });
+    const nextDay = screen.getByText('09');    
+    userEvent.click(nextDay);
+    waitFor(() => {
+        const selected = screen.getByRole('selected-day');
+        expect(selected.textContent).toBe('08');
+    })
+});
+
+it("mark today if is not selected", async () => {
+    const date = new Date();
+    let daysToAdd = 1;
+    if (isLastDayOfMonth(date)) {
+        daysToAdd = -1;
+    }
+
+    renderComponent({ selected: addDays(date, daysToAdd)});
+    
+    waitFor(() => {
+        const selected = screen.getByRole('today');
+        expect(selected.textContent).toBe(format(date, 'dd'));
+    })
+});

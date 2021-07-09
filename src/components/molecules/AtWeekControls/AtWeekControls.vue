@@ -22,7 +22,7 @@
 
 <script>
 import { format, isThisWeek} from "date-fns";
-import { useWeekPager } from "../../../utils/useWeekPager";
+import { useDatePager } from "../../../utils/useDatePager";
 import { watch, toRefs, computed } from "vue";
 
 export default {
@@ -54,7 +54,7 @@ export default {
   
   setup(props, { emit }) {
     const { modelValue, week, nextMode } = toRefs(props);
-    const { controls, selectedWeek, selectedDay} = useWeekPager({
+    const { controls, selectedWeek, selectedDay} = useDatePager({
       nextMode: nextMode.value,
       initialDate: modelValue.value
     });

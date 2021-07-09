@@ -15,11 +15,24 @@ const Template = (args) => ({
   setup() {
     return { args };
   },
-  template: `<AtDatePicker></AtDatePicker>`,
+  template: `<AtDatePicker v-bind="args"></AtDatePicker>`,
 });
 
 export const Default = Template.bind({});
-Default.args = {
+Default.args = {};
+
+export const WithEndDate = Template.bind({});
+WithEndDate.args = {
+  acceptEndDate: true
+};
+
+export const WithTime = Template.bind({});
+WithTime.args = {
+  acceptTime: true
+};
+
+export const FullFeatured = Template.bind({});
+FullFeatured.args = {
   acceptEndDate: true,
   acceptTime: true,
   acceptReminders: true,

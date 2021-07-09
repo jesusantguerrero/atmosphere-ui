@@ -6,7 +6,7 @@ interface Props {
   initialDate: Date
 } 
 
-export const useWeekPager = (props: Props) => {
+export const useDatePager = (props: Props) => {
   const nextMode = ref(props.nextMode);
 
   // Utils

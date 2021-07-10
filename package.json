@@ -1,5 +1,5 @@
 {
-  "version": "0.1.12",
+  "version": "0.1.13",
   "scripts": {
     "dev": "vite",
     "build": "npm run create-index-files && vite build",
@@ -11,6 +11,7 @@
     "build-storybook": "build-storybook --output-dir=docs"
   },
   "dependencies": {
+    "tippy.js": "^6.3.1",
     "vue": "^3.1.4"
   },
   "devDependencies": {

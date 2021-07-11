@@ -1,10 +1,10 @@
 <template>
     <div
-      class="flex items-center justify-between px-5 transition rounded-full menu-item-group__toggle"
+      class="flex items-center justify-between px-5 text-left transition rounded-md cursor-pointer"
       :class="[ isActive && active, !isActive && hasActiveChild && 'active', itemClass ]"
       @click="emitValue"
     >
-      <span class="w-full px-5 py-4 side-item">
+      <span class="w-full py-4 side-item">
         <i :class="`fa fa-${icon}`" />
         {{ label }}
       </span>
@@ -99,70 +99,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.menu-item-group {
-  &__toggle {
-    text-align: left;
-    transition: all ease 0.3s;
-    margin: 2px;
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-    overflow: hidden;
-
-    .indicator {
-      transition: all ease 0.3s;
-    }
-
-    &.active {
-      color: #777 !important;
-      background: #eee !important;
-      overflow-x: visible;
-
-      .indicator {
-        transform: rotate(90deg);
-      }
-    }
-
-    &.current {
-      background: dodgerblue;
-      color: white;
-      box-shadow: transparentize(dodgerblue, $amount: 0.5) 5px 3px 10px;
-      overflow-x: visible;
-
-      &:hover {
-        color: white !important;
-        background: dodgerblue !important;
-      }
-
-      .indicator {
-        transform: rotate(90deg);
-      }
-    }
-  }
-}
-</style>
-
-<style lang="scss">
-.custom-accordion {
-  animation: open 0.3s;
-  overflow: hidden;
-}
-
-.custom-accordion.my-collapse {
-  animation: open 0.3s reverse;
-}
-
-@keyframes open {
-  0% {
-    height: 0;
-  }
-  50% {
-    height: 50%;
-  }
-  100% {
-    max-height: auto;
-  }
-}
-</style>

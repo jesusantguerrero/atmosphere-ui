@@ -3,20 +3,24 @@
         <div class="divider__inner"></div>
     </div>
 
-    <div v-else class="item" effect="dark" :content="label" placement="right">
-        <inertia-link
-            class="flex items-center w-full px-5 py-4 rounded-3xl"
-            :class="[ isPath(to) && 'active', classes ]"
-            :href="to"
-        >
-            <i :class="`fa fa-${icon}`"  class="mr-2"/>
-            {{ label }}
-        </inertia-link>
+    <div v-else class="item">
+        <slot :label="label" :to="to" :class="classes" :icon="icon">
+            <inertia-link
+                :class="classes"
+                :href="to"
+            >
+                <i :class="`fa fa-${icon}`"  class="mr-2"/>
+                {{ label }}
+            </inertia-link>
+        </slot>
     </div>
 </template>
 
 <script>
-export default {
+import { computed, defineComponent, reactive, toRefs } from "@vue/runtime-core"
+
+export default defineComponent ({
+    name: "AtSideItem",
     props: {
         to: {
             type: String,
@@ -32,19 +36,29 @@ export default {
             default: "nav-link"
         }
     },
-    computed: {
-        path() {
-            return window.location.pathname;
-        }
-    },
-    methods: {
-        isPath(url = '') {
+    setup(props) {
+        const state = reactive({
+            path: computed(() => {
+                return window.location.pathname;
+            }),
+            classes: computed(() => {
+                const classes = "flex items-center w-full px-5 py-4 rounded-3xl";
+                return [ isPath(props.to) && 'active', classes ];
+            })
+        })
+
+        const isPath = (url = '') => {
             const link = url.replace(window.location.origin, "");
             if (url == "/") {
                 return ["/", "/dashboard"].includes(window.location.pathname);
             }
             return link == window.location.pathname;
-        },
+        }
+
+        return {
+            isPath,
+            ...toRefs(state)
+        }
     }
-};
+});
 </script>

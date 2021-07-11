@@ -1,7 +1,7 @@
 <template>
   <div class="w-full overflow-hidden">
     <header class="flex items-center justify-between py-1">
-        <h4 role="monthlabel"> {{ monthName }}</h4>
+        <h4 role="monthlabel" class="pl-1"> {{ monthName }}</h4>
         <div class="">
             <button data-test-id="btn-previous" role="button-previous"  class="px-2 py-1 rounded-md hover:bg-gray-200" @click="controls.previous()"><i class="fa fa-chevron-left" /></button>
             <button data-test-id="btn-next" role="button-next" class="px-2 py-1 rounded-md hover:bg-gray-200" @click="controls.next()"><i class="fa fa-chevron-right" /></button>
@@ -20,7 +20,7 @@
     <div
         v-for="day in displayWeek"
         :key="`item-${day}`"
-        class="flex justify-center w-full rounded-md cursor-pointer"
+        class="flex justify-center w-full rounded-md cursor-pointer select-none"
         :class="{
           'hover:bg-gray-200': day, 
           'bg-blue-100' : isBetween(day) && !isSelectedDate(day),

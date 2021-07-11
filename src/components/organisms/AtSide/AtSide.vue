@@ -1,6 +1,6 @@
 <template>
   <div class="border app-side">
-      <div class="app-side__section-title">
+      <div class="px-5 my-5">
         <slot name="brand">
           <h1>
             {{ title }}
@@ -108,7 +108,7 @@ export default {
   overflow: hidden;
   position: relative;
   display: grid;
-  grid-template-rows: 64px 1fr 1fr;
+  grid-template-rows: 80px 1fr 1fr;
   z-index: 1001;
 
   .nav-container {
@@ -120,7 +120,7 @@ export default {
   }
 
   .nav {
-    margin-top: 30px;
+    margin-top: 40px;
     width: 100%;
     max-height: 100%;
     flex-flow: row;
@@ -144,31 +144,6 @@ export default {
     &:not(.active):hover {
       background: dodgerblue;
       color: white;
-    }
-  }
-
-
-
-  &__section-title {
-    margin: 10px 0;
-    padding-left: 15px;
-    font-size: 40px;
-    cursor: pointer;
-    .side-logo {
-        font-weight: bolder;
-    }
-    .dot {
-        @apply text-green-400;
-        font-weight: bolder;
-    }
-  }
-
-  .router-link {
-    &-exact-active {
-      background: dodgerblue;
-      color: white;
-      box-shadow: transparentize(dodgerblue, $amount: 0.5) 5px 3px 10px;
-      overflow-x: visible;
     }
   }
 }

@@ -12,11 +12,11 @@ const Template = (args) => ({
 
     return { args, value: ref(false) };
   },
-  template: `<AtFieldCheck v-bind="args" v-model="value" />`,
+  template: `<AtFieldCheck v-bind="args" v-model="value"/>`,
 });
 
 export const Default = Template.bind({});
 Default.args = {
   label: 'End date',
-  modelValue: false
+  class: "w-32"
 };

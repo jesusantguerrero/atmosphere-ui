@@ -1,5 +1,6 @@
 import AtSideSideItem from './AtSideItem.vue'
 import AtLink from "../../atoms/AtLink/AtLink.vue";
+import { InertiaLink } from "@inertiajs/inertia-vue3";
 
 export default {
   title: 'Molecules/AtSideItem',
@@ -7,25 +8,17 @@ export default {
 };
 
 const Template = (args) => ({
-  components: { AtSideSideItem, InertiaLink: AtLink },
+  components: { AtSideSideItem, InertiaLink },
   setup() {
     return { args };
   },
-  template: `<AtSideItem v-bind="args">
-    <template #link="props">
-      <InertiaLink> {{ props }}</InertiaLink>
-    </template>
-  </AtSideItem>`,
+  template: `<AtSideItem v-bind="args" />`,
 });
 
 export const Default = Template.bind({});
 Default.args = {
-  icon: 'users',
-  label: 'Users',
-  childs: [
-    { 
-      icon: 'user',
-      label: 'Edit',
-    }
-  ]
+  icon: 'home',
+  label: 'Home',
+  to: '/',
+  class: 'text-gray-400'
 };

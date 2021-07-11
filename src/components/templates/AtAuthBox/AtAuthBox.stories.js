@@ -13,7 +13,7 @@ const Template = (args) => ({
   setup() {
     return { args };
   },
-  template: '<auth-template><auth-form v-bind="args" /></auth-template>',
+  template: '<auth-template v-bind="args"><auth-form v-bind="args" /></auth-template>',
 });
 
 export const Default = Template.bind({});
@@ -21,7 +21,7 @@ Default.args = {};
 
 export const Register = Template.bind({});
 Register.args = {
-  appName: 'Atmosphere Ui',
+  appName: 'Atmosphere',
   mode: 'register',
   linkClass: 'text-blue-500 hover:text-blue-600'
 };
@@ -57,7 +57,7 @@ WithBackgroundImage.args = {
   form: {
     email: ''
   },
-  backgroundImage: "http://neatlancer.test/images/background.jpg?9b8e89da443fac46097bbe70d87d01bc",
+  backgroundImage: "https://www.sciencenewsforstudents.org/wp-content/uploads/2020/11/1030_Earth_atmosphere_explainer.jpg",
   linkClass: 'text-blue-500 hover:text-blue-600',
   hideLink: true
 }

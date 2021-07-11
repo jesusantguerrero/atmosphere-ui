@@ -1,5 +1,5 @@
 <template>
-    <div class="login-box" ref="loginBox" :style="`background-image: ${coverImage}`">
+    <div class="login-box" ref="loginBox" :style="{'background-image': coverImage}">
         <div class="z-10 w-full px-12 py-4 login-box__form md:w-1/2" :class="boxClass">
             <slot></slot>
         </div>
@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 
 export default {
     props:{
@@ -20,8 +20,6 @@ export default {
         }
     },
     setup(props) {
-        const loginBox = ref(null);
-        
         return {
             coverImage: computed(() => {
                 return props.backgroundImage ? `url(${props.backgroundImage})` : '';

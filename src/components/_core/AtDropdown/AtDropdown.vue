@@ -20,8 +20,7 @@
 </template>
 
 <script>
-import { ref, unref } from '@vue/reactivity'
-import { onMounted } from '@vue/runtime-core'
+import { ref, unref, onMounted } from 'vue'
 import { createPopper } from "@popperjs/core";
 import { onClickOutside } from "@vueuse/core"
 

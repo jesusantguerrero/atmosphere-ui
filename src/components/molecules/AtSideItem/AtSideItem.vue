@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { computed, defineComponent, reactive, toRefs } from "@vue/runtime-core"
+import { computed, defineComponent, reactive, toRefs } from "vue"
 
 export default defineComponent ({
     name: "AtSideItem",

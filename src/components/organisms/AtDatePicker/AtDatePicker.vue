@@ -1,5 +1,5 @@
 <template>
-    <div class="px-2 py-2 bg-white border divide-y w-72" role="date-picker">
+    <div class="px-2 py-2 divide-y w-72" role="date-picker">
         <div class="flex flex-wrap">
             <at-field-date-time 
                 v-model="date" 
@@ -100,6 +100,10 @@ export default {
             default() {
                 return []
             }
+        },
+        class: {
+            type: String,
+            default: 'bg-white'
         }
     },
     setup(props, { emit }) {

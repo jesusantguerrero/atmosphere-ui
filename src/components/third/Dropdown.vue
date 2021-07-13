@@ -6,21 +6,21 @@
         </div>
 
         <!-- Full Screen Dropdown Overlay -->
-        <div v-show="open" class="fixed inset-0 z-40" @click="open = false">
+        <div v-show="open" class="fixed inset-0 z-40" @click="closeDropdown">
         </div>
 
         <transition
-            enter-active-class="transition ease-out duration-200"
-            enter-from-class="transform opacity-0 scale-95"
-            enter-to-class="transform opacity-100 scale-100"
-            leave-active-class="transition ease-in duration-75"
-            leave-from-class="transform opacity-100 scale-100"
-            leave-to-class="transform opacity-0 scale-95">
+            enter-active-class="transition duration-200 ease-out"
+            enter-from-class="transform scale-95 opacity-0"
+            enter-to-class="transform scale-100 opacity-100"
+            leave-active-class="transition duration-75 ease-in"
+            leave-from-class="transform scale-100 opacity-100"
+            leave-to-class="transform scale-95 opacity-0">
             <div v-show="open"
                     class="absolute z-50 mt-2 rounded-md shadow-lg"
                     :class="[widthClass, alignmentClasses]"
                     style="display: none;"
-                    @click="open = false">
+                    @click="closeDropdown">
                 <div class="rounded-md ring-1 ring-black ring-opacity-5" :class="contentClasses">
                     <slot name="content"></slot>
                 </div>
@@ -42,10 +42,14 @@ export default {
         },
         contentClasses: {
             default: () => ['py-1', 'bg-white']
+        },
+        closable: {
+            type: Boolean,
+            default: true
         }
     },
 
-    setup() {
+    setup(props) {
         let open = ref(false)
 
         const closeOnEscape = (e) => {
@@ -54,11 +58,21 @@ export default {
             }
         }
 
+        const closeDropdown = () => {
+            if (!props.closable) return
+            open.value = false
+        }
+
+        const close = () => {
+            open.value = false;
+        }
+
         onMounted(() => document.addEventListener('keydown', closeOnEscape))
         onUnmounted(() => document.removeEventListener('keydown', closeOnEscape))
 
         return {
             open,
+            closeDropdown
         }
     },
 

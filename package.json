@@ -8,7 +8,8 @@
     "create-index-files": "node scripts/create-index-files.js",
     "prepublishOnly": "npm run build",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook --output-dir=docs"
+    "build-storybook": "build-storybook --output-dir=docs",
+    "chromatic": "npx chromatic --project-token=170dcb534484"
   },
   "dependencies": {
     "tippy.js": "^6.3.1",
@@ -31,6 +32,7 @@
     "@vue/test-utils": "^2.0.0-0",
     "autoprefixer": "^10.2.6",
     "babel-jest": "^26.6.3",
+    "chromatic": "^5.9.2",
     "date-fns": "^2.22.1",
     "jest": "^26.6.3",
     "postcss": "^8.3.5",

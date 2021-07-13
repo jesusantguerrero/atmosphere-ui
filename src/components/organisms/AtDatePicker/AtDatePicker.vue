@@ -2,7 +2,11 @@
     <div class="px-2 py-2 bg-white border divide-y w-72" role="date-picker">
         <div class="flex flex-wrap">
             <at-field-date-time v-model="date" :include-time="includesTime" :selected="selected=='date'" @click="selected='date'"/>
-            <at-field-date-time v-model="endDate" :include-time="includesTime" :selected="selected=='endDate'" v-if="includesEndDate" @click="selected='endDate'"/>
+            <at-field-date-time 
+                role="enddate"
+                placeholder="pick an end date"
+                v-model="endDate" 
+                :include-time="includesTime" :selected="selected=='endDate'" v-if="includesEndDate" @click="selected='endDate'"/>
         </div>
         <div>
             <at-calendar :selected="selectedDate" :start-date="date" :end-date="endDate" @selected="setDate" />
@@ -11,9 +15,9 @@
             <div class="px-2 py-1 text-gray-500 cursor-pointer hover:bg-gray-100"><i class="fa fa-clock"></i> Remind</div>
         </div>
         <div class="py-2" v-if="shortcuts.length">
-            <div v-for="shortcut in shortcuts" :key="shortcut.text" class="cursor-pointer" @click="setDate(shortcut.value)">
+            <at-date-action v-for="shortcut in shortcuts" :key="shortcut.text" class="cursor-pointer" @click="setDate(shortcut.value)">
                 {{ shortcut.text }}
-            </div>
+            </at-date-action>
         </div>
         <div class="py-2" v-if="showSwitches">
             <at-field-check label="Include end" v-model="includesEndDate" v-if="acceptEndDate"/>
@@ -25,7 +29,7 @@
         </div>
 
         <div class="py-1">
-            <div class="px-2 py-1 text-gray-500 cursor-pointer hover:bg-gray-100">Clear</div>
+            <AtDateAction>Clear</AtDateAction>
         </div>
 
         <div class="py-1" v-if="acceptReminders">
@@ -40,14 +44,15 @@ import { reactive, toRefs } from '@vue/reactivity'
 import AtFieldCheck from '../../molecules/AtFieldCheck/AtFieldCheck.vue'
 import AtFieldDateTime from '../../molecules/AtFieldDateTime/AtFieldDateTime.vue'
 import AtCalendar from '../../molecules/AtCalendar/AtCalendar.vue'
+import AtDateAction from "./AtDateAction.vue"
 import { computed, watch } from '@vue/runtime-core'
 import { isAfter, isBefore, startOfDay } from 'date-fns'
 
 export default {
-    components: { AtFieldCheck, AtFieldDateTime, AtCalendar },
+    components: { AtFieldCheck, AtFieldDateTime, AtCalendar, AtDateAction },
     props: {
         date: {
-            type: Date,
+            type: [Date, null],
         },
         endDate: {
             type: Date,
@@ -81,7 +86,7 @@ export default {
     },
     setup(props, { emit }) {
         const state = reactive({
-            date: new Date(),
+            date: null,
             endDate: null,
             selected: 'date',
             includesTime: false,

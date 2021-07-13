@@ -14,12 +14,20 @@ export default {
 const Template = (args) => ({
   components: { AtDateSelect },
   setup() {
-    return { args, value: ref(new Date()) };
+    return { args, value: ref(null) };
   },
-  template: `<div class="w-full bg-red py-2 flex flex-end"><AtDateSelect v-bind="args" v-model="value"></AtDateSelect></div>`,
+  template: `<div class="w-full bg-red py-2 flex flex-end">
+    <AtDateSelect v-bind="args" v-model="value">
+    </div>`,
 });
 
 export const Default = Template.bind({});
 Default.args = {
-  value: new Date()
+  value: null
+};
+
+
+export const WidthOverflow = Template.bind({});
+WidthOverflow.args = {
+  class: 'w-32 overflow-hidden'
 };

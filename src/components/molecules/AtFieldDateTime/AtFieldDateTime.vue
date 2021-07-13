@@ -36,6 +36,12 @@ export default {
         hasError: {
             type: Boolean,
             default: false
+        },
+        role: {
+            type: String
+        },
+        placeholder: {
+            type: String
         }
     },
     emits: ['update:modelValue', 'update:time', 'update:hasError'],

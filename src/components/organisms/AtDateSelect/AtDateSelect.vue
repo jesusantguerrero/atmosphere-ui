@@ -14,9 +14,11 @@
                 </button>
             </div>
         </template>
+        
         <template #content>
             <at-date-picker 
                 v-model:date="date" 
+                @update:date="$emit('update:modelValue', $event)"
                 :shortcuts="shortcuts"
             />
         </template>
@@ -27,7 +29,7 @@
 import { defineComponent, reactive, ref, toRefs, watch } from "vue";
 import { useDateTime } from "../../../utils/useDateTime";
 import AtDatePicker from "../AtDatePicker/AtDatePicker.vue";
-import Dropdown from "../../third/Dropdown.vue"; 
+import Dropdown from "../../third/CustomDrop.vue"; 
 
 export default defineComponent({
     components: {

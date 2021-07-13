@@ -23,6 +23,7 @@ import AtWeekControls from "./src/components/molecules/AtWeekControls/AtWeekCont
 import AtWeekPager from "./src/components/molecules/AtWeekPager/AtWeekPager.vue";
 import AtAuthForm from "./src/components/organisms/AtAuthForm/AtAuthForm.vue";
 import AtDashlide from "./src/components/organisms/AtDashlide/AtDashlide.vue";
+import AtDateAction from "./src/components/organisms/AtDatePicker/AtDateAction.vue";
 import AtDatePicker from "./src/components/organisms/AtDatePicker/AtDatePicker.vue";
 import AtDateSelect from "./src/components/organisms/AtDateSelect/AtDateSelect.vue";
 import AtRecurrenceForm from "./src/components/organisms/AtRecurrenceSelect/AtRecurrenceForm.vue";
@@ -55,6 +56,7 @@ export {
   AtWeekPager,
   AtAuthForm,
   AtDashlide,
+  AtDateAction,
   AtDatePicker,
   AtDateSelect,
   AtRecurrenceForm,

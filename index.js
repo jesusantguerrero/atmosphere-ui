@@ -1,6 +1,7 @@
 // Auto-generated file by create-index-files.js. Do not edit manually
 import AtBareRate from "./src/components/_core/AtBareRate/AtBareRate.vue";
 import AtBareRateButton from "./src/components/_core/AtBareRate/AtBareRateButton.vue";
+import AtDropdown from "./src/components/_core/AtDropdown/AtDropdown.vue";
 import AtAuthInput from "./src/components/atoms/AtAuthInput/AtAuthInput.vue";
 import AtBadge from "./src/components/atoms/AtBadge/AtBadge.vue";
 import AtButton from "./src/components/atoms/AtButton/AtButton.vue";
@@ -34,6 +35,7 @@ import AtAuthBox from "./src/components/templates/AtAuthBox/AtAuthBox.vue";
 export {
   AtBareRate,
   AtBareRateButton,
+  AtDropdown,
   AtAuthInput,
   AtBadge,
   AtButton,

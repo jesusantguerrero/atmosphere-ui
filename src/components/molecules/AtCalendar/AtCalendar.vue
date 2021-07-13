@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { computed, toRefs, watch } from "@vue/runtime-core";
+import { computed, toRefs, watch } from "vue";
 import { useDatePager } from "../../../utils/useDatePager";
 import { format, isSameDay, isToday, isWithinInterval } from "date-fns";
 

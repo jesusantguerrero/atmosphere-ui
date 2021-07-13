@@ -1,5 +1,5 @@
 <template>
-    <dropdown align="right" width="full" content-classes="bg-transparent" :closable="false">
+    <at-dropdown align="right" width="full" content-classes="bg-transparent" :closable="false">
         <template #trigger>
             <div class="date-select">
                 <button
@@ -22,19 +22,19 @@
                 :shortcuts="shortcuts"
             />
         </template>
-    </dropdown>
+    </at-dropdown>
 </template>
 
 <script>
 import { defineComponent, reactive, ref, toRefs, watch } from "vue";
 import { useDateTime } from "../../../utils/useDateTime";
 import AtDatePicker from "../AtDatePicker/AtDatePicker.vue";
-import Dropdown from "../../third/CustomDrop.vue"; 
+import AtDropdown from "../../_core/AtDropdown/AtDropdown.vue"; 
 
 export default defineComponent({
     components: {
         AtDatePicker,
-        Dropdown,
+        AtDropdown,
     },
     props: {
         modelValue: [Date, String, null],
@@ -85,23 +85,4 @@ export default defineComponent({
         }  
     }
 })
-
 </script>
-
-<style lang="scss">
-.date-select {
-    .el-date-editor--date, .el-input__inner, .el-input__suffix, .el-input__preffix {
-        width: 1px !important;
-        opacity: 0;
-        padding: 0 0 0 0 !important;
-    }
-
-    .el-input__prefix {
-        width: 0;
-    }
-
-    .el-input__icon {
-        width: 0;
-    }
-}
-</style>

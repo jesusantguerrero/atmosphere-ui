@@ -18,8 +18,8 @@
     </div>
     <div class="grid w-full grid-cols-7 gap-1 mt-2">
     <div
-        v-for="day in displayWeek"
-        :key="`item-${day}`"
+        v-for="(day, index) in displayWeek"
+        :key="`item-${index}-${day}`"
         class="flex justify-center w-full rounded-md cursor-pointer select-none"
         :class="{
           'hover:bg-gray-200': day, 
@@ -105,7 +105,7 @@ export default {
     })
 
     const isBetween = (date) => {
-      if (props.startDate && props.endDate) {
+      if (props.startDate && props.endDate && date) {
         return isWithinInterval(date, {
           start: props.startDate, end: props.endDate
         })

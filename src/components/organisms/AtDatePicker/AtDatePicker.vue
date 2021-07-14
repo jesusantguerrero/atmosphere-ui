@@ -3,12 +3,14 @@
         <div class="flex flex-wrap">
             <at-field-date-time 
                 v-model="date" 
+                data-test-id="date"
                 :include-time="includesTime" 
                 :selected="selected=='date'" 
                 @click="selected='date'"
             />
             <at-field-date-time 
                 role="enddate"
+                data-test-id="enddate"
                 placeholder="pick an end date"
                 v-model="endDate" 
                 :include-time="includesTime" 
@@ -129,13 +131,12 @@ export default {
         watch(() => state.includesEndDate, () => {
             state.endDate = state.includesEndDate ? state.date : null;
             state.selected = state.includesEndDate ? 'endDate' : 'date'; 
-        })
+        }, { immediate: true })
 
         const setDate = (date) => {
             if (!props.includesTime) {
                 date = startOfDay(date);
             }
-
             if (state.selected == 'endDate' && state.date && isBefore(date, state.date)) {
                 const holder = state.date;
                 state.date = date;

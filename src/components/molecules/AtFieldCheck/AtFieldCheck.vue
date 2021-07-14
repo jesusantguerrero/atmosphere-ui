@@ -5,8 +5,8 @@
         @click="$emit('update:modelValue', !modelValue)"
         :aria-checked="modelValue"
     >
-        <label class="cursor-pointer">{{ label }}</label>
-        <at-switch v-model="modelValue" @update:modelValue="$emit('update:modelValue', $event)" />
+        <label class="cursor-pointer" for="switch">{{ label }}</label>
+        <at-switch v-model="modelValue" @update:modelValue="$emit('update:modelValue', $event)" name="switch" id="switch" />
     </div>
 </template>
 

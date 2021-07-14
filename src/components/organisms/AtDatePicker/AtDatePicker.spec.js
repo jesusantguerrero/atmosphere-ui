@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/vue";import { ref } from "vue";
+import { fireEvent, render, screen } from "@testing-library/vue";import { ref } from "vue";
 ;
 import AtDatePicker from "./AtDatePicker.vue";
 
@@ -24,15 +24,36 @@ it('renders shortcuts', async () => {
    screen.getByText('Today');
 })
 it('displays end date', async () => {
-    const includesEndDate = ref(false);
+    const acceptEndDate = ref(false);
     const { rerender } = renderComponent({
-       modelValue: new Date(),
-       includesEndDate
+       date: new Date(),
+       acceptEndDate
    });
 
-   expect(screen.queryByRole('enddate')).toBeFalsy();
-   includesEndDate.value = true;
-   await rerender({ includesEndDate});
-    expect(screen.getByRole('enddate')).toBeTruthy();
+    expect(screen.queryByRole('enddate')).toBeFalsy();
+    acceptEndDate.value = true;
+    await rerender({ acceptEndDate });
+    await fireEvent.click(screen.getByText('Include end'))
+    expect(screen.queryByRole('enddate')).toBeTruthy();
 })
 
+it('works with ranges', async () => {
+    const acceptEndDate = ref(true);
+    const { emitted } = renderComponent({
+        date: new Date(),
+        acceptEndDate
+    });
+
+    await fireEvent.click(screen.getByText('Include end'))
+    expect(screen.queryByRole('enddate')).toBeTruthy();
+
+    await fireEvent.click(screen.getByRole('button-previous'));
+    await fireEvent.click(screen.getByText('05'));
+    expect(emitted()).toHaveProperty('update:date');
+    await fireEvent.click(screen.getByRole('button-next'));
+    await fireEvent.click(screen.getByRole('button-next'));
+    await fireEvent.click(screen.getByText('05'));
+    expect(emitted()).toHaveProperty('update:endDate');
+    await fireEvent.click(screen.getByText('06'));
+    expect(emitted()).toHaveProperty('update:endDate');
+})

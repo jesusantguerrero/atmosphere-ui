@@ -55,5 +55,5 @@ it('works with ranges', async () => {
     await fireEvent.click(screen.getByText('05'));
     expect(emitted()).toHaveProperty('update:endDate');
     await fireEvent.click(screen.getByText('06'));
-    console.log(emitted()).toHaveProperty('update:endDate');
+    expect(emitted()).toHaveProperty('update:endDate');
 })

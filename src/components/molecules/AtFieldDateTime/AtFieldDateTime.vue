@@ -7,10 +7,9 @@
 </template>
 
 <script>
+import { reactive, ref, toRefs, computed, watch } from 'vue'
 import { toDate, format } from "date-fns"
 import { validateStringDate } from "../../../utils/validators/dateValidator";
-import { reactive, ref, toRefs } from '@vue/reactivity'
-import { computed, watch } from '@vue/runtime-core';
 
 export default {
     props: {
@@ -36,6 +35,12 @@ export default {
         hasError: {
             type: Boolean,
             default: false
+        },
+        role: {
+            type: String
+        },
+        placeholder: {
+            type: String
         }
     },
     emits: ['update:modelValue', 'update:time', 'update:hasError'],

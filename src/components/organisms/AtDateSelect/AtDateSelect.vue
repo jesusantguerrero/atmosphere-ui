@@ -1,5 +1,5 @@
 <template>
-    <modal>
+    <at-dropdown align="right" width="full" content-classes="bg-transparent" :closable="false">
         <template #trigger>
             <div class="date-select">
                 <button
@@ -10,31 +10,38 @@
 
                 >
                     <i class="mr-1 fa fa-calendar"></i>
-                    <span class="inline-block w-full ml-1 text-sm font-bold text-left capitalize" > {{ humanDate || placeholder }} </span>
+                    <span class="inline-block w-full ml-1 text-sm font-bold text-left " > {{ humanDate || placeholder }} </span>
                 </button>
             </div>
         </template>
-        <at-date-picker 
-            v-model:date="date" 
-            :shortcuts="shortcuts"
-        />
-    </modal>
+        
+        <template #content>
+            <at-date-picker 
+                v-model:date="date" 
+                @update:date="$emit('update:modelValue', $event)"
+                :shortcuts="shortcuts"
+            />
+        </template>
+    </at-dropdown>
 </template>
 
 <script>
 import { defineComponent, reactive, ref, toRefs, watch } from "vue";
 import { useDateTime } from "../../../utils/useDateTime";
 import AtDatePicker from "../AtDatePicker/AtDatePicker.vue";
-import Modal from "../../third/Modal.vue"; 
+import AtDropdown from "../../_core/AtDropdown/AtDropdown.vue"; 
 
 export default defineComponent({
     components: {
         AtDatePicker,
-        Modal,
+        AtDropdown,
     },
     props: {
-        modelValue: [Date, String],
-        placeholder: String,
+        modelValue: [Date, String, null],
+        placeholder: {
+            type: String,
+            default: 'Select a date'
+        },
         closeOnSelect: {
             type: Boolean,
             default: true
@@ -68,7 +75,7 @@ export default defineComponent({
         const { humanDate , getDateFromString } = useDateTime(date);
 
         watch(() => props.modelValue, (value) => {
-            date.value = typeof value == 'string' ? getDateFromString(value) : value
+            date.value = value && typeof value == 'string' ? getDateFromString(value) : value
         }, { immediate: true })
 
         return {
@@ -78,23 +85,4 @@ export default defineComponent({
         }  
     }
 })
-
 </script>
-
-<style lang="scss">
-.date-select {
-    .el-date-editor--date, .el-input__inner, .el-input__suffix, .el-input__preffix {
-        width: 1px !important;
-        opacity: 0;
-        padding: 0 0 0 0 !important;
-    }
-
-    .el-input__prefix {
-        width: 0;
-    }
-
-    .el-input__icon {
-        width: 0;
-    }
-}
-</style>

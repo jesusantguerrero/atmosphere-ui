@@ -1,6 +1,7 @@
 // Auto-generated file by create-index-files.js. Do not edit manually
 import AtBareRate from "./src/components/_core/AtBareRate/AtBareRate.vue";
 import AtBareRateButton from "./src/components/_core/AtBareRate/AtBareRateButton.vue";
+import AtDropdown from "./src/components/_core/AtDropdown/AtDropdown.vue";
 import AtAuthInput from "./src/components/atoms/AtAuthInput/AtAuthInput.vue";
 import AtBadge from "./src/components/atoms/AtBadge/AtBadge.vue";
 import AtButton from "./src/components/atoms/AtButton/AtButton.vue";
@@ -23,6 +24,7 @@ import AtWeekControls from "./src/components/molecules/AtWeekControls/AtWeekCont
 import AtWeekPager from "./src/components/molecules/AtWeekPager/AtWeekPager.vue";
 import AtAuthForm from "./src/components/organisms/AtAuthForm/AtAuthForm.vue";
 import AtDashlide from "./src/components/organisms/AtDashlide/AtDashlide.vue";
+import AtDateAction from "./src/components/organisms/AtDatePicker/AtDateAction.vue";
 import AtDatePicker from "./src/components/organisms/AtDatePicker/AtDatePicker.vue";
 import AtDateSelect from "./src/components/organisms/AtDateSelect/AtDateSelect.vue";
 import AtRecurrenceForm from "./src/components/organisms/AtRecurrenceSelect/AtRecurrenceForm.vue";
@@ -33,6 +35,7 @@ import AtAuthBox from "./src/components/templates/AtAuthBox/AtAuthBox.vue";
 export {
   AtBareRate,
   AtBareRateButton,
+  AtDropdown,
   AtAuthInput,
   AtBadge,
   AtButton,
@@ -55,6 +58,7 @@ export {
   AtWeekPager,
   AtAuthForm,
   AtDashlide,
+  AtDateAction,
   AtDatePicker,
   AtDateSelect,
   AtRecurrenceForm,

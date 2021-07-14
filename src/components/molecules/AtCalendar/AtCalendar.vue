@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { computed, toRefs, watch } from "@vue/runtime-core";
+import { computed, toRefs, watch } from "vue";
 import { useDatePager } from "../../../utils/useDatePager";
 import { format, isSameDay, isToday, isWithinInterval } from "date-fns";
 
@@ -79,7 +79,7 @@ export default {
     });
     
     const isSelectedDate = (date) => {
-      return date ? format(props.selected, 'yyyyMMdd') === format(date, 'yyyyMMdd') : false;
+      return date && props.selected ?  format(props.selected, 'yyyyMMdd') === format(date, 'yyyyMMdd') : false;
     };
 
     const getDayAttributes = (day) => {

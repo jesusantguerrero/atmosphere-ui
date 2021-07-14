@@ -105,7 +105,7 @@ export default {
     })
 
     const isBetween = (date) => {
-      if (props.startDate && props.endDate) {
+      if (props.startDate && props.endDate && date) {
         return isWithinInterval(date, {
           start: props.startDate, end: props.endDate
         })

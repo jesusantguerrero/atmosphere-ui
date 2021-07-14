@@ -1,7 +1,7 @@
 <template>
     <div class="relative flex w-full py-1 transition border-2 border-transparent divide-x rounded-md" ref="dateTimeField" :class="{'border-red-400 bg-red-50': isInvalid, 'border-gray-400': isSelected }">
         <div class="absolute top-0 px-2 py-1 text-sm text-white bg-black rounded-md -right-24" role="error" v-if="isInvalid">Invalid date</div>
-        <input v-model="date" :time="includeTime" class="w-full px-2 text-sm bg-transparent focus:outline-none" placeholder="mmm dd yyyy" @blur="onBlur" ref="dateInput" @click="onFocus"/>
+        <input v-model="date" :time="includeTime" class="w-full px-2 text-sm bg-transparent focus:outline-none" placeholder="mmm dd yyyy" @blur="onBlur" ref="dateInput" @click="onFocus" />
         <input v-model="formattedTime" v-if="includeTime" :time="includeTime" @blur="onBlur" class="w-full px-2 text-sm focus:outline-none" placeholder="hh:mm a" ref="timeInput" @click="onFocus" />
     </div>
 </template>
@@ -14,8 +14,7 @@ import { validateStringDate } from "../../../utils/validators/dateValidator";
 export default {
     props: {
         modelValue: {
-            type: Date,
-            required: true
+            type: [Date, null]
         },
         includeTime: {
             type: Boolean,
@@ -35,9 +34,6 @@ export default {
         hasError: {
             type: Boolean,
             default: false
-        },
-        role: {
-            type: String
         },
         placeholder: {
             type: String

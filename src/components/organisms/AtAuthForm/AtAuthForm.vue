@@ -18,7 +18,7 @@
                     required
                 />
                 <template #error>
-                    <error-bag :errors="errors" field="email"></error-bag>
+                    <at-error-bag :errors="errors" field="email" />
                 </template>
             </at-field>
 
@@ -30,7 +30,7 @@
                     required
                 />
                 <template #error>
-                    <at-error-bags :errors="errors" field="password"></at-error-bags>
+                    <at-error-bag :errors="errors" field="password"></at-error-bag>
                 </template>
             </at-field>
 
@@ -48,7 +48,7 @@
                     required
                 />
                 <small v-if="isConfirmationInvalid" class="text-red-200"> Passwords are not equal </small>
-                <error-bag :errors="errors" field="confirm_password"></error-bag>
+                <at-error-bag :errors="errors" field="confirm_password"></at-error-bag>
             </at-field>
         </slot>
 

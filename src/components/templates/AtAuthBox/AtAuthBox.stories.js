@@ -61,3 +61,16 @@ WithBackgroundImage.args = {
   linkClass: 'text-blue-500 hover:text-blue-600',
   hideLink: true
 }
+
+export const WithErrors = Template.bind({});
+WithErrors.args = {
+  form: {
+    email: '',
+  },
+  errors: {
+    email: 'Email is required',
+  },
+  backgroundImage: "https://www.sciencenewsforstudents.org/wp-content/uploads/2020/11/1030_Earth_atmosphere_explainer.jpg",
+  linkClass: 'text-blue-500 hover:text-blue-600',
+  hideLink: true
+}

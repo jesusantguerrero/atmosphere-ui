@@ -2,20 +2,19 @@
     <div 
         role="checkbox" 
         class="flex items-center justify-between px-2 py-1 text-gray-500 transition cursor-pointer select-none switch hover:bg-gray-100" 
-        @click="$emit('update:modelValue', !modelValue)"
+        @click="emitUpdate()"
         :aria-checked="modelValue"
     >
         <label class="cursor-pointer" for="switch">{{ label }}</label>
-        <at-switch v-model="modelValue" @update:modelValue="$emit('update:modelValue', $event)" name="switch" id="switch" />
+        <at-switch :model-value="modelValue" name="switch" id="switch" />
     </div>
 </template>
 
-<script>
+<script setup>
 import AtSwitch from "../../atoms/AtSwitch/AtSwitch.vue";
 
-export default {
-    props: {
-        modelValue: {
+const props = defineProps({
+   modelValue: {
             type: Boolean,
             required: true
         },
@@ -23,10 +22,12 @@ export default {
             type: String,
             required: true
         }
-    },
-    components: {
-        AtSwitch
-    },
-    emits: ['update:modelValue']
+});
+
+const emit = defineEmits(['update:modelValue']);
+
+const emitUpdate = () => {
+    emit('update:modelValue', !props.modelValue)
 }
+
 </script>

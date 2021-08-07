@@ -9,7 +9,6 @@ export default {
 const Template = (args) => ({
   components: { AtFieldCheck },
   setup() {
-
     return { args, value: ref(false) };
   },
   template: `<AtFieldCheck v-bind="args" v-model="value"/>`,

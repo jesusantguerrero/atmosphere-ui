@@ -14,7 +14,6 @@ import AtSwitch from "./src/components/atoms/AtSwitch/AtSwitch.vue";
 import AtTextarea from "./src/components/atoms/AtTextarea/AtTextarea.vue";
 import AtBackgroundIconCard from "./src/components/molecules/AtBackgroundIconCard/AtBackgroundIconCard.vue";
 import AtCalendar from "./src/components/molecules/AtCalendar/AtCalendar.vue";
-import AtDateRange from "./src/components/molecules/AtDateRange/AtDateRange.vue";
 import AtFieldCheck from "./src/components/molecules/AtFieldCheck/AtFieldCheck.vue";
 import AtFieldDateTime from "./src/components/molecules/AtFieldDateTime/AtFieldDateTime.vue";
 import AtFormGroup from "./src/components/molecules/AtFormGroup/AtFormGroup.vue";
@@ -27,9 +26,8 @@ import AtDashlide from "./src/components/organisms/AtDashlide/AtDashlide.vue";
 import AtDateAction from "./src/components/organisms/AtDatePicker/AtDateAction.vue";
 import AtDatePicker from "./src/components/organisms/AtDatePicker/AtDatePicker.vue";
 import AtDateSelect from "./src/components/organisms/AtDateSelect/AtDateSelect.vue";
-import AtRecurrenceForm from "./src/components/organisms/AtRecurrenceSelect/AtRecurrenceForm.vue";
-import AtRecurrenceSelect from "./src/components/organisms/AtRecurrenceSelect/AtRecurrenceSelect.vue";
 import AtSide from "./src/components/organisms/AtSide/AtSide.vue";
+import AtVideo from "./src/components/organisms/AtVideo/AtVideo.vue";
 import AtAuthBox from "./src/components/templates/AtAuthBox/AtAuthBox.vue";
 
 export {
@@ -48,7 +46,6 @@ export {
   AtTextarea,
   AtBackgroundIconCard,
   AtCalendar,
-  AtDateRange,
   AtFieldCheck,
   AtFieldDateTime,
   AtFormGroup,
@@ -61,8 +58,7 @@ export {
   AtDateAction,
   AtDatePicker,
   AtDateSelect,
-  AtRecurrenceForm,
-  AtRecurrenceSelect,
   AtSide,
+  AtVideo,
   AtAuthBox
 };

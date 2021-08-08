@@ -1,5 +1,5 @@
 <template>
-    <at-dropdown align="right" width="full" content-classes="bg-transparent" :closable="false">
+    <at-dropdown align="right" width="full" content-classes="bg-white" :closable="false">
         <template #trigger>
             <div class="date-select">
                 <button
@@ -18,6 +18,7 @@
         <template #content>
             <at-date-picker 
                 v-model:date="date" 
+                class="bg-white"
                 @update:date="$emit('update:modelValue', $event)"
                 :shortcuts="shortcuts"
             />

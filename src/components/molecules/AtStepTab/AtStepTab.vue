@@ -9,7 +9,7 @@
         <div class="load" :class="state.loadClass"/>
         <div
             class="circle"
-            @click="handleClick(index)"
+            @click="$emit('click')"
         >
             <i v-if="isActive" class="fas fa-check" />
         </div>

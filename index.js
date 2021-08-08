@@ -19,6 +19,8 @@ import AtFieldDateTime from "./src/components/molecules/AtFieldDateTime/AtFieldD
 import AtFormGroup from "./src/components/molecules/AtFormGroup/AtFormGroup.vue";
 import AtSideItem from "./src/components/molecules/AtSideItem/AtSideItem.vue";
 import AtSideItemGroup from "./src/components/molecules/AtSideItemGroup/AtSideItemGroup.vue";
+import AtStep from "./src/components/molecules/AtStep/AtStep.vue";
+import AtStepTab from "./src/components/molecules/AtStepTab/AtStepTab.vue";
 import AtWeekControls from "./src/components/molecules/AtWeekControls/AtWeekControls.vue";
 import AtWeekPager from "./src/components/molecules/AtWeekPager/AtWeekPager.vue";
 import AtAuthForm from "./src/components/organisms/AtAuthForm/AtAuthForm.vue";
@@ -27,6 +29,7 @@ import AtDateAction from "./src/components/organisms/AtDatePicker/AtDateAction.v
 import AtDatePicker from "./src/components/organisms/AtDatePicker/AtDatePicker.vue";
 import AtDateSelect from "./src/components/organisms/AtDateSelect/AtDateSelect.vue";
 import AtSide from "./src/components/organisms/AtSide/AtSide.vue";
+import AtSteps from "./src/components/organisms/AtSteps/AtSteps.vue";
 import AtVideo from "./src/components/organisms/AtVideo/AtVideo.vue";
 import AtAuthBox from "./src/components/templates/AtAuthBox/AtAuthBox.vue";
 
@@ -51,6 +54,8 @@ export {
   AtFormGroup,
   AtSideItem,
   AtSideItemGroup,
+  AtStep,
+  AtStepTab,
   AtWeekControls,
   AtWeekPager,
   AtAuthForm,
@@ -59,6 +64,7 @@ export {
   AtDatePicker,
   AtDateSelect,
   AtSide,
+  AtSteps,
   AtVideo,
   AtAuthBox
 };

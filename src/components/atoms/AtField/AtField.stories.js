@@ -16,6 +16,7 @@ const Template = (args) => ({
 export const Default = Template.bind({});
 Default.args = {
   field: 'email',
+  label: 'Email',
   errors: {
     email: 'An email error'
   }

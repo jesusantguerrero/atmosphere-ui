@@ -1,15 +1,17 @@
 <template>
 <div 
-    class="w-10 rounded-full cursor-pointer" 
+    class="block w-10 h-5 rounded-full cursor-pointer" 
     :class="localState ? activeClass : disabledClass"
+    v-bind="$attrs"
     role="switch"
     :aria-checked="localState"
     @click="emitUpdate()"
 >
     <span
         :class="localState ? 'translate-x-5' : 'translate-x-0'" 
-        class="block w-5 h-5 transition duration-200 ease-in-out transform bg-white border rounded-full pointer-events-none"></span>
+        class="block w-5 h-5 transition duration-200 ease-in-out transform bg-white border rounded-full pointer-events-none" />
 </div>
+<span class="text-sm"> {{ activeText }}</span>
 </template>
 
 <script setup>
@@ -27,6 +29,10 @@ import { ref, watch } from "vue";
         activeClass: {
             type: String,
             default: 'bg-green-400'
+        },
+        activeText: {
+            type: String,
+            default: ''
         }
     });
     const emit = defineEmits(['update:modelValue'])

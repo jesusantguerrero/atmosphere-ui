@@ -1,5 +1,5 @@
 <template>
-<a class="px-4 py-1 text-sm font-bold rounded-full" :class="colorClasses">
+<a class="px-4 py-1 text-sm font-bold rounded-full cursor-pointer" :class="colorClasses">
     <slot></slot>
 </a>
 </template>
@@ -19,11 +19,11 @@ export default {
     computed: {
         colorClasses() {
             const colors = {
-                primary: 'bg-blue-100 text-blue-400',
-                secondary: 'bg-gray-100 text-gray-400',
-                danger: 'bg-red-100 text-red-400',
-                warning: 'bg-yellow-100 text-yellow-400',
-                success: 'bg-green-100 text-green-400'
+                primary: 'text-blue-400',
+                secondary: 'text-gray-400',
+                danger: 'text-red-400',
+                warning: 'text-yellow-400',
+                success: 'text-green-400'
             }
             return colors[this.type] ?? colors.primary;
         }

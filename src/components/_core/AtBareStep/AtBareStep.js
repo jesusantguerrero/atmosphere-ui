@@ -76,8 +76,8 @@ export const AtBareStep = defineComponent({
         
             emit("update:value", currentIndex)
         
-            if (state.tabs[currentIndex] && state.tabs[currentIndex].afterChange) {
-                state.tabs[currentIndex].afterChange()
+            if (state.tabs[oldIndex] && state.tabs[oldIndex].afterChange) {
+                state.tabs[oldIndex].afterChange()
             }
         }
         

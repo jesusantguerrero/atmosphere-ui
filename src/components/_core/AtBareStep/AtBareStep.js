@@ -1,28 +1,6 @@
 import { defineComponent,h, computed, nextTick, onMounted, provide, reactive, useSlots, inject, watch } from "vue"
 import AtStep from "../../molecules/AtStep/AtStep.vue"
-import { createMachine, assign } from "xstate";
-import { useMachine } from "@xstate/vue";
 
-wizardMachine = createMachine({
-    id: "wizard",
-    initial: "welcome",
-    context: {
-
-    },
-    states: {
-        active: {
-            on: {
-                NEXT: next,
-                PREV: prev,
-            }
-        },
-        completed: {
-            on: {
-                RESET: reset
-            }
-        }
-    }
-});
 
 export const stepProps = {
     modelValue: {
@@ -86,6 +64,7 @@ export const AtBareStep = defineComponent({
             steps: null,
             tabs: null
         })
+
         watch(() => props.modelValue, (value) => {
             if (props.modelValue !== state.value) {
                 setActiveTab(value);   
@@ -118,10 +97,12 @@ export const AtBareStep = defineComponent({
             const isPrev = oldIndex > currentIndex;
             const isFinished = currentIndex >= state.tabs.length - 1;
 
-            if (isNext && state.tabs[oldIndex] && !isFinished) {
+            if (isNext && state.tabs[oldIndex]) {
                 const isInvalid = await dispatchTabHook(oldIndex, 'before-change')
                 if (isInvalid) {
                     newIndex = oldIndex   
+                } else if (isFinished) {
+                    return setStateValue(state.value, true)
                 }
             } else if (isPrev) {
                 newIndex = currentIndex            

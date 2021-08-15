@@ -20,6 +20,8 @@ import AtFieldDateTime from "./src/components/molecules/AtFieldDateTime/AtFieldD
 import AtFormField from "./src/components/molecules/AtFormField/AtFormField.vue";
 import AtFormGroup from "./src/components/molecules/AtFormGroup/AtFormGroup.vue";
 import AtOptionsCreator from "./src/components/molecules/AtOptionsCreator/AtOptionsCreator.vue";
+import AtOptionsPicture from "./src/components/molecules/AtOptionsPicture/AtOptionsPicture.vue";
+import AtOptionsPictureItem from "./src/components/molecules/AtOptionsPictureItem/AtOptionsPictureItem.vue";
 import AtRate from "./src/components/molecules/AtRate/AtRate.vue";
 import AtSideItem from "./src/components/molecules/AtSideItem/AtSideItem.vue";
 import AtSideItemGroup from "./src/components/molecules/AtSideItemGroup/AtSideItemGroup.vue";
@@ -60,6 +62,8 @@ export {
   AtFormField,
   AtFormGroup,
   AtOptionsCreator,
+  AtOptionsPicture,
+  AtOptionsPictureItem,
   AtRate,
   AtSideItem,
   AtSideItemGroup,

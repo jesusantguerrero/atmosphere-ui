@@ -83,7 +83,7 @@
 
 <script setup>
 import { computed, reactive, toRefs, watch } from 'vue';
-import JetSelect from "../../Jetstream/SimpleSelect.vue"
+import JetSelect from "../../Jetstream/AtSimpleSelect.vue"
 import AtSwitch from "../../atoms/AtSwitch/AtSwitch.vue";
 import AtButton from "../../atoms/AtButton/AtButton.vue";
 import AtFormField from "../../molecules/AtFormField/AtFormField.vue";

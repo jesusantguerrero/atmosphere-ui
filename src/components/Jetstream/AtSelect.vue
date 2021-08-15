@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import JetDropdown from './Dropdown.vue'
+import JetDropdown from './AtDropdown.vue'
 import { computed } from 'vue'
 
 const props = defineProps({

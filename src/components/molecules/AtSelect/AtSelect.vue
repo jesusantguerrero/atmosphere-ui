@@ -1,5 +1,5 @@
 <template>
-<jet-dropdown align="right" width="full">
+<at-dropdown align="right" width="full">
     <template #trigger>
         <span class="inline-flex w-full rounded-md">
             <button type="button" class="inline-flex items-center justify-between w-full px-3 py-3 text-sm font-medium leading-4 text-gray-500 capitalize transition duration-150 ease-in-out bg-white border border-gray-200 rounded-md hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50">
@@ -37,11 +37,11 @@
             </div>
         </div>
     </template>
-</jet-dropdown>
+</at-dropdown>
 </template>
 
 <script setup>
-import JetDropdown from './AtDropdown.vue'
+import AtDropdown from '../AtDropdown/AtDropdown.vue'
 import { computed } from 'vue'
 
 const props = defineProps({

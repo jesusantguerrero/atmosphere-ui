@@ -6,7 +6,7 @@ import AtChoices from "../../molecules/AtChoices/AtChoices.vue";
 import AtBinaryChoice from "../../molecules/AtBinaryChoice/AtBinaryChoice.vue";
 import AtOptionsCreator from "../../molecules/AtOptionsCreator/AtOptionsCreator.vue";
 import AtOptionsPicture from "../../molecules/AtOptionsPicture/AtOptionsPicture.vue";
-import SimpleSelect from "../../Jetstream/SimpleSelect.vue"
+import SimpleSelect from "../../molecules/AtSimpleSelect/AtSimpleSelect.vue"
 
 export default {
   title: 'Molecules/AtFormField',

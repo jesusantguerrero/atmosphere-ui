@@ -7,7 +7,7 @@ const path = require("path");
 const pathTargetIndexJs = path.resolve(__dirname, "..", "index.js");
 
 const pathVueComponentsRoot = path.resolve(__dirname, "..", "src/components");
-const pathsVueComponents = glob.sync("*/*/At*.vue", {
+const pathsVueComponents = glob.sync("*/*/At*.{vue,js}", {
   cwd: pathVueComponentsRoot,
 });
 

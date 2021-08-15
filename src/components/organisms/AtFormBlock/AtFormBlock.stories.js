@@ -5,7 +5,7 @@ import AtRate from "../../molecules/AtRate/AtRate.vue";
 import AtChoices from "../../molecules/AtChoices/AtChoices.vue";
 import AtBinaryChoice from "../../molecules/AtBinaryChoice/AtBinaryChoice.vue";
 import AtOptionsCreator from "../../molecules/AtOptionsCreator/AtOptionsCreator.vue";
-import SimpleSelect from "../../Jetstream/SimpleSelect.vue"
+import SimpleSelect from "../../molecules/AtSimpleSelect/AtSimpleSelect.vue"
 
 export default {
   title: 'Organisms/AtFormBlock',

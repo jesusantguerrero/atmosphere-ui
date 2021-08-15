@@ -1,8 +1,31 @@
-import { defineComponent,h, defineEmits, defineProps, computed, nextTick, onMounted, provide, reactive, useSlots, inject } from "vue"
+import { defineComponent,h, computed, nextTick, onMounted, provide, reactive, useSlots, inject, watch } from "vue"
 import AtStep from "../../molecules/AtStep/AtStep.vue"
+import { createMachine, assign } from "xstate";
+import { useMachine } from "@xstate/vue";
+
+wizardMachine = createMachine({
+    id: "wizard",
+    initial: "welcome",
+    context: {
+
+    },
+    states: {
+        active: {
+            on: {
+                NEXT: next,
+                PREV: prev,
+            }
+        },
+        completed: {
+            on: {
+                RESET: reset
+            }
+        }
+    }
+});
 
 export const stepProps = {
-    value: {
+    modelValue: {
        type: Number,
        default: 0
    },
@@ -14,25 +37,26 @@ export const stepProps = {
        type: Boolean,
        default: true
    },
-   activeColor: {
+   activeClass: {
        type: String,
-       default: "primary"
+       default: "bg-green-400"
    },
-   activeLabelColor: {
+   activeLabelClass: {
        type: String,
-       default: "white"
+       default: "text-white"
    },
 }
 
 export const AtBareStepList = defineComponent({
     name: "AtBareStepList",
-    setup: (_props, { slots }) => {
+    setup(_props, { slots }) {
         const state = inject("state");
         const handleClick = inject("handleClick");
 
         return () => h('div', slots.default({
             steps: state.steps,
             handleClick,
+            state
         }))
     }
 })
@@ -43,7 +67,6 @@ export const AtBareStepControls = defineComponent({
         const next = inject("next");
         const prev = inject("prev");
         const step = inject("step");
-        console.log(slots);
         return () => slots.default({
             next,
             prev,
@@ -52,33 +75,64 @@ export const AtBareStepControls = defineComponent({
     }
 })
 
+
 export const AtBareStep = defineComponent({
     name: "AtBareStep",
     props: stepProps,
-    emits: ["update:value"],
+    emits: ["update:modelValue", 'finished', 'reset'],
     setup(props, { slots, emit }) {        
         const state = reactive({
+            value: 0,
             steps: null,
             tabs: null
         })
-        
-        const dispatchBeforeChange = (index) => {
-            return state.tabs[index].beforeChange && !tabs[index].beforeChange()
+        watch(() => props.modelValue, (value) => {
+            if (props.modelValue !== state.value) {
+                setActiveTab(value);   
+            }
+        })
+
+        const dispatchTabHook = (index, hookName = 'before-change') => {
+            if (state.tabs[index] && state.tabs[index].props[hookName]) {
+                return state.tabs[index].props[hookName].call()
+            }
+
+            if ('before-change') {
+                return new Promise(resolve => resolve(false))
+            }
+        }
+
+        const setStateValue = (currentIndex, emitFinished) => {
+            state.value = currentIndex;
+            emit("update:modelValue", currentIndex)
+
+            if (emitFinished) {
+                emit("finished", currentIndex)
+            }
         }
         
-        const setActiveTab = (currentIndex) => {
-            const oldIndex = props.value;
-            if (oldIndex >= 0 && state.tabs[oldIndex]) {
-                if (oldIndex <= currentIndex && dispatchBeforeChange(oldIndex)) {
-                    return
+        const setActiveTab = async (currentIndex) => {
+            const oldIndex = state.value;
+            let newIndex = currentIndex;
+            const isNext = oldIndex < currentIndex;
+            const isPrev = oldIndex > currentIndex;
+            const isFinished = currentIndex >= state.tabs.length - 1;
+
+            if (isNext && state.tabs[oldIndex] && !isFinished) {
+                const isInvalid = await dispatchTabHook(oldIndex, 'before-change')
+                if (isInvalid) {
+                    newIndex = oldIndex   
                 }
+            } else if (isPrev) {
+                newIndex = currentIndex            
+            }
+            
+            setStateValue(newIndex, isFinished);
+
+            if (oldIndex !== newIndex) {
+                dispatchTabHook(oldIndex, 'after-change');
             }
         
-            emit("update:value", currentIndex)
-        
-            if (state.tabs[oldIndex] && state.tabs[oldIndex].afterChange) {
-                state.tabs[oldIndex].afterChange()
-            }
         }
         
         onMounted(() =>  {
@@ -86,24 +140,19 @@ export const AtBareStep = defineComponent({
             state.tabs = slots.default().find( slot => slot.key === '_default').children.filter(value => value.type == AtStep);
             state.steps = state.tabs.map(tab => tab.props);
             nextTick(() => {
-                setActiveTab(props.value);
+                setActiveTab(props.modelValue);
             });
         });
         
-        const next = () => {
-            if (props.value < state.tabs.length - 1) {
-                setActiveTab(props.value + 1);
-            } else {
-                const isInvalid = dispatchBeforeChange(props.value);
-                if (!isInvalid) {
-                    emit("finished", props.value)
-                }
+        const next = async () => {
+            if (state.value < state.tabs.length) {
+                setActiveTab(state.value + 1);
             }
         }
         
         const previous = () => {
-            if (props.value > 0) {
-                setActiveTab(props.value - 1)
+            if (state.value > 0) {
+                setActiveTab(state.value - 1)
             } else {
                 emit("reset");
             }
@@ -116,16 +165,21 @@ export const AtBareStep = defineComponent({
         }
         
         const activeTab = computed(() => {
-            return state.tabs && state.tabs[props.value].props.name;
+            return state.tabs && state.tabs[state.value] ? state.tabs[state.value].props.name : 0;
         })
         
         provide('activeTab', activeTab);
         provide('state', state)
-        provide('step', props.value);
+        provide('step', state.value);
         provide('handleClick', handleClick);
         provide('next', next);
         provide('prev', previous)
 
-        return () => slots.default()
+        return () => h('div', slots.default({
+            prev: previous,
+            next,
+            state: state,
+        }));
     },
 })
+

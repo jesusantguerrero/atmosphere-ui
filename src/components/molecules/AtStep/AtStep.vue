@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { computed, inject } from "vue-demi";
+import { computed, inject } from "vue";
 const props = defineProps({
     name: {
         type: String,
@@ -28,6 +28,14 @@ const props = defineProps({
     description: {
         type: String,
         required: false,
+    },
+    beforeChange: {
+        type: Function,
+        required: false
+    },
+    afterChange: {
+        type: Function,
+        required: false
     }
 })
 

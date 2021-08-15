@@ -5,7 +5,7 @@
                 value="no"
                 @input="$emit('update:modelValue', $event.target.value)"
                 :id="noName"
-                ref="input"
+        
                 type="radio"
                 name="yesno"
             >
@@ -16,7 +16,6 @@
                 value="yes"
                 :id="yesName"
                 @input="$emit('update:modelValue', $event.target.value)"
-                ref="input"
                 type="radio"
                 name="yesno"
             >

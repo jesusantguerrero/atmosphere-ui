@@ -2,22 +2,13 @@
   <div>
     <!-- Capturer value -->
     <div v-if="disabled">
-      <input
-        v-model="field.value"
-        v-if="['input', 'email', 'phone'].includes(field.type)"
-        v-bind="data"
-        class="w-full border-b focus:outline-none"
-        :type="field.type"
-        :options="field.options"
-        :placeholder="field.placeholder"
-      />
-
       <component
-        ref="input"
         v-model="field.value"
         v-model:options="options"
         v-bind="data"
+        :placeholder="field.placeholder"
         :data="field.data"
+        :type="field.type"
         :emit-value="disabled"
         :is="componentName"
       />

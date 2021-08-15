@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import Dropdown from './AtDropdown.vue'
+import Dropdown from '../AtDropdown/AtDropdown.vue'
 import { computed } from 'vue'
 
 const props = defineProps({

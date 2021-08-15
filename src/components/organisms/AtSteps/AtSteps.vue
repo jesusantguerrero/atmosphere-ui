@@ -1,13 +1,20 @@
 <template>
-    <at-bare-step v-bind="props" @update:value="$emit('update:value', $event)" class="wizard">
-        <at-bare-step-list v-slot:default="{ steps, handleClick }" class="steps">
+    <at-bare-step 
+        ref="steps" 
+        :model-value="modelValue" 
+        v-bind="props" 
+        class="wizard"
+        @update:modelValue="$emit('update:modelValue', $event)" 
+    >
+        <at-bare-step-list v-slot:default="{ steps, handleClick, state }" class="steps">
             <at-step-tab
                 v-for="(step, index) in steps"
                 :key="step.title"
                 :step="step"
-                :value="value"
-                :is-active="value == index"
-                :is-passed="value >= index"
+                :value="state.value"
+                :active-class="activeClass"
+                :is-active="state.value == index"
+                :is-passed="state.value >= index"
                 @click="handleClick(index)"
             />
         </at-bare-step-list>    
@@ -22,8 +29,16 @@
 import { AtBareStep, AtBareStepList, AtBareStepControls, stepProps } from '../../_core/AtBareStep/AtBareStep';
 import AtStep from "../../molecules/AtStep/AtStep.vue"
 import AtStepTab from "../../molecules/AtStepTab/AtStepTab.vue"
+import { ref } from 'vue';
 
 const props = defineProps(stepProps)
+defineEmits(['update:modelValue', 'finished'])
+
+const steps = ref(null);
+defineExpose({
+    steps: steps.value,
+})
+
 </script>
 
 <style lang="scss">

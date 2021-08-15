@@ -1,7 +1,7 @@
 // Auto-generated file by create-index-files.js. Do not edit manually
 import AtBareRate from "./src/components/_core/AtBareRate/AtBareRate.vue";
 import AtBareRateButton from "./src/components/_core/AtBareRate/AtBareRateButton.vue";
-import AtDropdown from "./src/components/_core/AtDropdown/AtDropdown.vue";
+import AtCustomDropdown from "./src/components/_core/AtCustomDropdown/AtCustomDropdown.vue";
 import AtAuthInput from "./src/components/atoms/AtAuthInput/AtAuthInput.vue";
 import AtBadge from "./src/components/atoms/AtBadge/AtBadge.vue";
 import AtButton from "./src/components/atoms/AtButton/AtButton.vue";
@@ -15,6 +15,7 @@ import AtBackgroundIconCard from "./src/components/molecules/AtBackgroundIconCar
 import AtBinaryChoice from "./src/components/molecules/AtBinaryChoice/AtBinaryChoice.vue";
 import AtCalendar from "./src/components/molecules/AtCalendar/AtCalendar.vue";
 import AtChoices from "./src/components/molecules/AtChoices/AtChoices.vue";
+import AtDropdown from "./src/components/molecules/AtDropdown/AtDropdown.vue";
 import AtFieldCheck from "./src/components/molecules/AtFieldCheck/AtFieldCheck.vue";
 import AtFieldDateTime from "./src/components/molecules/AtFieldDateTime/AtFieldDateTime.vue";
 import AtFormField from "./src/components/molecules/AtFormField/AtFormField.vue";
@@ -23,8 +24,10 @@ import AtOptionsCreator from "./src/components/molecules/AtOptionsCreator/AtOpti
 import AtOptionsPicture from "./src/components/molecules/AtOptionsPicture/AtOptionsPicture.vue";
 import AtOptionsPictureItem from "./src/components/molecules/AtOptionsPictureItem/AtOptionsPictureItem.vue";
 import AtRate from "./src/components/molecules/AtRate/AtRate.vue";
+import AtSelect from "./src/components/molecules/AtSelect/AtSelect.vue";
 import AtSideItem from "./src/components/molecules/AtSideItem/AtSideItem.vue";
 import AtSideItemGroup from "./src/components/molecules/AtSideItemGroup/AtSideItemGroup.vue";
+import AtSimpleSelect from "./src/components/molecules/AtSimpleSelect/AtSimpleSelect.vue";
 import AtStep from "./src/components/molecules/AtStep/AtStep.vue";
 import AtStepTab from "./src/components/molecules/AtStepTab/AtStepTab.vue";
 import AtWeekControls from "./src/components/molecules/AtWeekControls/AtWeekControls.vue";
@@ -43,7 +46,7 @@ import AtAuthBox from "./src/components/templates/AtAuthBox/AtAuthBox.vue";
 export {
   AtBareRate,
   AtBareRateButton,
-  AtDropdown,
+  AtCustomDropdown,
   AtAuthInput,
   AtBadge,
   AtButton,
@@ -57,6 +60,7 @@ export {
   AtBinaryChoice,
   AtCalendar,
   AtChoices,
+  AtDropdown,
   AtFieldCheck,
   AtFieldDateTime,
   AtFormField,
@@ -65,8 +69,10 @@ export {
   AtOptionsPicture,
   AtOptionsPictureItem,
   AtRate,
+  AtSelect,
   AtSideItem,
   AtSideItemGroup,
+  AtSimpleSelect,
   AtStep,
   AtStepTab,
   AtWeekControls,

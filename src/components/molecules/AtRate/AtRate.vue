@@ -4,11 +4,11 @@
         :value="modelValue" v-bind="{...$attrs, ...$props}" 
         @update:modelValue="$emit('update:modelValue', $event)" 
         class="space-x-2" 
-        v-slot:default="{ current, selected }">
+        v-slot:default="{ current, selected, covered }">
         
         <AtBareRateButton 
             class="w-8 font-bold text-gray-400 transition transform rounded-lg cursor-pointer hover:text-yellow-400 hover:scale-110"
-            :class="[selected && selectedClass, itemClass ]"
+            :class="[(selected || covered) && selectedClass, itemClass ]"
             :current="current"
             :selected="selected"
         > 

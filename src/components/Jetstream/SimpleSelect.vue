@@ -13,7 +13,7 @@
     </template>
 
     <template #content>
-        <div class="w-full" v-if="options && options.length">
+        <div class="w-full">
         <div v-for="option in options" :key="option.name || option" @click="emitValue(option)" class="px-2 py-2 cursor-pointer">
             {{ option.label || option.name || option }}
         </div>
@@ -44,18 +44,14 @@ const props = defineProps({
     }
 })
 
-const emit = defineEmits({
+const emit = defineEmit({
     'update:modelValue': Object
 })
 
 const valueLabel = computed(() => {
-    if (typeof props.modelValue == 'string') {
-        return props.modelValue;
-    } else {
-        const propToSearch = props.emitValue ? 'label' : 'name';
-        const selected = props.options.find( (option) => option[propToSearch] == props.modelValue)
-        return selected ? selected.label || selected.name : ""
-    }
+    const propToSearch = props.emitValue ? 'label' : 'name';
+    const selected = props.options.find( (option) => option[propToSearch] == props.modelValue)
+    return selected ? selected.label || selected.name : ""
 })
 
 const emitValue = (option) => {

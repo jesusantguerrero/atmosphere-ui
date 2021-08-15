@@ -5,11 +5,12 @@
             v-for="current in range" 
             :key="current" 
             :count="count" 
-            :current="current+1" 
+            :current="current" 
             :set-current-hover="setCurrentHover" 
-            :selected="isSelected(current+1)"
-            :hovered="isHovered(current+1)"
-            :focused="isFocused(current+1)"
+            :selected="isSelected(current)"
+            :hovered="isHovered(current)"
+            :focused="isFocused(current)"
+            :covered="isCovered(current)"
         >
             {{ current }}
         </slot>
@@ -71,7 +72,7 @@ provide('updateModelValue', (current)=> {
 })
 
 const range = computed(() => {
-    return [...Array(props.count).keys()]
+    return [...Array(props.count+1).keys()].slice(-props.count);
 });
 
 </script>

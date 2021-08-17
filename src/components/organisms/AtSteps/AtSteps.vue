@@ -4,7 +4,8 @@
         :model-value="modelValue" 
         v-bind="props" 
         class="wizard"
-        @update:modelValue="$emit('update:modelValue', $event)" 
+        @update:modelValue="$emit('update:modelValue', $event)"
+        @finished="$emit('finished', $event)"
     >
         <at-bare-step-list v-slot:default="{ steps, handleClick, state }" class="steps">
             <at-step-tab

@@ -38,8 +38,8 @@
 
         <!-- Switches -->
         <div class="py-2" v-if="showSwitches">
-            <at-field-check label="Include end" v-model="includesEndDate" v-if="acceptEndDate"/>
-            <at-field-check label="Include time" v-model="includesTime"  v-if="acceptTime"/>
+            <at-field-check label="Include end" v-model="includesEndDate" v-if="acceptEndDate" />
+            <at-field-check label="Include time" v-model="includesTime"  v-if="acceptTime" />
         </div>
 
         <!-- TimeFormat Config -->

@@ -1,5 +1,5 @@
 {
-  "version": "0.1.31",
+  "version": "0.1.32",
   "scripts": {
     "dev": "vite",
     "build": "npm run create-index-files && vite build",
@@ -65,5 +65,22 @@
     "dist/*"
   ],
   "author": "Jesus Guerrero",
-  "license": "MIT"
+  "license": "MIT",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jesusantguerrero/atmosphere-ui.git"
+  },
+  "keywords": [
+    "inertia.js",
+    "vuejs",
+    "vue3"
+  ],
+  "sideEffects": false,
+  "bugs": {
+    "url": "https://github.com/jesusantguerrero/atmosphere-ui/issues"
+  },
+  "homepage": "https://github.com/jesusantguerrero/atmosphere-ui#readme"
 }

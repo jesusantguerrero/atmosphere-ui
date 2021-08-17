@@ -5,8 +5,8 @@
         @click="emitUpdate()"
         :aria-checked="modelValue"
     >
-        <label class="cursor-pointer" for="switch">{{ label }}</label>
-        <at-switch :model-value="modelValue" name="switch" id="switch" />
+        <label class="block cursor-pointer" for="switch">{{ label }}</label>
+        <at-switch :model-value="modelValue" name="switch" id="switch" class="ml-auto" />
     </div>
 </template>
 

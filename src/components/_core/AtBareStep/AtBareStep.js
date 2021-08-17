@@ -95,19 +95,19 @@ export const AtBareStep = defineComponent({
             let newIndex = currentIndex;
             const isNext = oldIndex < currentIndex;
             const isPrev = oldIndex > currentIndex;
-            const isFinished = currentIndex >= state.tabs.length - 1;
+            const isFinished = currentIndex > state.tabs.length - 1;
 
             if (isNext && state.tabs[oldIndex]) {
                 const isInvalid = await dispatchTabHook(oldIndex, 'before-change')
                 if (isInvalid) {
                     newIndex = oldIndex   
-                } else if (isFinished) {
+                } 
+                if (!isInvalid && isFinished) {
                     return setStateValue(state.value, true)
                 }
             } else if (isPrev) {
                 newIndex = currentIndex            
             }
-            
             setStateValue(newIndex, isFinished);
 
             if (oldIndex !== newIndex) {

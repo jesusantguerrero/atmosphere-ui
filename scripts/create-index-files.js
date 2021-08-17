@@ -7,7 +7,7 @@ const path = require("path");
 const pathTargetIndexJs = path.resolve(__dirname, "..", "index.js");
 
 const pathVueComponentsRoot = path.resolve(__dirname, "..", "src/components");
-const pathsVueComponents = glob.sync("*/*/At*.{vue,js}", {
+const pathsVueComponents = glob.sync("*/*/At*.vue", {
   cwd: pathVueComponentsRoot,
 });
 
@@ -22,18 +22,12 @@ function generateFilesContent() {
   const exports = [];
   for (const pathComponentVue of pathsVueComponents) {
     const atComponentName = pathComponentVue.replace(/.*\/(At.+)\.vue/, "$1");
-    const importLine = `import ${atComponentName} from "./src/components/${pathComponentVue}";`;
+    const importLine = `export { default as ${atComponentName} } from "./src/components/${pathComponentVue}";`;
     imports.push(importLine);
-    const exportLine = "  " + atComponentName;
-    exports.push(exportLine);
   }
   const contentIndexJs =
     `// Auto-generated file by create-index-files.js. Do not edit manually\n` +
-    imports.join("\n") +
-    "\n\n" +
-    "export {\n" +
-    exports.join(",\n") +
-    "\n};\n";
+    imports.join("\n")
   return {
     contentIndexJs,
   };

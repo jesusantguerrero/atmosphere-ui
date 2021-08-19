@@ -16,12 +16,14 @@
         </template>
         
         <template #content>
-            <at-date-picker 
-                v-model:date="date" 
-                class="bg-white"
-                @update:date="$emit('update:modelValue', $event)"
-                :shortcuts="shortcuts"
-            />
+            <div class="text-left bg-white border shadow-md">
+                <at-date-picker 
+                    v-model:date="date" 
+                    class="bg-white"
+                    @update:date="$emit('update:modelValue', $event)"
+                    :shortcuts="shortcuts"
+                />
+            </div>
         </template>
     </at-dropdown>
 </template>

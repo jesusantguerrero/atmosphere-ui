@@ -1,5 +1,5 @@
 <template>
-<div class="relative overflow-hidden bg-white border rounded-md">
+<div class="relative overflow-hidden bg-white rounded-md">
     <div class="absolute z-20 flex items-center justify-center w-full h-full">
         <div class="px-5 py-2 my-auto text-white transition-transform transform bg-black cursor-pointer select-none hover:scale-105 bg-opacity-60 rounded-3xl hover:bg-opacity-80">
             <i class="mr-2 fa fa-play" />

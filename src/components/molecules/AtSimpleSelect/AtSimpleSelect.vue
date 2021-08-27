@@ -44,7 +44,7 @@ const props = defineProps({
     }
 })
 
-const emit = defineEmit({
+const emit = defineEmits({
     'update:modelValue': Object
 })
 

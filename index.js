@@ -32,6 +32,10 @@ export { default as AtStep } from "./src/components/molecules/AtStep/AtStep.vue"
 export { default as AtStepTab } from "./src/components/molecules/AtStepTab/AtStepTab.vue";
 export { default as AtWeekControls } from "./src/components/molecules/AtWeekControls/AtWeekControls.vue";
 export { default as AtWeekPager } from "./src/components/molecules/AtWeekPager/AtWeekPager.vue";
+export { default as AtHero } from "./src/components/molecules/landing/AtHero.vue";
+export { default as AtPreFooter } from "./src/components/molecules/landing/AtPreFooter.vue";
+export { default as AtSiteFooter } from "./src/components/molecules/landing/AtSiteFooter.vue";
+export { default as AtSiteHeader } from "./src/components/molecules/landing/AtSiteHeader.vue";
 export { default as AtAuthForm } from "./src/components/organisms/AtAuthForm/AtAuthForm.vue";
 export { default as AtDashlide } from "./src/components/organisms/AtDashlide/AtDashlide.vue";
 export { default as AtDateAction } from "./src/components/organisms/AtDatePicker/AtDateAction.vue";

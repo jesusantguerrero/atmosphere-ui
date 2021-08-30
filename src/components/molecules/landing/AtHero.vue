@@ -32,8 +32,8 @@
 
 <script setup>
 import { ref } from "vue";
-import SiteHeader from "./SiteHeader.vue"
-import { AtVideo } from "atmosphere-ui";
+import SiteHeader from "./AtSiteHeader.vue"
+import AtVideo from "../../organisms/AtVideo/AtVideo.vue";
 import DownWave from "./waves/down-wave.vue";
 
 const showMenu = ref(false)

@@ -53,7 +53,7 @@
         </slot>
 
         <at-button
-            class="w-full capitalize rounded-sm"
+            class="w-full rounded-md"
             :class="btnClass"
             type="primary"
             data-test-id="btn-submit"

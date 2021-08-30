@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { computed, inject } from "vue-demi";
+import { computed, inject } from "vue";
 const props = defineProps({
     name: {
         type: String,
@@ -28,6 +28,14 @@ const props = defineProps({
     description: {
         type: String,
         required: false,
+    },
+    beforeChange: {
+        type: Function,
+        required: false
+    },
+    afterChange: {
+        type: Function,
+        required: false
     }
 })
 
@@ -46,22 +54,17 @@ const isActive = computed(() => {
         justify-content: center;
 
         &__title {
-            margin-top: 66px;
-            color: #8582D1;
             font-weight: 600;
             font-size: 21px;
         }
 
         &__description {
-            color: #707070;
             font-size: 16px;
             font-weight: 600;
         }
 
         &__display {
             width: 80%;
-            display: flex;
-            justify-content: center;
         }
     }
 

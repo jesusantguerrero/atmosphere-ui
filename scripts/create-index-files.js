@@ -22,18 +22,12 @@ function generateFilesContent() {
   const exports = [];
   for (const pathComponentVue of pathsVueComponents) {
     const atComponentName = pathComponentVue.replace(/.*\/(At.+)\.vue/, "$1");
-    const importLine = `import ${atComponentName} from "./src/components/${pathComponentVue}";`;
+    const importLine = `export { default as ${atComponentName} } from "./src/components/${pathComponentVue}";`;
     imports.push(importLine);
-    const exportLine = "  " + atComponentName;
-    exports.push(exportLine);
   }
   const contentIndexJs =
     `// Auto-generated file by create-index-files.js. Do not edit manually\n` +
-    imports.join("\n") +
-    "\n\n" +
-    "export {\n" +
-    exports.join(",\n") +
-    "\n};\n";
+    imports.join("\n")
   return {
     contentIndexJs,
   };

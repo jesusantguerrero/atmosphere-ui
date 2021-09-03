@@ -19,7 +19,7 @@ export default {
     computed: {
         colorClasses() {
             const colors = {
-                primary: 'bg-blue-100 text-blue-400',
+                primary: 'bg-primary-100 text-primary-400',
                 secondary: 'bg-gray-100 text-gray-400',
                 danger: 'bg-red-100 text-red-400',
                 warning: 'bg-yellow-100 text-yellow-400',

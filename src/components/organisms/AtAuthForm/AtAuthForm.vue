@@ -58,7 +58,7 @@
             type="primary"
             data-test-id="btn-submit"
             :disabled="isConfirmationInvalid"
-            @click="loginUser()"
+            @click.stop.prevent="loginUser()"
         >
             {{ modeLabel }}
             <i v-if="isLoading" class="ml-2 fa fa-spinner fa-pulse"></i>

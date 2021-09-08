@@ -27,7 +27,7 @@
               :icon="item.icon"
               :label="item.label"
               :to="item.to"
-              :classes="itemClass"
+              :classes="[itemClass, itemActiveClass]"
             />
           </template>
         </div>

@@ -17,6 +17,8 @@
           :icon="route.icon"
           :label="route.label"
           :to="route.to"
+          :item-class="itemClass"
+          :item-active-class="itemActiveClass"
           v-if="!route.childs"
           :key="route.label"
         />
@@ -25,6 +27,7 @@
           v-else
           v-model="activeGroup"
           :item-class="itemClass"
+          :item-active-class="itemActiveClass"
           :track-id="route.label"
           :icon="route.icon"
           :label="route.label"

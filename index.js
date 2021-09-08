@@ -18,6 +18,7 @@ export { default as AtCalendar } from "./src/components/molecules/AtCalendar/AtC
 export { default as AtChoices } from "./src/components/molecules/AtChoices/AtChoices.vue";
 export { default as AtDataCard } from "./src/components/molecules/AtDataCard/AtDataCard.vue";
 export { default as AtDropdown } from "./src/components/molecules/AtDropdown/AtDropdown.vue";
+export { default as AtDropdownLink } from "./src/components/molecules/AtDropdownLink/AtDropdownLink.vue";
 export { default as AtFeedbackButton } from "./src/components/molecules/AtFeedbackButton/AtFeedbackButton.vue";
 export { default as AtFieldCheck } from "./src/components/molecules/AtFieldCheck/AtFieldCheck.vue";
 export { default as AtFieldDateTime } from "./src/components/molecules/AtFieldDateTime/AtFieldDateTime.vue";
@@ -47,8 +48,11 @@ export { default as AtDateAction } from "./src/components/organisms/AtDatePicker
 export { default as AtDatePicker } from "./src/components/organisms/AtDatePicker/AtDatePicker.vue";
 export { default as AtDateSelect } from "./src/components/organisms/AtDateSelect/AtDateSelect.vue";
 export { default as AtFormBlock } from "./src/components/organisms/AtFormBlock/AtFormBlock.vue";
+export { default as AtHeader } from "./src/components/organisms/AtHeader/AtHeader.vue";
 export { default as AtSide } from "./src/components/organisms/AtSide/AtSide.vue";
 export { default as AtSteps } from "./src/components/organisms/AtSteps/AtSteps.vue";
+export { default as AtTeamSelect } from "./src/components/organisms/AtTeamSelect/AtTeamSelect.vue";
+export { default as AtUserButton } from "./src/components/organisms/AtUserButton/AtUserButton.vue";
 export { default as AtVideo } from "./src/components/organisms/AtVideo/AtVideo.vue";
 export { default as AtAuthBox } from "./src/components/templates/AtAuthBox/AtAuthBox.vue";
  

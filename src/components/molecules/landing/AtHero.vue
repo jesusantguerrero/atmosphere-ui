@@ -41,7 +41,6 @@ const showMenu = ref(false)
 
 <style lang="scss" scoped>
 header {
-    background: url('../../assets/zen-photo.jpg');
     background-size: cover;
     position: relative;
     width: 100%;

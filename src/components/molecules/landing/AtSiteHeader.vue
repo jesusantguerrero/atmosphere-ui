@@ -9,7 +9,7 @@
             
             <div class="flex-col items-center justify-end hidden w-full h-full mt-12 font-bold text-center md:flex md:w-2/3 md:mt-0 md:flex-row md:items-center">
                 <component 
-                    :is="link.url ? 'a' : routerComponent " 
+                    :is="link.url ? 'a' : routerComponent" 
                     :href="link.url" 
                     :to="link.to" 
                     class="inline-block px-4 py-2 mx-2 text-left md:px-0 lg:mx-3 md:text-center" 
@@ -21,7 +21,7 @@
                     <slot name="actions">
                         <slot v-for="action in actions" :name="action.name">
                             <component 
-                                :is="routerComponent" 
+                                :is="getComponent(action)" 
                                 :to="action.url" 
                                 :class="action.class" 
                                 class="w-full px-4 py-2 font-bold transition rounded-md cursor-pointer md:mr-3 lg:mr-3 md:w-auto"
@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
     title: {
         default: 'Zen',
         type: String
@@ -75,10 +75,14 @@ defineProps({
 
 const emit = defineEmits(['action']);
 
-function handleClick = (event, action) => {
+const handleClick = (event, action) => {
     if (action.emit) {
         event.preventDefault();
         emit('action', action.name);
     }
 }
+
+const getComponent = (action) => {
+    return !link.url ? 'button' : props.routerComponent
+};
 </script>

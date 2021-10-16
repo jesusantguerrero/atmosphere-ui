@@ -46,7 +46,7 @@ export default defineComponent({
       }),
       classes: computed(() => {
         const classes = "flex items-center w-full px-5 py-4 rounded-3xl";
-        return [isPath(props.to) && itemActiveClass, props.classes, props.itemClass];
+        return [isPath(props.to) && props.itemActiveClass, props.classes, props.itemClass];
       }),
     });
 

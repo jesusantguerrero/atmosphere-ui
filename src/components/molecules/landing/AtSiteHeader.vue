@@ -83,6 +83,6 @@ const handleClick = (event, action) => {
 }
 
 const getComponent = (action) => {
-    return !link.url || action.emit ? 'button' : props.routerComponent
+    return !action.url || action.emit ? 'button' : props.routerComponent
 };
 </script>

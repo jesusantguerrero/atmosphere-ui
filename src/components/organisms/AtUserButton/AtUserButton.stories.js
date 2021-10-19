@@ -11,7 +11,7 @@ const Template = (args) => ({
     return { args };
   },
   template: `
-    <div>
+    <div class="flex justify-end">
       <AtUserButton
         v-bind="args"
       />
@@ -21,28 +21,34 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-    hasTeamFeatures: true,
-    canCreateTeams: true,
-    currentTeam: {
-        id: '1',
-        name: 'Team 1',
-        description: 'Team 1 description',
-        avatar: 'https://via.placeholder.com/150',
-    },
-    teams: [
-        {
-            id: '1',
-            name: 'Team 1',
-            description: 'Team 1 description',  
-            avatar: 'https://via.placeholder.com/150',
-        },
-        {
-            id: '2',
-            name: 'Team 2',
-            description: 'Team 2 description',
-            avatar: 'https://via.placeholder.com/150',  
-        },
-      ],
+    options: {
+      account: {
+        label: "General options",
+        sections: [
+          ["Profile", "/settings/profile"],
+          ["Favorites", "/favorites"],
+          ["My Collection", "/my-items"],
+          ["Favorites", "/settings"],
+          ["Logout", { emit: 'logout', separator: true }],
+        ]
+      }
+    }
+};
+
+export const HiddenOption = Template.bind({});
+HiddenOption.args = {
+    options: {
+      account: {
+        label: "General options",
+        sections: [
+          ["Profile", "/settings/profile"],
+          ["Favorites", "/favorites"],
+          ["My Collection", "/my-items"],
+          ["Favorites", "/settings"],
+          ["Logout", { emit: 'logout', hide: true }],
+        ]
+      }
+    }
 };
 
 

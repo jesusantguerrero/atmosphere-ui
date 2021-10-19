@@ -10,10 +10,11 @@
             <div class="flex-col items-center justify-end hidden w-full h-full mt-12 font-bold text-center md:flex md:w-2/3 md:mt-0 md:flex-row md:items-center">
                 <component 
                     :is="link.url ? 'a' : routerComponent" 
+                    v-for="link in links"
                     :href="link.url" 
                     :to="link.to" 
                     class="inline-block px-4 py-2 mx-2 text-left md:px-0 lg:mx-3 md:text-center" 
-                    :class="linkClass" v-for="link in links"
+                    :class="linkClass" 
                 >
                     {{ link.name }}
                 </component>

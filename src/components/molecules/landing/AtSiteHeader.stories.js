@@ -49,3 +49,39 @@ Default.args = {
         }
     ]
 }
+
+export const WithEmit = Template.bind({});
+WithEmit.args = {
+    title: 'Lumiere',
+    links: [
+        {
+            name: 'Home',
+            url: '/',
+        },
+        {
+            name: 'Features',
+            url: '/features',
+        },
+        {
+            name: 'Blog',
+            url: '/blog',
+        },
+        {
+            name: 'Contact',
+            url: '/contact',
+        },
+    ],
+    actions: [
+        {
+            name: 'Login',
+            url: '/login',
+            class: 'text-green-400 transition bg-white rounded-md hover:bg-green-500 hover:text-white'
+        },
+        {
+            name: 'Start',
+            url: '/login',
+            emit: true,
+            class: 'text-white transition bg-green-400 rounded-md hover:bg-green-500'
+        }
+    ]
+}

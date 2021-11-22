@@ -17,7 +17,7 @@
     </form>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, provide, reactive, ref } from "vue";
 import rateProps from "./rateProps";
 
@@ -31,28 +31,27 @@ const emit = defineEmits(['update:modelValue']);
 const currentHover = ref(0);
 const currentFocus = ref(0);
 
-const setCurrentHover = (current) => {
+const setCurrentHover = (current: number) => {
     currentHover.value = current;
 };
 
-const setCurrentFocus = (current) => {
+const setCurrentFocus = (current: number) => {
     currentFocus.value = current;
 };
 
-const isSelected = (current) => {
-    console.log(props.modelValue, current);
+const isSelected = (current: number) => {
     return props.modelValue === current;
 }
 
-const isCovered = (current) => {
-    return props.modelValue > current || currentHover.value > current
+const isCovered = (current: number) => {
+    return props.modelValue && props.modelValue > current || currentHover.value > current
 }
 
-const isHovered = (current) => {
+const isHovered = (current: number) => {
     return currentHover.value === current;
 }
 
-const isFocused = (current) => {
+const isFocused = (current: number) => {
     return currentFocus.value == current;
 }
 
@@ -67,7 +66,7 @@ provide('name', 'rating')
 provide('rateState', state)
 
 // v-model functionality
-provide('updateModelValue', (current)=> {
+provide('updateModelValue', (current: number)=> {
     emit('update:modelValue', current)
 })
 

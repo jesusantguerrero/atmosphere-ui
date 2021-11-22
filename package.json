@@ -1,5 +1,5 @@
 {
-  "version": "0.3.9",
+  "version": "0.4.0",
   "scripts": {
     "dev": "vite",
     "build": "npm run create-index-files && vite build",
@@ -9,7 +9,8 @@
     "prepublishOnly": "npm run build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook --output-dir=docs",
-    "chromatic": "npx chromatic --project-token=170dcb534484"
+    "chromatic": "npx chromatic --project-token=170dcb534484",
+    "generate-declarations": "tsc index.ts --declaration --emitDeclarationOnly --jsx react --esModuleInterop --outDir dist"
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2"
@@ -57,7 +58,7 @@
   "name": "atmosphere-ui",
   "description": "UI for jetstream inertia",
   "main": "dist/atmosphere-ui.es.js",
-  "module": "dist/atmosphere-ui.es.js",
+  "module": "index.js",
   "files": [
     "scripts/*",
     "src/*",

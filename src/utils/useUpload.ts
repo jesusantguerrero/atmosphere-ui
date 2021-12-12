@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { watch, reactive, toRefs, unref, inject, Ref, defineEmits } from 'vue';
+import { watch, reactive, toRefs, unref, inject, Ref, defineEmits, PropType } from 'vue';
 import { useFormData } from './useFormData';
 
-const emitDefinition = defineEmits(['input', 'submit', 'error']);
+const emitDefinition = defineEmits(['update:modelValue', 'submit', 'error']);
 type EmitFn = typeof emitDefinition
 
 export type ProcessPayloadFunction = (data: Record<string, any>) => FormData;
@@ -30,6 +30,7 @@ export interface IUploadFile {
   raw: File;
   id?: string;
   url?: string;
+  name?: string;
   localURL?: string;
 }
 
@@ -54,6 +55,7 @@ const uploadRequest = (data: Record<string, any>, config: UploadConfig) => {
 export const uploadProps = {
   url: {
     type: String,
+    default: '',
   },
   headers: {
     type: Object,
@@ -66,11 +68,11 @@ export const uploadProps = {
     default: false,
   },
   httpRequest: {
-    type: [Function, null],
+    type: Function as PropType<HttpRequest>,
     default: null,
   },
   processPayload: {
-    type: [Function, null],
+    type: Function as PropType<ProcessPayloadFunction>,
     default: null,
   },
   auto: {
@@ -97,14 +99,10 @@ const isValidConfigKey = (value: string, config: UploadConfig): value is keyof U
   return value in config;
 }
 
-const isValidPropKey = (value: string, config: IUploadProps): value is keyof IUploadProps => {
-  return value in config;
-}
-
-export const mergeConfig = (propsData: IUploadProps) => {
+export const mergeConfig = (propsData: Record<string, any>) => {
   return Object.keys(uploadConfig).reduce((config, key) => {
-    let propKey = key;
-    if (isValidConfigKey(key, config) && isValidPropKey(propKey, propsData) && (propsData[propKey] !== undefined || propsData[propKey] !== null)) {
+    if (isValidConfigKey(key, config) && (propsData[key] !== undefined || propsData[key] !== null)) {
+      /* @ts-expect-error */
       config[key] = propsData[key];
     }
     return config;
@@ -154,11 +152,12 @@ export const useUpload = (value: Ref, config = uploadConfig, httpRequestMethod: 
 
     if (!state.isUploadingLocal && rawFiles.length) {
       updateIsUploading(true);
+      console.log('uploading', rawFiles);
       return await httpRequest(rawFiles, config)
         .then(({ data }) => {
           const results = [...uploadedFiles, ...mergeResults(filesToUpload, data)];
           emit && emit('submit', results);
-          emit && emit('input', results);
+          emit && emit('update:modelValue', results);
           updateIsUploading(false);
           return true;
         })
@@ -234,14 +233,3 @@ export const uploadTemplateProps = {
   },
 };
 
-export const onDropFile = (e: DragEvent, props: Record<string, any>, addFile: AddFileFunction) => {
-  e.preventDefault();
-  if (!props.multiple && props.list.length === 1) {
-    return;
-  }
-
-  const files = e.dataTransfer?.files;
-  if (files && files.length) {
-    addFile(files);
-  }
-};

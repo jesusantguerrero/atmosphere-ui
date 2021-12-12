@@ -53,7 +53,6 @@ export const AtBareStepControls = defineComponent({
     }
 })
 
-
 export const AtBareStep = defineComponent({
     name: "AtBareStep",
     props: stepProps,

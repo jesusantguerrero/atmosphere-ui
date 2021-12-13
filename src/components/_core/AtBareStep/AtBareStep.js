@@ -1,7 +1,6 @@
 import { defineComponent,h, computed, nextTick, onMounted, provide, reactive, useSlots, inject, watch } from "vue"
 import AtStep from "../../molecules/AtStep/AtStep.vue"
 
-
 export const stepProps = {
     modelValue: {
        type: Number,

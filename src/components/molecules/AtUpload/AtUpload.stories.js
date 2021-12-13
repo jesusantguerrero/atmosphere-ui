@@ -1,36 +1,53 @@
 import AtUpload from './AtUpload.vue';
+import { action } from "@storybook/addon-actions"
+import { fireEvent, within } from '@storybook/testing-library'
 
 export default {
-  title: 'Core/AtUpload',
+  component: AtUpload,
+  title: 'Molecules/AtUpload',
+  excludeStories: /.*Data$/,
   argTypes: {
-    input: {
-      action: 'input',
-    },
-    submit: {
-      action: 'submit',
-    },
+    onModelUpdate: {},
+    onUploading: {},
   },
 };
 
+export const actionData = {
+  onModelUpdate: (context, id) => {
+    console.log(context)
+    action('update:modelValue')(id)
+  },
+  onUploading: (context, id) => {
+    console.log(context)
+    action('update:isUploading')(id)
+  } 
+}
 const Template = (args, { argTypes }) => ({
   name: 'StoryTemplate',
   components: { AtUpload },
-  props: Object.keys(argTypes),
-  methods: {
-    httpRequest: async (files, formData) => {
+  setup() {
+
+    const httpRequest = async (files, formData) => {
       await new Promise((resolve) => {
         console.log(files, formData);
         setTimeout(() => {
           resolve(files);
         }, 1000);
       });
-    },
+    };
+
+    return {
+      args,
+      ...actionData,
+      httpRequest,
+    }
   },
   template: `<div class="max-w-7xl mx-auto">
       <AtUpload 
         v-bind="args"
-        v-on="$props" 
-        :http-request="httpRequest" class="px-5" ref="fileInput" 
+        v-on="args"
+        :http-request="httpRequest" 
+        class="px-5" 
       />
     </div>`,
 });
@@ -41,10 +58,13 @@ Default.args = {
   isUploading: false,
   buttonLabel: 'Upload photos',
   buttonMoreLabel: 'Upload more',
-  "update:modelValue": (event) => {
-    Default.args.modelValue = event;
-  },
-  "update:isUploading": (event) => {
-    Default.args.isUploading = event;
-  },
+};
+
+export const WithInteractions = Template.bind({});
+WithInteractions.play = async ({ canvasElement }) => {
+const canvas = within(canvasElement);
+   // Simulates pinning the first task
+  await fireEvent.click(canvas.getByLabelText("pinTask-1"));
+   // Simulates pinning the third task
+   await fireEvent.click(canvas.getByLabelText("pinTask-3")); 
 };

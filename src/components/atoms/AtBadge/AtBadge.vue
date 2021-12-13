@@ -4,29 +4,29 @@
 </span>
 </template>
 
-<script>
-export default {
-    props: {
-        type: {
-            type: String,
-            validator(value) {
-                const classes = ['primary', 'secondary', 'danger', 'sucess', 'warning', 'gray'];
-                return classes.includes(value);
-            }
-        }
-    },
+<script lang="ts" setup>
+import { computed } from 'vue';
 
-    computed: {
-        colorClasses() {
-            const colors = {
-                primary: 'bg-primary-100 text-primary-400',
-                secondary: 'bg-gray-100 text-gray-400',
-                danger: 'bg-red-100 text-red-400',
-                warning: 'bg-yellow-100 text-yellow-400',
-                success: 'bg-green-100 text-green-400'
-            }
-            return colors[this.type] ?? colors.primary;
-        }
+const props = defineProps({
+    type: {
+        type: String,
+        validator(value: string) {
+            const classes = ['primary', 'secondary', 'danger', 'success', 'warning', 'gray'];
+            return classes.includes(value);
+        },
+        default: 'primary'
+    } 
+});
+
+const colorClasses = computed(() => {
+    const colors: Record<string, string> = {
+        primary: 'bg-primary-100 text-primary-400',
+        accent: 'bg-accent-100 text-accent-400',
+        secondary: 'bg-gray-100 text-gray-400',
+        danger: 'bg-red-100 text-red-400',
+        warning: 'bg-yellow-100 text-yellow-400',
+        success: 'bg-green-100 text-green-400'
     }
-}
+    return colors[props.type] ?? colors.primary;
+})
 </script>

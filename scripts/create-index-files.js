@@ -4,17 +4,20 @@ const fs = require("fs");
 const glob = require("glob");
 const path = require("path");
 
-const pathTargetIndexJs = path.resolve(__dirname, "..", "index.js");
-const pathTargetUtilsJs = path.resolve(__dirname, "..", "utils.js");
+const pathTargetIndexJs = path.resolve(__dirname, "..", 'src', "index.ts");
 
 const pathVueComponentsRoot = path.resolve(__dirname, "..", "src/components");
 const pathUtilsRoot = path.resolve(__dirname, "..", "src/utils");
 
 const pathsVueComponents = glob.sync("*/*/At*.vue", {
   cwd: pathVueComponentsRoot,
+  ignore: [
+    "**/**.spec.js",
+    "**/**.stories.js"
+  ]
 });
 
-const pathsUtils = glob.sync("**/use**.js", {
+const pathsUtils = glob.sync("**/use**.{js,ts}", {
   cwd: pathUtilsRoot,
   ignore: [
     "**/use**.spec.js"
@@ -32,7 +35,7 @@ function generateFilesContent() {
   const imports = [];
   for (const pathComponentVue of pathsVueComponents) {
     const atComponentName = pathComponentVue.replace(/.*\/(At.+)\.vue/, "$1");
-    const importLine = `export { default as ${atComponentName} } from "./src/components/${pathComponentVue}";`;
+    const importLine = `export { default as ${atComponentName} } from "./components/${pathComponentVue}";`;
     imports.push(importLine);
   }
   const contentIndexJs =
@@ -46,8 +49,9 @@ function generateFilesContent() {
 function generateUtils() {
   const imports = [];
   for (const pathUtil of pathsUtils) {
-    const fileName = pathUtil.replace(/(.+)\.js/, "$1");
-    const importLine = `export { ${fileName} } from "./src/utils/${pathUtil}";`;
+    const fileName = pathUtil.replace(/(.+)(\.js|\.ts)/, "$1");
+    const cleanPath = pathUtil.slice(0, pathUtil.lastIndexOf('.'));
+    const importLine = `export { ${fileName} } from "./utils/${cleanPath}";`;
     imports.push(importLine);
   }
   const contentIndexJs =

@@ -1,7 +1,7 @@
 import { format, isToday, isTomorrow, isThisWeek, isThisYear, isDate, isYesterday } from "date-fns";
-import { computed, ref} from "vue";
+import { computed, ref, Ref } from "vue";
 
-export function useDateTime(dateRef) {
+export function useDateTime(dateRef: Ref<Date|null>) {
     const date = dateRef || ref(null)
     
     const formattedDate = computed(() => {
@@ -14,10 +14,10 @@ export function useDateTime(dateRef) {
             return isoDate;
         }
         
-        return getHumanDate(isoDate)
+        return isoDate && getHumanDate(isoDate)
     })
 
-    const getHumanDate = (isoDate) => {
+    const getHumanDate = (isoDate: Date) => {
         if (isToday(isoDate)) {
             return 'Today';
         } else if (isYesterday(isoDate)) {
@@ -33,17 +33,17 @@ export function useDateTime(dateRef) {
         }
     }
 
-    const formatDate = (date, formatString) => {
+    const formatDate = (date:Date, formatString: string) => {
        return format(date || new Date(), formatString || "yyyy-MM-dd");
     }
 
-    const toISO = (date) => {
+    const toISO = (date?: Date) => {
        return date ? format(date, 'yyyy-MM-dd') :  ""
     }
 
 
-    const getDateFromString = (dateValue) => {
-        const date = dateValue ? dateValue.split("-") : null;
+    const getDateFromString = (dateValue: string): Date|null => {
+        const date:number[]|null = dateValue ? dateValue.split("-").map(n => Number(n)) : null;
         return date ? new Date(date[0], date[1] - 1, date[2]) : null;
     }
 

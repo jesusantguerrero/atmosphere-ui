@@ -1,24 +1,27 @@
 <template>
    <input
         :value="modelValue"
-        @input="$emit('update:modelValue', $event.target.value)"
+        @input="onInput"
+        @focus="onFocus"
         ref="input"
         class="px-4 text-gray-400 form-control input"
         :class="{ 'border-red-400 border-2': hasError }"
     />
 </template>
 
-<script>
-    export default {
-        props: ['modelValue', 'hasError'],
+<script lang="ts" setup>
+import { ref } from "vue";
+const props = defineProps(['modelValue', 'hasError']);
+const emit =defineEmits(['update:modelValue']);
 
-        emits: ['update:modelValue'],
+const input = ref<HTMLInputElement>();
+const onFocus = () => {
+    input.value?.focus()
+}
 
-        methods: {
-            focus() {
-                this.$refs.input.focus()
-            }
-        }
-    }
+const onInput = (e: Event) => {
+    const target = e.target as HTMLInputElement;
+    emit('update:modelValue', target.value)
+}
 </script>
 

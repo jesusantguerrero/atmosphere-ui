@@ -62,7 +62,7 @@
   "name": "atmosphere-ui",
   "description": "UI for jetstream inertia",
   "main": "dist/atmosphere-ui.es.js",
-  "module": "index.js",
+  "module": "dist/atmosphere-ui.umd.js",
   "files": [
     "scripts/*",
     "src/*",

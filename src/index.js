@@ -37,6 +37,7 @@ export { default as AtSimpleSelect } from "./components/molecules/AtSimpleSelect
 export { default as AtStep } from "./components/molecules/AtStep/AtStep.vue";
 export { default as AtStepTab } from "./components/molecules/AtStepTab/AtStepTab.vue";
 export { default as AtUpload } from "./components/molecules/AtUpload/AtUpload.vue";
+export { default as AtWeek } from "./components/molecules/AtWeek/AtWeek.vue";
 export { default as AtWeekControls } from "./components/molecules/AtWeekControls/AtWeekControls.vue";
 export { default as AtWeekPager } from "./components/molecules/AtWeekPager/AtWeekPager.vue";
 export { default as AtHero } from "./components/molecules/landing/AtHero.vue";
@@ -60,5 +61,6 @@ export { default as AtAuthBox } from "./components/templates/AtAuthBox/AtAuthBox
  // Utils 
 export { useDatePager } from "./utils/useDatePager";
 export { useDateTime } from "./utils/useDateTime";
+export { useForm } from "./utils/useForm";
 export { useFormData } from "./utils/useFormData";
 export { useUpload } from "./utils/useUpload";

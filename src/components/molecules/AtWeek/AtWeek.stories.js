@@ -1,21 +1,21 @@
-import AtWeekControls from './index.vue';
+import AtWeek from './AtWeek.vue';
 
 export default {
   title: 'Molecules/AtWeek',
-  component: AtWeekControls,
+  component: AtWeek,
   argTypes: {},
 };
 
 const Template = (args) => ({
   // Components used in your story `template` are defined in the `components` object
-  components: { AtWeekControls },
+  components: { AtWeek },
   // The story's `args` need to be mapped into the template through the `setup()` method
   setup() {
     return { args };
   },
   template: `
   <div class="w-full">
-    <AtWeekControls v-model="args.value" v-bind="args" />
+    <AtWeek v-model="args.value" v-bind="args" />
   </div>
   `,
 });

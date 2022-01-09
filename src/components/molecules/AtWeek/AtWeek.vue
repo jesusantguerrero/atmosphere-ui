@@ -1,6 +1,6 @@
 <template>
 <div class="w-full">
-    <AtWeekControls v-model="selectedDay" v-model:week="week" v-bind="args" />
+    <Controls v-model="selectedDay" v-model:week="week" v-bind="args" />
     <div class="flex">
         <DayItem v-for="day in week" :key="day" :day="day" :items="items" />         
     </div>
@@ -10,7 +10,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useDateTime } from '../../../utils/useDateTime';
-import AtWeekControls from './AtWeekControls.vue';
+import Controls from './Controls.vue';
 import DayItem from './DayItem.vue';
 const selectedDay = ref(new Date());
 const week = ref(null);

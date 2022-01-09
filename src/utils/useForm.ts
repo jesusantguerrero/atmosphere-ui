@@ -19,7 +19,7 @@ type IFormState = {
     validate: (schema?: ValidationSchema) => Boolean;
 }
 
-export default function useForm(...props: any[]) {
+export const useForm = (...props: any[]) => {
     const data = (typeof props[0] === "string" ? props[1] : props[0]) || {};
     const defaults = cloneDeep(data);
     let transform = (data: Record<string, any>) => data;
@@ -95,7 +95,7 @@ export default function useForm(...props: any[]) {
 
     watch(() => form, () => {
         form.isDirty = !isEqual(form.data(), defaults);
-        if (form.hasErrors.value) {
+        if (form.hasErrors) {
           form.validate();
         }
     }, { immediate: true, deep: true })

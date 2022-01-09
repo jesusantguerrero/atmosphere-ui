@@ -4,7 +4,7 @@ const fs = require("fs");
 const glob = require("glob");
 const path = require("path");
 
-const pathTargetIndexJs = path.resolve(__dirname, "..", 'src', "index.ts");
+const pathTargetIndexJs = path.resolve(__dirname, "..", 'src', "index.js");
 
 const pathVueComponentsRoot = path.resolve(__dirname, "..", "src/components");
 const pathUtilsRoot = path.resolve(__dirname, "..", "src/utils");

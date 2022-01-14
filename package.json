@@ -1,5 +1,5 @@
 {
-  "version": "0.4.4",
+  "version": "0.4.5",
   "scripts": {
     "dev": "vite",
     "build": "npm run create-index-files && vue-tsc --noEmit && vite build",

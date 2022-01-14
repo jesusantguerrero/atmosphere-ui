@@ -113,8 +113,8 @@ export default {
             date: null,
             endDate: null,
             selected: 'date',
-            includesTime: false,
-            includesEndDate: false,
+            includesTime: props.acceptTime,
+            includesEndDate: props.acceptEndDate,
             showSwitches: computed(() => {
                 return [props.acceptEndDate, props.acceptTime].some(value => value);
             })

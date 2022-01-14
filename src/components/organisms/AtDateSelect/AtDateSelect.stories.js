@@ -24,6 +24,12 @@ const Template = (args) => ({
 export const Default = Template.bind({});
 Default.args = {
   value: null
+}
+;
+export const AcceptTime = Template.bind({});
+AcceptTime.args = {
+  value: null,
+  acceptTime: true,
 };
 
 

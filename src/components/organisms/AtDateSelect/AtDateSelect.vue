@@ -20,6 +20,7 @@
                 <at-date-picker 
                     v-model:date="date" 
                     class="bg-white"
+                    :accept-time="acceptTime"
                     @update:date="$emit('update:modelValue', $event)"
                     :shortcuts="shortcuts"
                 />
@@ -44,6 +45,10 @@ export default defineComponent({
         placeholder: {
             type: String,
             default: 'Select a date'
+        },
+        acceptTime: {
+            type: Boolean,
+            default: false
         },
         closeOnSelect: {
             type: Boolean,

@@ -42,7 +42,8 @@ import { ref, watch } from "vue";
         if (localState.value != props.modelValue) {
             localState.value = props.modelValue
         }
-    })
+    }, { immediate: true})
+    
     const emitUpdate = () => {
         localState.value = !localState.value;
         emit('update:modelValue', localState.value)

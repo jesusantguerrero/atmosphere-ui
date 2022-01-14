@@ -32,8 +32,6 @@ const startDateToPixels = (string) => {
     const firstHour = startOfDay(props.day);
     const startDate = new Date(props.item.startTime);
     const offset = differenceInMinutes(startDate, firstHour);
-    console.log(startDate, firstHour);
-    console.log(offset);
     return minuteToPixels(offset);
 }
 

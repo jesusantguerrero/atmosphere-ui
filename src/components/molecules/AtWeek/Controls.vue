@@ -7,6 +7,11 @@
     >
       <i class="fa fa-chevron-left"></i>
     </button>
+    <div class="flex items-center justify-center w-9 h-10 px-4 py-2 text-center cursor-pointer">
+      <span class="font-bold text-gray-500 text-center capitalize transition hover:text-primary"> 
+        HR
+      </span>
+    </div>
     <div v-for="day in selectedWeek" :key="day" class="flex w-full items-center justify-center h-10 px-4 py-2 text-center cursor-pointer">
       <span class="font-bold text-gray-500 capitalize transition hover:text-primary"> 
         {{ formatDate(day)}}

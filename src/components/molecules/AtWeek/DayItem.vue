@@ -5,16 +5,21 @@
         :item="item"
         :day="day"
     />
-    <div v-for="hour in hoursOfDay" :key="hour" :title="hour" class="w-full bg-gray-50 hover:bg-gray-100 transition border px-5 cursor-pointer py-1" :style="hourClass">
+    <HourPoint v-if="isCurrentDay" />
+    <div v-for="hour in hoursOfDay" :key="hour" :title="hour" class="w-full bg-gray-50 hover:bg-gray-100 transition border px-5 cursor-pointer py-1 relative" :style="hourClass">
+        <div class="absolute -left-5 -top-2.5 text-xs z-20" v-if="isFirstDay">
+            {{ formatHour(hour) }} {{ getMeridian(hour) }}
+        </div>
     </div>
 </div>
 </template>
 
 <script setup>
-import { differenceInMinutes, startOfDay } from 'date-fns';
-import { computed } from 'vue';
+import { isSunday, isToday } from 'date-fns';
+import { computed, onMounted, provide } from 'vue';
 import { useDateTime } from '../../../utils/useDateTime';
 import DatePoint from './DatePoint.vue';
+import HourPoint from './HourPoint.vue';
 
 const props = defineProps({
     day: {
@@ -44,10 +49,21 @@ const itemsOfDay = computed(() => {
     });
 })
 
-const startDateToPixels = (string) => {
-    const firstHour = startOfDay(props.day);
-    const startDate = new Date(string);
-    const offset = differenceInMinutes(startDate, firstHour);
-    return secondsToPixels(offset);
+const isFirstDay = computed(() => {
+    return isSunday(props.day);
+})
+
+const getMeridian = (hour) => {
+    return hour > 12 ? 'PM' : 'AM';
 }
+
+const formatHour = (hour) => {
+    return hour > 12 ? hour - 12 : hour;
+}
+
+const isCurrentDay = computed(() => {
+    return isToday(props.day);
+})
+
+provide('day', props.day);
 </script>

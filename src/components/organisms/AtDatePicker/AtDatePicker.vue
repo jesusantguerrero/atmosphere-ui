@@ -2,7 +2,7 @@
     <div class="px-2 py-2 divide-y w-72" role="date-picker">
         <div class="flex flex-wrap">
             <at-field-date-time 
-                v-model="date" 
+                v-model="date"
                 data-test-id="date"
                 :include-time="includesTime" 
                 :selected="selected=='date'" 
@@ -119,6 +119,10 @@ export default {
                 return [props.acceptEndDate, props.acceptTime].some(value => value);
             })
         })
+
+        const emitUpdate = (value) => {
+            emit(`update:${state.selected}`, state[state.selected]);
+        }
         
         watch(() => props.date, () => {
             state.date = props.date || state.date;
@@ -127,6 +131,16 @@ export default {
         watch(() => props.endDate, () => {
             state.endDate = props.endDate;
         }, { immediate: true })
+        
+        watch(() => state.date, () => {
+            state.selected = "date"
+            emitUpdate()
+        })
+        
+        watch(() => state.endDate, () => {
+            state.selected = "enddate"
+            emitUpdate()
+        })
 
         watch(() => state.includesEndDate, () => {
             state.endDate = state.includesEndDate ? state.date : null;
@@ -151,7 +165,7 @@ export default {
                 state[state.selected] = date;
             }
 
-            emit(`update:${state.selected}`, state[state.selected]);
+            emitUpdate()
         }
 
         const selectedDate = computed(() => {

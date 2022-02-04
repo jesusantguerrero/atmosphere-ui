@@ -63,4 +63,5 @@ export { useDatePager } from "./utils/useDatePager";
 export { useDateTime } from "./utils/useDateTime";
 export { useForm } from "./utils/useForm";
 export { useFormData } from "./utils/useFormData";
+export { useTimeGrid } from "./utils/useTimeGrid";
 export { useUpload } from "./utils/useUpload";

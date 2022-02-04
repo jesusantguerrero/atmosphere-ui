@@ -1,29 +1,28 @@
 import { computed , ref, Ref } from 'vue';
 import { addMinutes, startOfDay } from "date-fns";
-import exactMath from "exact-math";
+import { multiply, divide, unit } from "mathjs";
 
 const pixelMinuteUnit = 0.9;
 
-
 export const minutesToPixelsFunc = (minutes: number, defaultUnit = pixelMinuteUnit) => {
-    return exactMath.mul(minutes, defaultUnit);
+    return multiply(minutes, defaultUnit);
 }
 
 export const pixelsToMinutesFunc = (pixels: number, day: Date, defaultUnit = pixelMinuteUnit) => {
-    const minutes = exactMath.div(pixels,  defaultUnit);
+    const minutes = divide(pixels,  defaultUnit);
     const firstHour = startOfDay(day);
     return addMinutes(firstHour, minutes);
 }
 
 export const useTimeGrid = (minutes: Ref<number>, day: Ref<Date>, defaultMinuteUnit = ref(pixelMinuteUnit)) => {
     const pixelMinutes = computed(() => {
-        return exactMath.mul(minutes.value || 0, defaultMinuteUnit.value).toFixed(2);
+        return multiply(minutes.value || 0, defaultMinuteUnit.value).toFixed(2);
     });
     
     const minutesPixels = computed(() => {
-        const minutes = exactMath.div(pixelMinutes.value,  defaultMinuteUnit.value);
+        const minutes = divide(unit(pixelMinutes.value),  defaultMinuteUnit.value);
         const firstHour = startOfDay(day.value);
-        return addMinutes(firstHour, minutes.value);
+        return addMinutes(firstHour, minutes.toNumber());
     });
 
     return {

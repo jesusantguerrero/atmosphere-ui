@@ -54,21 +54,21 @@
 import AtDropdown  from "../../molecules/AtDropdown/AtDropdown.vue";
 import AtDropdownLink from '../../molecules/AtDropdownLink/AtDropdownLink.vue';
 
-const props = defineProps({
-      options: {
-          type: Object,
-          default() {
-              return {}
-          }
-      },
-      isInertia: {
-        type: Boolean,
-        default: false
-      },
-      handlerClass: {
-        type: String,
-        default: ''
+defineProps({
+  options: {
+      type: Object,
+      default() {
+          return {}
       }
+  },
+  isInertia: {
+    type: Boolean,
+    default: false
+  },
+  handlerClass: {
+    type: String,
+    default: ''
+  }
 })
 
 const isSectionLink = (section) => {

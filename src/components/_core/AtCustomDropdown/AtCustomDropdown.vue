@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div ref="trigger">
+        <div ref="trigger" class="w-full">
             <slot name="trigger" />
         </div>
         
@@ -28,7 +28,7 @@ export default {
     props: {
         placement: {
             type: String,
-            default: 'bottom-right'
+            default: 'bottom'
         }
     },
     setup(props) {
@@ -44,7 +44,7 @@ export default {
                     {
                         name: 'offset',
                         options: {
-                            offset: [0, 8],
+                            offset: [0, trigger.value?.offsetHeight],
                         },
                     },
                 ],
@@ -64,7 +64,8 @@ export default {
         return {
             trigger,
             content,
-            open
+            open,
+            popper,
         }
     },
 }

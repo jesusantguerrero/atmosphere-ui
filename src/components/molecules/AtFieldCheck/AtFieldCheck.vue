@@ -15,13 +15,13 @@ import AtSwitch from "../../atoms/AtSwitch/AtSwitch.vue";
 
 const props = defineProps({
    modelValue: {
-            type: Boolean,
-            required: true
-        },
-        label: {
-            type: String,
-            required: true
-        }
+        type: Boolean,
+        required: true
+    },
+    label: {
+        type: String,
+        required: true
+    }
 });
 
 const emit = defineEmits(['update:modelValue']);

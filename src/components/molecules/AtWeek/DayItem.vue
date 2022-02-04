@@ -1,5 +1,5 @@
 <template>
-<div class="relative w-full" :key="day">
+<div class="relative w-full bg-green-500" :key="day">
     <DatePoint v-for="item in itemsOfDay" 
         :key="item.id" 
         :item="item"
@@ -8,7 +8,7 @@
         @update:soft="emit('update:soft', $event)"
         class="cursor-pointer"
     />
-
+    <HourPoint v-if="isCurrentDay" color-class="bg-red-500" :is-marked="true" />
     <div  @click="emitCreatePoint(hour)" v-for="hour in hoursOfDay" :key="hour" :title="hour" class="relative w-full px-5 py-1 transition border cursor-pointer bg-gray-50 hover:bg-gray-100" :style="hourClass">
         <div class="absolute -left-5 -top-2.5 text-xs z-20" v-if="isFirstDay">
             {{ formatHour(hour) }} {{ getMeridian(hour) }}
@@ -23,6 +23,7 @@ import { computed, inject, provide, ref } from 'vue';
 import { useDateTime } from '../../../utils/useDateTime';
 import DatePoint from './DatePoint.vue';
 import { useTimeGrid } from '../../../utils/useTimeGrid';
+import HourPoint from './HourPoint.vue';
 
 const props = defineProps({
     day: {

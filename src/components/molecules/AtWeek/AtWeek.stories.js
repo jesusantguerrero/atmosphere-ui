@@ -15,8 +15,8 @@ const Template = (args) => ({
     return { args };
   },
   template: `
-  <div class="w-full h-screen">
-    <AtWeek v-model="args.value" v-bind="args" />
+  <div class="w-full">
+    <AtWeek v-model="args.value" v-bind="args" class="h-screen overflow-auto" />
   </div>
   `,
 });

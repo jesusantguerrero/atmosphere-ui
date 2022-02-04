@@ -17,7 +17,7 @@ export const pixelsToMinutesFunc = (pixels: number, day: Date, defaultUnit = pix
 
 export const useTimeGrid = (minutes: Ref<number>, day: Ref<Date>, defaultMinuteUnit = ref(pixelMinuteUnit)) => {
     const pixelMinutes = computed(() => {
-        return exactMath.mul(minutes.value || 0, defaultMinuteUnit.value);
+        return exactMath.mul(minutes.value || 0, defaultMinuteUnit.value).toFixed(2);
     });
     
     const minutesPixels = computed(() => {

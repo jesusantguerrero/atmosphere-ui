@@ -1,36 +1,41 @@
 <template>
-<div class="relative w-full" :class="{'pl-5': time}" ref="weekline">
+<div class="relative w-full weekline" :class="{'pl-16': time}" ref="weekline" >
     <Controls 
         v-model="state.selectedDay" 
         v-model:week="state.week" 
         v-bind="args"
         :visible-week-days="visibleWeekDays" 
-        class="absolute top-0 left-0 z-30 w-full bg-white shadow-md week__header" 
+        class="absolute top-0 left-0 z-30 w-full bg-white border-b week__header" 
     />
-    <div class="flex pt-9 relative">
-        <DayItem 
-            v-for="(day, index) in visibleWeekDays"
-            :day-index="index" 
-            :key="day" 
-            :day="day" 
-            :items="visibleItems" 
-            @create="onCreate" 
-            @update:soft="$emit('update:soft', $event)" 
-            @update="$emit('update', $event)" 
-        />     
-        <HourPoint />    
+    <div class="pt-16">
+        <div class="relative flex w-full">
+            <DayItem 
+                v-for="(day, index) in visibleWeekDays"
+                :day-index="index" 
+                :key="day" 
+                :day="day" 
+                :items="visibleItems" 
+                @create="onCreate" 
+                @update:soft="$emit('update:soft', $event)" 
+                @update="$emit('update', $event)" 
+            />     
+            <HourPoint />    
+        </div>
     </div>
 </div>
 </template>
 
 <script setup>
-import { useScroll } from '@vueuse/core';
+import { useScroll, useTimestamp } from '@vueuse/core';
 import { addMilliseconds, differenceInMilliseconds, isWeekend, subDays } from 'date-fns';
 import { rrulestr } from 'rrule';
-import { computed, onMounted, provide, reactive, ref, watch, watchEffect, watchSyncEffect } from 'vue';
+import { computed, onMounted, provide, reactive, ref, watch } from 'vue';
 import Controls from './Controls.vue';
 import DayItem from './DayItem.vue';
 import HourPoint from './HourPoint.vue';
+
+
+const timestamp = useTimestamp();
 
 const state = reactive({
     selectedDay: new Date(),
@@ -80,6 +85,7 @@ const props = defineProps({
 
 provide('options', props);
 provide('schedulerState', state);
+provide('timestamp', timestamp);
 
 const emit = defineEmits([
     'create',
@@ -150,3 +156,35 @@ onMounted(() => {
 });
 
 </script>
+
+<style lang="scss" scoped>
+    .weekline {
+    &::-webkit-scrollbar-thumb {
+        background-color: transparentize($color: #000000, $amount: 0.7);
+        border-radius: 4px;
+
+        &:hover {
+            background-color: transparentize($color: #000000, $amount: 0.7);
+        }
+    }
+
+    &::-webkit-scrollbar {
+        background-color: transparent;
+        width: 8px;
+        height: 10px;
+    }
+
+    &-slim {
+        transition: all ease .3s;
+        &::-webkit-scrollbar {
+            height: 0;
+        }
+
+        &:hover {
+            &::-webkit-scrollbar {
+                height: 3px;
+            }
+        }
+    }
+}
+</style>

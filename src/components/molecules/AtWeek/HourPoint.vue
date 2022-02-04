@@ -1,40 +1,33 @@
 <template>
   <div 
-        class="w-full h-1 bg-red-400 absolute z-20 current-hour-line"
-        :style="pointStyles"
+        class="absolute z-30 w-full bg-red-400 current-hour cursor-pointer"
+        ref="hourPoint"
         :title="formattedTime"
     />
 </template>
 
 <script setup>
 import { differenceInMinutes, format, startOfDay } from 'date-fns';
-import { computed, inject, ref, watchEffect } from 'vue';
+import { computed, inject, ref, toRefs, watchEffect } from 'vue';
 import { useTimestamp } from '@vueuse/core';
+import { useTimeGrid } from '../../../utils/useTimeGrid';
 
-const pixelMinuteUnit = 0.9;
-const minuteToPixels = (minutes) => {
-    return minutes * pixelMinuteUnit;
-};
 
-const day = inject('day');
+const schedulerState = inject('schedulerState');
 
+const { selectedDay: day } = toRefs(schedulerState);
 const timestamp = useTimestamp();
 
-const startDateToPixels = (currentTime) => {
-    const firstHour = startOfDay(day);
-    const startDate = new Date(currentTime);
-    const offset = differenceInMinutes(startDate, firstHour);
-    return minuteToPixels(offset);
-}
-
-const getPointStyles = (currentTime) => {
-    return {
-        top: `${startDateToPixels(currentTime)}px`,
-    }
-}
-const pointStyles = ref(getPointStyles(timestamp.value));
+const { pixelMinutes, offset } = useTimeGrid(ref(0), day);
+const hourPoint = ref();
 watchEffect(() => {
-    pointStyles.value = getPointStyles(timestamp.value);
+    if (hourPoint.value) {
+        const firstHour = startOfDay(day.value);
+        const currentTime = new Date(timestamp.value);
+        offset.value = differenceInMinutes(currentTime, firstHour);
+
+        hourPoint.value.style.top = `${pixelMinutes.value}px`;
+    }  
 });
 
 const formattedTime = computed(() => {
@@ -42,3 +35,10 @@ const formattedTime = computed(() => {
 });
 
 </script>
+
+<style>
+.current-hour {
+    height: 2px;
+    background-color: #ff0000;
+}
+</style>

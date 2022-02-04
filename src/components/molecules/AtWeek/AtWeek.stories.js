@@ -1,3 +1,4 @@
+import { addDays, addHours } from 'date-fns';
 import AtWeek from './AtWeek.vue';
 
 export default {
@@ -14,31 +15,32 @@ const Template = (args) => ({
     return { args };
   },
   template: `
-  <div class="w-full">
+  <div class="w-full h-screen">
     <AtWeek v-model="args.value" v-bind="args" />
   </div>
   `,
 });
+
+const setISOTime = (hoursToAdd = 0, daysToAdd = 0 ) => {
+  return addHours(addDays(new Date(), daysToAdd), hoursToAdd);
+};
+
 const items = [
   {
     id: '1',
     title: 'Item 1',
     description: 'Item 1 description',
     image: 'https://picsum.photos/200/300',
-    startTime: '2022-01-13T05:00:00.000',
-    endTime: '2022-01-13T05:30:30.000',
-    startDate: '2022-01-13',
-    endDate: '2022-01-13',
+    startTime: setISOTime(8),
+    endTime: setISOTime(9),
   },
   {
     id: '2',
     title: 'Item 2',
     description: 'Item 2 description',
     image: 'https://picsum.photos/200/300',
-    startTime: '2022-01-13T06:00:00.000',
-    endTime: '2022-01-13T07:00:30.000',
-    startDate: '2022-06-01',
-    endDate: '2022-06-01',
+    startTime: setISOTime(10),
+    endTime: setISOTime(11),
   },
 ]
 export const Default = Template.bind({});
@@ -56,13 +58,15 @@ WeekMode.args = {
   items
 };
 
-export const RelativeDates = Template.bind({});
-RelativeDates.args = {
+export const NoTimeWeekDays = Template.bind({});
+NoTimeWeekDays.args = {
   value: new Date(),
   nextMode: 'week',
   placeholder: "Select a date",
   relativeDates: true,
-  items
+  items,
+  time: false,
+  hideWeekends: true,
 };
 
 export const TodayHighlighted = Template.bind({});

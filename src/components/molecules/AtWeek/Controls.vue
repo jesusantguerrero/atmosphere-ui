@@ -1,24 +1,24 @@
 <template>
    <div class="flex">
     <button
-      class="px-2 w-64 transition-colors bg-white dark:text-gray-300  focus:outline-none hover:bg-gray-200"
+      class="w-64 px-2 transition-colors bg-white dark:text-gray-300 focus:outline-none hover:bg-gray-200"
       @click="controls.previous()"
       v-if="showControls"
     >
       <i class="fa fa-chevron-left"></i>
     </button>
-    <div class="flex items-center justify-center w-9 h-10 px-4 py-2 text-center cursor-pointer">
-      <span class="font-bold text-gray-500 text-center capitalize transition hover:text-primary"> 
+    <div class="flex items-center justify-center h-10 px-4 py-2 text-center cursor-pointer w-9" v-if="options.time">
+      <span class="font-bold text-center text-gray-500 capitalize transition hover:text-primary"> 
         HR
       </span>
     </div>
-    <div v-for="day in selectedWeek" :key="day" class="flex w-full items-center justify-center h-10 px-4 py-2 text-center cursor-pointer">
+    <div v-for="day in visibleWeekDays" :key="day" class="flex items-center justify-center w-full h-10 px-4 py-2 text-center cursor-pointer">
       <span class="font-bold text-gray-500 capitalize transition hover:text-primary"> 
         {{ formatDate(day)}}
       </span>
     </div>
     <button
-      class="px-2 w-64 transition-colors bg-white focus:outline-none hover:bg-gray-200"
+      class="w-64 px-2 transition-colors bg-white focus:outline-none hover:bg-gray-200"
       @click="controls.next()"
       v-if="showControls"
     >
@@ -28,9 +28,9 @@
 </template>
 
 <script setup>
-import { format, isThisWeek} from "date-fns";
+import { format, isThisWeek } from "date-fns";
 import { useDatePager } from "../../../utils/useDatePager";
-import { watch, toRefs } from "vue";
+import { watch, toRefs, inject } from "vue";
 
 const props = defineProps({
     modelValue: {
@@ -58,7 +58,11 @@ const props = defineProps({
     showControls: {
       type: Boolean,
       default: true
-    }
+    },
+    visibleWeekDays: {
+      type: Array,
+      default: () => []
+    },
 });
 
 const emit = defineEmits([
@@ -66,6 +70,7 @@ const emit = defineEmits([
     "change"
 ]);
 
+const options = inject('options', {});
 const { modelValue, week, nextMode } = toRefs(props);
 const { controls, selectedWeek, selectedDay} = useDatePager({
   nextMode: nextMode.value,

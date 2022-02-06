@@ -24,27 +24,19 @@ it('renders shortcuts', async () => {
    screen.getByText('Today');
 })
 it('displays end date', async () => {
-    const acceptEndDate = ref(false);
-    const { rerender } = renderComponent({
+    renderComponent({
        date: new Date(),
-       acceptEndDate
-   });
-
-    expect(screen.queryByRole('enddate')).toBeFalsy();
-    acceptEndDate.value = true;
-    await rerender({ acceptEndDate });
-    await fireEvent.click(screen.getByText('Include end'))
+       acceptEndDate: true,
+    });
     expect(screen.queryByRole('enddate')).toBeTruthy();
 })
 
 it('works with ranges', async () => {
-    const acceptEndDate = ref(true);
     const { emitted } = renderComponent({
         date: new Date(),
-        acceptEndDate
+        acceptEndDate: true,
     });
 
-    await fireEvent.click(screen.getByText('Include end'))
     expect(screen.queryByRole('enddate')).toBeTruthy();
 
     await fireEvent.click(screen.getByRole('button-previous'));

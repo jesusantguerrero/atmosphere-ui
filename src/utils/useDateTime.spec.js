@@ -10,7 +10,7 @@ describe('Test use date time', () => {
     })
 
     it('formats date human readable computed', () => {
-        expect(humanDate.value).toBe('Jul 25')
+        expect(humanDate.value).toBe('Jul 25 2021')
     })
 
     it('formats human readable date function', () => {

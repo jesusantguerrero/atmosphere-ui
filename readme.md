@@ -8,4 +8,4 @@
 This package cover two purposes at this point:
 1. Explore a component first approach with storybook + jest + vite + vue3 development workflow
 
-2. Provide an elegant set of components for laravel's Jetstream-inertia based on vue.
+2. Provide an elegant set of components for my laravel's Jetstream-inertia, Firebase and Supabase based projects on vue.

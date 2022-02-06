@@ -18,8 +18,7 @@
     "@interactjs/dev-tools": "^1.10.11",
     "@interactjs/interact": "^1.10.11",
     "@interactjs/modifiers": "^1.10.11",
-    "@popperjs/core": "^2.9.2",
-    "caniuse-lite": "^1.0.30001307"
+    "@popperjs/core": "^2.9.2"
   },
   "peerDependencies": {
     "@headlessui/vue": "^1.3.0",

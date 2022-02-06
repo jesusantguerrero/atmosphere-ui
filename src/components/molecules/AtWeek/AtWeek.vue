@@ -1,190 +1,205 @@
 <template>
-<div class="relative w-full weekline" :class="{'pl-16': time}" ref="weekline" >
-    <Controls 
-        v-model="state.selectedDay" 
-        v-model:week="state.week" 
-        v-bind="args"
-        :visible-week-days="visibleWeekDays" 
-        class="absolute top-0 left-0 z-30 w-full bg-white border-b week__header" 
+  <div class="relative w-full weekline" :class="{ 'pl-16': time }" ref="weekline">
+    <Controls
+      v-model="state.selectedDay"
+      v-model:week="state.week"
+      v-bind="args"
+      :visible-week-days="visibleWeekDays"
+      class="absolute top-0 left-0 z-30 w-full bg-white border-b week__header"
     />
     <div class="pt-16">
-        <div class="relative flex w-full">
-            <DayItem 
-                v-for="(day, index) in visibleWeekDays"
-                :day-index="index" 
-                :key="day" 
-                :day="day" 
-                :items="visibleItems" 
-                @create="onCreate" 
-                @update:soft="$emit('update:soft', $event)" 
-                @update="$emit('update', $event)" 
-            />     
-            <HourPoint />    
-        </div>
+      <div class="relative flex w-full">
+        <DayItem
+          v-for="(day, index) in visibleWeekDays"
+          :day-index="index"
+          :key="day"
+          :day="day"
+          :items="visibleItems"
+          @create="onCreate"
+          @update:soft="$emit('update:soft', $event)"
+          @update="$emit('update', $event)"
+        />
+        <HourPoint />
+      </div>
     </div>
-</div>
+  </div>
 </template>
 
 <script setup>
-import { useScroll, useTimestamp } from '@vueuse/core';
-import { addMilliseconds, differenceInMilliseconds, isWeekend, subDays } from 'date-fns';
-import { rrulestr } from 'rrule';
-import { computed, onMounted, provide, reactive, ref, watch } from 'vue';
-import Controls from './Controls.vue';
-import DayItem from './DayItem.vue';
-import HourPoint from './HourPoint.vue';
-
+import { useScroll, useTimestamp } from "@vueuse/core";
+import { addMilliseconds, differenceInMilliseconds, isWeekend, subDays } from "date-fns";
+import { rrulestr } from "rrule";
+import { computed, onMounted, provide, reactive, ref, watch } from "vue";
+import Controls from "./Controls.vue";
+import DayItem from "./DayItem.vue";
+import HourPoint from "./HourPoint.vue";
 
 const timestamp = useTimestamp();
 
 const state = reactive({
-    selectedDay: new Date(),
-    week: null,
-})
-
-const props = defineProps({
-    args: {
-        type: Object,
-        default: () => ({
-            nextMode: 'week',
-            showControls: false,
-            highlightToday: true,
-            relativeDates: true,
-            format: 'MMM dd yyyy'
-        })
-    },
-    items: {
-        type: Array,
-        default: () => []
-    },
-    modalControl: {
-        type: Boolean,
-        default: false,
-    },
-    hideWeekends: {
-        type: Boolean,
-        default: false,
-    },
-    timeFrom: {
-        type: Number,
-        default: 0
-    },
-    timeTo: {
-        type: Number,
-        default: 23 * 60
-    },
-    timeStep: {
-        type: Number,
-        default: 30
-    },
-    time: {
-        type: Boolean,
-        default: true
-    },
+  selectedDay: new Date(),
+  week: null,
 });
 
-provide('options', props);
-provide('schedulerState', state);
-provide('timestamp', timestamp);
+const props = defineProps({
+  args: {
+    type: Object,
+    default: () => ({
+      nextMode: "week",
+      showControls: true,
+      highlightToday: true,
+      relativeDates: true,
+      format: "MMM dd yyyy",
+    }),
+  },
+  items: {
+    type: Array,
+    default: () => [],
+  },
+  modalControl: {
+    type: Boolean,
+    default: false,
+  },
+  hideWeekends: {
+    type: Boolean,
+    default: false,
+  },
+  timeFrom: {
+    type: Number,
+    default: 0,
+  },
+  timeTo: {
+    type: Number,
+    default: 23 * 60,
+  },
+  timeStep: {
+    type: Number,
+    default: 30,
+  },
+  time: {
+    type: Boolean,
+    default: true,
+  },
+  allowCreate: {
+    type: Boolean,
+    default: true,
+  },
+  allowMove: {
+    type: Boolean,
+    default: true,
+  },
+});
 
-const emit = defineEmits([
-    'create',
-    'update',
-    'delete'
-]);
+provide("options", props);
+provide("schedulerState", state);
+provide("timestamp", timestamp);
+
+const emit = defineEmits(["create", "update", "delete"]);
 
 const temporalItems = ref([]);
 
 const visibleItems = computed(() => {
-    const events = []; 
-    props.items.forEach(scheduleEvent => {
-        if (scheduleEvent.recurrence) {
-            const duration = differenceInMilliseconds(scheduleEvent.endTime, scheduleEvent.startTime);
-            rrulestr(scheduleEvent.recurrence).between(subDays(visibleWeekDays.value[0], 1), visibleWeekDays.value[visibleWeekDays.value.length - 1]).forEach(date => {
-                events.push({
-                    ...scheduleEvent,
-                    startTime: date,
-                    endTime: addMilliseconds(date, duration)
-                });
-            });
-        } else {
-            events.push(scheduleEvent);
-        }
-    })
-    return [...temporalItems.value, ...events];
+  const events = [];
+  props.items.forEach((scheduleEvent) => {
+    if (scheduleEvent.recurrence) {
+      const duration = differenceInMilliseconds(
+        scheduleEvent.endTime,
+        scheduleEvent.startTime
+      );
+      rrulestr(scheduleEvent.recurrence)
+        .between(
+          subDays(visibleWeekDays.value[0], 1),
+          visibleWeekDays.value[visibleWeekDays.value.length - 1]
+        )
+        .forEach((date) => {
+          events.push({
+            ...scheduleEvent,
+            startTime: date,
+            endTime: addMilliseconds(date, duration),
+          });
+        });
+    } else {
+      events.push(scheduleEvent);
+    }
+  });
+  return [...temporalItems.value, ...events];
 });
 
 const onCreate = (item) => {
-    if (temporalItems.value.length) {
-        temporalItems.value.splice(0, 1, item);
-    } else {
-        temporalItems.value.push(item);
-    }
-    emit('create', item);
-}
+  if (temporalItems.value.length) {
+    temporalItems.value.splice(0, 1, item);
+  } else {
+    temporalItems.value.push(item);
+  }
+  emit("create", item);
+};
 
-watch(() => props.modalControl, (newValue) => {
+watch(
+  () => props.modalControl,
+  (newValue) => {
     if (!newValue) {
-        temporalItems.value = [];
+      temporalItems.value = [];
     }
-});
+  }
+);
 
 const weekline = ref(null);
 const setStickyHeaders = () => {
-    requestAnimationFrame(() => {
-        if (weekLineTop.value >= 40 ) {
-            const header = document.querySelector('.week__header')
-            header.style.transform = `translate3d(0px, ${weekLineTop.value}px, 1px)`
-        } else {
-            const header = document.querySelector('.week__header')
-            header.style.transform = ``
-        }
-    })
-}
-const { y:weekLineTop } = useScroll(weekline, {
-    onScroll: setStickyHeaders,
+  requestAnimationFrame(() => {
+    if (weekLineTop.value >= 40) {
+      const header = document.querySelector(".week__header");
+      header.style.transform = `translate3d(0px, ${weekLineTop.value}px, 1px)`;
+    } else {
+      const header = document.querySelector(".week__header");
+      header.style.transform = ``;
+    }
+  });
+};
+const { y: weekLineTop } = useScroll(weekline, {
+  onScroll: setStickyHeaders,
 });
 
 const visibleWeekDays = computed(() => {
-    return props.hideWeekends && state.week ? state.week.filter(day => !isWeekend(day)) : state.week;
+  return props.hideWeekends && state.week
+    ? state.week.filter((day) => !isWeekend(day))
+    : state.week;
 });
 
 onMounted(() => {
-    setTimeout(() => {
-        document.querySelector('.current-hour-line')?.scrollIntoView({ smooth: true });
-    })
+  setTimeout(() => {
+    document.querySelector(".current-hour")?.scrollIntoView({ smooth: true });
+  });
 });
-
 </script>
 
 <style lang="scss" scoped>
-    .weekline {
-    &::-webkit-scrollbar-thumb {
-        background-color: transparentize($color: #000000, $amount: 0.7);
-        border-radius: 4px;
+.weekline {
+  &::-webkit-scrollbar-thumb {
+    background-color: transparentize($color: #000000, $amount: 0.7);
+    border-radius: 4px;
 
-        &:hover {
-            background-color: transparentize($color: #000000, $amount: 0.7);
-        }
+    &:hover {
+      background-color: transparentize($color: #000000, $amount: 0.7);
     }
+  }
 
+  &::-webkit-scrollbar {
+    background-color: transparent;
+    width: 8px;
+    height: 10px;
+  }
+
+  &-slim {
+    transition: all ease 0.3s;
     &::-webkit-scrollbar {
-        background-color: transparent;
-        width: 8px;
-        height: 10px;
+      height: 0;
     }
 
-    &-slim {
-        transition: all ease .3s;
-        &::-webkit-scrollbar {
-            height: 0;
-        }
-
-        &:hover {
-            &::-webkit-scrollbar {
-                height: 3px;
-            }
-        }
+    &:hover {
+      &::-webkit-scrollbar {
+        height: 3px;
+      }
     }
+  }
 }
 </style>

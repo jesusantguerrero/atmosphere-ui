@@ -1,9 +1,10 @@
 {
-  "version": "0.5.0",
+  "version": "0.5.1",
   "scripts": {
     "dev": "vite",
     "build": "npm run create-index-files && vue-tsc --noEmit && vite build",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "serve": "vite preview",
     "create-index-files": "node scripts/create-index-files.js",
     "prepublishOnly": "npm run build",

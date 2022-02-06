@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="flex controls__header justify-between w-full mx-4">
+    <div class="flex controls__header justify-between w-full px-4">
       <div class="font-bold text-xl text-gray-500">{{ currentMonth }}</div>
       <div>
 
-        <div class="w-20 flex space-x-1 mr-5">
+        <div class="w-20 flex space-x-1 pr-5 ">
           <button
             class="px-2 rounded-md transition-colors bg-white focus:outline-none hover:bg-gray-200"
             @click="controls.previous()"

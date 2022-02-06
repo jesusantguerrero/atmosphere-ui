@@ -22,7 +22,7 @@ import '@interactjs/actions/resize'
 import '@interactjs/modifiers'
 import '@interactjs/dev-tools'
 import interact from '@interactjs/interact'
-import { useTimeGrid, minutesToPixelsFunc } from '../../../utils/useTimeGrid';
+import { useTimeGrid, minutesToPixelsFunc, pixelsToMinutesFunc } from '../../../utils/useTimeGrid';
 
 const props = defineProps({
     day: {
@@ -93,7 +93,7 @@ watch(() => props.item, (newValue) => {
 });
 
 const updateTimes = (top, shouldEmit) => {
-    const startTime = pixelsToMinutes(top, props.day);
+    const startTime = pixelsToMinutesFunc(top, props.day);
     const endTime =  addMinutes(startTime, getDuration());
     localItem.startTime = startTime;
     localItem.endTime = endTime;

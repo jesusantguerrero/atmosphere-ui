@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx nx run-many --target=build --all --parallel"
+    "build": "npx nx run-many --target=build --all --parallel",
+    "core:dev": "npx nx run-many --target=storybook --projects=atmosphere-ui",
+    "core:publish": "npx nx run-many --target=publish --projects=atmosphere-ui"
   },
   "repository": {
     "type": "git",

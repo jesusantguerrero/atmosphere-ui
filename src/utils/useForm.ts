@@ -1,5 +1,5 @@
-import { computed, ComputedRef, reactive, watch } from "vue";
-import { cloneDeep, isEqual } from "lodash-es";
+import { computed, reactive, watch } from "vue";
+import { cloneDeep, isEqual } from "lodash";
 
 interface IValidator {
     (value: string): string | boolean
@@ -12,10 +12,10 @@ type IFormState = {
     isDirty: boolean;
     hasErrors: boolean;
     data: () => Record<string, any>;
-    transform: (data: Record<string, any>) => IFormState;
+    transform: (callback: (data: Record<string, any>) => any) => IFormState;
     validationSchema: (schema: ValidationSchema) => IFormState;
     reset: () => IFormState;
-    submit: () => void;
+    submit: (name: string, options: Record<string, any>) => void;
     validate: (schema?: ValidationSchema) => Boolean;
 }
 
@@ -23,22 +23,23 @@ type IFormConfig = {
    emit?: (event: string, data: any) => void;
    axiosInstance?: any; 
 }
-export const useForm = (props: any[], config: IFormConfig = {} ) => {
-    const data = (typeof props[0] === "string" ? props[1] : props[0]) || {};
+export const useForm = (props: Record<string, any>, config: IFormConfig = {} ) => {
+    const data = props || { };
     const defaults = cloneDeep(data);
     let transform = (data: Record<string, any>) => data;
     let validationSchema: ValidationSchema = {};
 
-    const form: IFormState = reactive<IFormState>({
+    const form: IFormState = reactive({
         ...data,
         isDirty: false,
         errors: {},
+        /* @ts-ignore: */
         hasErrors: computed(() => Object.keys(form.errors).length > 0),
         data() {
             return Object
               .keys(data)
               .reduce((carry: Record<string, any>, key) => {
-                carry[key] = this[key]
+                carry[key] = form[key]
                 return carry
               }, {})
         },

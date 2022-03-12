@@ -19,7 +19,11 @@ type IFormState = {
     validate: (schema?: ValidationSchema) => Boolean;
 }
 
-export const useForm = (...props: any[]) => {
+type IFormConfig = {
+   emit?: (event: string, data: any) => void;
+   axiosInstance?: any; 
+}
+export const useForm = (props: any[], config?: IFormConfig = {} ) => {
     const data = (typeof props[0] === "string" ? props[1] : props[0]) || {};
     const defaults = cloneDeep(data);
     let transform = (data: Record<string, any>) => data;
@@ -65,7 +69,12 @@ export const useForm = (...props: any[]) => {
     
           return this
         },
-        submit(method: string|Function, options: Record<string, any>) {
+        submitEvent: (event: string) => {
+          if (config.emit) {
+            config.emit(event, transform(form.data()))
+          }
+        },
+        submitForm(method: string|Function, options: Record<string, any>) {
           options = options || {}
     
           if (typeof method === "function") {
@@ -75,6 +84,14 @@ export const useForm = (...props: any[]) => {
           }
           
           options.onSuccess && options.onSuccess();
+        },
+
+        submit(name: string, options: Record<string, any>) {
+          if (config.emit) {
+            form.submitEvent(name)
+          } else if (config.axiosInstance) {
+            form.submitForm(name, options)
+          }
         },
         validate(schema: ValidationSchema = validationSchema) {
           form.errors = {}

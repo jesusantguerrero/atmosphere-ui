@@ -1,12 +1,12 @@
 <template>
     <div 
         ref="inputWrapper" 
-        class="w-full h-10 shadow-sm  focus:ring  focus:ring-opacity-50 overflow-hidden flex"
+        class="flex w-full h-10 overflow-hidden shadow-sm focus:ring focus:ring-opacity-50"
         :class="inputClasses"
         @click="focus"
     >
         <slot name="prefix" v-if="prefix || $slots.prefix">
-            <div class="items-center flex px-2 h-full w-4 justify-center">{{ prefix }}</div>
+            <div class="flex items-center justify-center w-4 h-full px-2">{{ prefix }}</div>
         </slot>
         <input 
             ref="inputRef" 
@@ -14,13 +14,12 @@
             :disabled="disabled"
             class="w-full h-full px-2 focus:outline-none" 
             v-bind="$attrs"
-            @keydown="handleKeyDown"
             @focus="onFocus"
             @blur="onBlur"
             @input="onInput" 
         />
         <slot name="suffix" v-if="suffix || $slots.suffix">
-            <div class="flex items-center px-2 h-full w-4 justify-center">{{ suffix }}</div>
+            <div class="flex items-center justify-center w-4 h-full px-2">{{ suffix }}</div>
         </slot>
     </div>
 </template>

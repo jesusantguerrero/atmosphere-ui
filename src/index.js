@@ -45,6 +45,7 @@ export { default as AtPreFooter } from "./components/molecules/landing/AtPreFoot
 export { default as AtSiteFooter } from "./components/molecules/landing/AtSiteFooter.vue";
 export { default as AtSiteHeader } from "./components/molecules/landing/AtSiteHeader.vue";
 export { default as AtAuthForm } from "./components/organisms/AtAuthForm/AtAuthForm.vue";
+export { default as AtBottomNavigation } from "./components/organisms/AtBottomNavigation/AtBottomNavigation.vue";
 export { default as AtDashlide } from "./components/organisms/AtDashlide/AtDashlide.vue";
 export { default as AtDateAction } from "./components/organisms/AtDatePicker/AtDateAction.vue";
 export { default as AtDatePicker } from "./components/organisms/AtDatePicker/AtDatePicker.vue";

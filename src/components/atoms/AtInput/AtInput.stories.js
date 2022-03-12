@@ -1,5 +1,5 @@
 import AtInput from './AtInput.vue';
-
+import { ref } from "vue"
 export default {
   title: 'Atoms/AtInput',
   component: AtInput,
@@ -8,16 +8,43 @@ export default {
 const Template = (args) => ({
   components: { AtInput },
   setup() {
-    return { args };
+    return { 
+      args,
+      value: ref(args.value || ''), 
+    };
   },
-  template: '<AtInput v-bind="args" />',
+  template: '<AtInput v-bind="args" v-model="value" />',
 });
 
 export const Default = Template.bind({});
 Default.args = {
-  field: 'email',
-  errors: {
-    email: 'An email error'
-  }
+  value: 'hola mundo'
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  disabled: true,
+};
+
+export const Rounded = Template.bind({});
+Rounded.args = {
+  rounded: true,
+};
+
+export const Prefix = Template.bind({});
+Prefix.args = {
+  prefix:'$',
+};
+
+export const Suffix = Template.bind({});
+Suffix.args = {
+  suffix: '%',
+};
+
+export const WithFormatting = Template.bind({});
+WithFormatting.args = {
+  prefix: '$',
+  numberFormat: true,
+  isBorderless: true
 };
 

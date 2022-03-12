@@ -23,7 +23,7 @@ type IFormConfig = {
    emit?: (event: string, data: any) => void;
    axiosInstance?: any; 
 }
-export const useForm = (props: any[], config?: IFormConfig = {} ) => {
+export const useForm = (props: any[], config: IFormConfig = {} ) => {
     const data = (typeof props[0] === "string" ? props[1] : props[0]) || {};
     const defaults = cloneDeep(data);
     let transform = (data: Record<string, any>) => data;

@@ -1,6 +1,6 @@
 <template>
     <div class="form-group">
-        <label :for="field">{{ label }}</label>
+        <label :for="field" class="mb-0.5 inline-block">{{ label }}</label>
         <slot></slot>
         <slot name="error"></slot>
     </div>

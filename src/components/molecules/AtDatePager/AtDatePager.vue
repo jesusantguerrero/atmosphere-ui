@@ -6,11 +6,9 @@
     >
       <i class="fa fa-chevron-left"></i>
     </button>
-    <div v-if="selectedWeek && selectedWeek.length" class="flex items-center text-sm font-bold text-gray-500 bg-white dark:bg-gray-700 dark:text-gray-300 dark:hover:text-gray-50">
-      {{ formatDate(selectedWeek[0]) }} - {{ formatDate(selectedWeek[6]) }}
+    <div v-if="startDate && endDate" class="flex items-center text-sm font-bold text-gray-500 bg-white dark:bg-gray-700 dark:text-gray-300 dark:hover:text-gray-50">
+      {{ formatDate(startDate) }} - {{ formatDate(endDate) }}
     </div>
-    <el-date-picker v-model="date" type="date" @change="emitDate" v-if="false">
-    </el-date-picker>
     <button
       class="px-2 transition-colors bg-white dark:bg-gray-700 dark:text-gray-300 dark:hover:text-gray-50 focus:outline-none hover:bg-gray-200"
       @click="controls.next()"
@@ -20,18 +18,16 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { format } from "date-fns";
 import { useDatePager } from "../../../utils/useDatePager";
-import { watch, toRefs, computed } from "vue";
+import { watch, toRefs } from "vue";
 
-export default {
-  name: "DatePagerWeek",
-  props: {
+  const props = defineProps({
     modelValue: {
       type: Date
     },
-    week: {
+    dateSpan: {
       type: Array
     },
     format: {
@@ -42,23 +38,23 @@ export default {
       type: String,
       default: "day"
     }
-  },
+  })
+
+  const emit = defineEmits(['update:modelValue', 'update:dateSpan'])
   
-  setup(props, { emit }) {
-    const { modelValue, week, nextMode } = toRefs(props);
-    const { controls, selectedWeek, selectedDay} = useDatePager({
+    const { modelValue, dateSpan, nextMode } = toRefs(props);
+    const { controls, selectedSpan, selectedDay, startDate, endDate} = useDatePager({
       nextMode: nextMode.value,
       initialDate: modelValue.value
     });
 
-    const isMonthMode = computed(() => nextMode.value == "month");
 
-    // week
-    const emitWeek = value => {
-      emit("update:week", value);
+    // dateSpan
+    const emitDateSpan = value => {
+      emit("update:dateSpan", value);
     };
-    watch(week, controls.setWeek, { immediate: true });
-    watch(selectedWeek, emitWeek, { immediate: true });
+    watch(dateSpan, controls.setDateSpan, { immediate: true });
+    watch(selectedSpan, emitDateSpan, { immediate: true });
 
     // Day
     const emitDay = value => {
@@ -68,26 +64,9 @@ export default {
     watch(selectedDay, emitDay, { immediate: true });
 
     // viewHelpers
-    const getISODate = date => {
-      return date.toISOString ? date.toISOString().slice(0, 10) : "";
-    };
-
     const formatDate = (date) => {
       return format(date,  props.format)
     }
-
-    return {
-      selectedWeek,
-      selectedDay,
-      isMonthMode,
-      // methods
-      controls,
-      // ui helpers
-      getISODate,
-      formatDate
-    };
-  }
-};
 </script>
 
 <style lang="scss">

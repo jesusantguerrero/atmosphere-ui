@@ -23,9 +23,9 @@
             </at-field>
 
             <at-field field="password" label="Password">
-                <at-input
-                    type="password"
+                <at-input-password
                     data-test-id="input-password"
+                    class="bg-white"
                     v-model="formData.password"
                     required
                 />
@@ -53,7 +53,7 @@
         </slot>
 
         <at-button
-            class="w-full rounded-md"
+            class="w-full"
             :class="btnClass"
             type="primary"
             data-test-id="btn-submit"
@@ -85,9 +85,10 @@ import AtField from '../../atoms/AtField/AtField.vue';
 import AtAuthInput from '../../atoms/AtAuthInput/AtAuthInput.vue';
 import AtErrorBag from '../../atoms/AtErrorBag/AtErrorBag.vue';
 import AtInput from '../../atoms/AtInput/AtInput.vue';
+import AtInputPassword from "../../molecules/AtInputPassword/AtInputPassword.vue";
 
 export default {
-  components: { AtButton, AtAuthInput, AtField, AtErrorBag, AtInput },
+  components: { AtButton, AtAuthInput, AtField, AtErrorBag, AtInput, AtInputPassword },
   name: 'AuthForm',
   emits: {
       submit: null

@@ -14,9 +14,11 @@ export { default as AtTextarea } from "./components/atoms/AtTextarea/AtTextarea.
 export { default as AtBackgroundIconCard } from "./components/molecules/AtBackgroundIconCard/AtBackgroundIconCard.vue";
 export { default as AtBillingCard } from "./components/molecules/AtBillingCard/AtBillingCard.vue";
 export { default as AtBinaryChoice } from "./components/molecules/AtBinaryChoice/AtBinaryChoice.vue";
+export { default as AtButtonGroup } from "./components/molecules/AtButtonGroup/AtButtonGroup.vue";
 export { default as AtCalendar } from "./components/molecules/AtCalendar/AtCalendar.vue";
 export { default as AtChoices } from "./components/molecules/AtChoices/AtChoices.vue";
 export { default as AtDataCard } from "./components/molecules/AtDataCard/AtDataCard.vue";
+export { default as AtDatePager } from "./components/molecules/AtDatePager/AtDatePager.vue";
 export { default as AtDropdown } from "./components/molecules/AtDropdown/AtDropdown.vue";
 export { default as AtDropdownLink } from "./components/molecules/AtDropdownLink/AtDropdownLink.vue";
 export { default as AtFeedbackButton } from "./components/molecules/AtFeedbackButton/AtFeedbackButton.vue";
@@ -24,6 +26,7 @@ export { default as AtFieldCheck } from "./components/molecules/AtFieldCheck/AtF
 export { default as AtFieldDateTime } from "./components/molecules/AtFieldDateTime/AtFieldDateTime.vue";
 export { default as AtFormField } from "./components/molecules/AtFormField/AtFormField.vue";
 export { default as AtFormGroup } from "./components/molecules/AtFormGroup/AtFormGroup.vue";
+export { default as AtInputPassword } from "./components/molecules/AtInputPassword/AtInputPassword.vue";
 export { default as AtOptionsCreator } from "./components/molecules/AtOptionsCreator/AtOptionsCreator.vue";
 export { default as AtOptionsPicture } from "./components/molecules/AtOptionsPicture/AtOptionsPicture.vue";
 export { default as AtOptionsPictureItem } from "./components/molecules/AtOptionsPictureItem/AtOptionsPictureItem.vue";
@@ -39,7 +42,6 @@ export { default as AtStepTab } from "./components/molecules/AtStepTab/AtStepTab
 export { default as AtUpload } from "./components/molecules/AtUpload/AtUpload.vue";
 export { default as AtWeek } from "./components/molecules/AtWeek/AtWeek.vue";
 export { default as AtWeekControls } from "./components/molecules/AtWeekControls/AtWeekControls.vue";
-export { default as AtWeekPager } from "./components/molecules/AtWeekPager/AtWeekPager.vue";
 export { default as AtHero } from "./components/molecules/landing/AtHero.vue";
 export { default as AtPreFooter } from "./components/molecules/landing/AtPreFooter.vue";
 export { default as AtSiteFooter } from "./components/molecules/landing/AtSiteFooter.vue";

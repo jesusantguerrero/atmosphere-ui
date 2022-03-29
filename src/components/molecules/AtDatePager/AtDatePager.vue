@@ -1,16 +1,16 @@
 <template>
-   <div class="flex justify-between overflow-hidden border-2 border-gray-200 rounded-md h-9 date-pager dark:bg-gray-700 dark:border-gray-600">
+   <div class="flex justify-between overflow-hidden border-2 border-gray-200 rounded-md h-9 date-pager ">
     <button
-      class="px-2 transition-colors bg-white dark:bg-gray-700 dark:text-gray-300 dark:hover:text-gray-50 focus:outline-none hover:bg-gray-200"
+      class="px-2 transition-colors bg-white focus:outline-none hover:bg-gray-200"
       @click="controls.previous()"
     >
       <i class="fa fa-chevron-left"></i>
     </button>
-    <div v-if="startDate && endDate" class="flex items-center text-sm font-bold text-gray-500 bg-white dark:bg-gray-700 dark:text-gray-300 dark:hover:text-gray-50">
+    <div v-if="startDate && endDate" class="flex items-center text-sm font-bold text-gray-500 bg-white">
       {{ formatDate(startDate) }} - {{ formatDate(endDate) }}
     </div>
     <button
-      class="px-2 transition-colors bg-white dark:bg-gray-700 dark:text-gray-300 dark:hover:text-gray-50 focus:outline-none hover:bg-gray-200"
+      class="px-2 transition-colors bg-white focus:outline-none hover:bg-gray-200"
       @click="controls.next()"
     >
       <i class="fa fa-chevron-right"></i>
@@ -41,7 +41,6 @@ import { watch, toRefs } from "vue";
   })
 
   const emit = defineEmits(['update:modelValue', 'update:dateSpan'])
-  
     const { modelValue, dateSpan, nextMode } = toRefs(props);
     const { controls, selectedSpan, selectedDay, startDate, endDate} = useDatePager({
       nextMode: nextMode.value,

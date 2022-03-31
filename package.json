@@ -1,10 +1,10 @@
 {
-  "version": "0.6.1",
+  "version": "0.6.2",
   "scripts": {
     "dev": "vite",
     "build": "npm run create-index-files && vue-tsc --noEmit && vite build",
-    "test": "jest",
-    "test:coverage": "jest --coverage",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
     "serve": "vite preview",
     "create-index-files": "node scripts/create-index-files.js",
     "prepublishOnly": "npm run build",
@@ -52,6 +52,7 @@
     "babel-jest": "^27.0.0",
     "chromatic": "^5.9.2",
     "date-fns": "^2.22.1",
+    "happy-dom": "^2.52.0",
     "interactjs": "^1.10.11",
     "jest": "^27.0.0",
     "mathjs": "^10.1.1",
@@ -64,6 +65,7 @@
     "ts-jest": "^27.0.0",
     "typescript": "^4.3.5",
     "vite": "^2.3.8",
+    "vitest": "^0.8.1",
     "vue": "^3.2.31",
     "vue-jest": "^5.0.0-0",
     "vue-loader": "^16.5.0",
@@ -71,8 +73,8 @@
   },
   "name": "atmosphere-ui",
   "description": "UI for jetstream inertia",
-  "main": "dist/atmosphere-ui.es.js",
-  "module": "dist/atmosphere-ui.umd.js",
+  "main": "dist/atmosphere-ui.umd.js",
+  "module": "dist/atmosphere-ui.es.js",
   "files": [
     "scripts/*",
     "src/*",
@@ -97,5 +99,11 @@
   "bugs": {
     "url": "https://github.com/jesusantguerrero/atmosphere-ui/issues"
   },
-  "homepage": "https://github.com/jesusantguerrero/atmosphere-ui#readme"
+  "homepage": "https://github.com/jesusantguerrero/atmosphere-ui#readme",
+  "exports": {
+    ".": {
+      "require": "./dist/atmosphere-ui.umd.js",
+      "import": "./dist/atmosphere-ui.es.js"
+    }
+  }
 }

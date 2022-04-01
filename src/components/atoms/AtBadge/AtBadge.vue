@@ -1,6 +1,6 @@
 <template>
 <span class="px-4 py-1 text-sm font-bold rounded-full" :class="colorClasses">
-    <slot></slot>
+    <slot>{{label}}</slot>
 </span>
 </template>
 
@@ -15,7 +15,11 @@ const props = defineProps({
             return classes.includes(value);
         },
         default: 'primary'
-    } 
+    },
+    label: {
+        type: String,
+        default: ''
+    },
 });
 
 const colorClasses = computed(() => {

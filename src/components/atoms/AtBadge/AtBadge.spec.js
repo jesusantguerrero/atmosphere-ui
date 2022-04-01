@@ -1,9 +1,13 @@
-import { wrapper } from "vue-test-utils"
+/**
+ * @jest-environment jsdom
+ */
+
+import { mount } from "@vue/test-utils"
 import Badge from "./AtBadge.vue"
 
 describe('Badge component', () => {
     it('Should render the component', () => {
-        const badge = wrapper(Badge, {
+        const badge = mount(Badge, {
             props: {
                 label: 'Hola'
             }

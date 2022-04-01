@@ -40,6 +40,7 @@
     "@storybook/addon-links": "^6.4.19",
     "@storybook/testing-library": "0.0.9",
     "@storybook/vue3": "^6.4.19",
+    "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/user-event": "^13.1.9",
     "@testing-library/vue": "^6.4.2",
     "@types/jest": "^27.0.0",

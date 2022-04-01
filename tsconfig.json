@@ -15,6 +15,6 @@
     },
     "include": [
       "src/**/*"
-    ]
+, "vitest.config.js"    ]
   }
   

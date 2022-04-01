@@ -1,5 +1,5 @@
 {
-  "version": "0.6.2",
+  "version": "0.6.3",
   "scripts": {
     "dev": "vite",
     "build": "npm run create-index-files && vue-tsc --noEmit && vite build",
@@ -44,6 +44,7 @@
     "@testing-library/vue": "^6.4.2",
     "@types/jest": "^27.0.0",
     "@vitejs/plugin-vue": "^1.2.3",
+    "@vitest/ui": "^0.8.1",
     "@vue/compiler-sfc": "^3.2.31",
     "@vue/test-utils": "^2.0.0-0",
     "@vue/vue3-jest": "^27.0.0-alpha.4",
@@ -73,7 +74,7 @@
   },
   "name": "atmosphere-ui",
   "description": "UI for jetstream inertia",
-  "main": "dist/atmosphere-ui.umd.js",
+  "main": "index.js",
   "module": "dist/atmosphere-ui.es.js",
   "files": [
     "scripts/*",
@@ -104,6 +105,10 @@
     ".": {
       "require": "./dist/atmosphere-ui.umd.js",
       "import": "./dist/atmosphere-ui.es.js"
+    },
+    "./styles.css": {
+      "require": "./dist/styles.css",
+      "import": "./dist/styles.css"
     }
   }
 }

@@ -11,7 +11,7 @@ import { reactive, ref, toRefs, computed, watch } from 'vue'
 import { toDate, format } from "date-fns"
 import { validateStringDate } from "../../../utils/validators/dateValidator";
 
-const props = definePros({
+const props = defineProps({
         modelValue: {
             type: [Date, null]
         },

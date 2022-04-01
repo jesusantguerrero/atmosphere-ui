@@ -1,19 +1,19 @@
 <template>
   <div>
-    <div class="flex controls__header justify-between w-full px-4">
-      <div class="font-bold text-xl text-gray-500">{{ currentMonth }}</div>
+    <div class="flex justify-between w-full px-4 controls__header">
+      <div class="text-xl font-bold text-gray-500">{{ currentMonth }}</div>
       <div>
 
-        <div class="w-20 flex space-x-1 pr-5 ">
+        <div class="flex w-20 pr-5 space-x-1 ">
           <button
-            class="px-2 rounded-md transition-colors bg-white focus:outline-none hover:bg-gray-200"
+            class="px-2 transition-colors bg-white rounded-md focus:outline-none hover:bg-gray-200"
             @click="controls.previous()"
             v-if="showControls"
           >
             <i class="fa fa-chevron-left"></i>
           </button>
           <button
-            class="px-2 rounded-md transition-colors bg-white  focus:outline-none hover:bg-gray-200"
+            class="px-2 transition-colors bg-white rounded-md focus:outline-none hover:bg-gray-200"
             @click="controls.next()"
             v-if="showControls"
           >
@@ -28,7 +28,7 @@
         v-if="options.time"
       >
         <span
-          class="font-bold text-center text-gray-500 capitalize transition  hover:text-primary"
+          class="font-bold text-center text-gray-500 capitalize transition hover:text-primary"
         >
           HR
         </span>
@@ -90,7 +90,7 @@ const emit = defineEmits(["input", "change"]);
 
 const options = inject("options", {});
 const { modelValue, week, nextMode } = toRefs(props);
-const { controls, selectedWeek, selectedDay } = useDatePager({
+const { controls, selectedSpan, selectedDay } = useDatePager({
   nextMode: nextMode.value,
   initialDate: modelValue.value,
 });
@@ -100,7 +100,7 @@ const emitWeek = (value) => {
   emit("update:week", value);
 };
 watch(week, controls.setWeek, { immediate: true });
-watch(selectedWeek, emitWeek, { immediate: true });
+watch(selectedSpan, emitWeek, { immediate: true });
 
 // Day
 const emitDay = (value) => {

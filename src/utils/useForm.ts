@@ -72,14 +72,14 @@ export const useForm = (props: Record<string, any>, config: IFormConfig = {} ) =
         },
         submitEvent: (event: string) => {
           if (config.emit) {
-            config.emit(event, transform(form.data()))
+            config.emit(event, form.data())
           }
         },
         submitForm(method: string|Function, options: Record<string, any>) {
           options = options || {}
     
           if (typeof method === "function") {
-            method('submit', transform(form.data()))
+            method('submit', form.data())
           } else {
             options.url = method
           }

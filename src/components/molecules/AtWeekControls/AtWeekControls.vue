@@ -54,7 +54,7 @@ export default {
   
   setup(props, { emit }) {
     const { modelValue, week, nextMode } = toRefs(props);
-    const { controls, selectedWeek, selectedDay} = useDatePager({
+    const { controls, selectedSpan, selectedDay} = useDatePager({
       nextMode: nextMode.value,
       initialDate: modelValue.value
     });
@@ -66,7 +66,7 @@ export default {
       emit("update:week", value);
     };
     watch(week, controls.setWeek, { immediate: true });
-    watch(selectedWeek, emitWeek, { immediate: true });
+    watch(selectedSpan, emitWeek, { immediate: true });
 
     // Day
     const emitDay = value => {
@@ -93,7 +93,7 @@ export default {
     }
 
     return {
-      selectedWeek,
+      selectedSpan,
       selectedDay,
       isMonthMode,
       // methods

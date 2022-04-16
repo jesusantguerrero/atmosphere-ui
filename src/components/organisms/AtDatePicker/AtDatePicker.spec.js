@@ -1,5 +1,5 @@
-import { fireEvent, render, screen } from "@testing-library/vue";import { ref } from "vue";
-;
+import { fireEvent, render, screen } from "@testing-library/vue";
+import '@testing-library/jest-dom';
 import AtDatePicker from "./AtDatePicker.vue";
 
 const renderComponent = (props) => {

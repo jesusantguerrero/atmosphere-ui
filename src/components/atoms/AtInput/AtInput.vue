@@ -12,6 +12,7 @@
             ref="inputRef" 
             :value="formattedValue"
             :disabled="disabled"
+            :data-testid="dataTestid"
             class="w-full h-full px-2 focus:outline-none" 
             v-bind="$attrs"
             @focus="onFocus"
@@ -27,6 +28,10 @@
 <script setup>
     import { computed, reactive, ref, watch } from 'vue';
     const props = defineProps({
+        dataTestid: {
+            type: String,
+            default: null
+        },
         modelValue: String,
         disabled: Boolean,
         prefix: String,

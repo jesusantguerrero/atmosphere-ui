@@ -152,7 +152,6 @@ export const useUpload = (value: Ref, config = uploadConfig, httpRequestMethod: 
 
     if (!state.isUploadingLocal && rawFiles.length) {
       updateIsUploading(true);
-      console.log('uploading', rawFiles);
       return await httpRequest(rawFiles, config)
         .then(({ data }) => {
           const results = [...uploadedFiles, ...mergeResults(filesToUpload, data)];

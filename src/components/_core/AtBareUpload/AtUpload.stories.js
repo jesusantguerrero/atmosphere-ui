@@ -21,7 +21,6 @@ const Template = (args, { argTypes }) => ({
   methods: {
     httpRequest: async (files, formData) => {
       await new Promise((resolve) => {
-        console.log(files, formData);
         setTimeout(() => {
           resolve(files);
         }, 5000);

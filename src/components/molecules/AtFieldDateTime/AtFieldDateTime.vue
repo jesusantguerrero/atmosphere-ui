@@ -6,13 +6,12 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { reactive, ref, toRefs, computed, watch } from 'vue'
 import { toDate, format } from "date-fns"
 import { validateStringDate } from "../../../utils/validators/dateValidator";
 
-export default {
-    props: {
+const props = defineProps({
         modelValue: {
             type: [Date, null]
         },
@@ -38,67 +37,60 @@ export default {
         placeholder: {
             type: String
         }
-    },
-    emits: ['update:modelValue', 'update:time', 'update:hasError'],
-    setup(props, {emit}) {
-        const state = reactive({
-            date: '',
-            formattedTime: '',
-            isInvalid: false,
-            isFocused: false
-        });
+})
 
-        const { modelValue } = toRefs(props);
+const emit = defineEmits(['update:modelValue', 'update:time', 'update:hasError'])
 
-        const validateDate = () => {
-            return validateStringDate(`${state.date} ${state.formattedTime}`);
-        }
-        
-        watch(() => modelValue.value, () => {
-            const date = props.modelValue || new Date();
-            state.date = format(date, props.format)
-            state.formattedTime = format(date, 'hh:mm a');
-            state.isInvalid = !validateDate();
-        }, { immediate: true})
+const state = reactive({
+    date: '',
+    formattedTime: '',
+    isInvalid: false,
+    isFocused: false
+})
 
-        const onBlur = () => {
-            state.isInvalid = !validateDate();
-            if (!state.isInvalid) {
-                state.isFocused = false;
-                emit('update:modelValue', toDate(Date.parse(`${state.date} ${state.formattedTime}`)));
-            }
-        }
+const { modelValue } = toRefs(props);
 
-        // focus
-        const dateInput = ref(null);
-        const timeInput = ref(null);
-        const onFocus = () => {
-            state.isFocused = true;
-            emit('click');
-        }
-        
-        const isSelected = computed(() => {
-           return state.isFocused || props.selected;
-        })
-
-        // Error state
-        watch(() => props.hasError, () => {
-            state.isInvalid = props.hasError;
-        }, { immediate: true})
-
-        watch(() => state.isInvalid, () => {
-            if (state.isInvalid != props.hasError) {
-                emit('update:hasError', state.isInvalid);
-            }
-        }, { immediate: true})
-
-        return {
-            ...toRefs(state),
-            onBlur,
-            dateInput,
-            timeInput,
-            isSelected,
-        }
-    },
+const validateDate = () => {
+    return validateStringDate(`${state.date} ${state.formattedTime}`);
 }
+        
+watch(() => modelValue.value, () => {
+    const date = props.modelValue || new Date();
+    state.date = format(date, props.format)
+    state.formattedTime = format(date, 'hh:mm a');
+    state.isInvalid = !validateDate();
+}, { immediate: true})
+
+const onBlur = () => {
+    state.isInvalid = !validateDate();
+    if (!state.isInvalid) {
+        state.isFocused = false;
+        emit('update:modelValue', toDate(Date.parse(`${state.date} ${state.formattedTime}`)));
+    }
+}
+
+// focus
+const dateInput = ref(null);
+const timeInput = ref(null);
+const onFocus = () => {
+    state.isFocused = true;
+    emit('click');
+}
+
+const isSelected = computed(() => {
+    return state.isFocused || props.selected;
+})
+
+// Error state
+watch(() => props.hasError, () => {
+    state.isInvalid = props.hasError;
+}, { immediate: true})
+
+watch(() => state.isInvalid, () => {
+    if (state.isInvalid != props.hasError) {
+        emit('update:hasError', state.isInvalid);
+    }
+}, { immediate: true})
+
+const { date, formattedTime, isInvalid   } = toRefs(state)
 </script>

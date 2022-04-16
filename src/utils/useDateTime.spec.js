@@ -1,4 +1,4 @@
-import { addDays, format, isSunday, isWeekend, subDays } from "date-fns";
+import { addDays, format, isSunday, isWeekend, subDays, startOfDay } from "date-fns";
 import { ref } from "vue";
 import { useDateTime } from "./useDateTime";
 
@@ -14,15 +14,13 @@ describe('Test use date time', () => {
     })
 
     it('formats human readable date function', () => {
-        const date = new Date();
+        const date = startOfDay(new Date());
         const lastYear = new Date(2019, 11, 31);
-        let thisWeek = addDays(date, 3);
-        if (isWeekend(date) && !isSunday(date)) {
-            thisWeek =  subDays(date, 3)
-        }
+        let thisWeek = isWeekend(date) && !isSunday(date) ? addDays(date, 3) : subDays(date, 3)
+    
         expect(getHumanDate(date)).toBe('Today');
-        expect(getHumanDate(subDays(date, 1))).toBe('Yesterday');
-        expect(getHumanDate(addDays(date, 1))).toBe('Tomorrow');
+        expect(getHumanDate(subDays(startOfDay(date), 1))).toBe('Yesterday');
+        expect(getHumanDate(addDays(startOfDay(date), 1))).toBe('Tomorrow');
         expect(getHumanDate(thisWeek)).toBe(format(thisWeek, 'iiii'));
         expect(getHumanDate(lastYear)).toBe(format(lastYear, 'MMM dd yyyy'));
 

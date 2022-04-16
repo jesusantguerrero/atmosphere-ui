@@ -40,7 +40,7 @@ import { watch, toRefs } from "vue";
     }
   })
 
-  const emit = defineEmits(['update:modelValue', 'update:dateSpan'])
+  const emit = defineEmits(['update:modelValue', 'update:dateSpan', 'update:startDate', 'update:endDate'])
     const { modelValue, dateSpan, nextMode } = toRefs(props);
     const { controls, selectedSpan, selectedDay, startDate, endDate} = useDatePager({
       nextMode: nextMode.value,
@@ -61,6 +61,8 @@ import { watch, toRefs } from "vue";
     };
     watch(modelValue,  controls.setDay , { immediate: true });
     watch(selectedDay, emitDay, { immediate: true });
+    watch(startDate, emit('update:startDate', startDate.value), { immediate: true });
+    watch(endDate, emit('update:endDate', endDate.value), { immediate: true });
 
     // viewHelpers
     const formatDate = (date) => {

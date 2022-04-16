@@ -11,7 +11,7 @@ components: { AtCalendar },
 setup() {
     return { args };
 },
-template: '<div class="w-52"><at-calendar v-bind="args" v-on="args" class="w-32"/></div>',
+template: '<div class="w-52"><at-calendar v-bind="args" v-on="args" class="w-full"/></div>',
 });
 
 export const Default = Template.bind({});

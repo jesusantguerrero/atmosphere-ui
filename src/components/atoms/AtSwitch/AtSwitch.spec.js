@@ -1,6 +1,6 @@
 import AtSwitch from "./AtSwitch.vue";
-import { fireEvent, render, screen,  } from "@testing-library/vue"
-import { ref } from "@vue/runtime-core";
+import { fireEvent, render, screen } from "@testing-library/vue"
+import { ref } from "vue";
 
 const renderSwitch = (localProps) => {
     const state = ref(false);

@@ -20,7 +20,7 @@
 
 <script setup>
 import { format } from "date-fns";
-import { useDatePager } from "../../../utils/useDatePager";
+import { useDatePager } from "vueuse-temporals";
 import { watch, toRefs } from "vue";
 
   const props = defineProps({

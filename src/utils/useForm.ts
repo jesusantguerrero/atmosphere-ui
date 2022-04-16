@@ -45,11 +45,11 @@ export const useForm = (props: Record<string, any>, config: IFormConfig = {} ) =
         },
         transform(callback: (data: any) => any) {
           transform = callback
-          return this
+          return form
         },
         validationSchema(schema: ValidationSchema) {
           validationSchema = schema
-          return this
+          return form
         },
         reset(...fields: any[]) {
           let clonedDefaults = cloneDeep(defaults)
@@ -72,16 +72,19 @@ export const useForm = (props: Record<string, any>, config: IFormConfig = {} ) =
         },
         submitEvent: (event: string) => {
           if (config.emit) {
-            config.emit(event, form.data())
+            config.emit(event, transform(form.data()))
           }
         },
         submitForm(method: string|Function, options: Record<string, any>) {
           options = options || {}
     
           if (typeof method === "function") {
-            method('submit', form.data())
+            method('submit', transform(form.data()))
           } else {
-            options.url = method
+            config.axiosInstance[method]({
+              ...options,
+              data: transform(form.data()),
+            })
           }
           
           options.onSuccess && options.onSuccess();

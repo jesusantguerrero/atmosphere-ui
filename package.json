@@ -1,10 +1,17 @@
 {
-  "version": "0.6.4",
+  "name": "atmosphere-ui",
+  "version": "0.6.5",
+  "description": "UI for jetstream inertia",
+  "keywords": [
+    "inertia.js",
+    "vuejs",
+    "vue3"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "npm run create-index-files && vue-tsc --noEmit && vite build",
-    "test": "vitest",
-    "test:coverage": "vitest --coverage",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
     "serve": "vite preview",
     "create-index-files": "node scripts/create-index-files.js",
     "prepublishOnly": "npm run build",
@@ -73,8 +80,6 @@
     "vue-loader": "^16.5.0",
     "vue-tsc": "^0.3.0"
   },
-  "name": "atmosphere-ui",
-  "description": "UI for jetstream inertia",
   "main": "index.js",
   "module": "dist/atmosphere-ui.es.js",
   "files": [
@@ -92,11 +97,6 @@
     "type": "git",
     "url": "git+https://github.com/jesusantguerrero/atmosphere-ui.git"
   },
-  "keywords": [
-    "inertia.js",
-    "vuejs",
-    "vue3"
-  ],
   "sideEffects": false,
   "bugs": {
     "url": "https://github.com/jesusantguerrero/atmosphere-ui/issues"
@@ -107,9 +107,6 @@
       "require": "./dist/atmosphere-ui.umd.js",
       "import": "./dist/atmosphere-ui.es.js"
     },
-    "./styles.css": {
-      "require": "./dist/styles.css",
-      "import": "./dist/styles.css"
-    }
+    "./*": "./dist/*"
   }
 }

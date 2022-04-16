@@ -1,5 +1,5 @@
 <template>
-   <AtInput v-bind="$attrs" v-on="$attrs" :type="state.inputType">
+   <AtInput v-bind="$attrs" v-model="modelValue" v-on="$attrs" :type="state.inputType">
       <template #suffix>
          <div class="text-gray-500 cursor-pointer w-14 h-full flex items-center justify-center" @click="togglePassword()">
             <div class="w-5 h-5">

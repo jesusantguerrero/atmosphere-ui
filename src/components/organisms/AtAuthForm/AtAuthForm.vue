@@ -14,7 +14,7 @@
             <at-field field="email" label="Email">
                 <at-input
                     v-model.trim="formData.email"
-                    data-test-id="input-email"
+                    data-testid="input-email"
                     required
                 />
                 <template #error>
@@ -24,7 +24,7 @@
 
             <at-field field="password" label="Password">
                 <at-input-password
-                    data-test-id="input-password"
+                    data-testid="input-password"
                     class="bg-white"
                     v-model="formData.password"
                     required
@@ -39,9 +39,9 @@
                 label="Confirm Password"
                 field="confirm_password"
             >
-                <at-input
-                    type="password"
-                    data-test-id="input-confirm-password"
+                <at-input-password
+                    data-testid="input-confirm-password"
+                    class="bg-white"
                     v-model="formData.confirmPassword"
                     @blur="isDirty=true"
                     :class="{ 'error-input': isConfirmationInvalid }"
@@ -56,7 +56,7 @@
             class="w-full"
             :class="btnClass"
             type="primary"
-            data-test-id="btn-submit"
+            data-testid="btn-submit"
             :disabled="isConfirmationInvalid"
             @click.stop.prevent="loginUser()"
         >
@@ -178,12 +178,14 @@ export default {
             return
         }
 
-        emit('submit', {...state.formData})
+        emit('submit', {
+            ...state.formData,
+            confirmPassword: mode.value == 'register' ? state.formData.confirmPassword : undefined
+        })
     }
 
     const validateRegistration = () => {
        if (mode.value == 'register' && state.formData.password != state.formData.confirmPassword) {
-
             return false
         }
         return true

@@ -26,7 +26,8 @@
     "@interactjs/dev-tools": "^1.10.11",
     "@interactjs/interact": "^1.10.11",
     "@interactjs/modifiers": "^1.10.11",
-    "@popperjs/core": "^2.9.2"
+    "@popperjs/core": "^2.9.2",
+    "vueuse-temporals": "^1.0.1"
   },
   "peerDependencies": {
     "@headlessui/vue": "^1.3.0",

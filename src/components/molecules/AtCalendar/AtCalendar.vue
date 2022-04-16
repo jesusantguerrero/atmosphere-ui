@@ -42,7 +42,7 @@
 
 <script setup>
 import { computed, toRefs, watch } from "vue";
-import { useDatePager } from "../../../utils/useDatePager";
+import { useDatePager } from "vueuse-temporals";
 import { format, isSameDay, isToday, isWithinInterval } from "date-fns";
 
 const props = defineProps({

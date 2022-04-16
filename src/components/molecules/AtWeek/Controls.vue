@@ -50,7 +50,7 @@
 
 <script setup>
 import { format, isThisWeek } from "date-fns";
-import { useDatePager } from "../../../utils/useDatePager";
+import { useDatePager } from "vueuse-temporals";
 import { watch, toRefs, inject, computed } from "vue";
 
 const props = defineProps({

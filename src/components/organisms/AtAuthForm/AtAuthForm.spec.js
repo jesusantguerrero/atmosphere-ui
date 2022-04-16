@@ -3,8 +3,8 @@
  */
 import { click } from "@testing-library/user-event/dist/click";
 import { type } from "@testing-library/user-event/dist/type";
- import { render, screen, waitFor} from "@testing-library/vue";
- import AuthForm from "./AtAuthForm.vue"
+import { render, screen } from "@testing-library/vue";
+import AuthForm from "./AtAuthForm.vue"
  
  describe('AuthForm component', () => {
      it('Should render the component', () => {

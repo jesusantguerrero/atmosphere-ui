@@ -16,7 +16,7 @@ describe('Test use date time', () => {
     it('formats human readable date function', () => {
         const date = startOfDay(new Date());
         const lastYear = new Date(2019, 11, 31);
-        let thisWeek = !isWeekend(date) ? addDays(date, 3) : subDays(date, 3)
+        let thisWeek = !isWeekend(date) || isSunday(date) ? addDays(date, 3) : subDays(date, 3)
     
         expect(getHumanDate(date)).toBe('Today');
         expect(getHumanDate(subDays(startOfDay(date), 1))).toBe('Yesterday');

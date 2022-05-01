@@ -79,6 +79,4 @@ describe('Test use form', () => {
             console.log('submitted', data)
         })
     })
-
-   
 })

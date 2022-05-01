@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { watch, reactive, toRefs, unref, inject, Ref, defineEmits, PropType } from 'vue';
-import { useFormData } from './useFormData';
+import { toFormData} from './useFormData';
 
 const emitDefinition = defineEmits(['update:modelValue', 'submit', 'error']);
 type EmitFn = typeof emitDefinition
@@ -35,7 +35,7 @@ export interface IUploadFile {
 }
 
 const uploadRequest = (data: Record<string, any>, config: UploadConfig) => {
-  let formData = useFormData({ files: data });
+  let formData = toFormData({ files: data });
   // allow parent to format payload before sending the request
   if (config.processPayload) {
     formData = config.processPayload(data);

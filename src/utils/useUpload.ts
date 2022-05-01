@@ -1,9 +1,8 @@
 import axios from 'axios';
-import { watch, reactive, toRefs, unref, inject, Ref, defineEmits, PropType } from 'vue';
+import { watch, reactive, toRefs, unref, inject, Ref, PropType } from 'vue';
 import { toFormData} from './useFormData';
 
-const emitDefinition = defineEmits(['update:modelValue', 'submit', 'error']);
-type EmitFn = typeof emitDefinition
+type EmitFn = (...args: any[]) => void;
 
 export type ProcessPayloadFunction = (data: Record<string, any>) => FormData;
 export type HttpRequest = (files: File[], config?: UploadConfig) => Promise<any>;

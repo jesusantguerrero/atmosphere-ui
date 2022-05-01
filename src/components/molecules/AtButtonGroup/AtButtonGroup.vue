@@ -23,7 +23,7 @@ const props = defineProps({
         required: true
     },
     options: {
-        type: Array,
+        type: Array as () => Array<{ value: string, label: string }>,
         default: () => []
     },
     compact: Boolean,

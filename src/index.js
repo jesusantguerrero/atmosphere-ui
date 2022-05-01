@@ -62,7 +62,6 @@ export { default as AtVideo } from "./components/organisms/AtVideo/AtVideo.vue";
 export { default as AtAuthBox } from "./components/templates/AtAuthBox/AtAuthBox.vue";
  
  // Utils 
-export { useDatePager } from "./utils/useDatePager";
 export { useDateTime } from "./utils/useDateTime";
 export { useForm } from "./utils/useForm";
 export { useFormData } from "./utils/useFormData";

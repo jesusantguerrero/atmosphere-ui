@@ -35,13 +35,13 @@
         modelValue: String,
         disabled: Boolean,
         prefix: String,
-        suffix: String,
         isBorderless: Boolean,
         rounded: Boolean,
         theme: {
             type: String,
             default: 'default'
         },
+        suffix: String,
         formatter: Function,
         parser: Function,
         numberFormat: {

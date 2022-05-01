@@ -1,6 +1,6 @@
 {
   "name": "atmosphere-ui",
-  "version": "0.6.6",
+  "version": "0.6.8",
   "description": "UI for jetstream inertia and Vue 3",
   "keywords": [
     "inertia.js",
@@ -18,7 +18,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook --output-dir=docs",
     "chromatic": "npx chromatic --project-token=170dcb534484",
-    "generate-declarations": "tsc index.ts --declaration --emitDeclarationOnly --esModuleInterop --outDir dist"
+    "generate-declarations": "tsc index.ts --declaration --emitDeclarationOnly --esModuleInterop --outDir dist",
+    "release": "standard-version"
   },
   "dependencies": {
     "@interactjs/actions": "^1.10.11",

@@ -14,7 +14,7 @@ const Template = (args) => ({
     return { args };
   },
   template: `
-  <div class="w-60">
+  <div class="w-96">
     <AtDatePager v-model="args.value" v-bind="args" />
   </div>
   `,
@@ -39,4 +39,12 @@ MonthMode.args = {
   value: new Date(),
   nextMode: 'month',
   placeholder: "Select a date"
+};
+
+export const CustomFormat = Template.bind({});
+CustomFormat.args = {
+  value: new Date(),
+  nextMode: 'month',
+  placeholder: "Select a date",
+  format: 'MMM dd, yyyy'
 };

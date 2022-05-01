@@ -39,7 +39,7 @@ const props = defineProps({
         }
 })
 
-const emit = defineEmits(['update:modelValue', 'update:time', 'update:hasError'])
+const emit = defineEmits(['update:modelValue', 'update:time', 'update:hasError', 'click'])
 
 const state = reactive({
     date: '',

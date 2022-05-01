@@ -80,5 +80,10 @@ describe('Test use form', () => {
         })
     })
 
-   
+    it('transform object into a formData object', () => {
+        const form = useForm({
+            title: 'hello world',
+        });
+        expect(form.formData().get('title')).toBe('hello world');
+    })
 })

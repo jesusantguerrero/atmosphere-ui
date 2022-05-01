@@ -1,5 +1,6 @@
 import { computed, reactive, watch } from "vue";
 import { cloneDeep, isEqual } from "lodash";
+import { toFormData } from "./useFormData";
 
 interface IValidator {
     (value: string): string | boolean
@@ -96,6 +97,9 @@ export const useForm = (props: Record<string, any>, config: IFormConfig = {} ) =
           } else if (config.axiosInstance) {
             form.submitForm(name, options)
           }
+        },
+        formData() {
+          return toFormData(form.data()) 
         },
         validate(schema: ValidationSchema = validationSchema) {
           form.errors = {}

@@ -1,6 +1,6 @@
 import AtSideSideItem from './AtSideItem.vue'
 import AtLink from "../../atoms/AtLink/AtLink.vue";
-import { InertiaLink } from "@inertiajs/inertia-vue3";
+import { Link} from "@inertiajs/inertia-vue3";
 
 export default {
   title: 'Molecules/AtSideItem',
@@ -8,7 +8,7 @@ export default {
 };
 
 const Template = (args) => ({
-  components: { AtSideSideItem, InertiaLink },
+  components: { AtSideSideItem, InertiaLink: Link },
   setup() {
     return { args };
   },
@@ -20,5 +20,24 @@ Default.args = {
   icon: 'home',
   label: 'Home',
   to: '/',
-  class: 'text-gray-400'
+  classes: 'text-gray-400',
+  as: 'a'
+};
+
+const TemplateWithCustom = (args) => ({
+  components: { AtSideSideItem, AtLink },
+  setup() {
+    return { args };
+  },
+  template: `<AtSideItem v-bind="args"> 
+    <AtLink href="https://google.com">Google</AtLink> 
+  </AtSideItem>`,
+});
+
+export const CustomChild = TemplateWithCustom.bind({});
+CustomChild.args = {
+  icon: 'home',
+  label: 'Home',
+  to: '/',
+  classes: 'text-gray-400'
 };

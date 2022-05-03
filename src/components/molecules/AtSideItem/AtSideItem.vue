@@ -57,7 +57,7 @@ const componentName = computed(() => {
 const isPath = (url = "") => {
   const link = url.replace(window.location.origin, "");
   if (url == "/") {
-    return ["/", "/dashboard"].includes(state.pathName);
+    return state.pathName && ["/", "/dashboard"].includes(state.pathName);
   }
   return link == state.pathName;
 };

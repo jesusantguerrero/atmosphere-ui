@@ -11,7 +11,7 @@ export default defineConfig({
       name: 'atmosphere-ui'
     },
     rollupOptions: {
-      external: ['vue'],
+      external: ['vue', '@inertiajs/inertia-vue3', '@inertiajs/inertia', '@vueuse/core', 'axios'],
       output: {
         // Provide global variables to use in the UMD build
         // for externalized deps

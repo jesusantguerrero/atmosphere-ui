@@ -44,7 +44,7 @@ const props = defineProps({
 
 const state = reactive({
   pathName: computed(() => {
-    return window?.location?.pathname;
+    return  "";
   }),
   classes: computed(() => {
     const classes = "flex items-center w-full px-5 py-4 rounded-3xl";
@@ -55,9 +55,9 @@ const componentName = computed(() => {
   return props.as;
 });
 const isPath = (url = "") => {
-  const link = url.replace(window.location.origin, "");
-  if (url == "/") {
-    return ["/", "/dashboard"].includes(state.pathName);
+  const link = url.replace("", "");
+  if (url === "/") {
+    return state.pathName && ["/", "/dashboard"].includes(state.pathName);
   }
   return link == state.pathName;
 };

@@ -22,7 +22,19 @@
 import { format } from "date-fns";
 import { useDatePager } from "vueuse-temporals";
 import { watch, toRefs } from "vue";
+  // viewHelpers
+  const formatDate = (date) => {
+    return format(date,  props.format)
+  }
 
+  const isSameDate = (date1, date2) => {
+    try {
+      return date1 && date2 && format(date1, 'yyyy-MM-dd') === format(date2, 'yyyy-MM-dd')
+    } catch (e) {
+      return false
+    }
+  }
+    
   const props = defineProps({
     modelValue: {
       type: Date
@@ -47,7 +59,6 @@ import { watch, toRefs } from "vue";
       initialDate: modelValue.value
     });
 
-
     // dateSpan
     const emitDateSpan = value => {
       emit("update:dateSpan", value);
@@ -57,17 +68,16 @@ import { watch, toRefs } from "vue";
 
     // Day
     const emitDay = value => {
-      emit("update:modelValue", value);
+        if (!isSameDate(value, modelValue.value)) {
+          emit("update:modelValue", value);
+        }
     };
-    watch(modelValue,  controls.setDay , { immediate: true });
+    watch(modelValue,  (date) => {
+        controls.setDay(date);
+    } , { immediate: true });
     watch(selectedDay, emitDay, { immediate: true });
-    watch(startDate, emit('update:startDate', startDate.value), { immediate: true });
-    watch(endDate, emit('update:endDate', endDate.value), { immediate: true });
-
-    // viewHelpers
-    const formatDate = (date) => {
-      return format(date,  props.format)
-    }
+    watch(startDate, () => emit('update:startDate', startDate.value), { immediate: true });
+    watch(endDate, () => emit('update:endDate', endDate.value), { immediate: true });
 </script>
 
 <style lang="scss">

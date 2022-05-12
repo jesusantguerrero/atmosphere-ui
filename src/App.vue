@@ -1,12 +1,18 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <at-week-pager></at-week-pager>
+  <at-date-pager v-model="state.date"/>
 </template>
 
 <script setup>
-import AtWeekPager from "./components/molecules/AtWeekPager/AtWeekPager.vue"
-// This starter template is using Vue 3 experimental <script setup> SFCs
-// Check out https://github.com/vuejs/rfcs/blob/script-setup-2/active-rfcs/0000-script-setup.md
+import { reactive, watch } from "vue";
+import AtDatePager from "./components/molecules/AtDatePager/AtDatePager.vue"
+const state = reactive({
+  date: new Date()
+})
+
+watch(() => state.date, () => {
+  console.log(state.date)
+}, { immediate: true })
 </script>
 
 <style>

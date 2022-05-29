@@ -42,12 +42,8 @@
 </template>
 
 <script>
-import { TransitionRoot } from "@headlessui/vue"
 
 export default {
-  components: {
-    TransitionRoot,
-  },
   props: {
     slides: {
       type: Array,

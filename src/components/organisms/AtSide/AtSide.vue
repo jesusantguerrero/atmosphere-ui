@@ -32,7 +32,6 @@
           :icon="route.icon"
           :label="route.label"
           :childs="route.childs"
-          :key="route.label"
         />
       </template>
     </div>
@@ -45,23 +44,22 @@
           aria-orientation="vertical"
           v-if="headerMenu"
         >
-        <template v-for="route in headerMenu">
-            <at-side-item
+        <template v-for="route in headerMenu" :key="route.label">
+            <AtSideItem
+                v-if="!route.childs"
                 :icon="route.icon"
                 :label="route.label"
                 :to="route.to"
-                v-if="!route.childs"
-                :key="route.label"
             />
 
-            <at-side-item-group
+            <AtSideItemGroup
                 v-else
                 :track-id="route.label"
                 :icon="route.icon"
                 :label="route.label"
                 v-model="activeGroup"
                 :childs="route.childs"
-                :key="route.label"
+                
             />
         </template>
         </div>
@@ -69,12 +67,12 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import AtSideItemGroup from '../../molecules/AtSideItemGroup/AtSideItemGroup.vue';
 import AtSideItem from '../../molecules/AtSideItem/AtSideItem.vue';
+import { provide, ref } from 'vue';
 
-export default {
-  props: {
+const props = defineProps({
     title: String,
     menu: {
       type: Array,
@@ -88,18 +86,15 @@ export default {
     },
     itemActiveClass: {
       type: String
+    },
+    currentPath: {
+      type: String,
+      default: '/'
     }
-  },
-  components: {
-    AtSideItem,
-    AtSideItemGroup
-  },
-  data() {
-    return {
-      activeGroup: ""
-    };
-  }
-};
+  });
+  
+  const activeGroup = ref('');
+  provide('currentPath', props.currentPath);
 </script>
 
 <style lang="scss" scoped>

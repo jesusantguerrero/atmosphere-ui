@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { computed, reactive, toRefs } from "vue";
+import { computed, inject, reactive, toRefs } from "vue";
 
 const props = defineProps({
   to: {
@@ -42,12 +42,10 @@ const props = defineProps({
   },
 });
 
+const currentPath = inject('currentPath', '')
 const state = reactive({
-  pathName: computed(() => {
-    return  "";
-  }),
   classes: computed(() => {
-    const classes = "flex items-center w-full px-5 py-4 rounded-3xl";
+    const classes = "flex items-center w-full px-5 py-4 rounded-md cursor-pointer";
     return [isPath(props.to) && props.itemActiveClass, props.classes, props.itemClass, classes];
   }),
 });
@@ -57,9 +55,9 @@ const componentName = computed(() => {
 const isPath = (url = "") => {
   const link = url.replace("", "");
   if (url === "/") {
-    return state.pathName && ["/", "/dashboard"].includes(state.pathName);
+    return currentPath && ["/", "/dashboard"].includes(currentPath);
   }
-  return link == state.pathName;
+  return link === currentPath;
 };
 
 const { classes } = toRefs(state);

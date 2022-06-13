@@ -1,6 +1,6 @@
 {
   "name": "atmosphere-ui",
-  "version": "0.7.0",
+  "version": "0.7.2",
   "description": "UI for jetstream inertia and Vue 3",
   "keywords": [
     "inertia.js",
@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2",
-    "vueuse-temporals": "^1.0.5"
+    "vueuse-temporals": "^1.1.0"
   },
   "peerDependencies": {
     "@inertiajs/inertia": "^0.9.2",

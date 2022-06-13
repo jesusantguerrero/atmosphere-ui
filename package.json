@@ -55,7 +55,6 @@
     "@testing-library/vue": "^6.4.2",
     "@types/jest": "^27.0.0",
     "@vitejs/plugin-vue": "^1.2.3",
-    "@vitest/ui": "^0.8.1",
     "@vue/compiler-sfc": "^3.2.31",
     "@vue/test-utils": "^2.0.0-0",
     "@vue/vue3-jest": "^27.0.0-alpha.4",
@@ -78,8 +77,7 @@
     "ts-jest": "^27.0.0",
     "typescript": "^4.3.5",
     "vite": "^2.3.8",
-    "vitest": "^0.8.1",
-    "vue": "^3.2.31",
+    "vue": "^3.2.37",
     "vue-jest": "^5.0.0-0",
     "vue-loader": "^16.5.0",
     "vue-tsc": "^0.3.0"

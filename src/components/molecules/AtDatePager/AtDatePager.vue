@@ -1,16 +1,18 @@
 <template>
-   <div class="flex justify-between overflow-hidden border-2 border-gray-200 rounded-md h-9 date-pager ">
+   <div class="flex justify-between overflow-hidden border-2 border-gray-200 text-gray-500 bg-white rounded-md h-9 date-pager">
     <button
-      class="px-2 transition-colors bg-white focus:outline-none hover:bg-gray-200"
+      class="px-2 transition-colors  focus:outline-none "
+      :class="controlsClass"
       @click="controls.previous()"
     >
       <i class="fa fa-chevron-left"></i>
     </button>
-    <div v-if="startDate && endDate" class="flex items-center text-sm font-bold text-gray-500 bg-white">
+    <div v-if="startDate && endDate" class="flex items-center text-sm font-bold">
       {{ formatDate(startDate) }} - {{ formatDate(endDate) }}
     </div>
     <button
-      class="px-2 transition-colors bg-white focus:outline-none hover:bg-gray-200"
+      class="px-2 transition-colors focus:outline-none"
+      :class="controlsClass"
       @click="controls.next()"
     >
       <i class="fa fa-chevron-right"></i>
@@ -37,7 +39,7 @@ import { watch, toRefs } from "vue";
     
   const props = defineProps({
     modelValue: {
-      type: Date
+      type: Date,
     },
     dateSpan: {
       type: Array
@@ -49,6 +51,10 @@ import { watch, toRefs } from "vue";
     nextMode: {
       type: String,
       default: "day"
+    },
+    controlsClass: {
+      type: String,
+      default: "bg-white hover:bg-gray-200"
     }
   })
 

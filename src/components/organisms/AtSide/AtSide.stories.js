@@ -27,6 +27,7 @@ const menu =  [
       { 
         icon: 'user',
         label: 'Edit',
+        to: '/people/edit',
       }
     ]
   },
@@ -36,7 +37,13 @@ const menu =  [
     childs: [
       { 
         icon: 'user',
+        label: 'Songs',
+        to: '/favorites/songs'
+      },
+      { 
+        icon: 'user',
         label: 'Edit',
+        to: '/favorites/books'
       }
     ]
   }, {
@@ -46,8 +53,9 @@ const menu =  [
     label: 'Dashboard',
     childs: [
       { 
-        icon: 'user',
-        label: 'Edit',
+        to: '/dashboard',
+        icon: 'Home',
+        label: 'Home',
       }
     ]
   }
@@ -67,6 +75,16 @@ WithTheme.args = {
   title: 'Atmosphere UI',
   class: "bg-gray-700 text-white",
   menu,
+  itemClass:"text-white hover:bg-gray-500 hover:text-white",
+  itemActiveClass: "bg-gray-500 text-white"
+};
+
+export const ItemActive = Template.bind({});
+ItemActive.args = {
+  title: 'Atmosphere UI',
+  class: "bg-gray-700 text-white",
+  menu,
+  currentPath: '/dashboard',
   itemClass:"text-white hover:bg-gray-500 hover:text-white",
   itemActiveClass: "bg-gray-500 text-white"
 };

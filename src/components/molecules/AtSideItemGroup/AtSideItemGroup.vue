@@ -1,7 +1,7 @@
 <template>
     <div
       class="flex items-center justify-between px-5 text-left transition rounded-md cursor-pointer"
-      :class="[ isActive && active, !isActive && hasActiveChild && 'active', itemClass ]"
+      :class="[ (isActive || !isActive && hasActiveChild) ? itemActiveClass : itemClass ]"
       @click="emitValue"
     >
       <span class="w-full py-4 side-item">
@@ -18,27 +18,26 @@
       class="menu-item-group__childs"
       :class="{ 'my-collapse': isActive, 'custom-accordion': true }"
     >
-        <div class="mt-1 ml-5 child-container" v-show="isActive">
-          <template v-for="item in childs">
-            <at-side-item
-              v-if="!item.hide"
-              :ref="`${label}-${item.label}`"
-              :key="`${label}-${item.label}`"
-              :icon="item.icon"
-              :label="item.label"
-              :to="item.to"
-              :classes="[itemClass, itemActiveClass]"
-            />
-          </template>
+        <div class="mt-1 mb-1 ml-5 child-container space-y-1" v-show="isActive">
+          <AtSideItem
+            v-for="item in childs.filter(item => !item.hide)"
+            :ref="`${label}-${item.label}`"
+            :key="`${label}-${item.label}`"
+            :icon="item.icon"
+            :label="item.label"
+            :to="item.to"
+            :item-active-class="itemActiveClass"
+            :classes="[itemClass]"
+          />
         </div>
     </div>
 </template>
 
-<script>
+<script setup>
+import { computed, inject, ref } from 'vue';
 import AtSideItem from '../AtSideItem/AtSideItem.vue';
 
-export default {
-  props: {
+const props = defineProps({
     icon: {
       type: String,
       required: true
@@ -61,41 +60,29 @@ export default {
       type: String,
       required: true
     },
-    currentPath: {
-      type: String,
-      default: '/'
-    },
     itemClass: {
       type: String
     },
     itemActiveClass: {
       type: String
     }
-  },
-  components: {
-    AtSideItem
-  },
-  data() {
-    return {
-      active: false
-    };
-  },
-  computed: {
-    arrowIcon() {
-      return this.isActive ? "chevron-down" : "chevron-right";
-    },
-    isActive() {
-      return this.trackId == this.modelValue;
-    },
-    hasActiveChild() {
-      return !this.isActive &&  this.childs.find(item => item.to == this.currentPath)
-    }
-  },
-  methods: {
-    emitValue() {
-      const current = this.modelValue == this.trackId ? "" : this.trackId;
-      this.$emit("update:modelValue", current);
-    },
-  }
+});
+
+const currentPath = inject('currentPath');
+const active = ref(false);
+const arrowIcon = computed(() => {
+  return isActive.value ? "chevron-down" : "chevron-right";
+});
+const isActive = computed(() => {
+  return props.trackId == props.modelValue;
+});
+const hasActiveChild = computed(() => {
+  return !isActive.value &&  props.childs.find(item => item.to == currentPath)
+});
+
+const emit = defineEmits(['update:modelValue']);
+const emitValue = () => {
+      const current = props.modelValue == props.trackId ? "" : props.trackId;
+      emit("update:modelValue", current);
 };
 </script>

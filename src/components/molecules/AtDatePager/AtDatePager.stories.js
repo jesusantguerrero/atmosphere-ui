@@ -48,3 +48,15 @@ CustomFormat.args = {
   placeholder: "Select a date",
   format: 'MMM dd, yyyy'
 };
+
+
+export const DarkTheme = Template.bind({});
+DarkTheme.args = {
+  value: new Date(),
+  nextMode: 'month',
+  placeholder: "Select a date",
+  format: 'MMM dd, yyyy',
+  dateClass: "",
+  class:"bg-slate-600 text-white border-slate-800",
+  controlsClass: "hover:bg-slate-400 bg-transparent text-white",
+};

@@ -11,47 +11,50 @@
 </template>
 
 <script setup>
+import { startOfDay } from "date-fns";
 import { reactive, watch } from "vue";
 import { startOfDay } from "date-fns";
 import AtDatePager from "./components/molecules/AtDatePager/AtDatePager.vue"
 
 const props = defineProps({
- searchOptions: {
+ serverSearchOptions: {
     type: Object,
     default() {
       return {
 
       }
     }
-  },
+ }
 })
+
 const state = reactive({
-        filterOptions: [
-            {
-                label: 'Accounts',
-                value: 'accounts'
-            },
-            {
-                label: 'Descriptions',
-                value: 'description'
-            },
-        ],
-        searchOptions: {
-            group: "",
-            date: {
-                startDate: null,
-                endDate: null,
-            }
-        },
-        date: startOfDay(new Date()),
-        dateSpan: null,
-        listType: 'table'
+  date: new Date(),
+  filterOptions: [
+      {
+          label: 'Accounts',
+          value: 'accounts'
+      },
+      {
+          label: 'Descriptions',
+          value: 'description'
+      },
+  ],
+  searchOptions: {
+      group: "",
+      date: {
+          startDate: null,
+          endDate: null,
+      }
+  },
+  date: startOfDay(new Date()),
+  dateSpan: null,
+  listType: 'table'
 })
 
 Object.entries(props.serverSearchOptions).forEach(([key, value]) => {
     if (key === 'date') {
-        state.searchOptions.date.startDate = getDateFromIso(value.startDate)
-        state.searchOptions.date.endDate = getDateFromIso(value.endDate)
+        state.searchOptions.date.startDate = getDateFromIso(new Date().toISOString().slice(0, 10));
+        state.searchOptions.date.endDate = getDateFromIso(new Date().toISOString().slice(0, 10))
         state.date = getDateFromIso(value.startDate)
     } else {
         state.searchOptions[key] = Object.values(state.filterOptions).map(filter => filter.value).includes(value) ? value : ""

@@ -1,6 +1,6 @@
 {
   "name": "atmosphere-ui",
-  "version": "0.6.13",
+  "version": "0.7.1",
   "description": "UI for jetstream inertia and Vue 3",
   "keywords": [
     "inertia.js",
@@ -19,7 +19,7 @@
     "build-storybook": "build-storybook --output-dir=docs",
     "chromatic": "npx chromatic --project-token=170dcb534484",
     "generate-declarations": "tsc index.ts --declaration --emitDeclarationOnly --esModuleInterop --outDir dist",
-    "release": "npm run build && standard-version"
+    "postpublish": "standard-version"
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2",

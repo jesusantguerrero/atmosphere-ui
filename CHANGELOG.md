@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.1](https://github.com/jesusantguerrero/atmosphere-ui/compare/v0.6.13...v0.7.1) (2022-06-13)
+
+
+### Features
+
+* add support to dark themes ([e89854d](https://github.com/jesusantguerrero/atmosphere-ui/commit/e89854dfde81697059cbc09a2fa45227f0c26f20))
+
+
+### Bug Fixes
+
+* update site item active class ([fb821cd](https://github.com/jesusantguerrero/atmosphere-ui/commit/fb821cdab15f3b7e38fcf75e76455aec3b061794))
+
 ### [0.6.13](https://github.com/jesusantguerrero/atmosphere-ui/compare/v0.6.12...v0.6.13) (2022-05-12)
 
 ### [0.6.9](https://github.com/jesusantguerrero/atmosphere-ui/compare/v0.6.7...v0.6.9) (2022-05-03)

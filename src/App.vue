@@ -13,6 +13,7 @@
 <script setup>
 import { startOfDay } from "date-fns";
 import { reactive, watch } from "vue";
+import { startOfDay } from "date-fns";
 import AtDatePager from "./components/molecules/AtDatePager/AtDatePager.vue"
 
 const props = defineProps({
@@ -60,7 +61,7 @@ Object.entries(props.serverSearchOptions).forEach(([key, value]) => {
     }
 })
 
-watch(() => state.date, () => {
+watch(() => state.searchOptions, () => {
   console.log(state.date)
 }, { immediate: true })
 </script>

@@ -15,7 +15,15 @@
 import { computed, reactive } from 'vue';
 import AtInput from '../../atoms/AtInput/AtInput.vue';
 
-defineProps(['modelValue', 'hasError']);
+defineProps({
+   modelValue: {
+      type: String,
+      required: true
+   },
+   hasError: {
+      type: Boolean
+   }
+});
 
 const state = reactive({
    isVisible: false,

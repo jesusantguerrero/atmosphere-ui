@@ -15,6 +15,7 @@
 
 <script setup>
 import { computed, inject, reactive, toRefs } from "vue";
+import { Link } from "@inertiajs/inertia-vue3"
 
 const props = defineProps({
   to: {
@@ -38,7 +39,7 @@ const props = defineProps({
   },
   as: {
     type: String,
-    default: "inertia-link",
+    default: "Link",
   },
 });
 
@@ -53,11 +54,11 @@ const componentName = computed(() => {
   return props.as;
 });
 const isPath = (url = "") => {
-  const link = url.replace("", "");
+  const linkUrl = url.replace("", "");
   if (url === "/") {
     return currentPath && ["/", "/dashboard"].includes(currentPath);
   }
-  return link === currentPath;
+  return linkUrl === currentPath;
 };
 
 const { classes } = toRefs(state);

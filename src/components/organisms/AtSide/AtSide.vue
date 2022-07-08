@@ -17,6 +17,7 @@
           :icon="route.icon"
           :label="route.label"
           :to="route.to"
+          :as="route.as"
           :item-class="itemClass"
           :item-active-class="itemActiveClass"
           v-if="!route.childs"

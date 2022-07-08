@@ -75,9 +75,6 @@ describe('Test use form', () => {
         expect(validatedForm.validate()).toBe(false);
         validatedForm.msg = "Hello world";
         expect(validatedForm.validate()).toBe(true);
-        validatedForm.submitForm((data) => {
-            console.log('submitted', data)
-        })
     })
 
     it('transform object into a formData object', () => {

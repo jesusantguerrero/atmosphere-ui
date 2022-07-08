@@ -26,6 +26,7 @@
             :icon="item.icon"
             :label="item.label"
             :to="item.to"
+            :as="item.as"
             :item-active-class="itemActiveClass"
             :classes="[itemClass]"
           />

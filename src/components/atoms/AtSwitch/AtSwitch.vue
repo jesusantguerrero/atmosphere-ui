@@ -14,39 +14,39 @@
 <span class="text-sm"> {{ activeText }}</span>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { ref, watch } from "vue";
 
-    const props = defineProps({
-        modelValue: {
-            required: true,
-            type: Boolean
-        },
-        disabledClass: {
-            type: String,
-            default: 'bg-gray-400'
-        },
-        activeClass: {
-            type: String,
-            default: 'bg-green-400'
-        },
-        activeText: {
-            type: String,
-            default: ''
-        }
-    });
-    const emit = defineEmits(['update:modelValue'])
-    const localState = ref(false);
-
-    watch(() => props.modelValue, () => {
-        if (localState.value != props.modelValue) {
-            localState.value = props.modelValue
-        }
-    }, { immediate: true})
-    
-    const emitUpdate = () => {
-        localState.value = !localState.value;
-        emit('update:modelValue', localState.value)
+const props = defineProps({
+    modelValue: {
+        required: true,
+        type: Boolean
+    },
+    disabledClass: {
+        type: String,
+        default: 'bg-gray-400'
+    },
+    activeClass: {
+        type: String,
+        default: 'bg-green-400'
+    },
+    activeText: {
+        type: String,
+        default: ''
     }
+});
+const emit = defineEmits(['update:modelValue'])
+const localState = ref(false);
+
+watch(() => props.modelValue, () => {
+    if (localState.value != props.modelValue) {
+        localState.value = props.modelValue
+    }
+}, { immediate: true})
+
+const emitUpdate = () => {
+    localState.value = !localState.value;
+    emit('update:modelValue', localState.value)
+}
 </script>
 

@@ -21,7 +21,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "prepublishOnly": "npm run build",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook --output-dir=docs",
+    "build-storybook": "build-storybook",
     "chromatic": "npx chromatic --project-token=170dcb534484"
   },
   "dependencies": {
@@ -37,6 +37,7 @@
     "vue": "^3.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.18.6",
     "@inertiajs/inertia": "^0.11.0",
     "@inertiajs/inertia-vue3": "^0.6.0",
     "@interactjs/actions": "^1.10.11",
@@ -45,6 +46,13 @@
     "@interactjs/interact": "^1.10.11",
     "@interactjs/modifiers": "^1.10.11",
     "@rushstack/eslint-patch": "^1.1.0",
+    "@storybook/addon-actions": "^6.5.9",
+    "@storybook/addon-essentials": "^6.5.9",
+    "@storybook/addon-interactions": "^6.5.9",
+    "@storybook/addon-links": "^6.5.9",
+    "@storybook/builder-vite": "^0.1.39",
+    "@storybook/testing-library": "0.0.13",
+    "@storybook/vue3": "^6.5.9",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/user-event": "^13.1.9",
     "@testing-library/vue": "^6.4.2",
@@ -59,12 +67,14 @@
     "@vueuse/core": "^7.5.5",
     "autoprefixer": "^10.4.0",
     "axios": "^0.27.2",
+    "babel-loader": "^8.2.5",
     "c8": "^7.11.3",
     "chromatic": "^5.9.2",
     "cypress": "^10.1.0",
     "date-fns": "^2.22.1",
     "eslint": "^8.5.0",
     "eslint-plugin-cypress": "^2.12.1",
+    "eslint-plugin-storybook": "^0.5.13",
     "eslint-plugin-vue": "^9.0.0",
     "interactjs": "^1.10.11",
     "jsdom": "^20.0.0",
@@ -81,6 +91,7 @@
     "vite": "^2.9.12",
     "vitest": "^0.15.1",
     "vue": "^3.2.37",
+    "vue-loader": "^16.8.3",
     "vue-tsc": "^0.38.1"
   },
   "main": "index.js",

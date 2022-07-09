@@ -5,8 +5,8 @@
         v-model="state.date"
         data-test-id="date"
         :include-time="state.includesTime"
-        :selected="selected == 'date'"
-        @click="selected = 'date'"
+        :selected="state.selected == 'date'"
+        @click="state.selected = 'date'"
       />
       <AtFieldDateTime
         role="enddate"
@@ -14,9 +14,9 @@
         placeholder="pick an end date"
         v-model="state.endDate"
         :include-time="state.includesTime"
-        :selected="selected == 'endDate'"
+        :selected="state.selected == 'endDate'"
         v-if="state.includesEndDate"
-        @click="selected = 'endDate'"
+        @click="state.selected = 'endDate'"
       />
     </div>
     <!-- Calendar -->

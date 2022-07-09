@@ -15,7 +15,7 @@
 
 <script setup>
 import { computed, inject, reactive, toRefs } from "vue";
-import { Link } from "@inertiajs/inertia-vue3"
+import { Link as InertiaLink } from "@inertiajs/inertia-vue3"
 
 const props = defineProps({
   to: {
@@ -39,7 +39,7 @@ const props = defineProps({
   },
   as: {
     type: String,
-    default: "Link",
+    default: InertiaLink,
   },
 });
 

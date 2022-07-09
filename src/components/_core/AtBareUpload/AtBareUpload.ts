@@ -1,3 +1,6 @@
+import type {
+  PropType,
+} from 'vue';
 import {
   computed,
   provide,
@@ -7,11 +10,11 @@ import {
   watch,
   reactive,
   defineComponent,
-  PropType,
   h,
 } from 'vue';
 
-import { useUpload, mergeConfig, uploadProps, IUploadFile } from '../../../utils/useUpload';
+import { useUpload, mergeConfig, uploadProps } from '../../../utils/useUpload';
+import type { IUploadFile } from '../../../utils/useUpload';
 
 export let Upload = defineComponent({
   name: 'Upload',

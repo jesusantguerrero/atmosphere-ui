@@ -1,4 +1,5 @@
-import { ref, Ref, watch, reactive } from 'vue';
+import { ref, watch, reactive } from 'vue';
+import type { Ref } from 'vue';
 /**
  * Transform a payload 
  * @param payload 

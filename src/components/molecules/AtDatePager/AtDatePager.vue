@@ -1,7 +1,9 @@
 <template>
-   <div class="flex justify-between overflow-hidden border-2 border-gray-200 text-gray-500 bg-white rounded-md h-9 date-pager">
+  <div
+    class="flex justify-between overflow-hidden text-gray-500 bg-white border-2 border-gray-200 rounded-md h-9 date-pager"
+  >
     <button
-      class="px-2 transition-colors  focus:outline-none "
+      class="px-2 transition-colors focus:outline-none"
       :class="controlsClass"
       @click="controls.previous()"
     >
@@ -24,66 +26,68 @@
 import { format } from "date-fns";
 import { useDatePager } from "vueuse-temporals";
 import { watch, toRefs } from "vue";
-  // viewHelpers
-  const formatDate = (date) => {
-    return format(date,  props.format)
+import { isSameDate } from "~utils/useDateTime";
+// viewHelpers
+const formatDate = (date) => {
+  return format(date, props.format);
+};
+
+const props = defineProps({
+  modelValue: {
+    type: Date,
+  },
+  dateSpan: {
+    type: Array,
+  },
+  format: {
+    type: String,
+    default: "MMM dd yyyy",
+  },
+  nextMode: {
+    type: String,
+    default: "day",
+  },
+  controlsClass: {
+    type: String,
+    default: "bg-white hover:bg-gray-200",
+  },
+});
+
+const emit = defineEmits([
+  "update:modelValue",
+  "update:dateSpan",
+  "update:startDate",
+  "update:endDate",
+]);
+const { modelValue, dateSpan, nextMode } = toRefs(props);
+const { controls, selectedSpan, selectedDay, startDate, endDate } = useDatePager({
+  nextMode: nextMode.value,
+  initialDate: modelValue.value,
+});
+
+// dateSpan
+const emitDateSpan = (value) => {
+  emit("update:dateSpan", value);
+};
+watch(dateSpan, controls.setDateSpan, { immediate: true });
+watch(selectedSpan, emitDateSpan, { immediate: true });
+
+// Day
+const emitDay = (value) => {
+  if (!isSameDate(value, modelValue.value)) {
+    emit("update:modelValue", value);
   }
-
-  const isSameDate = (date1, date2) => {
-    try {
-      return date1 && date2 && format(date1, 'yyyy-MM-dd') === format(date2, 'yyyy-MM-dd')
-    } catch (e) {
-      return false
-    }
-  }
-    
-  const props = defineProps({
-    modelValue: {
-      type: Date,
-    },
-    dateSpan: {
-      type: Array
-    },
-    format: {
-      type: String,
-      default: 'MMM dd yyyy'
-    },
-    nextMode: {
-      type: String,
-      default: "day"
-    },
-    controlsClass: {
-      type: String,
-      default: "bg-white hover:bg-gray-200"
-    }
-  })
-
-  const emit = defineEmits(['update:modelValue', 'update:dateSpan', 'update:startDate', 'update:endDate'])
-    const { modelValue, dateSpan, nextMode } = toRefs(props);
-    const { controls, selectedSpan, selectedDay, startDate, endDate} = useDatePager({
-      nextMode: nextMode.value,
-      initialDate: modelValue.value
-    });
-
-    // dateSpan
-    const emitDateSpan = value => {
-      emit("update:dateSpan", value);
-    };
-    watch(dateSpan, controls.setDateSpan, { immediate: true });
-    watch(selectedSpan, emitDateSpan, { immediate: true });
-
-    // Day
-    const emitDay = value => {
-        if (!isSameDate(value, modelValue.value)) {
-          emit("update:modelValue", value);
-        }
-    };
-    watch(modelValue,  (date) => {
-        controls.setDay(date);
-    } , { immediate: true });
-    watch(selectedDay, emitDay, { immediate: true });
-    watch(startDate, () => emit('update:startDate', startDate.value), { immediate: true });
-    watch(endDate, () => emit('update:endDate', endDate.value), { immediate: true });
+};
+watch(
+  modelValue,
+  (date) => {
+    controls.setDay(date);
+  },
+  { immediate: true }
+);
+watch(selectedDay, emitDay, { immediate: true });
+watch(startDate, () => emit("update:startDate", startDate.value), { immediate: true });
+watch(endDate, () => emit("update:endDate", endDate.value), { immediate: true });
 </script>
 
 <style lang="scss">

@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import AtSwitch from "../../atoms/AtSwitch/AtSwitch.vue";
+import AtSwitch from "~atoms/AtSwitch/AtSwitch.vue";
 
 const props = defineProps({
    modelValue: {

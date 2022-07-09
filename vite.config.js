@@ -1,39 +1,54 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import path from 'path'
+import { fileURLToPath, URL } from "url";
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import vueJsx from "@vitejs/plugin-vue-jsx";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [vue(), vueJsx()],
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/index.js'),
-      name: 'atmosphere-ui'
+      entry: fileURLToPath(new URL("src/index.js", import.meta.url)),
+      name: "atmosphere-ui",
     },
     rollupOptions: {
-      external: ['vue', '@inertiajs/inertia-vue3', '@inertiajs/inertia', '@vueuse/core', 'axios'],
+      external: [
+        "vue",
+        "@inertiajs/inertia-vue3",
+        "@inertiajs/inertia",
+        "@vueuse/core",
+        "axios",
+      ],
       output: {
         // Provide global variables to use in the UMD build
         // for externalized deps
         globals: {
-          vue: 'Vue',
-        }
-      }
-    }
+          vue: "Vue",
+        },
+      },
+    },
   },
   resolve: {
     alias: {
-      '~/': path.resolve(__dirname, './src'),
-      '~atoms': path.resolve(__dirname, './src/components/atoms'),
-      '~molecules': path.resolve(__dirname, './src/components/molecules'),
-      '~organisms': path.resolve(__dirname, './src/components/organisms'),
-      '~templates': path.resolve(__dirname, './src/components/templates'),
-      '~utils': path.resolve(__dirname, './src/utils')
-    }
+      "~/": fileURLToPath(new URL("./src", import.meta.url)),
+      "~atoms": fileURLToPath(
+        new URL("./src/components/atoms", import.meta.url)
+      ),
+      "~molecules": fileURLToPath(
+        new URL("./src/components/molecules", import.meta.url)
+      ),
+      "~organisms": fileURLToPath(
+        new URL("./src/components/organisms", import.meta.url)
+      ),
+      "~templates": fileURLToPath(
+        new URL("./src/components/templates", import.meta.url)
+      ),
+      "~utils": fileURLToPath(new URL("./src/utils", import.meta.url)),
+    },
   },
   test: {
-    include: ['src/**/*.spec.*'],
-    environment: 'jsdom',
-    globals: true
+    include: ["src/**/*.spec.*"],
+    environment: "jsdom",
+    globals: true,
   },
-})
+});

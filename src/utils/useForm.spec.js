@@ -1,89 +1,95 @@
 import { useForm, validators } from "./useForm";
+import { expect, describe, it, beforeEach, vi } from "vitest";
+describe("Test use form", () => {
+  const emit = vi.fn((event, data) => {
+    return { event, data };
+  });
+  let form;
+  const defaultFormValues = {
+    msg: "hello",
+    date: new Date(),
+    fields: ["one", "two", "three"],
+  };
+  beforeEach(() => {
+    form = useForm(defaultFormValues, { emit });
+  });
 
-describe('Test use form', () => {
-    const emit =  jest.fn((event, data) => {
-        return { event, data };
+  it("formats the date computed", () => {
+    expect(form.msg).toBe("hello");
+    expect(form.fields.length).toBe(3);
+    form.fields.push("four");
+    expect(form.fields.length).toBe(4);
+  });
+
+  it("submit the data", () => {
+    form.submit("submit");
+    expect(emit).toBeCalled();
+  });
+
+  it("transform the data before submitting", () => {
+    form
+      .transform((data) => ({
+        ...data,
+        msg: data.msg.toUpperCase(),
+      }))
+      .submit("submit");
+    expect(emit).toHaveBeenLastCalledWith(
+      "submit",
+      expect.objectContaining({
+        msg: "HELLO",
+      })
+    );
+  });
+
+  it("resets the data after submit", () => {
+    const newDate = new Date(2020, 1, 1);
+    form.msg = "Hello world";
+    form.date = newDate;
+    expect(form.msg).toBe("Hello world");
+    form.reset("msg");
+    expect(form.msg).toBe("hello");
+    expect(form.date).toBe(newDate);
+    form.reset();
+    expect(form.date).toEqual(defaultFormValues.date);
+  });
+
+  it("submit with axios", () => {
+    const axiosMock = {
+      post: vi.fn(),
+    };
+    const form = useForm(
+      {
+        text: "hello world",
+      },
+      { axiosInstance: axiosMock }
+    );
+    form.submit("post", { url: "/api/message" });
+    expect(axiosMock.post).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        data: {
+          text: "hello world",
+        },
+      })
+    );
+  });
+
+  it("validate before submit", () => {
+    const validatedForm = useForm({
+      msg: "",
     });
-    let form;
-    const defaultFormValues = {
-        msg: 'hello',
-        date: new Date(),
-        fields: ["one", "two", "three"]
-    }
-    beforeEach(() => {
-        form = useForm(defaultFormValues, { emit });
-    })
+    validatedForm.validationSchema({
+      msg: [validators.isRequired],
+    });
 
-    
-    it('formats the date computed', () => {
-        expect(form.msg).toBe('hello')
-        expect(form.fields.length).toBe(3)
-        form.fields.push('four');
-        expect(form.fields.length).toBe(4)
-    })
+    expect(validatedForm.validate()).toBe(false);
+    validatedForm.msg = "Hello world";
+    expect(validatedForm.validate()).toBe(true);
+  });
 
-    it('submit the data', () => {
-        form.submit('submit');
-        expect(emit).toBeCalled()
-    })
-
-    it('transform the data before submitting', () => {
-        form.transform((data) => ({
-            ...data,
-            msg: data.msg.toUpperCase()
-        })).submit('submit');
-        expect(emit).toHaveBeenLastCalledWith('submit', expect.objectContaining({
-            msg: 'HELLO',
-        }))
-    })
-
-    it('resets the data after submit', () => {
-        const newDate = new Date(2020, 1, 1);
-        form.msg = "Hello world"
-        form.date = newDate;
-        expect(form.msg).toBe("Hello world");
-        form.reset('msg');
-        expect(form.msg).toBe('hello');
-        expect(form.date).toBe(newDate);
-        form.reset();
-        expect(form.date).toEqual(defaultFormValues.date);
-    })
-
-    it('submit with axios', () => {
-        const axiosMock = {
-            post: jest.fn()
-        };
-        const form = useForm({
-            text: 'hello world',
-        }, { axiosInstance: axiosMock });
-        form.submit('post', { url: '/api/message' });
-        expect(axiosMock.post).toHaveBeenLastCalledWith(expect.objectContaining({
-            data: {
-                text: 'hello world',
-            }
-        }))
-    })
-
-    it('validate before submit', () => {
-        const validatedForm = useForm({ 
-            msg: ''
-        })
-        validatedForm.validationSchema({
-            msg: [validators.isRequired]
-        })
-
-        expect(validatedForm.validate()).toBe(false);
-        validatedForm.msg = "Hello world";
-        expect(validatedForm.validate()).toBe(true);
-        validatedForm.submitForm((data) => {
-            console.log('submitted', data)
-        })
-    })
-
-    it('transform object into a formData object', () => {
-        const form = useForm({
-            title: 'hello world',
-        });
-        expect(form.formData().get('title')).toBe('hello world');
-    })
-})
+  it("transform object into a formData object", () => {
+    const form = useForm({
+      title: "hello world",
+    });
+    expect(form.formData().get("title")).toBe("hello world");
+  });
+});

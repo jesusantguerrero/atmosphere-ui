@@ -1,11 +1,15 @@
-import axios from 'axios';
-import { watch, reactive, toRefs, unref, inject, Ref, PropType } from 'vue';
-import { toFormData} from './useFormData';
+import axios from "axios";
+import { watch, reactive, toRefs, unref, inject } from "vue";
+import type { Ref, PropType } from "vue";
+import { toFormData } from "./useFormData";
 
 type EmitFn = (...args: any[]) => void;
 
 export type ProcessPayloadFunction = (data: Record<string, any>) => FormData;
-export type HttpRequest = (files: File[], config?: UploadConfig) => Promise<any>;
+export type HttpRequest = (
+  files: File[],
+  config?: UploadConfig
+) => Promise<any>;
 export interface UploadConfig {
   headers: Record<string, string>;
   url?: string;
@@ -18,7 +22,7 @@ export interface IUploadProps {
   url?: string;
   headers: Record<string, string>;
   isUploading: boolean;
-  httpRequest?: HttpRequest; 
+  httpRequest?: HttpRequest;
   processPayload?: ProcessPayloadFunction;
   auto: boolean;
   multiple: boolean;
@@ -42,11 +46,11 @@ const uploadRequest = (data: Record<string, any>, config: UploadConfig) => {
 
   return axios({
     url: config.url,
-    method: 'POST',
+    method: "POST",
     data: formData,
     headers: {
       ...config.headers,
-      'Content-Type': 'multipart/form-data',
+      "Content-Type": "multipart/form-data",
     },
   });
 };
@@ -54,7 +58,7 @@ const uploadRequest = (data: Record<string, any>, config: UploadConfig) => {
 export const uploadProps = {
   url: {
     type: String,
-    default: '',
+    default: "",
   },
   headers: {
     type: Object,
@@ -86,21 +90,27 @@ export const uploadProps = {
 
 export const uploadConfig: UploadConfig = {
   headers: {
-    'Content-Type': 'multipart/form-data',
+    "Content-Type": "multipart/form-data",
   },
   processPayload: undefined,
-  url: '',
+  url: "",
   isUploading: false,
   auto: false,
 };
 
-const isValidConfigKey = (value: string, config: UploadConfig): value is keyof UploadConfig => {
+const isValidConfigKey = (
+  value: string,
+  config: UploadConfig
+): value is keyof UploadConfig => {
   return value in config;
-}
+};
 
 export const mergeConfig = (propsData: Record<string, any>) => {
   return Object.keys(uploadConfig).reduce((config, key) => {
-    if (isValidConfigKey(key, config) && (propsData[key] !== undefined || propsData[key] !== null)) {
+    if (
+      isValidConfigKey(key, config) &&
+      (propsData[key] !== undefined || propsData[key] !== null)
+    ) {
       /* @ts-expect-error */
       config[key] = propsData[key];
     }
@@ -108,8 +118,16 @@ export const mergeConfig = (propsData: Record<string, any>) => {
   }, uploadConfig);
 };
 
-export const useUpload = (value: Ref, config = uploadConfig, httpRequestMethod: HttpRequest, emit: EmitFn) => {
-  const httpRequest = inject('httpFileRequest', httpRequestMethod  || uploadRequest);
+export const useUpload = (
+  value: Ref,
+  config = uploadConfig,
+  httpRequestMethod: HttpRequest,
+  emit: EmitFn
+) => {
+  const httpRequest = inject(
+    "httpFileRequest",
+    httpRequestMethod || uploadRequest
+  );
   const state = reactive({
     progress: 0,
     isUploadingLocal: uploadConfig.isUploading,
@@ -153,14 +171,17 @@ export const useUpload = (value: Ref, config = uploadConfig, httpRequestMethod: 
       updateIsUploading(true);
       return await httpRequest(rawFiles, config)
         .then(({ data }) => {
-          const results = [...uploadedFiles, ...mergeResults(filesToUpload, data)];
-          emit && emit('submit', results);
-          emit && emit('update:modelValue', results);
+          const results = [
+            ...uploadedFiles,
+            ...mergeResults(filesToUpload, data),
+          ];
+          emit && emit("submit", results);
+          emit && emit("update:modelValue", results);
           updateIsUploading(false);
           return true;
         })
         .catch((error) => {
-          emit && emit('error', error, rawFiles, files);
+          emit && emit("error", error, rawFiles, files);
           updateIsUploading(false);
           return false;
         });
@@ -177,19 +198,19 @@ export const useUpload = (value: Ref, config = uploadConfig, httpRequestMethod: 
 export const uploadTemplateProps = {
   label: {
     type: String,
-    default: '',
+    default: "",
   },
   description: {
     type: String,
-    default: '',
+    default: "",
   },
   buttonLabel: {
     type: String,
-    default: '',
+    default: "",
   },
   buttonMoreLabel: {
     type: String,
-    default: '',
+    default: "",
   },
   list: {
     type: Array,
@@ -230,4 +251,3 @@ export const uploadTemplateProps = {
     default: false,
   },
 };
-

@@ -1,8 +1,9 @@
 {
-    "extends": "tsconfig.json",
-    "include": ["vite.config.*"],
-    "compilerOptions": {
-      "composite": true,
-      "types": ["node"]
-    }
+  "extends": "./tsconfig.app.json",
+  "exclude": [],
+  "compilerOptions": {
+    "composite": true,
+    "lib": [],
+    "types": ["node", "jsdom"]
+  }
 }

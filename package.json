@@ -21,7 +21,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "prepublishOnly": "npm run build",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "docs:build": "build-storybook -o docs",
     "chromatic": "npx chromatic --project-token=170dcb534484"
   },
   "dependencies": {

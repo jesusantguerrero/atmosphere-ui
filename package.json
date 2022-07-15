@@ -1,6 +1,6 @@
 {
   "name": "atmosphere-ui",
-  "version": "0.7.6",
+  "version": "0.7.7",
   "description": "UI for jetstream inertia and Vue 3",
   "keywords": [
     "inertia.js",

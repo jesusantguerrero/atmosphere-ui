@@ -5,6 +5,8 @@ import {
   isWeekend,
   subDays,
   startOfDay,
+  isSaturday,
+  isFriday,
 } from "date-fns";
 import { ref } from "vue";
 import { useDateTime } from "./useDateTime";
@@ -31,7 +33,9 @@ describe("Test use date time", () => {
     const date = startOfDay(new Date());
     const lastYear = new Date(2019, 11, 31);
     const thisWeek =
-      !isWeekend(date) || isSunday(date) ? addDays(date, 2) : subDays(date, 2);
+      !isFriday(date) && !isSaturday(date)
+        ? addDays(date, 2)
+        : subDays(date, 2);
     expect(getHumanDate(date)).toBe("Today");
     expect(getHumanDate(subDays(startOfDay(date), 1))).toBe("Yesterday");
     expect(getHumanDate(addDays(startOfDay(date), 1))).toBe("Tomorrow");

@@ -38,7 +38,7 @@ const props = defineProps({
   },
   as: {
     type: String,
-    default: InertiaLink,
+    default: "router-link",
   },
 });
 

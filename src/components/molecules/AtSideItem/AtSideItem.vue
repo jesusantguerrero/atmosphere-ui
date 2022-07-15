@@ -15,7 +15,6 @@
 
 <script setup>
 import { computed, inject, reactive, toRefs } from "vue";
-import { Link as InertiaLink } from "@inertiajs/inertia-vue3"
 
 const props = defineProps({
   to: {
@@ -43,11 +42,17 @@ const props = defineProps({
   },
 });
 
-const currentPath = inject('currentPath', '')
+const currentPath = inject("currentPath", "");
 const state = reactive({
   classes: computed(() => {
-    const classes = "flex items-center w-full px-5 py-4 rounded-md cursor-pointer";
-    return [isPath(props.to) && props.itemActiveClass, props.classes, props.itemClass, classes];
+    const classes =
+      "flex items-center w-full px-5 py-4 rounded-md cursor-pointer";
+    return [
+      isPath(props.to) && props.itemActiveClass,
+      props.classes,
+      props.itemClass,
+      classes,
+    ];
   }),
 });
 const componentName = computed(() => {

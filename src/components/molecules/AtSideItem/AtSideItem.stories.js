@@ -1,9 +1,9 @@
-import AtSideSideItem from './AtSideItem.vue'
+import AtSideSideItem from "./AtSideItem.vue";
 import AtLink from "../../atoms/AtLink/AtLink.vue";
-import { Link} from "@inertiajs/inertia-vue3";
+import { Link } from "@inertiajs/inertia-vue3";
 
 export default {
-  title: 'Molecules/AtSideItem',
+  title: "Molecules/AtSideItem",
   component: AtSideSideItem,
 };
 
@@ -17,11 +17,11 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  icon: 'home',
-  label: 'Home',
-  to: '/',
-  classes: 'text-gray-400',
-  as: 'a'
+  icon: "home",
+  label: "Home",
+  to: "/",
+  classes: "text-gray-400",
+  as: Link,
 };
 
 const TemplateWithCustom = (args) => ({
@@ -36,8 +36,8 @@ const TemplateWithCustom = (args) => ({
 
 export const CustomChild = TemplateWithCustom.bind({});
 CustomChild.args = {
-  icon: 'home',
-  label: 'Home',
-  to: '/',
-  classes: 'text-gray-400'
+  icon: "home",
+  label: "Home",
+  to: "/",
+  classes: "text-gray-400",
 };

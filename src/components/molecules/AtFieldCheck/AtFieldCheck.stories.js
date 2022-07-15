@@ -11,7 +11,7 @@ const Template = (args) => ({
   setup() {
     return { args, value: ref(false) };
   },
-  template: `<AtFieldCheck v-bind="args" v-model="value"/>`,
+  template: `<AtFieldCheck v-bind="args" v-model="value" />`,
 });
 
 export const Default = Template.bind({});

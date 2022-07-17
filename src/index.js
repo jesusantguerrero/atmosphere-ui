@@ -11,6 +11,7 @@ export { default as AtInput } from "./components/atoms/AtInput/AtInput.vue";
 export { default as AtLink } from "./components/atoms/AtLink/AtLink.vue";
 export { default as AtSwitch } from "./components/atoms/AtSwitch/AtSwitch.vue";
 export { default as AtTextarea } from "./components/atoms/AtTextarea/AtTextarea.vue";
+export { default as AtThemeProvider } from "./components/atoms/AtThemeProvider/AtThemeProvider.vue";
 export { default as AtBackgroundIconCard } from "./components/molecules/AtBackgroundIconCard/AtBackgroundIconCard.vue";
 export { default as AtBillingCard } from "./components/molecules/AtBillingCard/AtBillingCard.vue";
 export { default as AtBinaryChoice } from "./components/molecules/AtBinaryChoice/AtBinaryChoice.vue";

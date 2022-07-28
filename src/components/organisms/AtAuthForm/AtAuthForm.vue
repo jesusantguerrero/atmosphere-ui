@@ -1,9 +1,5 @@
 <template>
-    <form
-        @submit.prevent="loginUser()"
-        @keydown.enter="loginUser()"
-        class="text-white"
-    >
+    <form @submit.prevent="loginUser()" class="text-white">
         <div class="flex items-center justify-center w-full mb-20 sm:pt-20">
             <div
                 class="text-6xl text-center cursor-pointer brand-font"
@@ -67,7 +63,6 @@
             type="primary"
             data-testid="btn-submit"
             :disabled="isConfirmationInvalid"
-            @click.stop.prevent="loginUser()"
         >
             {{ modeLabel }}
             <i v-if="isLoading" class="ml-2 fa fa-spinner fa-pulse"></i>
@@ -82,7 +77,7 @@
                         class="font-bold cursor-pointer"
                         :class="linkClass"
                     >
-                        {{ linkLabel }}
+                        {{ state.linkLabel }}
                     </a>
                 </slot>
             </div>
@@ -93,7 +88,7 @@
 </template>
 
 <script setup>
-import { reactive, computed, toRefs, provide } from "vue";
+import { reactive, computed, toRefs, provide, watch } from "vue";
 import AtButton from "../../atoms/AtButton/AtButton.vue";
 import AtField from "../../atoms/AtField/AtField.vue";
 import AtErrorBag from "../../atoms/AtErrorBag/AtErrorBag.vue";
@@ -153,9 +148,21 @@ const props = defineProps({
         type: String,
         default: "Passwords are not equal",
     },
+    initialValues: {
+        type: Object,
+        default() {
+            return {};
+        },
+    },
+    config: {
+        type: Object,
+        default() {
+            return {};
+        },
+    },
 });
 
-const { mode, isLoading } = toRefs(props);
+const { mode, isLoading, initialValues } = toRefs(props);
 const state = reactive({
     formData: {
         email: "",
@@ -175,7 +182,7 @@ const state = reactive({
     linkDescription: computed(() => {
         return mode.value == "register"
             ? " Already have an account?"
-            : "Dont have an account?";
+            : "Don't have an account?";
     }),
 
     linkLabel: computed(() => {
@@ -194,6 +201,24 @@ const state = reactive({
         );
     }),
 });
+
+watch(
+    initialValues,
+    (formValues) => {
+        Object.keys(state.formData).forEach((key) => {
+            const fieldConfig = props.config?.[key];
+            if (
+                fieldConfig &&
+                state.formData[key] !== formValues[fieldConfig.mapper || key]
+            ) {
+                state.formData[key] = formValues[fieldConfig.mapper || key];
+            }
+        });
+    },
+    {
+        immediate: true,
+    }
+);
 
 // auth manipulation
 

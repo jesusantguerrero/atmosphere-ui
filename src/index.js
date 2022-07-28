@@ -38,6 +38,7 @@ export { default as AtSelect } from "./components/molecules/AtSelect/AtSelect.vu
 export { default as AtSideItem } from "./components/molecules/AtSideItem/AtSideItem.vue";
 export { default as AtSideItemGroup } from "./components/molecules/AtSideItemGroup/AtSideItemGroup.vue";
 export { default as AtSimpleSelect } from "./components/molecules/AtSimpleSelect/AtSimpleSelect.vue";
+export { default as AtScrollCard } from "./components/molecules/AtSrollCard/AtScrollCard.vue";
 export { default as AtStep } from "./components/molecules/AtStep/AtStep.vue";
 export { default as AtStepTab } from "./components/molecules/AtStepTab/AtStepTab.vue";
 export { default as AtUpload } from "./components/molecules/AtUpload/AtUpload.vue";

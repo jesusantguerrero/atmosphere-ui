@@ -1,5 +1,5 @@
 <template>
-    <div class="border app-side">
+    <div class="border transition app-side">
         <div class="px-5 my-5">
             <slot name="brand">
                 <h1>
@@ -49,7 +49,7 @@
             </template>
         </div>
 
-        <div class="nav-container">
+        <div class="nav-container flex flex-col justify-end">
             <div
                 class="nav flex-column nav-pills"
                 id="v-pills-tab"
@@ -75,12 +75,37 @@
                     />
                 </template>
             </div>
+            <div class="flex w-full justify-end pr-4" v-if="isExpandable">
+                <slot name="close-icon">
+                    <div
+                        class="transform cursor-pointer hover:bg-white/80 rounded-full p-2"
+                        :class="[
+                            isExpanded ? 'rotate-180' : 'rotate-0',
+                            iconClass,
+                        ]"
+                        @click="$emit('update:isExpanded', !isExpanded)"
+                    >
+                        <svg width="32" height="32" viewBox="0 0 16 16">
+                            <g fill="none">
+                                <path
+                                    d="M6.293 8.5l-.647.647a.5.5 0 1 0 .708.707l1.5-1.5a.5.5 0 0 0 0-.707l-1.5-1.5a.5.5 0 1 0-.708.707l.647.646H4.502a.5.5 0 1 0 0 1h1.79z"
+                                    fill="currentColor"
+                                />
+                                <path
+                                    d="M12 13.001a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v6.002a2 2 0 0 0 2 2h8zm1-2a1 1 0 0 1-1 1H9.998V4H12a1 1 0 0 1 1 1v6.002zM8.998 4v8.002H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h4.998z"
+                                    fill="currentColor"
+                                />
+                            </g>
+                        </svg>
+                    </div>
+                </slot>
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { provide, ref } from "vue";
+import { provide, ref, toRefs } from "vue";
 import AtSideItemGroup from "~molecules/AtSideItemGroup/AtSideItemGroup.vue";
 import AtSideItem from "~molecules/AtSideItem/AtSideItem.vue";
 
@@ -99,6 +124,9 @@ const props = defineProps({
     itemActiveClass: {
         type: String,
     },
+    iconClass: {
+        type: String,
+    },
     currentPath: {
         type: String,
         default: "/",
@@ -107,10 +135,21 @@ const props = defineProps({
         type: String,
         default: "items",
     },
+    isExpanded: {
+        type: Boolean,
+        default: true,
+    },
+    isExpandable: {
+        type: Boolean,
+        default: false,
+    },
 });
 
+defineEmits(["update:isExpanded"]);
+const { isExpanded, currentPath } = toRefs(props);
 const activeGroup = ref("");
-provide("currentPath", props.currentPath);
+provide("currentPath", currentPath);
+provide("isExpanded", isExpanded);
 </script>
 
 <style lang="scss" scoped>

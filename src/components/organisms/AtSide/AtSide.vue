@@ -1,13 +1,13 @@
 <template>
     <div class="border transition app-side">
-        <div class="px-5 my-5">
+        <div class="mx-auto my-5">
             <slot name="brand">
                 <h1>
                     {{ title }}
                 </h1>
             </slot>
         </div>
-        <div class="px-5" role="tablist" aria-orientation="vertical">
+        <div class="mx-auto py-8" role="tablist" aria-orientation="vertical">
             <template v-for="route in menu">
                 <AtSideItem
                     v-if="!route[itemProperty]"

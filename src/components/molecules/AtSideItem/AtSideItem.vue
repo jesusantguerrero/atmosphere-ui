@@ -79,5 +79,5 @@ const isPath = (url = "") => {
 
 const { classes } = toRefs(state);
 
-const isExpanded = inject("isExpanded");
+const isExpanded = inject("isExpanded", true);
 </script>

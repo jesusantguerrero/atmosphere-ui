@@ -7,74 +7,33 @@
                 </h1>
             </slot>
         </div>
-        <div class="mx-auto py-8" role="tablist" aria-orientation="vertical">
-            <template v-for="route in menu">
-                <AtSideItem
-                    v-if="!route[itemProperty]"
-                    v-bind="route"
-                    :item-class="itemClass"
-                    :item-active-class="itemActiveClass"
-                    :key="route.label"
-                />
-
-                <div v-else-if="route.section" :key="`${route.label}-section`">
-                    <p
-                        class="pl-5 mt-2 text-sm font-bold text-gray-400 capitalize"
-                    >
-                        {{ route.section }}
-                    </p>
-                    <div>
-                        <AtSideItem
-                            v-for="sectionItem in route[itemProperty]"
-                            :key="`${sectionItem.section}-${route.label}`"
-                            v-bind="sectionItem"
-                            :item-class="itemClass"
-                            :item-active-class="itemActiveClass"
-                            :track-id="sectionItem.label"
-                        />
-                    </div>
-                </div>
-
-                <AtSideItemGroup
-                    v-else
-                    v-model="activeGroup"
-                    :key="`${route.label}-group`"
-                    :item-class="itemClass"
-                    :item-active-class="itemActiveClass"
-                    :track-id="route.label"
-                    :icon="route.icon"
-                    :label="route.label"
-                    :childs="route[itemProperty]"
-                />
-            </template>
-        </div>
+        <AtSideNav
+            v-model="activeGroup"
+            class="mx-auto py-8 w-full"
+            role="tablist"
+            aria-orientation="vertical"
+            :menu="menu"
+            :item-property="itemProperty"
+            :icon-class="iconClass"
+            :item-class="itemClass"
+            :item-active-class="itemActiveClass"
+        />
 
         <div class="nav-container flex flex-col justify-end">
-            <div
+            <AtSideNav
                 class="nav flex-column nav-pills"
                 id="v-pills-tab"
                 role="tablist"
                 aria-orientation="vertical"
                 v-if="headerMenu"
-            >
-                <template v-for="route in headerMenu" :key="route.label">
-                    <AtSideItem
-                        v-if="!route.childs"
-                        :icon="route.icon"
-                        :label="route.label"
-                        :to="route.to"
-                    />
+                v-model="activeGroup"
+                :menu="menu"
+                :item-property="itemProperty"
+                :icon-class="iconClass"
+                :item-class="itemClass"
+                :item-active-class="itemActiveClass"
+            />
 
-                    <AtSideItemGroup
-                        v-else
-                        :track-id="route.label"
-                        :icon="route.icon"
-                        :label="route.label"
-                        v-model="activeGroup"
-                        :childs="route.childs"
-                    />
-                </template>
-            </div>
             <div class="flex w-full justify-end pr-4" v-if="isExpandable">
                 <slot name="close-icon">
                     <div
@@ -106,34 +65,20 @@
 
 <script setup>
 import { provide, ref, toRefs } from "vue";
-import AtSideItemGroup from "~molecules/AtSideItemGroup/AtSideItemGroup.vue";
-import AtSideItem from "~molecules/AtSideItem/AtSideItem.vue";
+import AtSideNav from "./AtSideNav.vue";
+
+import { AtSideNavProps } from "./AtSideNavProps";
+
 
 const props = defineProps({
     title: String,
-    menu: {
-        type: Array,
-        required: true,
-    },
     headerMenu: {
         type: Array,
     },
-    itemClass: {
-        type: String,
-    },
-    itemActiveClass: {
-        type: String,
-    },
-    iconClass: {
-        type: String,
-    },
+    ...AtSideNavProps,
     currentPath: {
         type: String,
         default: "/",
-    },
-    itemProperty: {
-        type: String,
-        default: "items",
     },
     isExpanded: {
         type: Boolean,
@@ -143,11 +88,15 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    size: {
+
+    }
 });
 
 defineEmits(["update:isExpanded"]);
 const { isExpanded, currentPath } = toRefs(props);
 const activeGroup = ref("");
+
 provide("currentPath", currentPath);
 provide("isExpanded", isExpanded);
 </script>

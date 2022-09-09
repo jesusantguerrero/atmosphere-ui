@@ -26,7 +26,7 @@ const menu = [
     {
         icon: "users",
         label: "People",
-        childs: [
+        items: [
             {
                 icon: "user",
                 label: "Edit",
@@ -37,7 +37,7 @@ const menu = [
     {
         icon: "star",
         label: "Favorites",
-        childs: [
+        items: [
             {
                 icon: "user",
                 label: "Songs",
@@ -54,7 +54,7 @@ const menu = [
     {
         icon: "home",
         label: "Dashboard",
-        childs: [
+        items: [
             {
                 to: "/dashboard",
                 icon: "Home",

@@ -3,7 +3,7 @@
         <div class="divider__inner"></div>
     </div>
 
-    <div v-else class="item">
+    <div v-else class="item" v-bind="$attrs">
         <slot :label="label" :to="to" :class="classes" :icon="icon">
             <component
                 :is="componentName"
@@ -12,20 +12,18 @@
             >
                 <i
                     :class="[
-                        iconClass ?? `fa fa-${icon}`,
+                        icon ?? `fa fa-${icon}`,
                         isExpanded ? 'mr-2' : 'mx-auto',
                     ]"
                 />
-                <span v-if="isExpanded">
-                    {{ label }}
-                </span>
+                <span v-if="isExpanded"> {{ label }} </span>
             </component>
         </slot>
     </div>
 </template>
 
 <script setup>
-import { computed, inject, reactive, toRefs } from "vue";
+import { computed, inject, ref } from "vue";
 
 const props = defineProps({
     to: {
@@ -48,36 +46,36 @@ const props = defineProps({
         type: String,
     },
     as: {
-        type: String,
+        type: [String, Object],
         default: "router-link",
     },
 });
 
-const currentPath = inject("currentPath", "");
-const state = reactive({
-    classes: computed(() => {
-        const classes =
-            "flex items-center w-full px-5 py-4 rounded-md cursor-pointer";
-        return [
-            isPath(props.to) && props.itemActiveClass,
-            props.classes,
-            props.itemClass,
-            classes,
-        ];
-    }),
+const currentPath = inject("currentPath", ref(""));
+const classes = computed(() => {
+    const classes =
+        "flex items-center w-full px-5 py-4 rounded-md cursor-pointer";
+    return [
+        isPath(props.to) && props.itemActiveClass,
+        props.classes,
+        props.itemClass,
+        classes,
+    ];
 });
+
 const componentName = computed(() => {
     return props.as;
 });
-const isPath = (url = "") => {
+
+function isPath(url = "") {
     const linkUrl = url.replace("", "");
     if (url === "/") {
-        return currentPath && ["/", "/dashboard"].includes(currentPath);
+        return (
+            currentPath.value && ["/", "/dashboard"].includes(currentPath.value)
+        );
     }
-    return linkUrl === currentPath;
-};
-
-const { classes } = toRefs(state);
+    return linkUrl === currentPath.value;
+}
 
 const isExpanded = inject("isExpanded", true);
 </script>

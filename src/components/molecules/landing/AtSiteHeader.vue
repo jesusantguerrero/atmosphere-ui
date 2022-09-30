@@ -10,8 +10,7 @@
                     class="py-4 pr-4 cursor-pointer"
                     :class="brandClass"
                 >
-                    <span
-                        class="text-3xl leading-none text-white select-none logo zen"
+                    <span class="text-3xl leading-none select-none logo"
                         >{{ title }}<span :class="dotClass">.</span></span
                     >
                 </component>

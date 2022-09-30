@@ -42,7 +42,6 @@ export { default as AtScrollCard } from "./components/molecules/AtSrollCard/AtSc
 export { default as AtStep } from "./components/molecules/AtStep/AtStep.vue";
 export { default as AtStepTab } from "./components/molecules/AtStepTab/AtStepTab.vue";
 export { default as AtUpload } from "./components/molecules/AtUpload/AtUpload.vue";
-export { default as AtWeek } from "./components/molecules/AtWeek/AtWeek.vue";
 export { default as AtWeekControls } from "./components/molecules/AtWeekControls/AtWeekControls.vue";
 export { default as AtHero } from "./components/molecules/landing/AtHero.vue";
 export { default as AtPreFooter } from "./components/molecules/landing/AtPreFooter.vue";

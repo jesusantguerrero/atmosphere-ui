@@ -162,3 +162,44 @@ WithSections.args = {
         },
     ],
 };
+
+export const ProductionExample = Template.bind({});
+ProductionExample.args = {
+    title: "Loger",
+    menu: [
+        {
+            icon: "cogs",
+            label: "Dashboard",
+        },
+        {
+            icon: "star",
+            label: "Meals",
+        },
+        {
+            icon: "meals",
+            label: "Finance",
+        },
+        {
+            icon: "Relationships",
+            label: "Relationships",
+        },
+        {
+            icon: "Relationships",
+            label: "Home projects",
+        },
+    ],
+    headerMenu: [
+        {
+            icon: "cogs",
+            label: "Settings",
+        },
+        {
+            icon: "star",
+            label: "Help",
+        },
+    ],
+    class: "bg-white text-gray-700",
+    itemClass: "text-gray-700 hover:bg-gray-500 hover:text-white",
+    itemActiveClass: "bg-gray-500 text-white",
+    isExpandable: true,
+};

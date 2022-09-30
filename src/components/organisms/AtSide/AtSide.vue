@@ -27,7 +27,7 @@
                 aria-orientation="vertical"
                 v-if="headerMenu"
                 v-model="activeGroup"
-                :menu="menu"
+                :menu="headerMenu"
                 :item-property="itemProperty"
                 :icon-class="iconClass"
                 :item-class="itemClass"
@@ -69,7 +69,6 @@ import AtSideNav from "./AtSideNav.vue";
 
 import { AtSideNavProps } from "./AtSideNavProps";
 
-
 const props = defineProps({
     title: String,
     headerMenu: {
@@ -89,8 +88,8 @@ const props = defineProps({
         default: false,
     },
     size: {
-
-    }
+        type: String,
+    },
 });
 
 defineEmits(["update:isExpanded"]);

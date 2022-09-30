@@ -5,11 +5,7 @@
 
     <div v-else class="item" v-bind="$attrs">
         <slot :label="label" :to="to" :class="classes" :icon="icon">
-            <component
-                :is="componentName"
-                :class="[classes, itemClass]"
-                :href="to"
-            >
+            <component :is="componentName" :class="classes" :href="to">
                 <i
                     :class="[
                         icon ?? `fa fa-${icon}`,
@@ -53,8 +49,7 @@ const props = defineProps({
 
 const currentPath = inject("currentPath", ref(""));
 const classes = computed(() => {
-    const classes =
-        "flex items-center w-full px-5 py-4 rounded-md cursor-pointer";
+    const classes = "flex items-center w-full px-5 py-4 cursor-pointer";
     return [
         isPath(props.to) && props.itemActiveClass,
         props.classes,

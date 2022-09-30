@@ -1,26 +1,22 @@
-const colors = require('tailwindcss/colors');
-
-module.exports = {
-  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
-  theme: {
-    extend: {
-      colors: {
-        // primary: {
-        //   DEFAULT: '#1E90FF',
-        //   '50': '#FFFFFF',
-        //   '100': '#EAF5FF',
-        //   '200': '#B7DBFF',
-        //   '300': '#84C2FF',
-        //   '400': '#51A9FF',
-        //   '500': '#1E90FF',
-        //   '600': '#0077EA',
-        //   '700': '#005DB7',
-        //   '800': '#004384',
-        //   '900': '#002951'
-        // },
-        primary: colors.pink
-      }
+export default {
+    content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+    theme: {
+        extend: {
+            colors: {
+                primary: {
+                    50: "#fdf2f8",
+                    100: "#fce7f3",
+                    200: "#fbcfe8",
+                    300: "#f9a8d4",
+                    400: "#f472b6",
+                    500: "#ec4899",
+                    600: "#db2777",
+                    700: "#be185d",
+                    800: "#9d174d",
+                    900: "#831843",
+                },
+            },
+        },
     },
-  },
-  plugins: [],
-}
+    plugins: [],
+};

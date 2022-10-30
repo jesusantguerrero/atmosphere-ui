@@ -114,6 +114,7 @@ ItemActive.args = {
 
 export const WithSections = Template.bind({});
 WithSections.args = {
+    itemActiveClass: "bg-gray-500 text-white",
     menu: [
         {
             icon: "fa fa-home",
@@ -132,6 +133,9 @@ WithSections.args = {
                     icon: "fa fa-question-circle",
                     label: "Prompts",
                     to: "/dashboard/prompts",
+                    isActiveFunction(url, currentPath) {
+                        return true;
+                    },
                 },
                 {
                     icon: "fa fa-circle-o-notch",

@@ -20,6 +20,7 @@
 
 <script setup>
 import { computed, inject, ref } from "vue";
+import { isSamePath } from "../../../utils/props";
 
 const props = defineProps({
     to: {
@@ -45,13 +46,16 @@ const props = defineProps({
         type: [String, Object],
         default: "router-link",
     },
+    isActiveFunction: {
+        type: [Function],
+    },
 });
 
 const currentPath = inject("currentPath", ref(""));
 const classes = computed(() => {
     const classes = "flex items-center w-full px-5 py-4 cursor-pointer";
     return [
-        isPath(props.to) && props.itemActiveClass,
+        isActive(props.to) && props.itemActiveClass,
         props.classes,
         props.itemClass,
         classes,
@@ -62,14 +66,9 @@ const componentName = computed(() => {
     return props.as;
 });
 
-function isPath(url = "") {
-    const linkUrl = url.replace("", "");
-    if (url === "/") {
-        return (
-            currentPath.value && ["/", "/dashboard"].includes(currentPath.value)
-        );
-    }
-    return linkUrl === currentPath.value;
+function isActive(url) {
+    const isActiveMethod = props.isActiveFunction || isSamePath;
+    return isActiveMethod(url, currentPath.value);
 }
 
 const isExpanded = inject("isExpanded", true);

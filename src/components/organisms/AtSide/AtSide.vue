@@ -1,5 +1,5 @@
 <template>
-    <div class="border transition app-side">
+    <div class="transition app-side">
         <div class="mx-auto my-5">
             <slot name="brand">
                 <h1>

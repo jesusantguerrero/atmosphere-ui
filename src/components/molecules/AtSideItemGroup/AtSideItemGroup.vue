@@ -1,7 +1,7 @@
 <template>
     <div>
         <div
-            class="flex items-center justify-between px-5 text-left transition rounded-md cursor-pointer"
+            class="flex items-center justify-between px-5 text-left transition cursor-pointer"
             v-bind="$attrs"
             :class="[
                 isActive || (!isActive && hasActiveChild)

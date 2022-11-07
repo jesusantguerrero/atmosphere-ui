@@ -1,6 +1,6 @@
 <template>
     <div class="transition app-side">
-        <div class="mx-auto my-5">
+        <div :class="brandContainerClass">
             <slot name="brand">
                 <h1>
                     {{ title }}
@@ -9,7 +9,8 @@
         </div>
         <AtSideNav
             v-model="activeGroup"
-            class="mx-auto py-8 w-full"
+            class="w-full mx-auto"
+            :class="navContainerClass"
             role="tablist"
             aria-orientation="vertical"
             :menu="menu"
@@ -19,7 +20,7 @@
             :item-active-class="itemActiveClass"
         />
 
-        <div class="nav-container flex flex-col justify-end">
+        <div class="flex flex-col justify-end nav-container">
             <AtSideNav
                 class="nav flex-column nav-pills"
                 id="v-pills-tab"
@@ -34,10 +35,10 @@
                 :item-active-class="itemActiveClass"
             />
 
-            <div class="flex w-full justify-end pr-4" v-if="isExpandable">
+            <div class="flex justify-end w-full pr-4" v-if="isExpandable">
                 <slot name="close-icon">
                     <div
-                        class="transform cursor-pointer hover:bg-white/80 rounded-full p-2"
+                        class="p-2 transform rounded-full cursor-pointer hover:bg-white/80"
                         :class="[
                             isExpanded ? 'rotate-180' : 'rotate-0',
                             iconClass,
@@ -90,6 +91,14 @@ const props = defineProps({
     size: {
         type: String,
     },
+    brandContainerClass: {
+        default: "mx-auto my-5",
+        type: String,
+    },
+    navContainerClass: {
+        default: "py-8",
+        type: String,
+    },
 });
 
 defineEmits(["update:isExpanded"]);
@@ -109,7 +118,7 @@ provide("isExpanded", isExpanded);
     overflow: hidden;
     position: relative;
     display: grid;
-    grid-template-rows: 80px 1fr 1fr;
+    grid-template-rows: 64px 1fr 1fr;
     z-index: 1001;
 
     .nav-container {

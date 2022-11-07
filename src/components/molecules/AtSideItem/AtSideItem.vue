@@ -20,7 +20,7 @@
 
 <script setup>
 import { computed, inject, ref } from "vue";
-import { isSamePath } from "../../../utils/props";
+import { isSamePath } from "../../../utils";
 
 const props = defineProps({
     to: {
@@ -47,7 +47,7 @@ const props = defineProps({
         default: "router-link",
     },
     isActiveFunction: {
-        type: [Function],
+        type: [Function, null],
     },
 });
 

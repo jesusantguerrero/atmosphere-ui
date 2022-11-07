@@ -15,11 +15,10 @@
         <video
             loop
             muted
-            playsinline=""
             preload="metadata"
-            :poster="imageUrl"
             :width="width"
             :height="height"
+            controls
         >
             <source :src="src" :type="type" />
         </video>

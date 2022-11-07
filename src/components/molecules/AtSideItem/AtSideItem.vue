@@ -47,7 +47,7 @@ const props = defineProps({
         default: "router-link",
     },
     isActiveFunction: {
-        type: [Function],
+        type: [Function, null],
     },
 });
 

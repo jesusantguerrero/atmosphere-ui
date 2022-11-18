@@ -1,3 +1,4 @@
+import { Link } from "@inertiajs/inertia-vue3";
 import { ref } from "vue";
 import AtSide from "./AtSide.vue";
 
@@ -172,24 +173,43 @@ ProductionExample.args = {
     title: "Loger",
     menu: [
         {
-            icon: "cogs",
-            label: "Dashboard",
+            icon: "fa fa-home",
+            name: "home",
+            label: "Home",
+            to: "/dashboard",
+            as: Link,
         },
         {
-            icon: "star",
-            label: "Meals",
+            icon: "far fa-calendar-alt",
+            label: "Meal Planner",
+            name: "mealPlanner",
+            to: "/meal-planner",
+            as: Link,
+            isActiveFunction(url, currentPath) {
+                return /meal-planner|meals|ingredients/.test(currentPath);
+            },
         },
         {
-            icon: "meals",
+            icon: "fas fa-dollar-sign",
             label: "Finance",
+            name: "finance",
+            to: "/finance",
+            as: Link,
+            isActiveFunction(url, currentPath) {
+                return /finance|budgets|trends/.test(currentPath);
+            },
         },
         {
-            icon: "Relationships",
-            label: "Relationships",
+            icon: "fas fa-heart",
+            label: "Relationship",
+            to: "/relationships",
+            as: Link,
         },
         {
-            icon: "Relationships",
-            label: "Home projects",
+            icon: "fas fa-home",
+            label: "Home Projects",
+            to: "/housing",
+            as: Link,
         },
     ],
     headerMenu: [
@@ -206,4 +226,5 @@ ProductionExample.args = {
     itemClass: "text-gray-700 hover:bg-gray-500 hover:text-white",
     itemActiveClass: "bg-gray-500 text-white",
     isExpandable: true,
+    currentPath: "/",
 };

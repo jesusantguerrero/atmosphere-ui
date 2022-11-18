@@ -8,11 +8,8 @@ export function isSamePath(
         if (url === "/") {
             return currentPath && ["/", "/dashboard"].includes(currentPath);
         }
-        return (
-            linkUrl === currentPath ||
-            matches.includes(currentPath) ||
-            matchesWithAny(matches, currentPath)
-        );
+
+        return linkUrl === currentPath || matches.includes(currentPath);
     } catch (err) {
         console.log(err);
     }

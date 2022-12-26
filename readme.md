@@ -1,4 +1,4 @@
-# atmosphere-ui
+# Atmosphere UI
 
 <p align="left">
   <a href="https://codecov.io/gh/jesusantguerrero/atmosphere-ui"> <img src="https://codecov.io/gh/jesusantguerrero/atmosphere-ui/branch/master/graph/badge.svg?token=OG0HEUNU59" /> </a>

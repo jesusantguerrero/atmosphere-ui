@@ -63,6 +63,7 @@
             type="primary"
             data-testid="btn-submit"
             :disabled="isConfirmationInvalid"
+            v-if="!hideAction"
         >
             {{ modeLabel }}
             <i v-if="isLoading" class="ml-2 fa fa-spinner fa-pulse"></i>
@@ -116,6 +117,10 @@ const props = defineProps({
         default: "",
     },
     hideLink: {
+        type: Boolean,
+        default: false,
+    },
+    hideAction: {
         type: Boolean,
         default: false,
     },

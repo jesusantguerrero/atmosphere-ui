@@ -58,10 +58,12 @@ export { default as AtHeader } from "./components/organisms/AtHeader/AtHeader.vu
 export { default as AtSide } from "./components/organisms/AtSide/AtSide.vue";
 export { default as AtSideNav } from "./components/organisms/AtSide/AtSideNav.vue";
 export { default as AtSteps } from "./components/organisms/AtSteps/AtSteps.vue";
+export { default as AtTable } from "./components/organisms/AtTable/AtTable.vue";
 export { default as AtTeamSelect } from "./components/organisms/AtTeamSelect/AtTeamSelect.vue";
 export { default as AtUserButton } from "./components/organisms/AtUserButton/AtUserButton.vue";
 export { default as AtVideo } from "./components/organisms/AtVideo/AtVideo.vue";
 export { default as AtAuthBox } from "./components/templates/AtAuthBox/AtAuthBox.vue";
+export { default as AtShell } from "./components/templates/AtShell/AtShell.vue";
  
  // Utils 
 export { useDateTime } from "./utils/useDateTime";

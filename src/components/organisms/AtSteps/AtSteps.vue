@@ -33,9 +33,9 @@
       </slot>
     </AtBareStepList>
     <slot />
-    <at-bare-step-controls v-slot:default="{ next, prev }">
+    <AtBareStepControls v-slot:default="{ next, prev }">
       <slot name="footer" :next="next" :prev="prev" />
-    </at-bare-step-controls>
+    </AtBareStepControls>
   </AtBareStep>
 </template>
 

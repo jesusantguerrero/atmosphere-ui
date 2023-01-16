@@ -34,6 +34,9 @@ export const stepProps = {
     type: String,
     default: "text-white",
   },
+  loadShadowColor: {
+    type: String,
+  },
   circleActiveColor: {
     type: String,
   },

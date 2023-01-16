@@ -124,7 +124,9 @@ Default.args = {
 export const Simple = Template.bind({});
 Simple.args = {
     simple: true,
-    circleActiveColor: "bg-green-500 text-white",
+    activeClass: "bg-blue-400 text-white",
+    circleActiveColor: "bg-blue-500 text-white",
+    loadShadowColor: "shadow-blue-400",
 };
 
 export const ExternalControls = RefTemplate.bind({});

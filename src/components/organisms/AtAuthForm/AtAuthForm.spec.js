@@ -54,7 +54,6 @@ describe("AuthForm component", () => {
         const component = render(AuthForm, {
             props: {
                 mode: "register",
-                initialValues,
             },
         });
 

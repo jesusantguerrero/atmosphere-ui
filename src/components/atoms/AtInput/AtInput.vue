@@ -5,7 +5,12 @@
         :class="inputClasses"
         @click="focus"
     >
-        <slot name="prefix" v-if="prefix || $slots.prefix">
+        <slot
+            name="prefix"
+            v-if="prefix || $slots.prefix"
+            :is-focused="state.isFocused"
+            :is-mouseover="state.isMouseover"
+        >
             <div class="flex items-center justify-center w-4 h-full px-2">
                 {{ prefix }}
             </div>
@@ -17,11 +22,19 @@
             :data-testid="dataTestid"
             class="w-full h-full px-2 focus:outline-none"
             v-bind="$attrs"
+            :placeholder="placeholder"
             @focus="onFocus"
             @blur="onBlur"
             @input="onInput"
+            @mouseover="onMouseOver(true)"
+            @mouseleave="onMouseLeave(false)"
         />
-        <slot name="suffix" v-if="suffix || $slots.suffix">
+        <slot
+            name="suffix"
+            v-if="suffix || $slots.suffix"
+            :is-focused="state.isFocused"
+            :is-mouseover="state.isMouseover"
+        >
             <div class="flex items-center justify-center w-4 h-full px-2">
                 {{ suffix }}
             </div>
@@ -55,6 +68,9 @@ const props = defineProps({
     decimalDigits: {
         type: Number,
         default: 2,
+    },
+    placeholder: {
+        type: String,
     },
     numberFormatter: Function,
 });
@@ -94,6 +110,7 @@ const emit = defineEmits(["update:modelValue", "change", "focus", "blur"]);
 
 const state = reactive({
     isFocused: false,
+    isMouseover: false,
 });
 
 const inputRef = ref();
@@ -121,6 +138,16 @@ const onInput = (evt) => {
 
 const onFocus = () => {
     state.isFocused = true;
+    emit("focus");
+};
+
+const onMouseLeave = () => {
+    state.isMouseover = false;
+    emit("focus");
+};
+
+const onMouseOver = () => {
+    state.isMouseover = false;
     emit("focus");
 };
 

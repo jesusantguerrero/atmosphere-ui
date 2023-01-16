@@ -1,6 +1,6 @@
 {
   "name": "atmosphere-ui",
-  "version": "1.0.6-beta",
+  "version": "1.1.0",
   "description": "UI for jetstream inertia and Vue 3",
   "type": "module",
   "keywords": [
@@ -22,6 +22,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "prepublishOnly": "npm run build",
     "storybook": "start-storybook -p 6006",
+    "release": "npm run build && bumpp --commit --tag --push",
     "docs:build": "build-storybook -o docs",
     "chromatic": "npx chromatic --project-token=170dcb534484"
   },
@@ -65,6 +66,7 @@
     "autoprefixer": "^10.4.0",
     "axios": "^0.27.2",
     "babel-loader": "^8.2.5",
+    "bumpp": "^8.2.1",
     "c8": "^7.12.0",
     "chromatic": "^5.10.2",
     "cypress": "^10.1.0",

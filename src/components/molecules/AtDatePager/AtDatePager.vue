@@ -8,20 +8,24 @@
       :class="controlsClass"
       @click="controls.previous()"
     >
-      <i class="fa fa-chevron-left"></i>
+      <slot name="previous">
+        <i class="fa fa-chevron-left"></i>
+      </slot>
     </button>
     <div
       v-if="startDate && endDate && !iconsOnly"
       class="flex items-center text-sm font-bold"
     >
-      {{ formatDate(startDate) }} - {{ formatDate(endDate) }}
+      <slot> {{ formatDate(startDate) }} - {{ formatDate(endDate) }} </slot>
     </div>
     <button
       class="px-2 transition-colors focus:outline-none"
       :class="controlsClass"
       @click="controls.next()"
     >
-      <i class="fa fa-chevron-right"></i>
+      <slot name="next">
+        <i class="fa fa-chevron-right"></i>
+      </slot>
     </button>
   </div>
 </template>

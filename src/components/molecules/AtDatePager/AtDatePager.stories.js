@@ -20,6 +20,22 @@ const Template = (args) => ({
   `,
 });
 
+const TemplateWithSlot = (args) => ({
+  // Components used in your story `template` are defined in the `components` object
+  components: { AtDatePager },
+  // The story's `args` need to be mapped into the template through the `setup()` method
+  setup() {
+    return { args };
+  },
+  template: `
+  <div>
+    <AtDatePager v-model="args.value" v-bind="args">
+      Range Selector
+    </AtDatePager>
+  </div>
+  `
+})
+
 export const Default = Template.bind({});
 Default.args = {
   value: new Date(),
@@ -70,11 +86,11 @@ IconsOnly.args = {
 export const CustomRangeMode = Template.bind({});
 CustomRangeMode.args = {
   value: new Date(),
-  nextModeRange: "P3M",
+  nextMode: "P3M",
   placeholder: "Select a date",
 };
 
-export const MiddleSlot = Template.bind({});
+export const MiddleSlot = TemplateWithSlot.bind({});
 MiddleSlot.args = {
   value: new Date(),
   nextMode: "month",

@@ -18,8 +18,6 @@ export default defineConfig({
         rollupOptions: {
             external: [
                 "vue",
-                "@inertiajs/inertia-vue3",
-                "@inertiajs/inertia",
                 "@vueuse/core",
             ],
             output: {

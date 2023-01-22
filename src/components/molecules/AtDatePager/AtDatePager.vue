@@ -1,6 +1,7 @@
 <template>
   <div
-    class="flex justify-between overflow-hidden text-gray-500 bg-white border-2 border-gray-200 rounded-md h-9 date-pager"
+    class="flex justify-between overflow-hidden text-gray-500 bg-white border-2 border-gray-200 rounded-md date-pager"
+    :class="sizeClass"
   >
     <button
       class="px-2 transition-colors focus:outline-none"
@@ -9,7 +10,10 @@
     >
       <i class="fa fa-chevron-left"></i>
     </button>
-    <div v-if="startDate && endDate" class="flex items-center text-sm font-bold">
+    <div
+      v-if="startDate && endDate && !iconsOnly"
+      class="flex items-center text-sm font-bold"
+    >
       {{ formatDate(startDate) }} - {{ formatDate(endDate) }}
     </div>
     <button
@@ -22,11 +26,14 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { format } from "date-fns";
 import { useDatePager } from "vueuse-temporals";
-import { watch, toRefs } from "vue";
+import { watch, toRefs, computed } from "vue";
+// @ts-expect-error its ok
 import { isSameDate } from "~utils/useDateTime";
+
+import { PagerSizes } from "./constants";
 // viewHelpers
 const formatDate = (date) => {
   return format(date, props.format);
@@ -51,6 +58,16 @@ const props = defineProps({
     type: String,
     default: "bg-white hover:bg-gray-200",
   },
+  iconsOnly: {
+    type: Boolean,
+  },
+  size: {
+    type: String,
+    validator(value: string) {
+      return Object.keys(PagerSizes).includes(value);
+    },
+    default: "medium",
+  },
 });
 
 const emit = defineEmits([
@@ -60,10 +77,11 @@ const emit = defineEmits([
   "update:endDate",
 ]);
 const { modelValue, dateSpan, nextMode } = toRefs(props);
-const { controls, selectedSpan, selectedDay, startDate, endDate } = useDatePager({
-  nextMode: nextMode.value,
-  initialDate: modelValue.value,
-});
+const { controls, selectedSpan, selectedDay, startDate, endDate } =
+  useDatePager({
+    nextMode: nextMode.value,
+    initialDate: modelValue.value,
+  });
 
 // dateSpan
 const emitDateSpan = (value) => {
@@ -86,8 +104,17 @@ watch(
   { immediate: true }
 );
 watch(selectedDay, emitDay, { immediate: true });
-watch(startDate, () => emit("update:startDate", startDate.value), { immediate: true });
-watch(endDate, () => emit("update:endDate", endDate.value), { immediate: true });
+watch(startDate, () => emit("update:startDate", startDate.value), {
+  immediate: true,
+});
+watch(endDate, () => emit("update:endDate", endDate.value), {
+  immediate: true,
+});
+
+const sizeClass = computed(() => {
+  const widthClass = props.iconsOnly ? "w-14" : "";
+  return [PagerSizes[props.size], widthClass];
+});
 </script>
 
 <style lang="scss">

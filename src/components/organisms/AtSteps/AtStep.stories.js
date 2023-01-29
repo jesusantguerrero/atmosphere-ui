@@ -13,7 +13,7 @@ const Template = (args) => ({
     setup() {
         const finished = () => {
             alert("Completed");
-        };
+    };
         const afterChange = (step) => {
             alert(`Changed to step ${step}`);
         };

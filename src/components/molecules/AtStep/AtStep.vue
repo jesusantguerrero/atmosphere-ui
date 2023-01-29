@@ -2,7 +2,7 @@
   <div v-show="isActive" class="step">
     <slot name="header">
       <header :class="headerClass">
-        <h4 v-if="title" class="step__title mt-4">{{ title }} Hello</h4>
+        <h4 v-if="title" class="step__title mt-4">{{ title }}</h4>
         <p v-if="description" class="step__description">
           {{ description }}
         </p>

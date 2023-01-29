@@ -1,91 +1,94 @@
 <template>
-    <form @submit.prevent="loginUser()" class="text-white">
-        <div class="flex items-center justify-center w-full mb-20 sm:pt-20">
-            <div
-                class="text-6xl text-center cursor-pointer brand-font"
-                @click="$emit('home-pressed')"
-            >
-                <slot name="brand">
-                    {{ appName }}
-                </slot>
-            </div>
-        </div>
-
-        <slot name="prependInput" />
-
-        <slot name="content">
-            <AtField field="email" label="Email">
-                <AtInput
-                    v-model.trim="formData.email"
-                    data-testid="input-email"
-                    required
-                />
-                <template #error>
-                    <AtErrorBag :errors="errors" field="email" />
-                </template>
-            </AtField>
-
-            <AtField field="password" label="Password">
-                <AtInputPassword
-                    data-testid="input-password"
-                    class="bg-white"
-                    v-model="formData.password"
-                    required
-                />
-                <template #error>
-                    <AtErrorBag :errors="errors" field="password" />
-                </template>
-            </AtField>
-
-            <AtField
-                v-if="mode != 'login'"
-                label="Confirm Password"
-                field="confirm_password"
-            >
-                <AtInputPassword
-                    data-testid="input-confirm-password"
-                    class="bg-white"
-                    v-model="formData.confirmPassword"
-                    @blur="isDirty = true"
-                    :class="{ 'error-input': isConfirmationInvalid }"
-                    required
-                />
-                <small v-if="isConfirmationInvalid" class="text-red-200">
-                    {{ passwordNotEqualLabel }}
-                </small>
-                <AtErrorBag :errors="errors" field="confirm_password" />
-            </AtField>
+  <form @submit.prevent="loginUser()" class="text-white">
+    <div
+      class="flex items-center justify-center w-full"
+      :class="brandContainerClass"
+    >
+      <div
+        class="text-6xl text-center cursor-pointer brand-font"
+        @click="$emit('home-pressed')"
+      >
+        <slot name="brand">
+          {{ appName }}
         </slot>
+      </div>
+    </div>
 
-        <AtButton
-            class="w-full"
-            :class="btnClass"
-            type="primary"
-            data-testid="btn-submit"
-            :disabled="isConfirmationInvalid"
-            v-if="!hideAction"
-        >
-            {{ modeLabel }}
-            <i v-if="isLoading" class="ml-2 fa fa-spinner fa-pulse"></i>
-        </AtButton>
+    <slot name="prependInput" />
 
-        <div class="text-center" v-if="!hideLink">
-            <div>
-                {{ linkDescription }}
-                <slot name="link">
-                    <a
-                        @click.prevent="$emit('link-pressed', mode)"
-                        class="font-bold cursor-pointer"
-                        :class="linkClass"
-                    >
-                        {{ state.linkLabel }}
-                    </a>
-                </slot>
-            </div>
-        </div>
+    <slot name="content">
+      <AtField field="email" label="Email">
+        <AtInput
+          v-model.trim="formData.email"
+          data-testid="input-email"
+          required
+        />
+        <template #error>
+          <AtErrorBag :errors="errors" field="email" />
+        </template>
+      </AtField>
 
-        <p class="pt-10 text-center">&copy; {{ currentYear }}</p>
-    </form>
+      <AtField field="password" label="Password">
+        <AtInputPassword
+          data-testid="input-password"
+          class="bg-white"
+          v-model="formData.password"
+          required
+        />
+        <template #error>
+          <AtErrorBag :errors="errors" field="password" />
+        </template>
+      </AtField>
+
+      <AtField
+        v-if="mode != 'login'"
+        label="Confirm Password"
+        field="confirm_password"
+      >
+        <AtInputPassword
+          data-testid="input-confirm-password"
+          class="bg-white"
+          v-model="formData.confirmPassword"
+          @blur="isDirty = true"
+          :class="{ 'error-input': isConfirmationInvalid }"
+          required
+        />
+        <small v-if="isConfirmationInvalid" class="text-red-200">
+          {{ passwordNotEqualLabel }}
+        </small>
+        <AtErrorBag :errors="errors" field="confirm_password" />
+      </AtField>
+    </slot>
+
+    <AtButton
+      class="w-full"
+      :class="btnClass"
+      type="primary"
+      data-testid="btn-submit"
+      :disabled="isConfirmationInvalid"
+      v-if="!hideAction"
+    >
+      {{ modeLabel }}
+      <i v-if="isLoading" class="ml-2 fa fa-spinner fa-pulse"></i>
+    </AtButton>
+
+    <div class="text-center" v-if="!hideLink">
+      <div>
+        {{ linkDescription }}
+        <slot name="link">
+          <a
+            @click.prevent="$emit('link-pressed', mode)"
+            class="font-bold cursor-pointer"
+            :class="linkClass"
+          >
+            {{ state.linkLabel }}
+          </a>
+        </slot>
+      </div>
+    </div>
+
+    <p class="pt-10 text-center">&copy; {{ currentYear }}</p>
+  </form>
 </template>
 
 <script setup>
@@ -97,196 +100,196 @@ import AtInput from "../../atoms/AtInput/AtInput.vue";
 import AtInputPassword from "../../molecules/AtInputPassword/AtInputPassword.vue";
 
 const emit = defineEmits({
-    submit: null,
+  submit: null,
 });
 
 const props = defineProps({
-    mode: {
-        type: String,
-        default: "login",
+  mode: {
+    type: String,
+    default: "login",
+  },
+  brandContainerClass: {
+    type: String,
+    default: "mb-20 sm:pt-20",
+  },
+  btnClass: {
+    type: String,
+    default: "",
+  },
+  btnLabel: {
+    type: String,
+  },
+  linkClass: {
+    type: String,
+    default: "",
+  },
+  hideLink: {
+    type: Boolean,
+    default: false,
+  },
+  hideAction: {
+    type: Boolean,
+    default: false,
+  },
+  appName: {
+    type: String,
+    default: "Atmosphere",
+  },
+  submitLabel: {
+    type: String,
+    default: "",
+  },
+  isLoading: {
+    type: Boolean,
+    default: false,
+  },
+  errors: {
+    type: Object,
+    default() {
+      return {};
     },
-    btnClass: {
-        type: String,
-        default: "",
+  },
+  dark: {
+    type: Boolean,
+    default: false,
+  },
+  customLinkLabel: {
+    type: String,
+  },
+  passwordNotEqualLabel: {
+    type: String,
+    default: "Passwords are not equal",
+  },
+  initialValues: {
+    type: Object,
+    default() {
+      return {};
     },
-    btnLabel: {
-        type: String,
+  },
+  config: {
+    type: Object,
+    default() {
+      return {};
     },
-    linkClass: {
-        type: String,
-        default: "",
-    },
-    hideLink: {
-        type: Boolean,
-        default: false,
-    },
-    hideAction: {
-        type: Boolean,
-        default: false,
-    },
-    appName: {
-        type: String,
-        default: "Atmosphere",
-    },
-    submitLabel: {
-        type: String,
-        default: "",
-    },
-    isLoading: {
-        type: Boolean,
-        default: false,
-    },
-    errors: {
-        type: Object,
-        default() {
-            return {};
-        },
-    },
-    dark: {
-        type: Boolean,
-        default: false,
-    },
-    customLinkLabel: {
-        type: String,
-    },
-    passwordNotEqualLabel: {
-        type: String,
-        default: "Passwords are not equal",
-    },
-    initialValues: {
-        type: Object,
-        default() {
-            return {};
-        },
-    },
-    config: {
-        type: Object,
-        default() {
-            return {};
-        },
-    },
+  },
 });
 
 const { mode, isLoading, initialValues } = toRefs(props);
 const state = reactive({
-    formData: {
-        email: "",
-        password: "",
-        confirmPassword: "",
-    },
-    currentYear: new Date().getFullYear(),
-    modeLabel: computed(() => {
-        if (props.submitLabel) {
-            return props.submitLabel;
-        }
-        return (
-            props.btnLabel ?? (mode.value == "register" ? "Sign Up" : "Sign In")
-        );
-    }),
+  formData: {
+    email: "",
+    password: "",
+    confirmPassword: "",
+  },
+  currentYear: new Date().getFullYear(),
+  modeLabel: computed(() => {
+    if (props.submitLabel) {
+      return props.submitLabel;
+    }
+    return props.btnLabel ?? (mode.value == "register" ? "Sign Up" : "Sign In");
+  }),
 
-    linkDescription: computed(() => {
-        return mode.value == "register"
-            ? " Already have an account?"
-            : "Don't have an account?";
-    }),
+  linkDescription: computed(() => {
+    return mode.value == "register"
+      ? " Already have an account?"
+      : "Don't have an account?";
+  }),
 
-    linkLabel: computed(() => {
-        return (
-            props.customLinkLabel ??
-            (mode.value == "register" ? "Login" : "Create One")
-        );
-    }),
-    // validation
-    isDirty: false,
-    isConfirmationInvalid: computed(() => {
-        return (
-            state.isDirty.value &&
-            mode.value == "register" &&
-            state.formData.password != state.formData.confirmPassword
-        );
-    }),
+  linkLabel: computed(() => {
+    return (
+      props.customLinkLabel ??
+      (mode.value == "register" ? "Login" : "Create One")
+    );
+  }),
+  // validation
+  isDirty: false,
+  isConfirmationInvalid: computed(() => {
+    return (
+      state.isDirty.value &&
+      mode.value == "register" &&
+      state.formData.password != state.formData.confirmPassword
+    );
+  }),
 });
 
 watch(
-    initialValues,
-    (formValues) => {
-        Object.keys(state.formData).forEach((key) => {
-            const fieldConfig = props.config?.[key];
-            if (
-                fieldConfig &&
-                state.formData[key] !== formValues[fieldConfig.mapper || key]
-            ) {
-                state.formData[key] = formValues[fieldConfig.mapper || key];
-            }
-        });
-    },
-    {
-        immediate: true,
-    }
+  initialValues,
+  (formValues) => {
+    Object.keys(state.formData).forEach((key) => {
+      const fieldConfig = props.config?.[key];
+      if (
+        fieldConfig &&
+        state.formData[key] !== formValues[fieldConfig.mapper || key]
+      ) {
+        state.formData[key] = formValues[fieldConfig.mapper || key];
+      }
+    });
+  },
+  {
+    immediate: true,
+  }
 );
 
 // auth manipulation
 
 const loginUser = () => {
-    if (!validateRegistration()) {
-        return;
-    }
+  if (!validateRegistration()) {
+    return;
+  }
 
-    emit("submit", {
-        ...state.formData,
-        confirmPassword:
-            mode.value == "register"
-                ? state.formData.confirmPassword
-                : undefined,
-    });
+  emit("submit", {
+    ...state.formData,
+    confirmPassword:
+      mode.value == "register" ? state.formData.confirmPassword : undefined,
+  });
 };
 
 const validateRegistration = () => {
-    if (
-        mode.value == "register" &&
-        state.formData.password != state.formData.confirmPassword
-    ) {
-        return false;
-    }
-    return true;
+  if (
+    mode.value == "register" &&
+    state.formData.password != state.formData.confirmPassword
+  ) {
+    return false;
+  }
+  return true;
 };
 
 provide("dark", props.dark);
 
 const {
-    formData,
-    currentYear,
-    modeLabel,
-    linkDescription,
-    isDirty,
-    isConfirmationInvalid,
+  formData,
+  currentYear,
+  modeLabel,
+  linkDescription,
+  isDirty,
+  isConfirmationInvalid,
 } = toRefs(state);
 </script>
 
 <style lang="scss">
 .form-group {
-    margin: 15px 0;
+  margin: 15px 0;
 
-    label {
-        margin: 0.5rem 0;
-    }
+  label {
+    margin: 0.5rem 0;
+  }
 
-    &--error {
-        @apply text-red-400;
-        input {
-            @apply shadow-sm;
-            @apply border-2;
-            @apply border-red-300;
-        }
+  &--error {
+    @apply text-red-400;
+    input {
+      @apply shadow-sm;
+      @apply border-2;
+      @apply border-red-300;
     }
+  }
 }
 
 .form-control {
-    @apply text-gray-400;
-    @apply px-2;
+  @apply text-gray-400;
+  @apply px-2;
 
-    &:focus {
-        outline: none;
-    }
+  &:focus {
+    outline: none;
+  }
 }
 </style>

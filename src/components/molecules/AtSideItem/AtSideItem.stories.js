@@ -1,6 +1,6 @@
 import AtSideSideItem from "./AtSideItem.vue";
 import AtLink from "../../atoms/AtLink/AtLink.vue";
-import { Link } from "@inertiajs/inertia-vue3";
+import { Link } from "@inertiajs/vue3";
 
 export default {
     title: "Molecules/AtSideItem",

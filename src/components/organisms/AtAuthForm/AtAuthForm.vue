@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="loginUser()" class="text-white">
+  <form @submit.prevent="loginUser()">
     <div
       class="flex items-center justify-center w-full"
       :class="brandContainerClass"
@@ -13,12 +13,12 @@
         </slot>
       </div>
     </div>
-
     <slot name="prependInput" />
 
     <slot name="content">
-      <AtField field="email" label="Email">
-        <AtInput
+      <component :is="AtField" field="email" label="Email">
+        <component
+          :is="AtInput"
           v-model.trim="formData.email"
           data-testid="input-email"
           required
@@ -26,51 +26,58 @@
         <template #error>
           <AtErrorBag :errors="errors" field="email" />
         </template>
-      </AtField>
+      </component>
 
-      <AtField field="password" label="Password">
-        <AtInputPassword
+      <component
+        :is="AtField"
+        field="password"
+        label="Password"
+        :errors="errors"
+      >
+        <component
+          :is="AtInputPassword"
           data-testid="input-password"
           class="bg-white"
           v-model="formData.password"
           required
         />
-        <template #error>
-          <AtErrorBag :errors="errors" field="password" />
-        </template>
-      </AtField>
+      </component>
 
-      <AtField
+      <component 
+        :is="AtField"
         v-if="mode != 'login'"
         label="Confirm Password"
         field="confirm_password"
       >
-        <AtInputPassword
+        <component
+          :is="AtInputPassword"
           data-testid="input-confirm-password"
           class="bg-white"
           v-model="formData.confirmPassword"
           @blur="isDirty = true"
           :class="{ 'error-input': isConfirmationInvalid }"
           required
+          :errors="errors"
         />
         <small v-if="isConfirmationInvalid" class="text-red-200">
           {{ passwordNotEqualLabel }}
         </small>
-        <AtErrorBag :errors="errors" field="confirm_password" />
-      </AtField>
+      </component>
     </slot>
 
-    <AtButton
-      class="w-full"
-      :class="btnClass"
-      type="primary"
-      data-testid="btn-submit"
-      :disabled="isConfirmationInvalid"
-      v-if="!hideAction"
-    >
-      {{ modeLabel }}
-      <i v-if="isLoading" class="ml-2 fa fa-spinner fa-pulse"></i>
-    </AtButton>
+    <slot name="action">
+      <AtButton
+        class="w-full"
+        :class="btnClass"
+        type="primary"
+        data-testid="btn-submit"
+        :disabled="isConfirmationInvalid"
+        v-if="!hideAction"
+      >
+        {{ modeLabel }}
+        <i v-if="isLoading" class="ml-2 fa fa-spinner fa-pulse"></i>
+      </AtButton>
+    </slot>
 
     <div class="text-center" v-if="!hideLink">
       <div>
@@ -277,9 +284,9 @@ const {
   &--error {
     @apply text-red-400;
     input {
-      @apply shadow-sm;
-      @apply border-2;
-      @apply border-red-300;
+      @apply shadow-sm
+      border-2
+      border-red-300;
     }
   }
 }

@@ -6,7 +6,7 @@
     <button
       class="px-2 transition-colors focus:outline-none"
       :class="controlsClass"
-      @click="controls.previous()"
+      @click="emitChange('prev')"
     >
       <slot name="previous">
         <i class="fa fa-chevron-left"></i>
@@ -21,7 +21,7 @@
     <button
       class="px-2 transition-colors focus:outline-none"
       :class="controlsClass"
-      @click="controls.next()"
+      @click="emitChange('next')"
     >
       <slot name="next">
         <i class="fa fa-chevron-right"></i>
@@ -79,6 +79,7 @@ const emit = defineEmits([
   "update:dateSpan",
   "update:startDate",
   "update:endDate",
+  "change",
 ]);
 const { modelValue, dateSpan, nextMode } = toRefs(props);
 const { controls, selectedSpan, selectedDay, startDate, endDate } =
@@ -86,6 +87,15 @@ const { controls, selectedSpan, selectedDay, startDate, endDate } =
     nextMode: nextMode.value,
     initialDate: modelValue.value,
   });
+
+const emitChange = (mode) => {
+  if (mode == "next") {
+    controls.next();
+  } else {
+    controls.previous();
+  }
+  emit("change", [startDate.value, endDate.value]);
+};
 
 // dateSpan
 const emitDateSpan = (value) => {

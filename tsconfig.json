@@ -13,7 +13,15 @@
       "esModuleInterop": true,
       "lib": ["ESNext", "DOM"],
       "skipLibCheck": true,
-      "noEmit": true
+      "noEmit": true,
+      "paths": {
+        "~/": ["./src/*"],
+        "~atoms/*": ["./src/components/atoms/*"],
+        "~molecules/*": ["./src/components/molecules/*"],
+        "~organisms/*": ["./src/components/organisms/*"],
+        "~templates/*": ["./src/components/templates/*"],
+        "~utils/*": ["./src/utils/*"]
+      },  
     },
     "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
     "references": [{ "path": "./tsconfig.node.json" }]

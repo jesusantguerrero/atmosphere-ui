@@ -1,48 +1,5 @@
-<template>
-  <div
-    ref="inputWrapper"
-    class="flex w-full h-10 overflow-hidden shadow-sm focus:ring focus:ring-opacity-50"
-    :class="inputClasses"
-    @click="focus"
-  >
-    <slot
-      name="prefix"
-      v-if="prefix || $slots.prefix"
-      :is-focused="state.isFocused"
-      :is-mouseover="state.isMouseover"
-    >
-      <div class="flex items-center justify-center w-4 h-full px-2">
-        {{ prefix }}
-      </div>
-    </slot>
-    <input
-      ref="inputRef"
-      :value="formattedValue"
-      :disabled="disabled"
-      :data-testid="dataTestid"
-      class="w-full h-full px-2 focus:outline-none"
-      v-bind="$attrs"
-      :placeholder="placeholder"
-      @focus="onFocus"
-      @blur="onBlur"
-      @input="onInput"
-      @mouseover="onMouseOver(true)"
-      @mouseleave="onMouseLeave(false)"
-    />
-    <slot
-      name="suffix"
-      v-if="suffix || $slots.suffix"
-      :is-focused="state.isFocused"
-      :is-mouseover="state.isMouseover"
-    >
-      <div class="flex items-center justify-center w-4 h-full px-2">
-        {{ suffix }}
-      </div>
-    </slot>
-  </div>
-</template>
-
-<script setup>
+<script lang="ts" setup>
+import { formatNumber } from "~utils/formatMoney";
 import { computed, reactive, ref, watch } from "vue";
 const props = defineProps({
   dataTestid: {
@@ -107,7 +64,14 @@ const themes = {
   },
 };
 
-const emit = defineEmits(["update:modelValue", "change", "focus", "blur"]);
+const emit = defineEmits([
+  "update:modelValue",
+  "change",
+  "focus",
+  "blur",
+  "mouseover",
+  "mouseleave",
+]);
 
 const state = reactive({
   isFocused: false,
@@ -190,13 +154,12 @@ const formattedValue = computed(() => {
   const numberFormat = props.numberFormat;
   const numberFormatter = props.numberFormatter;
 
-  const defaultFormatter = () => {
-    const formatted = new Intl.NumberFormat("en-US", {
+  const defaultFormatter = (value: number) => {
+    return formatNumber("en-US", {
       style: "decimal",
       minimumFractionDigits: props.decimalDigits,
       maximumFractionDigits: props.decimalDigits,
-    }).format(value);
-    return formatted;
+    });
   };
 
   let formatted = value;
@@ -216,3 +179,47 @@ const formattedValue = computed(() => {
   return state.isFocused ? value : formatted;
 });
 </script>
+
+<template>
+  <div
+    ref="inputWrapper"
+    class="flex w-full h-10 overflow-hidden shadow-sm focus:ring focus:ring-opacity-50"
+    :class="inputClasses"
+    @click="focus"
+  >
+    <slot
+      name="prefix"
+      v-if="prefix || $slots.prefix"
+      :is-focused="state.isFocused"
+      :is-mouseover="state.isMouseover"
+    >
+      <div class="flex items-center justify-center w-4 h-full px-2">
+        {{ prefix }}
+      </div>
+    </slot>
+    <input
+      ref="inputRef"
+      :value="formattedValue"
+      :disabled="disabled"
+      :data-testid="dataTestid"
+      class="w-full h-full px-2 focus:outline-none"
+      v-bind="$attrs"
+      :placeholder="placeholder"
+      @focus="onFocus"
+      @blur="onBlur"
+      @input="onInput"
+      @mouseover="onMouseOver(true)"
+      @mouseleave="onMouseLeave(false)"
+    />
+    <slot
+      name="suffix"
+      v-if="suffix || $slots.suffix"
+      :is-focused="state.isFocused"
+      :is-mouseover="state.isMouseover"
+    >
+      <div class="flex items-center justify-center w-4 h-full px-2">
+        {{ suffix }}
+      </div>
+    </slot>
+  </div>
+</template>

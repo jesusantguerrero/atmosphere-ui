@@ -1,49 +1,49 @@
 import AtInput from "./AtInput.vue";
 import { ref } from "vue";
 export default {
-    title: "Atoms/AtInput",
-    component: AtInput,
+  title: "Atoms/AtInput",
+  component: AtInput,
 };
 
 const Template = (args) => ({
-    components: { AtInput },
-    setup() {
-        return {
-            args,
-            value: ref(args.value || ""),
-        };
-    },
-    template: '<AtInput v-bind="args" v-model="value" />',
+  components: { AtInput },
+  setup() {
+    return {
+      args,
+      value: ref(args.value || ""),
+    };
+  },
+  template: '<AtInput v-bind="args" v-model="value" />',
 });
 
 export const Default = Template.bind({});
 Default.args = {
-    value: "hola mundo",
+  value: "hola mundo",
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-    disabled: true,
+  disabled: true,
 };
 
 export const Rounded = Template.bind({});
 Rounded.args = {
-    rounded: true,
+  rounded: true,
 };
 
 export const Prefix = Template.bind({});
 Prefix.args = {
-    prefix: "$",
+  prefix: "$",
 };
 
 export const Suffix = Template.bind({});
 Suffix.args = {
-    suffix: "%",
+  suffix: "%",
 };
 
 export const WithFormatting = Template.bind({});
 WithFormatting.args = {
-    prefix: "$",
-    numberFormat: true,
-    isBorderless: true,
+  prefix: "$",
+  numberFormat: true,
+  isBorderless: true,
 };

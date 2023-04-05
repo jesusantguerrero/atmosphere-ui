@@ -32,6 +32,7 @@
         :item-active-class="itemActiveClass"
         :track-id="route.label"
         :icon="route.icon"
+        :icon-component="route.iconComponent"
         :label="route.label"
         :childs="route[itemProperty]"
         @update:modelValue="$emit('update:modelValue', $event)"

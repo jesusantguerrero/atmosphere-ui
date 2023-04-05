@@ -34,7 +34,6 @@
 import { format } from "date-fns";
 import { useDatePager } from "vueuse-temporals";
 import { watch, toRefs, computed } from "vue";
-// @ts-expect-error its ok
 import { isSameDate } from "~utils/useDateTime";
 
 import { PagerSizes } from "./constants";

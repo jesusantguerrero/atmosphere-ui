@@ -1,6 +1,6 @@
 {
   "name": "atmosphere-ui",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "description": "UI for jetstream inertia and Vue 3",
   "type": "module",
   "keywords": [
@@ -23,6 +23,7 @@
     "prepublishOnly": "npm run build",
     "storybook": "start-storybook -p 6006",
     "release": "npm run build && bumpp --commit --tag --push",
+    "release-publish-only": "bumpp --commit --tag --push",
     "docs:build": "build-storybook -o docs",
     "chromatic": "npx chromatic --project-token=170dcb534484"
   },

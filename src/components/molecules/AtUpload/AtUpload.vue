@@ -1,6 +1,6 @@
 <template>
-  <Upload
-    v-slot="{ openModal, hasFiles, uploadFiles, onRemoved, list, uploading }"
+  <AtBareUpload
+    v-slot="{ openModal, uploadFiles, list, uploading }"
     v-bind="$props"
     v-on="$props"
     :http-request="httpRequest"
@@ -8,28 +8,29 @@
     ref="fileInput"
   >
     <div>
-      <AtButton @click="openModal" type="primary">Upload file </AtButton>
+      <AtButton @click="openModal()" type="primary">Upload file </AtButton>
       <ul v-if="list">
-        <li v-for="file in list">{{ file && file.name }}</li>
+        <li v-for="file in list" :key="file.name">
+          {{ file && file.name }}
+        </li>
       </ul>
       <AtButton @click="uploadFiles()" :disabled="uploading" type="primary"
-        >Submit {{ uploading }}</AtButton
-      >
+        >Submit {{ uploading }}
+      </AtButton>
     </div>
-  </Upload>
+  </AtBareUpload>
 </template>
 
 <script lang="ts" setup>
-import { Upload } from "../../_core/AtBareUpload/AtBareUpload";
+import { AtBareUpload } from "../../_core/AtBareUpload/AtBareUpload";
 import AtButton from "../../atoms/AtButton/AtButton.vue";
 
-import { computed, provide, ref, toRefs, unref, watch } from "vue";
-
-import type { PropType } from "vue";
+import { PropType } from "vue";
 
 import { uploadProps } from "../../../utils/useUpload";
 import type { IUploadFile } from "../../../utils/useUpload";
-const props = defineProps({
+
+defineProps({
   modelValue: {
     type: Array as PropType<IUploadFile[]>,
     required: true,
@@ -41,5 +42,5 @@ const props = defineProps({
   ...uploadProps,
 });
 
-const emit = defineEmits(["update:modelValue", "submit", "error", "update:isUploading"]);
+defineEmits(["update:modelValue", "submit", "error", "update:isUploading"]);
 </script>

@@ -17,6 +17,7 @@ export { default as AtBillingCard } from "./components/molecules/AtBillingCard/A
 export { default as AtBinaryChoice } from "./components/molecules/AtBinaryChoice/AtBinaryChoice.vue";
 export { default as AtButtonGroup } from "./components/molecules/AtButtonGroup/AtButtonGroup.vue";
 export { default as AtCalendar } from "./components/molecules/AtCalendar/AtCalendar.vue";
+export { default as AtCardAction } from "./components/molecules/AtCardAction/AtCardAction.vue";
 export { default as AtChoices } from "./components/molecules/AtChoices/AtChoices.vue";
 export { default as AtDataCard } from "./components/molecules/AtDataCard/AtDataCard.vue";
 export { default as AtDatePager } from "./components/molecules/AtDatePager/AtDatePager.vue";
@@ -39,6 +40,8 @@ export { default as AtSideItem } from "./components/molecules/AtSideItem/AtSideI
 export { default as AtSideItemGroup } from "./components/molecules/AtSideItemGroup/AtSideItemGroup.vue";
 export { default as AtSimpleSelect } from "./components/molecules/AtSimpleSelect/AtSimpleSelect.vue";
 export { default as AtScrollCard } from "./components/molecules/AtSrollCard/AtScrollCard.vue";
+export { default as AtStatBox } from "./components/molecules/AtStatBox/AtStatBox.vue";
+export { default as AtStatItem } from "./components/molecules/AtStatItem/AtStatItem.vue";
 export { default as AtStep } from "./components/molecules/AtStep/AtStep.vue";
 export { default as AtStepTab } from "./components/molecules/AtStepTab/AtStepTab.vue";
 export { default as AtUpload } from "./components/molecules/AtUpload/AtUpload.vue";

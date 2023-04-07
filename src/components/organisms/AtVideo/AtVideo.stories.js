@@ -40,7 +40,7 @@ export const Default = Template.bind({});
 Default.args = {
     imageUrl:
         "https://www.sciencenewsforstudents.org/wp-content/uploads/2020/11/1030_Earth_atmosphere_explainer.jpg",
-    src: "https://www.framer.com/images/developers/hero.mp4",
+    src: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm",
 };
 
 export const CustomButton = CustomTemplate.bind({});

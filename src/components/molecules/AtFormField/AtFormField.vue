@@ -3,14 +3,16 @@
     <!-- Capturer value -->
     <div v-if="disabled">
       <component
-        v-model="field.value"
-        v-model:options="options"
+        :model-value="field.value"
+        :options="options"
         v-bind="data"
         :placeholder="field.placeholder"
         :data="field.data"
         :type="field.type"
         :emit-value="disabled"
         :is="componentName"
+        @update:options="$emit('update:options', $event)"
+        @update:model-value="$emit('update:model-value', $event)"
       />
     </div>
     <!-- /Capturer value -->

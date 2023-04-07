@@ -100,10 +100,20 @@ LightColors.args = {
     email: "",
   },
   theme: "light",
-  errors: {
-    email: "Email is required",
-  },
   linkClass: "text-blue-500 hover:text-blue-600",
   hideLink: true,
-  brandContainerClass: ''
+  brandContainerClass: "",
+};
+
+export const BackgroundSide = TemplateLight.bind({});
+BackgroundSide.args = {
+  form: {
+    email: "",
+  },
+  theme: "light",
+  linkClass: "text-blue-500 hover:text-blue-600",
+  hideLink: true,
+  brandContainerClass: "",
+  backgroundImage: "https://www.sciencenewsforstudents.org/wp-content/uploads/2020/11/1030_Earth_atmosphere_explainer.jpg",
+  backgroundPlacement: "right",
 };

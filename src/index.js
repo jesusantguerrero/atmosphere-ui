@@ -44,7 +44,6 @@ export { default as AtStatBox } from "./components/molecules/AtStatBox/AtStatBox
 export { default as AtStatItem } from "./components/molecules/AtStatItem/AtStatItem.vue";
 export { default as AtStep } from "./components/molecules/AtStep/AtStep.vue";
 export { default as AtStepTab } from "./components/molecules/AtStepTab/AtStepTab.vue";
-export { default as AtUpload } from "./components/molecules/AtUpload/AtUpload.vue";
 export { default as AtWeekControls } from "./components/molecules/AtWeekControls/AtWeekControls.vue";
 export { default as AtHero } from "./components/molecules/landing/AtHero.vue";
 export { default as AtPreFooter } from "./components/molecules/landing/AtPreFooter.vue";

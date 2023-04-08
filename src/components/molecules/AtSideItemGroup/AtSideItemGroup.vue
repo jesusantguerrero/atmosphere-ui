@@ -50,9 +50,9 @@ const emitValue = () => {
   emit("update:modelValue", current);
 };
 
-const isIconComponent = () => {
+const isIconComponent = computed(() => {
   return typeof props.icon !== "string";
-};
+});
 </script>
 
 <template>

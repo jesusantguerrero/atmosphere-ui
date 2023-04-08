@@ -37,16 +37,16 @@ const componentName = computed(() => {
   return props.as;
 });
 
-function isActive(url) {
+function isActive(url: string) {
   const isActiveMethod = props.isActiveFunction || isSamePath;
   return isActiveMethod(url, currentPath.value);
 }
 
 const isExpanded = inject("isExpanded", true);
 
-const isIconComponent = () => {
+const isIconComponent = computed(() => {
   return typeof props.icon !== "string";
-};
+});
 </script>
 
 <template>

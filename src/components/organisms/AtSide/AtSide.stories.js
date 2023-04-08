@@ -1,6 +1,7 @@
 import { Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 import AtSide from "./AtSide.vue";
+import CustomIcon from "./CustomIcon.vue";
 
 export default {
   title: "Organisms/AtSide",
@@ -173,7 +174,7 @@ ProductionExample.args = {
   title: "Loger",
   menu: [
     {
-      icon: "fa fa-home",
+      icon: CustomIcon,
       name: "home",
       label: "Home",
       to: "/dashboard",

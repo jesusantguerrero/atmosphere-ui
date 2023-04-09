@@ -1,3 +1,17 @@
+<script setup>
+import AtSideItemGroup from "~molecules/AtSideItemGroup/AtSideItemGroup.vue";
+import AtSideItem from "~molecules/AtSideItem/AtSideItem.vue";
+
+import { AtSideNavProps } from "./AtSideNavProps";
+
+defineProps({
+  ...AtSideNavProps,
+  modelValue: {
+    type: String,
+  },
+});
+</script>
+
 <template>
   <div>
     <template v-for="route in menu">
@@ -30,6 +44,8 @@
         :key="`${route.label}-group`"
         :item-class="itemClass"
         :item-active-class="itemActiveClass"
+        :child-class="childClass"
+        :child-active-class="childActiveClass"
         :track-id="route.label"
         :icon="route.icon"
         :icon-component="route.iconComponent"
@@ -40,17 +56,3 @@
     </template>
   </div>
 </template>
-
-<script setup>
-import AtSideItemGroup from "~molecules/AtSideItemGroup/AtSideItemGroup.vue";
-import AtSideItem from "~molecules/AtSideItem/AtSideItem.vue";
-
-import { AtSideNavProps } from "./AtSideNavProps";
-
-defineProps({
-  ...AtSideNavProps,
-  modelValue: {
-    type: String,
-  },
-});
-</script>

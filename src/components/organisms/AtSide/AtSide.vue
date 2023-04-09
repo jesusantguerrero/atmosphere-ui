@@ -7,6 +7,7 @@
         </h1>
       </slot>
     </div>
+
     <AtSideNav
       v-model="activeGroup"
       class="w-full mx-auto"
@@ -16,6 +17,8 @@
       :menu="menu"
       :item-property="itemProperty"
       :icon-class="iconClass"
+      :child-class="childClass"
+      :child-active-class="childActiveClass"
       :item-class="itemClass"
       :item-active-class="itemActiveClass"
     />
@@ -31,6 +34,8 @@
         :menu="headerMenu"
         :item-property="itemProperty"
         :icon-class="iconClass"
+        :child-class="childClass"
+        :child-active-class="childActiveClass"
         :item-class="itemClass"
         :item-active-class="itemActiveClass"
       />

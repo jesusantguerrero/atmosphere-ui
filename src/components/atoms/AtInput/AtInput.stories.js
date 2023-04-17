@@ -44,6 +44,7 @@ Suffix.args = {
 export const WithFormatting = Template.bind({});
 WithFormatting.args = {
   prefix: "$",
+  modelValue: "22,000.00",
   numberFormat: true,
   isBorderless: true,
 };

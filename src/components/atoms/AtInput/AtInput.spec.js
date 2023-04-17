@@ -4,25 +4,39 @@ import AtInput from "./AtInput.vue";
 import { ref } from "vue";
 
 describe("AtInput", async () => {
-    it("renders properly", async () => {
-        render(AtInput, {
-            props: { placeholder: "Type something..." },
-        });
-
-        const searchInput = screen.getByPlaceholderText("Type something...");
-        expect(searchInput).toBeTruthy();
+  it("renders properly", async () => {
+    render(AtInput, {
+      props: { placeholder: "Type something..." },
     });
 
-    it("handle input", async () => {
-        const modelValue = ref();
-        render(AtInput, {
-            props: {
-                placeholder: "Type something...",
-                modelValue,
-            },
-        });
-        const searchInput = screen.getByPlaceholderText("Type something...");
+    const searchInput = screen.getByPlaceholderText("Type something...");
+    expect(searchInput).toBeTruthy();
+  });
 
-        expect(searchInput).toBeTruthy();
+  it("handle input", async () => {
+    const modelValue = ref();
+    render(AtInput, {
+      props: {
+        placeholder: "Type something...",
+        modelValue,
+      },
     });
+    const searchInput = screen.getByPlaceholderText("Type something...");
+
+    expect(searchInput).toBeTruthy();
+  });
+
+  it("renders initial value correctly", async () => {
+    const modelValue = ref("22,000.00");
+    render(AtInput, {
+      props: {
+        placeholder: "Type something...",
+        modelValue,
+        numberFormat: true,
+      },
+    });
+    const searchInput = screen.getByPlaceholderText("Type something...");
+
+    expect(searchInput).toBe("22,000.00");
+  });
 });

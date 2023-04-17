@@ -18,7 +18,6 @@ const props = withDefaults(
   }>(),
   {
     classes: "nav-link",
-    as: "router-link",
   }
 );
 
@@ -67,7 +66,12 @@ const isIconComponent = computed(() => {
           :class="[icon ?? `fa fa-${icon}`, isExpanded ? 'mr-2' : 'mx-auto']"
         />
 
-        <span v-if="isExpanded"> {{ label }} </span>
+        <span v-if="isExpanded">
+          {{ label }}
+        </span>
+        <span v-else-if="!icon">
+          {{ label?.at?.(0) }}
+        </span>
       </component>
     </slot>
   </div>

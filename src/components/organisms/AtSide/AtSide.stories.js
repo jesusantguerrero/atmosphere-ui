@@ -24,13 +24,33 @@ const Template = (args) => ({
   `,
 });
 
+const CustomSlotTemplate = (args) => ({
+  components: { AtSide },
+  setup() {
+    const isExpanded = ref(true);
+    return { args, isExpanded };
+  },
+  template: `
+    <div :class="isExpanded ? 'w-96' : 'w-32'">
+      <AtSide 
+        v-bind="args"
+        v-model:isExpanded="isExpanded"
+      >
+        <template #dashboard>
+          <button>I am a custom button</button>
+        </template>
+      </AtSide>
+    </div>
+  `,
+});
+
 const menu = [
   {
     icon: "users",
     label: "People",
     items: [
       {
-        icon: "user",
+        icon: CustomIcon,
         label: "Edit",
         to: "/people/edit",
       },
@@ -56,6 +76,7 @@ const menu = [
   {
     icon: "home",
     label: "Dashboard",
+    name: "dashboard",
     items: [
       {
         to: "/dashboard",
@@ -93,6 +114,20 @@ WithHeaderMenu.args = {
   class: "bg-white text-gray-700",
   itemClass: "text-gray-700 hover:bg-gray-500 hover:text-white",
   itemActiveClass: "bg-gray-500 text-white",
+  childClass: "text-gray-500 hover:text-primary",
+  childActiveClass: "text-primary",
+};
+
+export const WithCustomItem = CustomSlotTemplate.bind({});
+WithCustomItem.args = {
+  title: "Atmosphere UI",
+  menu,
+  headerMenu: menu,
+  class: "bg-white text-gray-700",
+  itemClass: "text-gray-700 hover:bg-gray-500 hover:text-white",
+  itemActiveClass: "bg-gray-500 text-white",
+  childClass: "text-gray-500 hover:text-primary",
+  childActiveClass: "text-primary",
 };
 
 export const WithTheme = Template.bind({});

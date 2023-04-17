@@ -133,18 +133,10 @@ const inputClasses = computed(() => {
   const focusClasses = state.isFocused
     ? `ring-indigo-200 ring-opacity-50 ${theme.focus}`
     : "";
-  const borderClasses = props.isBorderless
-    ? "border-none"
-    : "border border-gray-300";
+  const borderClasses = props.isBorderless ? "border-none" : "border border-gray-300";
   const formClasses = props.rounded ? "rounded-md" : "";
 
-  return [
-    disabledClasses,
-    focusClasses,
-    borderClasses,
-    formClasses,
-    theme.normal,
-  ];
+  return [disabledClasses, focusClasses, borderClasses, formClasses, theme.normal];
 });
 
 const formattedValue = computed(() => {
@@ -155,7 +147,7 @@ const formattedValue = computed(() => {
   const numberFormatter = props.numberFormatter;
 
   const defaultFormatter = (value: number) => {
-    return formatNumber("en-US", {
+    return formatNumber(value, {
       style: "decimal",
       minimumFractionDigits: props.decimalDigits,
       maximumFractionDigits: props.decimalDigits,
@@ -199,11 +191,11 @@ const formattedValue = computed(() => {
     </slot>
     <input
       ref="inputRef"
+      v-bind="$attrs"
       :value="formattedValue"
       :disabled="disabled"
       :data-testid="dataTestid"
       class="w-full h-full px-2 focus:outline-none"
-      v-bind="$attrs"
       :placeholder="placeholder"
       @focus="onFocus"
       @blur="onBlur"

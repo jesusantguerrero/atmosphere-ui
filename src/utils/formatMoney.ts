@@ -11,7 +11,8 @@ export const formatMoney = (
       ...options,
     }).format(Number(value.toString().replaceAll(",", "")) || 0);
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    console.error(err);
     return value;
   }
 };
@@ -20,12 +21,17 @@ export const formatNumber = (
   value: number | string,
   options: Intl.NumberFormatOptions = {}
 ) => {
-  return new Intl.NumberFormat("en-US", {
-    style: "decimal",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-    ...options,
-  }).format(Number(value.toString().replaceAll(",", "")) || 0);
+  try {
+    return new Intl.NumberFormat("en-US", {
+      style: "decimal",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+      ...options,
+    }).format(Number(value.toString().replaceAll(",", "")) || 0);
+  } catch (err) {
+    console.error("atmosphere-ui:error", err);
+    return value;
+  }
 };
 
 export default formatMoney;

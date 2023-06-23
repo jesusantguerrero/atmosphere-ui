@@ -1,6 +1,6 @@
 {
   "name": "atmosphere-ui",
-  "version": "1.1.16",
+  "version": "1.1.17",
   "description": "UI for jetstream inertia and Vue 3",
   "type": "module",
   "keywords": [
@@ -28,8 +28,8 @@
     "chromatic": "npx chromatic --project-token=170dcb534484"
   },
   "dependencies": {
-    "@popperjs/core": "^2.11.7",
-    "mathjs": "^11.8.0",
+    "@popperjs/core": "^2.11.8",
+    "mathjs": "^11.8.2",
     "vueuse-temporals": "^1.4.3"
   },
   "peerDependencies": {

@@ -66,6 +66,7 @@ export { default as AtUserButton } from "./components/organisms/AtUserButton/AtU
 export { default as AtPlayer } from "./components/organisms/AtVideo/AtPlayer.vue";
 export { default as AtVideo } from "./components/organisms/AtVideo/AtVideo.vue";
 export { default as AtAuthBox } from "./components/templates/AtAuthBox/AtAuthBox.vue";
+export { default as AtAuthFluid } from "./components/templates/AtAuthFluid/AtAuthFluid.vue";
 export { default as AtShell } from "./components/templates/AtShell/AtShell.vue";
  
  // Utils 

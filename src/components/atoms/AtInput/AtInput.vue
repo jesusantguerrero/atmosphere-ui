@@ -80,7 +80,7 @@ const state = reactive({
 
 const inputRef = ref();
 const focus = () => {
-  inputRef.value.focus();
+  inputRef.value?.focus();
 };
 
 const blur = () => {

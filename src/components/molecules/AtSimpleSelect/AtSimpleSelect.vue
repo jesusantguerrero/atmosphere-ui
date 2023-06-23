@@ -43,7 +43,7 @@
 
 <script setup>
 import Dropdown from "../AtDropdown/AtDropdown.vue";
-import { computed, ref } from "vue";
+import { computed } from "vue";
 
 const props = defineProps({
   options: {
@@ -76,8 +76,7 @@ const valueLabel = computed(() => {
 });
 
 const emitValue = (option) => {
-  const value =
-    props.emitValue && option ? option.label : option.name || option;
+  const value = props.emitValue && option ? option.label : option.name || option;
   emit("update:modelValue", value);
 };
 </script>

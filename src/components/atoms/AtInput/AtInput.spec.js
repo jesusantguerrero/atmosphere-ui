@@ -35,8 +35,8 @@ describe("AtInput", async () => {
         numberFormat: true,
       },
     });
-    const searchInput = screen.getByPlaceholderText("Type something...");
+    const numberInput = screen.getByPlaceholderText("Type something...");
 
-    expect(searchInput).toBe("22,000.00");
+    expect(numberInput.value).toBe("22,000.00");
   });
 });

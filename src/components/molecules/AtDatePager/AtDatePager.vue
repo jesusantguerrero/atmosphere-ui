@@ -1,35 +1,3 @@
-<template>
-  <div
-    class="flex justify-between overflow-hidden text-gray-500 bg-white border-2 border-gray-200 rounded-md date-pager"
-    :class="sizeClass"
-  >
-    <button
-      class="px-2 transition-colors focus:outline-none"
-      :class="controlsClass"
-      @click="emitChange('prev')"
-    >
-      <slot name="previous">
-        <i class="fa fa-chevron-left"></i>
-      </slot>
-    </button>
-    <div
-      v-if="startDate && endDate && !iconsOnly"
-      class="flex items-center text-sm font-bold"
-    >
-      <slot> {{ formatDate(startDate) }} - {{ formatDate(endDate) }} </slot>
-    </div>
-    <button
-      class="px-2 transition-colors focus:outline-none"
-      :class="controlsClass"
-      @click="emitChange('next')"
-    >
-      <slot name="next">
-        <i class="fa fa-chevron-right"></i>
-      </slot>
-    </button>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { format } from "date-fns";
 import { useDatePager } from "vueuse-temporals";
@@ -109,6 +77,11 @@ const emitDay = (value) => {
     emit("update:modelValue", value);
   }
 };
+
+watch(() => props.nextMode, () => {
+  controls?.setMode(props.nextMode);
+})
+
 watch(
   modelValue,
   (date) => {
@@ -129,6 +102,40 @@ const sizeClass = computed(() => {
   return [PagerSizes[props.size], widthClass];
 });
 </script>
+
+<template>
+  <div
+    class="flex justify-between overflow-hidden text-gray-500 bg-white border-2 border-gray-200 rounded-md date-pager"
+    :class="sizeClass"
+  >
+    <button
+      class="px-2 transition-colors focus:outline-none"
+      :class="controlsClass"
+      @click="emitChange('prev')"
+    >
+      <slot name="previous">
+        <i class="fa fa-chevron-left"></i>
+      </slot>
+    </button>
+    <div
+      v-if="startDate && endDate && !iconsOnly"
+      class="flex items-center text-sm font-bold"
+    >
+      <slot> {{ formatDate(startDate) }} - {{ formatDate(endDate) }} </slot>
+    </div>
+    <button
+      class="px-2 transition-colors focus:outline-none"
+      :class="controlsClass"
+      @click="emitChange('next')"
+    >
+      <slot name="next">
+        <i class="fa fa-chevron-right"></i>
+      </slot>
+    </button>
+  </div>
+</template>
+
+
 
 <style lang="scss">
 $primary-color: var(--primary-color);

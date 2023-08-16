@@ -115,7 +115,10 @@
 import Dropdown from "../../molecules/AtDropdown/AtDropdown.vue";
 import AtDropdownLink from "../../molecules/AtDropdownLink/AtDropdownLink.vue";
 
-type Team = Record<string, any>;
+interface Team {
+  id: number;
+  name: string;
+};
 
 withDefaults(
   defineProps<{

@@ -20,6 +20,7 @@ const props = withDefaults(
     // eslint-disable-next-line @typescript-eslint/ban-types
     icon: string | Object;
     label: string;
+    name?: string;
     childs?: IMenuItem[];
     modelValue: string;
     trackId: string;
@@ -39,6 +40,7 @@ const props = withDefaults(
 
 const isExpanded = inject("isExpanded");
 const currentPath = inject("currentPath", ref(""));
+
 
 const isActive = computed(() => {
   return props.trackId == props.modelValue;
@@ -97,6 +99,7 @@ const isIconComponent = computed(() => {
           :key="`${label}-${item.label}`"
           :icon="item.icon"
           :label="item.label"
+          :name="item.name"
           :to="item.to"
           :as="item.as ?? as"
           :item-active-class="childActiveClass ?? item.class ?? itemActiveClass"

@@ -2,6 +2,7 @@ import { Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 import AtSide from "./AtSide.vue";
 import CustomIcon from "./CustomIcon.vue";
+import AtTeamSelect from "../AtTeamSelect/AtTeamSelect.vue";
 
 export default {
   title: "Organisms/AtSide",
@@ -12,7 +13,7 @@ const Template = (args) => ({
   components: { AtSide },
   setup() {
     const isExpanded = ref(true);
-    return { args, isExpanded };
+    return { args, isExpanded, teamProps };
   },
   template: `
     <div :class="isExpanded ? 'w-96' : 'w-32'">
@@ -20,6 +21,56 @@ const Template = (args) => ({
         v-bind="args"
         v-model:isExpanded="isExpanded"
       />
+    </div>
+  `,
+});
+
+const HeaderSlotTemplate = (args) => ({
+  components: { AtSide, AtTeamSelect },
+  setup() {
+    const teamProps = {
+      hasTeamFeatures: true,
+      canCreateTeams: true,
+      currentTeam: {
+        id: "1",
+        name: "Team 1",
+        description: "Team 1 description",
+        avatar: "https://via.placeholder.com/150",
+      },
+      teams: [
+        {
+          id: "1",
+          name: "Team 1",
+          description: "Team 1 description",
+          avatar: "https://via.placeholder.com/150",
+        },
+        {
+          id: "2",
+          name: "Team 2",
+          description: "Team 2 description",
+          avatar: "https://via.placeholder.com/150",
+        },
+      ],
+      imageUrl:
+        "blob:http://neatlancer.test/f87e1fb3-c9f4-42dd-8604-8d6e61b74779",
+      colors: "bg-[#15325E] text-white hover:bg-[#F3645C]",
+      rounded: false,
+      fullHeight: true,
+    };
+
+    const isExpanded = ref(true);
+    return { args, isExpanded, teamProps };
+  },
+  template: `
+    <div :class="isExpanded ? 'w-96' : 'w-16'">
+      <AtSide 
+        v-bind="args"
+        v-model:isExpanded="isExpanded"
+      >
+      <template #brand>
+        <AtTeamSelect v-bind="teamProps" class="w-full" :image-only="isExpanded" />
+      </template>
+      </AtSide>
     </div>
   `,
 });
@@ -196,7 +247,8 @@ WithSections.args = {
         },
         {
           icon: "",
-          label: "My Resources",
+          name: "messages",
+          label: "Messages",
           to: "/dashboard/my-resources",
         },
       ],
@@ -263,4 +315,70 @@ ProductionExample.args = {
   itemActiveClass: "bg-gray-500 text-white",
   isExpandable: true,
   currentPath: "/",
+};
+
+export const WithHeaderSlot = HeaderSlotTemplate.bind({});
+WithHeaderSlot.args = {
+  title: "ICLoan",
+  menu: [
+    {
+      icon: CustomIcon,
+      name: "home",
+      label: "Home",
+      to: "/dashboard",
+      as: Link,
+    },
+    {
+      icon: "far fa-calendar-alt",
+      label: "Meal Planner",
+      name: "mealPlanner",
+      to: "/meal-planner",
+      as: Link,
+      isActiveFunction(url, currentPath) {
+        return /meal-planner|meals|ingredients/.test(currentPath);
+      },
+    },
+    {
+      icon: "fas fa-dollar-sign",
+      label: "Finance",
+      name: "finance",
+      to: "/finance",
+      as: Link,
+      isActiveFunction(url, currentPath) {
+        return /finance|budgets|trends/.test(currentPath);
+      },
+    },
+    {
+      icon: "fas fa-heart",
+      label: "Relationship",
+      to: "/relationships",
+      as: Link,
+    },
+    {
+      icon: "fas fa-home",
+      label: "Home Projects",
+      name: "housing",
+      to: "/housing",
+      as: Link,
+    },
+  ],
+  headerMenu: [
+    {
+      icon: "cogs",
+      label: "Settings",
+    },
+    {
+      icon: "star",
+      label: "Help",
+    },
+  ],
+  class: "bg-[#15325E] text-white",
+  itemClass: "text-white hover:bg-[#F3645C] hover:text-white",
+  itemActiveClass: "bg-[#F3645C] text-white",
+  isExpandable: true,
+  brandContainerClass: "",
+  currentPath: "/",
+  counters: {
+    housing: 7,
+  },
 };

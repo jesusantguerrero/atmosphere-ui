@@ -1,14 +1,42 @@
 <template>
-  <div class="relative">
-    <dropdown align="right" width="60" v-bind="$attrs" v-if="hasTeamFeatures">
+  <div
+    class="relative"
+    :class="{
+      'h-full': fullHeight,
+    }"
+  >
+    <dropdown
+      align="right"
+      width="60"
+      v-bind="$attrs"
+      v-if="hasTeamFeatures"
+      :full-height="fullHeight"
+    >
       <template #trigger>
-        <span class="inline-flex rounded-md">
-          <button
-            type="button"
-            class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition bg-white border border-transparent rounded-md hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50"
-          >
-            {{ currentTeam.name }}
+        <button
+          :class="[
+            rounded && 'rounded-md',
+            fullHeight && 'h-full justify-between',
+            colors,
+          ]"
+          type="button"
+          class="inline-flex w-full items-center px-3 py-2 text-sm font-medium leading-4 transition border border-transparent focus:outline-none"
+        >
+          <section class="flex items-center">
+            <div
+              v-if="imageUrl || $slots.image"
+              class="w-10 h-10 bg-black rounded-md mr-4 flex items-center justify-center"
+            >
+              <slot name="image">
+                <img :src="imageUrl" alt="" />
+              </slot>
+            </div>
+            <article v-if="imageOnly">
+              {{ currentTeam.name }}
+            </article>
+          </section>
 
+          <slot name="icon">
             <svg
               class="ml-2 -mr-0.5 h-4 w-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -21,8 +49,8 @@
                 clip-rule="evenodd"
               />
             </svg>
-          </button>
-        </span>
+          </slot>
+        </button>
       </template>
 
       <template #content>
@@ -34,11 +62,15 @@
             </div>
 
             <!-- Team Settings -->
-            <AtDropdownLink :href="route('teams.show', currentTeam)">
+            <AtDropdownLink as="button" @click="$emit('settings')">
               {{ resourceName }} Settings
             </AtDropdownLink>
 
-            <AtDropdownLink :href="route('teams.create')" v-if="canCreateTeams">
+            <AtDropdownLink
+              as="button"
+              @click="$emit('create')"
+              v-if="canCreateTeams"
+            >
               Create New {{ resourceName }}
             </AtDropdownLink>
 
@@ -79,40 +111,37 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Dropdown from "../../molecules/AtDropdown/AtDropdown.vue";
 import AtDropdownLink from "../../molecules/AtDropdownLink/AtDropdownLink.vue";
 
-defineProps({
-  hasTeamFeatures: {
-    type: Boolean,
-    default: false,
-  },
-  canCreateTeams: {
-    type: Boolean,
-    default: false,
-  },
-  currentTeam: {
-    type: Object,
-    default: () => ({}),
-  },
-  teams: {
-    type: Array,
-    default: () => [],
-  },
-  route: {
-    type: Function,
-    default: () => (path) => path,
-  },
-  sectionTitle: {
-    type: String,
-    default: "Manage Team",
-  },
-  resourceName: {
-    type: String,
-    default: "Team",
-  },
-});
+interface Team {
+  id: number;
+  name: string;
+};
 
-defineEmits(["switch-team", "create"]);
+withDefaults(
+  defineProps<{
+    hasTeamFeatures: boolean;
+    canCreateTeams: boolean;
+    currentTeam: Team;
+    teams: Team[];
+    sectionTitle: string;
+    resourceName: string;
+    imageUrl?: string;
+    rounded: boolean;
+    fullHeight?: boolean;
+    imageOnly?: boolean;
+    colors: string;
+  }>(),
+  {
+    sectionTitle: "Manage Team",
+    resourceName: "Team",
+    rounded: true,
+    colors:
+      "text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:bg-gray-50 active:bg-gray-50",
+  }
+);
+
+defineEmits(["switch-team", "create", "settings"]);
 </script>

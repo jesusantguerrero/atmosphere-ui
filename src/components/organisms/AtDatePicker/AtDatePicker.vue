@@ -38,20 +38,28 @@
 
     <!-- Shortcuts -->
     <div class="py-2" v-if="shortcuts.length">
-      <at-date-action
+      <AtDateAction
         v-for="shortcut in shortcuts"
         :key="shortcut.text"
         class="cursor-pointer"
         @click="setDate(shortcut.value)"
       >
         {{ shortcut.text }}
-      </at-date-action>
+      </AtDateAction>
     </div>
 
     <!-- Switches -->
     <div class="py-2" v-if="state.showSwitches">
-      <AtFieldCheck label="Include end" v-model="state.includesEndDate" v-if="acceptEndDate" />
-      <AtFieldCheck label="Include time" v-model="state.includesTime" v-if="acceptTime" />
+      <AtFieldCheck
+        label="Include end"
+        v-model="state.includesEndDate"
+        v-if="acceptEndDate"
+      />
+      <AtFieldCheck
+        label="Include time"
+        v-model="state.includesTime"
+        v-if="acceptTime"
+      />
     </div>
 
     <!-- TimeFormat Config -->
@@ -78,7 +86,7 @@
 </template>
 
 <script setup>
-import { reactive, toRefs, computed, watch } from "vue";
+import { reactive, computed, watch } from "vue";
 import AtFieldCheck from "../../molecules/AtFieldCheck/AtFieldCheck.vue";
 import AtFieldDateTime from "../../molecules/AtFieldDateTime/AtFieldDateTime.vue";
 import AtCalendar from "../../molecules/AtCalendar/AtCalendar.vue";
@@ -193,7 +201,11 @@ const setDate = (date) => {
     state.date = date;
     state.endDate = holder;
     state.selected = "date";
-  } else if (state.selected == "date" && state.endDate && isAfter(date, state.endDate)) {
+  } else if (
+    state.selected == "date" &&
+    state.endDate &&
+    isAfter(date, state.endDate)
+  ) {
     const holder = state.endDate;
     state.endDate = date;
     state.date = holder;
@@ -204,8 +216,4 @@ const setDate = (date) => {
 
   emitUpdate();
 };
-
-const selectedDate = computed(() => {
-  return state[state.selected];
-});
 </script>

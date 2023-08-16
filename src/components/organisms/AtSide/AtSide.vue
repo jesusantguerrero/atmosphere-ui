@@ -21,6 +21,7 @@
       :child-active-class="childActiveClass"
       :item-class="itemClass"
       :item-active-class="itemActiveClass"
+      :counters="counters"
     />
 
     <div class="flex flex-col justify-end nav-container">
@@ -38,6 +39,7 @@
         :child-active-class="childActiveClass"
         :item-class="itemClass"
         :item-active-class="itemActiveClass"
+        :counters="counters"
       />
 
       <div class="flex justify-end w-full pr-4" v-if="isExpandable">
@@ -101,14 +103,21 @@ const props = defineProps({
     default: "py-8",
     type: String,
   },
+  counters: {
+    type: Object,
+    default() {
+      return {};
+    },
+  },
 });
 
 defineEmits(["update:isExpanded"]);
-const { isExpanded, currentPath } = toRefs(props);
+const { isExpanded, currentPath, counters } = toRefs(props);
 const activeGroup = ref("");
 
 provide("currentPath", currentPath);
 provide("isExpanded", isExpanded);
+provide("counters", counters);
 </script>
 
 <style lang="scss" scoped>

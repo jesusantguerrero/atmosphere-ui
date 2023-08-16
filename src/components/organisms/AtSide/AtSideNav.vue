@@ -9,6 +9,12 @@ defineProps({
   modelValue: {
     type: String,
   },
+  counters: {
+    type: Object,
+    default() {
+      return {};
+    },
+  },
 });
 </script>
 

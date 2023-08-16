@@ -8,6 +8,7 @@ const props = withDefaults(
     // eslint-disable-next-line @typescript-eslint/ban-types
     icon: string | Object;
     label: string;
+    name: string;
     classes: string;
     itemClass?: string;
     itemActiveClass?: string;
@@ -22,6 +23,7 @@ const props = withDefaults(
 );
 
 const currentPath = inject("currentPath", ref(""));
+const counters = inject("counters", ref({}));
 const classes = computed(() => {
   const classes = "flex items-center w-full px-5 py-4 cursor-pointer";
   return [
@@ -45,6 +47,10 @@ const isExpanded = inject("isExpanded", true);
 
 const isIconComponent = computed(() => {
   return typeof props.icon !== "string";
+});
+
+const itemCounter = computed(() => {
+  return counters.value[props.name] ?? 0
 });
 </script>
 
@@ -72,6 +78,12 @@ const isIconComponent = computed(() => {
         <span v-else-if="!icon">
           {{ label?.at?.(0) }}
         </span>
+        <div
+          v-if="itemCounter"
+          class="w-5 h-5 text-xs text-white flex justify-center items-center rounded-full shadow-md bg-error"
+        >
+          {{ itemCounter }}
+        </div>
       </component>
     </slot>
   </div>

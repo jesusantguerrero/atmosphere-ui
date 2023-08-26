@@ -163,7 +163,7 @@ export const useServerSearch = (
     });
   };
 
-  onUrlChange(parseParams(state)).then(() => {
+  localUrlChange(parseParams(state)).then(() => {
     isLoaded.value = true;
   });
 
@@ -171,7 +171,7 @@ export const useServerSearch = (
     nextTick(() => {
       const urlParams = parseParams(state);
       const currentUrl = getCurrentLocationParams();
-      if (urlParams == currentUrl || !onUrlChange) return;
+      if (urlParams == currentUrl || !localUrlChange) return;
 
       if (!delay) {
         localUrlChange(urlParams);

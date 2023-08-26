@@ -96,3 +96,11 @@ MiddleSlot.args = {
   nextMode: "month",
   placeholder: "Select a date",
 };
+
+export const WithInitialDate = Template.bind({});
+WithInitialDate.args = {
+  startDate: new Date(2023, 5, 1),
+  endDate: new Date(2023, 5, 30),
+  nextMode: "month",
+  placeholder: "Select a date",
+};

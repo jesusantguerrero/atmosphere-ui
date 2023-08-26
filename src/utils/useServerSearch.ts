@@ -37,12 +37,15 @@ interface ISearchState {
 export interface InertiaRouterType {
   get: (
     url: string,
-    data: Record<string, any> | undefined,
-    config: Record<string, any>
+    data: Partial<Record<string, any>> | undefined,
+    config: Partial<Record<string, any>>
   ) => void;
 }
 
-export type UrlChangeCallback = (urlParams: string) => Promise<void>;
+export type UrlChangeCallback = (
+  urlParams: string,
+  UpdateSearch?: (params: string) => void
+) => Promise<void>;
 export const filterParams = (
   mainDateField: string,
   externalFilters: Record<string, string | null>,
@@ -116,16 +119,19 @@ const getCurrentLocationParams = () => {
   return location.search.toString();
 };
 
-export const defaultSearchInertia = async (
+const defaultSearchInertia = async (
   router: InertiaRouterType,
-  urlParams: string
+  urlParams: string,
+  updateSearch?: (urlParams: string) => void
 ) => {
   const finalUrl = `${window.location.pathname}?${urlParams}`;
   if (finalUrl == window.location.toString()) return;
-  return router.get(finalUrl, undefined, {
-    preserveScroll: true,
-    preserveState: true,
-  });
+  return updateSearch
+    ? updateSearch(urlParams)
+    : router.get(finalUrl, undefined, {
+        preserveScroll: true,
+        preserveState: true,
+      });
 };
 
 export const useServerSearch = (
@@ -137,7 +143,15 @@ export const useServerSearch = (
   const dates = parseDateFilters(serverSearchData);
   const isLoaded = ref(false);
 
-  const localRouter = inject("router", router);
+  const localRouter = inject(
+    "router",
+    // eslint-disable-next-line no-empty-pattern
+    router ?? {get: (params, {}, {}) => {
+        throw new Error(`provide an router with ${params}`)
+        return;
+      },
+    }
+  );
   const localUrlChange =
     onUrlChange ?? defaultSearchInertia.bind(null, localRouter);
 
@@ -157,13 +171,14 @@ export const useServerSearch = (
     page: serverSearchData.value?.page,
   });
 
-  const updateSearch = (newUrl: string) => {
-    return localRouter.get(newUrl, undefined, {
+  const updateSearch = (urlParams: string) => {
+    const finalUrl = `${window.location.pathname}?${urlParams}`;
+    return localRouter.get(finalUrl, undefined, {
       preserveState: true,
     });
   };
 
-  localUrlChange(parseParams(state)).then(() => {
+  localUrlChange(parseParams(state), updateSearch).then(() => {
     isLoaded.value = true;
   });
 
@@ -174,7 +189,7 @@ export const useServerSearch = (
       if (urlParams == currentUrl || !localUrlChange) return;
 
       if (!delay) {
-        localUrlChange(urlParams);
+        localUrlChange(urlParams, updateSearch);
       } else {
         nextTick(
           debounce(() => {
@@ -184,7 +199,7 @@ export const useServerSearch = (
               null,
               `${location.pathname}?${urlParams}`
             );
-            localUrlChange(urlParams);
+            localUrlChange(urlParams, updateSearch);
           }, delay)
         );
       }
@@ -209,7 +224,7 @@ export const useServerSearch = (
             null,
             `${location.pathname}?${urlParams}`
           );
-          localUrlChange(urlParams);
+          localUrlChange(urlParams, updateSearch);
         }
       });
     }, 400),

@@ -14,6 +14,12 @@ const props = defineProps({
   modelValue: {
     type: Date,
   },
+  startDate: {
+    type: Date,
+  },
+  endDate: {
+    type: Date,
+  },
   dateSpan: {
     type: Array,
   },
@@ -48,12 +54,17 @@ const emit = defineEmits([
   "update:endDate",
   "change",
 ]);
-const { modelValue, dateSpan, nextMode } = toRefs(props);
-const { controls, selectedSpan, selectedDay, startDate, endDate } =
-  useDatePager({
-    nextMode: nextMode.value,
-    initialDate: modelValue.value,
-  });
+const { modelValue, dateSpan, nextMode, startDate, endDate } = toRefs(props);
+const {
+  controls,
+  selectedSpan,
+  selectedDay,
+  startDate: selectedStartDate,
+  endDate: selectedEndDate,
+} = useDatePager({
+  nextMode: nextMode.value,
+  initialDate: modelValue.value,
+});
 
 const emitChange = (mode) => {
   if (mode == "next") {
@@ -78,9 +89,12 @@ const emitDay = (value) => {
   }
 };
 
-watch(() => props.nextMode, () => {
-  controls?.setMode(props.nextMode);
-})
+watch(
+  () => props.nextMode,
+  () => {
+    controls?.setMode(props.nextMode);
+  }
+);
 
 watch(
   modelValue,
@@ -89,11 +103,35 @@ watch(
   },
   { immediate: true }
 );
+
+watch(
+  startDate,
+  (date) => {
+    controls.setDay(date);
+  },
+  { immediate: true }
+);
+
 watch(selectedDay, emitDay, { immediate: true });
-watch(startDate, () => emit("update:startDate", startDate.value), {
-  immediate: true,
-});
-watch(endDate, () => emit("update:endDate", endDate.value), {
+watch(
+  selectedStartDate,
+  (value) => {
+    if (!isSameDate(value, startDate.value)) {
+      emit("update:startDate", selectedStartDate.value)
+    }
+  },
+  {
+    immediate: true,
+  }
+);
+
+watch(
+  selectedEndDate,
+  (value) => {
+  if (!isSameDate(value, endDate.value)) {
+      emit("update:endDate", selectedEndDate.value);
+  }
+}, {
   immediate: true,
 });
 
@@ -134,8 +172,6 @@ const sizeClass = computed(() => {
     </button>
   </div>
 </template>
-
-
 
 <style lang="scss">
 $primary-color: var(--primary-color);

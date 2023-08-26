@@ -20,18 +20,18 @@
             colors,
           ]"
           type="button"
-          class="inline-flex w-full items-center px-3 py-2 text-sm font-medium leading-4 transition border border-transparent focus:outline-none"
+          class="inline-flex items-center w-full px-3 py-2 text-sm font-medium leading-4 transition border border-transparent focus:outline-none"
         >
           <section class="flex items-center">
             <div
               v-if="imageUrl || $slots.image"
-              class="w-10 h-10 bg-black rounded-md mr-4 flex items-center justify-center"
+              class="flex items-center justify-center w-10 h-10 mr-4 bg-black rounded-md"
             >
               <slot name="image">
                 <img :src="imageUrl" alt="" />
               </slot>
             </div>
-            <article v-if="imageOnly">
+            <article v-if="!imageOnly">
               {{ currentTeam.name }}
             </article>
           </section>
@@ -77,33 +77,36 @@
             <div class="border-t border-gray-100"></div>
 
             <!-- Team Switcher -->
-            <div class="block px-4 py-2 text-xs text-gray-400">
-              Switch {{ resourceName }}
-            </div>
-
-            <template v-for="team in teams" :key="team.id">
-              <form @submit.prevent="$emit('switch-team', team)">
-                <AtDropdownLink as="button">
-                  <div class="flex items-center">
-                    <svg
-                      v-if="team.id == currentTeam.id"
-                      class="w-5 h-5 mr-2 text-green-400"
-                      fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      ></path>
-                    </svg>
-                    <div>{{ team.name }}</div>
-                  </div>
-                </AtDropdownLink>
-              </form>
-            </template>
+            <section v-if="teams.length > 1">
+              <h5 class="block px-4 py-2 text-xs text-gray-400">
+                Switch {{ resourceName }}
+              </h5>
+  
+              <AtDropdownLink
+                v-for="team in teams"
+                :key="team.id"
+                as="button"
+                @click="$emit('switch-team', team)"
+              >
+                <div class="flex items-center">
+                  <svg
+                    v-if="team.id == currentTeam.id"
+                    class="w-5 h-5 mr-2 text-green-400"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
+                  </svg>
+                  <div>{{ team.name }}</div>
+                </div>
+              </AtDropdownLink>
+            </section>
           </template>
         </div>
       </template>
@@ -118,7 +121,7 @@ import AtDropdownLink from "../../molecules/AtDropdownLink/AtDropdownLink.vue";
 interface Team {
   id: number;
   name: string;
-};
+}
 
 withDefaults(
   defineProps<{

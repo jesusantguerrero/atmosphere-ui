@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { formatNumber } from "~utils/formatMoney";
-import { computed, reactive, ref, watch } from "vue";
+import { computed, reactive, ref, watch, onMounted } from "vue";
 const props = defineProps({
   dataTestid: {
     type: String,
@@ -90,15 +90,26 @@ const blur = () => {
 watch(
   () => props.modelValue,
   (value) => {
-    if (value !== inputRef.value.value) {
-      inputRef.value.value = value;
+    if (parseEmit(value) !== parseEmit(inputRef.value.value)) {
+      inputRef.value.value = parseEmit(value);
     }
   }
 );
 
+onMounted(() => {
+  emit("update:modelValue", parseEmit(props.modelValue));
+});
+
+const parseEmit = (value: string) => {
+  if (props.numberFormat) {
+    return value.replaceAll(",", "");
+  }
+  return value;
+}
+
 const onInput = (evt) => {
-  emit("update:modelValue", evt.target.value);
-  emit("change", inputRef.value.value);
+  emit("update:modelValue", parseEmit(evt.target.value));
+  emit("change", parseEmit(inputRef.value.value));
 };
 
 const onFocus = (evt) => {
@@ -133,26 +144,33 @@ const inputClasses = computed(() => {
   const focusClasses = state.isFocused
     ? `ring-indigo-200 ring-opacity-50 ${theme.focus}`
     : "";
-  const borderClasses = props.isBorderless ? "border-none" : "border border-gray-300";
+  const borderClasses = props.isBorderless
+    ? "border-none"
+    : "border border-gray-300";
   const formClasses = props.rounded ? "rounded-md" : "";
 
-  return [disabledClasses, focusClasses, borderClasses, formClasses, theme.normal];
+  return [
+    disabledClasses,
+    focusClasses,
+    borderClasses,
+    formClasses,
+    theme.normal,
+  ];
 });
 
+const defaultFormatter = (value: number) => {
+  return formatNumber(value, {
+    style: "decimal",
+    minimumFractionDigits: props.decimalDigits,
+    maximumFractionDigits: props.decimalDigits,
+  });
+};
 const formattedValue = computed(() => {
   const value = props.modelValue;
   const formatter = props.formatter;
   const parser = props.parser;
   const numberFormat = props.numberFormat;
   const numberFormatter = props.numberFormatter;
-
-  const defaultFormatter = (value: number) => {
-    return formatNumber(value, {
-      style: "decimal",
-      minimumFractionDigits: props.decimalDigits,
-      maximumFractionDigits: props.decimalDigits,
-    });
-  };
 
   let formatted = value;
   if (formatter) {

@@ -73,5 +73,6 @@ export { default as AtShell } from "./components/templates/AtShell/AtShell.vue";
 export { useDateTime } from "./utils/useDateTime";
 export { useForm } from "./utils/useForm";
 export { useFormData } from "./utils/useFormData";
+export { useServerSearch } from "./utils/useServerSearch";
 export { useTimeGrid } from "./utils/useTimeGrid";
 export { useUpload } from "./utils/useUpload";

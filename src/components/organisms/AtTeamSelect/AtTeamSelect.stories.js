@@ -50,3 +50,23 @@ Default.args = {
     },
   ],
 };
+
+export const OneTeam = Template.bind({});
+OneTeam.args = {
+  hasTeamFeatures: true,
+  canCreateTeams: true,
+  currentTeam: {
+    id: "1",
+    name: "Team 1",
+    description: "Team 1 description",
+    avatar: "https://via.placeholder.com/150",
+  },
+  teams: [
+    {
+      id: "1",
+      name: "Team 1",
+      description: "Team 1 description",
+      avatar: "https://via.placeholder.com/150",
+    },
+  ],
+};

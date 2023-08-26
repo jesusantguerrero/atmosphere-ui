@@ -1,6 +1,7 @@
 <template>
   <component
     :is="as"
+    :type="attrType"
     class="relative px-5 py-2 overflow-hidden cursor-pointer focus:outline-none"
     :class="[
       colorClass,
@@ -41,6 +42,9 @@ const props = defineProps({
     type: [Object, String],
     default: "button",
   },
+  attrType: {
+    type: String
+  }
 });
 
 const themeConfig = inject("themeConfig", {});

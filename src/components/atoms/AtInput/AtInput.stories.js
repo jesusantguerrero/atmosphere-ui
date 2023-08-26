@@ -10,7 +10,7 @@ const Template = (args) => ({
   setup() {
     return {
       args,
-      value: ref(args.value || ""),
+      value: ref(args.modelValue || ""),
     };
   },
   template: '<AtInput v-bind="args" v-model="value" />',
@@ -44,7 +44,7 @@ Suffix.args = {
 export const WithFormatting = Template.bind({});
 WithFormatting.args = {
   prefix: "$",
-  modelValue: "22,000.00",
+  modelValue: "22,000",
   numberFormat: true,
   isBorderless: true,
 };

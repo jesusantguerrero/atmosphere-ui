@@ -43,7 +43,7 @@
         />
       </component>
 
-      <component 
+      <component
         :is="AtField"
         v-if="mode != 'login'"
         label="Confirm Password"
@@ -71,8 +71,10 @@
         :class="btnClass"
         type="primary"
         data-testid="btn-submit"
+        attr-type="button"
         :disabled="isConfirmationInvalid"
         v-if="!hideAction"
+        @click.prevent.stop="loginUser()"
       >
         {{ modeLabel }}
         <i v-if="isLoading" class="ml-2 fa fa-spinner fa-pulse"></i>
@@ -182,6 +184,7 @@ const props = defineProps({
 });
 
 const { mode, isLoading, initialValues } = toRefs(props);
+
 const state = reactive({
   formData: {
     email: "",
@@ -246,8 +249,11 @@ const loginUser = () => {
 
   emit("submit", {
     ...state.formData,
-    confirmPassword:
-      mode.value == "register" ? state.formData.confirmPassword : undefined,
+    ...(mode.value == "register"
+      ? {
+          confirmPassword: state.formData.confirmPassword,
+        }
+      : {}),
   });
 };
 

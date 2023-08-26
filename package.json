@@ -1,12 +1,14 @@
 {
   "name": "atmosphere-ui",
   "version": "1.1.18",
-  "description": "UI for jetstream inertia and Vue 3",
+  "description": "UI for jetstream/inertia and Vue 3",
   "type": "module",
   "keywords": [
     "inertia.js",
     "vuejs",
-    "vue3"
+    "vue3",
+    "laravel",
+    "jetstream"
   ],
   "scripts": {
     "dev": "npm run storybook",

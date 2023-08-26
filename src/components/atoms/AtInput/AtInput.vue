@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { formatNumber } from "~utils/formatMoney";
-import { computed, reactive, ref, watch, onMounted } from "vue";
+import { computed, reactive, ref, watch, onMounted, nextTick } from "vue";
 const props = defineProps({
   dataTestid: {
     type: String,
@@ -97,12 +97,14 @@ watch(
 );
 
 onMounted(() => {
-  emit("update:modelValue", parseEmit(props.modelValue));
+  nextTick(() => {
+    emit("update:modelValue", parseEmit(props.modelValue));
+  })
 });
 
 const parseEmit = (value: string) => {
   if (props.numberFormat) {
-    return value.replaceAll(",", "");
+    return value?.replaceAll?.(",", "");
   }
   return value;
 }

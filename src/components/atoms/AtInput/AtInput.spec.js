@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/vue";
+import { mount } from "@vue/test-utils";
 import AtInput from "./AtInput.vue";
 import { ref } from "vue";
 
@@ -27,42 +28,41 @@ describe("AtInput", async () => {
   });
 
   it("renders initial value correctly", async () => {
-    const modelValue = ref("22000");
-    const { container } = render(
-      {
-        template: '<AtInput v-model="modelValue" :placeholder="placeholder" />',
-        components: {
-          AtInput,
+    const wrapper = mount(AtInput, {
+      props: {
+        placeholder: "Type something...",
+        modelValue: "22,000",
+        numberFormat: true,
+        dataTestid: "input",
+        "onUpdate:modelValue": (e) => {
+          wrapper.setProps({
+            modelValue: e,
+          });
         },
       },
-      {
-        setup: () => ({
-          placeholder: "Type something...",
-          numberFormat: true,
-          modelValue,
-        }),
-      }
-    );
+    });
 
-    const numberInput = screen.getByPlaceholderText("Type something...");
-    await fireEvent.focus(numberInput);
-    await fireEvent.blur(numberInput);
-
-    expect(modelValue.value).toBe("22,000.00");
+    expect(wrapper.props("modelValue")).toBe("22000");
+    expect(wrapper.find("input").element.value).toBe("22,000.00");
   });
 
   it("renders pasted value correctly", async () => {
-    const modelValue = ref("0");
-    const { emitted } = render(AtInput, {
+    const wrapper = mount(AtInput, {
       props: {
         placeholder: "Type something...",
-        modelValue: modelValue.value,
+        modelValue: 0,
         numberFormat: true,
+        dataTestid: "input",
+        "onUpdate:modelValue": (e) => {
+          wrapper.setProps({
+            modelValue: e,
+          });
+        },
       },
     });
-    const numberInput = screen.getByPlaceholderText("Type something...");
-    await fireEvent.paste(numberInput, "22,000");
-    await fireEvent.blur(numberInput);
-    expect(numberInput.value).toBe("22,000.00");
+
+    await wrapper.find("input").setValue("22000");
+    expect(wrapper.props("modelValue")).toBe("22000");
+    expect(wrapper.find("input").element.value).toBe("22,000.00");
   });
 });

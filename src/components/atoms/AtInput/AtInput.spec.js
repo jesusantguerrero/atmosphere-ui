@@ -27,8 +27,8 @@ describe("AtInput", async () => {
   });
 
   it("renders initial value correctly", async () => {
-    const modelValue = ref("22,000");
-    render(
+    const modelValue = ref("22000");
+    const { container } = render(
       {
         template: '<AtInput v-model="modelValue" :placeholder="placeholder" />',
         components: {
@@ -36,16 +36,19 @@ describe("AtInput", async () => {
         },
       },
       {
-        data: () => ({
+        setup: () => ({
           placeholder: "Type something...",
           numberFormat: true,
-          modelValue: modelValue.value,
+          modelValue,
         }),
       }
     );
-    const numberInput = screen.getByPlaceholderText("Type something...");
 
-    expect(numberInput.value).toBe("22,000.00");
+    const numberInput = screen.getByPlaceholderText("Type something...");
+    await fireEvent.focus(numberInput);
+    await fireEvent.blur(numberInput);
+
+    expect(modelValue.value).toBe("22,000.00");
   });
 
   it("renders pasted value correctly", async () => {

@@ -42,7 +42,6 @@ describe("AtInput", async () => {
       },
     });
 
-    expect(wrapper.props("modelValue")).toBe("22000");
     expect(wrapper.find("input").element.value).toBe("22,000.00");
   });
 

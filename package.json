@@ -15,8 +15,6 @@
     "create-index-files": "node scripts/create-index-files.js",
     "test:unit": "vitest --environment jsdom",
     "test:coverage": "vitest run --coverage",
-    "test:e2e": "start-server-and-test preview http://127.0.0.1:4173/ 'cypress open --e2e'",
-    "test:e2e:ci": "start-server-and-test preview http://127.0.0.1:4173/ 'cypress run --e2e'",
     "build-only": "npm run create-index-files && vite build",
     "type-check": "vue-tsc",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
@@ -29,8 +27,8 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
-    "mathjs": "^11.8.2",
-    "vueuse-temporals": "^1.5.0"
+    "mathjs": "^11.10.0",
+    "vueuse-temporals": "^1.6.0"
   },
   "peerDependencies": {
     "@inertiajs/vue3": "^1.0.0",
@@ -69,10 +67,8 @@
     "bumpp": "^9.1.0",
     "c8": "^7.13.0",
     "chromatic": "^6.17.4",
-    "cypress": "^12.12.0",
     "date-fns": "^2.30.0",
     "eslint": "^8.40.0",
-    "eslint-plugin-cypress": "^2.13.3",
     "eslint-plugin-storybook": "^0.6.12",
     "eslint-plugin-vue": "^9.12.0",
     "jsdom": "^22.0.0",

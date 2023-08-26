@@ -1,6 +1,7 @@
 <template>
-  <button
-    class="relative px-5 py-2 overflow-hidden focus:outline-none"
+  <component
+    :is="as"
+    class="relative px-5 py-2 overflow-hidden cursor-pointer focus:outline-none"
     :class="[
       colorClass,
       disabled
@@ -11,7 +12,7 @@
     ref="Button"
   >
     <slot />
-  </button>
+  </component>
 </template>
 
 <script setup>
@@ -35,6 +36,10 @@ const props = defineProps({
   },
   rounded: {
     type: Boolean,
+  },
+  as: {
+    type: [Object, String],
+    default: "button",
   },
 });
 

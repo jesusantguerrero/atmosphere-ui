@@ -14,7 +14,7 @@ const Template = (args) => ({
   template: '<at-button v-bind="args" > Submit </at-button>',
 });
 
-const ThemeProviderSetup = (args, { argTypes}) => ({
+const ThemeProviderSetup = (args, { argTypes }) => ({
   components: { AtButton, AtThemeProvider },
   props: Object.keys(argTypes),
   setup() {
@@ -72,4 +72,10 @@ withThemeProvider.args = {
       },
     },
   },
+};
+
+export const AsLink = Template.bind({});
+AsLink.args = {
+  type: "danger",
+  as: "a",
 };

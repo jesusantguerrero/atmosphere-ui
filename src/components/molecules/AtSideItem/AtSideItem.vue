@@ -14,7 +14,6 @@ const props = withDefaults(
     itemActiveClass?: string;
     // eslint-disable-next-line @typescript-eslint/ban-types
     as: string | Object;
-    is: string | Object;
     // eslint-disable-next-line @typescript-eslint/ban-types
     isActiveFunction?: Function | null;
   }>(),

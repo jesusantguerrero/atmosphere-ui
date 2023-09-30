@@ -1,7 +1,7 @@
 "use strict";
 // taken from https://github.com/vuestorefront/storefront-ui
 import fs from "fs";
-import glob from "node:glob";
+import glob  from "glob";
 import * as url from "node:url";
 import path, { dirname } from "path";
 import process from "process";

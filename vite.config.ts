@@ -3,23 +3,30 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import postcss from "./postcss.config.js";
+import dts from 'vite-plugin-dts'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), vueJsx()],
+  plugins: [
+    vue(), 
+    vueJsx(),
+    dts({
+      tsconfigPath: 'tsconfig.build.json',
+      cleanVueFileName: true,
+    }),
+  ],
   css: {
     postcss,
   },
   build: {
     lib: {
-      entry: fileURLToPath(new URL("src/index.js", import.meta.url)),
       name: "atmosphere-ui",
+      fileName: 'index',
+      entry: fileURLToPath(new URL("src/index.ts", import.meta.url)),
     },
     rollupOptions: {
       external: ["vue", "@vueuse/core"],
       output: {
-        // Provide global variables to use in the UMD build
-        // for externalized deps
         globals: {
           vue: "Vue",
         },

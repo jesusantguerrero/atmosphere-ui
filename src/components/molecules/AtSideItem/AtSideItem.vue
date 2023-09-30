@@ -14,6 +14,7 @@ const props = withDefaults(
     itemActiveClass?: string;
     // eslint-disable-next-line @typescript-eslint/ban-types
     as: string | Object;
+    is: string | Object;
     // eslint-disable-next-line @typescript-eslint/ban-types
     isActiveFunction?: Function | null;
   }>(),
@@ -50,7 +51,7 @@ const isIconComponent = computed(() => {
 });
 
 const itemCounter = computed(() => {
-  return counters.value[props.name] ?? 0
+  return counters.value[props.name] ?? null
 });
 </script>
 
@@ -61,7 +62,7 @@ const itemCounter = computed(() => {
 
   <div v-else class="item" v-bind="$attrs">
     <slot :label="label" :to="to" :class="classes" :icon="icon">
-      <component :is="componentName" :class="classes" :href="to">
+      <component :is="componentName" :class="classes" :href="to" :label="label">
         <component
           :class="[isExpanded ? 'mr-2' : 'mx-auto']"
           :is="icon"
@@ -80,9 +81,10 @@ const itemCounter = computed(() => {
         </span>
         <div
           v-if="itemCounter"
-          class="w-5 h-5 text-xs text-white flex justify-center items-center rounded-full shadow-md bg-error"
+          class="flex items-center justify-center w-5 h-5 text-xs text-white rounded-full shadow-md"
+          :class="[itemCounter.class ?? 'bg-error' , isExpanded && 'ml-4']"
         >
-          {{ itemCounter }}
+          {{ itemCounter.count }}
         </div>
       </component>
     </slot>

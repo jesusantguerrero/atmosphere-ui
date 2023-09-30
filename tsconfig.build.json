@@ -1,0 +1,36 @@
+{
+    "extends": "@vue/tsconfig/tsconfig.dom.json",
+    "include": [
+      "env.d.ts",
+      "src/**/*",
+      "src/**/*.ts",
+      "src/**/*.tsx",
+      "src/**/*.vue"
+    ],
+    "exclude": [
+      "src/**/*.test.ts"
+    ],
+    "compilerOptions": {
+      "paths": {
+          "~/": ["src/*"],
+          "~atoms/*": ["src/components/atoms/*"],
+          "~molecules/*": ["src/components/molecules/*"],
+          "~organisms/*": ["src/components/organisms/*"],
+          "~templates/*": ["src/components/templates/*"],
+          "~utils/*": ["src/utils/*"]
+        }, 
+      },
+      "target": "esnext",
+      "module": "esnext",
+      "moduleResolution": "node",
+      "strict": true,
+      "jsx": "preserve",
+      "sourceMap": true,
+      "resolveJsonModule": true,
+      "esModuleInterop": true,
+      "declaration": false,
+      "lib": ["esnext", "dom"],
+      "baseUrl": ".",
+      "skipLibCheck": true,
+      "outDir": "dist"
+}

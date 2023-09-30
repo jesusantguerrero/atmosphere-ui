@@ -1,7 +1,7 @@
 "use strict";
 // taken from https://github.com/vuestorefront/storefront-ui
 import fs from "fs";
-import glob from "glob";
+import glob from "node:glob";
 import * as url from "node:url";
 import path, { dirname } from "path";
 import process from "process";
@@ -12,7 +12,7 @@ const _dirname =
         ? __dirname
         : dirname(fileURLToPath(import.meta.url));
 
-const pathTargetIndexJs = path.resolve(_dirname, "..", "src", "index.js");
+const pathTargetIndexJs = path.resolve(_dirname, "..", "src", "index.ts");
 
 const pathVueComponentsRoot = path.resolve(_dirname, "..", "src/components");
 const pathUtilsRoot = path.resolve(_dirname, "..", "src/utils");

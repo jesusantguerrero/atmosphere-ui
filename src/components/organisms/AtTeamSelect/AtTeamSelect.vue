@@ -1,18 +1,13 @@
 <template>
-  <div
-    class="relative"
-    :class="{
-      'h-full': fullHeight,
-    }"
-  >
     <dropdown
       align="right"
+      
       width="60"
       v-bind="$attrs"
       v-if="hasTeamFeatures"
       :full-height="fullHeight"
     >
-      <template #trigger>
+  
         <button
           :class="[
             rounded && 'rounded-md',
@@ -25,7 +20,8 @@
           <section class="flex items-center">
             <div
               v-if="imageUrl || $slots.image"
-              class="flex items-center justify-center w-10 h-10 mr-4 bg-black rounded-md"
+              class="flex items-center justify-center w-10 h-10 bg-black rounded-md"
+              :class="[imageOnly ? '' : 'mr-4']"
             >
               <slot name="image">
                 <img :src="imageUrl" alt="" />
@@ -36,7 +32,7 @@
             </article>
           </section>
 
-          <slot name="icon">
+          <slot name="icon" v-if="!hideIcon">
             <svg
               class="ml-2 -mr-0.5 h-4 w-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -51,71 +47,69 @@
             </svg>
           </slot>
         </button>
-      </template>
 
-      <template #content>
-        <div class="w-60">
-          <!-- Team Management -->
-          <template v-if="hasTeamFeatures">
-            <div class="block px-4 py-2 text-xs text-gray-400">
-              {{ sectionTitle }}
-            </div>
-
-            <!-- Team Settings -->
-            <AtDropdownLink as="button" @click="$emit('settings')">
-              {{ resourceName }} Settings
-            </AtDropdownLink>
-
-            <AtDropdownLink
-              as="button"
-              @click="$emit('create')"
-              v-if="canCreateTeams"
-            >
-              Create New {{ resourceName }}
-            </AtDropdownLink>
-
-            <div class="border-t border-gray-100"></div>
-
-            <!-- Team Switcher -->
-            <section v-if="teams.length > 1">
-              <h5 class="block px-4 py-2 text-xs text-gray-400">
-                Switch {{ resourceName }}
-              </h5>
-  
-              <AtDropdownLink
-                v-for="team in teams"
-                :key="team.id"
-                as="button"
-                @click="$emit('switch-team', team)"
-              >
-                <div class="flex items-center">
-                  <svg
-                    v-if="team.id == currentTeam.id"
-                    class="w-5 h-5 mr-2 text-green-400"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    ></path>
-                  </svg>
-                  <div>{{ team.name }}</div>
+      <template #popper>
+            <div class="w-60">
+              <!-- Team Management -->
+              <template v-if="hasTeamFeatures">
+                <div class="block px-4 py-2 text-xs text-gray-400">
+                  {{ sectionTitle }}
                 </div>
-              </AtDropdownLink>
-            </section>
-          </template>
-        </div>
+    
+                <!-- Team Settings -->
+                <AtDropdownLink as="button" @click="$emit('settings')">
+                  {{ resourceName }} Settings
+                </AtDropdownLink>
+    
+                <AtDropdownLink
+                  as="button"
+                  @click="$emit('create')"
+                  v-if="canCreateTeams"
+                >
+                  Create New {{ resourceName }}
+                </AtDropdownLink>
+    
+                <div class="border-t border-gray-100"></div>
+    
+                <!-- Team Switcher -->
+                <section v-if="teams.length > 1">
+                  <h5 class="block px-4 py-2 text-xs text-gray-400">
+                    Switch {{ resourceName }}
+                  </h5>
+      
+                  <AtDropdownLink
+                    v-for="team in teams"
+                    :key="team.id"
+                    as="button"
+                    @click="$emit('switch-team', team)"
+                  >
+                    <div class="flex items-center">
+                      <svg
+                        v-if="team.id == currentTeam.id"
+                        class="w-5 h-5 mr-2 text-green-400"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        ></path>
+                      </svg>
+                      <div>{{ team.name }}</div>
+                    </div>
+                  </AtDropdownLink>
+                </section>
+              </template>
+            </div>
       </template>
     </dropdown>
-  </div>
 </template>
 
 <script setup lang="ts">
-import Dropdown from "../../molecules/AtDropdown/AtDropdown.vue";
+import { Dropdown } from "floating-vue";
 import AtDropdownLink from "../../molecules/AtDropdownLink/AtDropdownLink.vue";
 
 interface Team {
@@ -135,6 +129,7 @@ withDefaults(
     rounded: boolean;
     fullHeight?: boolean;
     imageOnly?: boolean;
+    hideIcon?: boolean; 
     colors: string;
   }>(),
   {

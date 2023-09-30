@@ -156,10 +156,19 @@ const sizeClass = computed(() => {
       </slot>
     </button>
     <div
-      v-if="startDate && endDate && !iconsOnly"
+      v-if="!iconsOnly"
       class="flex items-center text-sm font-bold"
     >
-      <slot> {{ formatDate(startDate) }} - {{ formatDate(endDate) }} </slot>
+      <slot> 
+        <span v-if="startDate && endDate">
+          {{ formatDate(startDate) }} - {{ formatDate(endDate) }} 
+
+        </span>
+        <span v-else>
+          {{ formatDate(selectedDay) }}
+
+        </span>
+      </slot>
     </div>
     <button
       class="px-2 transition-colors focus:outline-none"

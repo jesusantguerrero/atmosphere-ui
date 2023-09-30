@@ -1,74 +1,4 @@
-<template>
-  <div class="transition app-side" :class="{ 'side-mini': !isExpanded }">
-    <div :class="brandContainerClass">
-      <slot name="brand">
-        <h1>
-          {{ title }}
-        </h1>
-      </slot>
-    </div>
-
-    <AtSideNav
-      v-model="activeGroup"
-      class="w-full mx-auto"
-      :class="navContainerClass"
-      role="tablist"
-      aria-orientation="vertical"
-      :menu="menu"
-      :item-property="itemProperty"
-      :icon-class="iconClass"
-      :child-class="childClass"
-      :child-active-class="childActiveClass"
-      :item-class="itemClass"
-      :item-active-class="itemActiveClass"
-      :counters="counters"
-    />
-
-    <div class="flex flex-col justify-end nav-container">
-      <AtSideNav
-        class="nav flex-column nav-pills"
-        id="v-pills-tab"
-        role="tablist"
-        aria-orientation="vertical"
-        v-if="headerMenu"
-        v-model="activeGroup"
-        :menu="headerMenu"
-        :item-property="itemProperty"
-        :icon-class="iconClass"
-        :child-class="childClass"
-        :child-active-class="childActiveClass"
-        :item-class="itemClass"
-        :item-active-class="itemActiveClass"
-        :counters="counters"
-      />
-
-      <div class="flex justify-end w-full pr-4" v-if="isExpandable">
-        <slot name="close-icon">
-          <div
-            class="p-2 transform rounded-full cursor-pointer hover:bg-white/80"
-            :class="[isExpanded ? 'rotate-180' : 'rotate-0', iconClass]"
-            @click="$emit('update:isExpanded', !isExpanded)"
-          >
-            <svg width="32" height="32" viewBox="0 0 16 16">
-              <g fill="none">
-                <path
-                  d="M6.293 8.5l-.647.647a.5.5 0 1 0 .708.707l1.5-1.5a.5.5 0 0 0 0-.707l-1.5-1.5a.5.5 0 1 0-.708.707l.647.646H4.502a.5.5 0 1 0 0 1h1.79z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M12 13.001a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v6.002a2 2 0 0 0 2 2h8zm1-2a1 1 0 0 1-1 1H9.998V4H12a1 1 0 0 1 1 1v6.002zM8.998 4v8.002H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h4.998z"
-                  fill="currentColor"
-                />
-              </g>
-            </svg>
-          </div>
-        </slot>
-      </div>
-    </div>
-  </div>
-</template>
-
-<script setup>
+<script setup lang="ts">
 import { provide, ref, toRefs } from "vue";
 import AtSideNav from "./AtSideNav.vue";
 
@@ -92,6 +22,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  hideIcon: {
+    type: Boolean,
+    default: false,
+  },
   size: {
     type: String,
   },
@@ -111,14 +45,93 @@ const props = defineProps({
   },
 });
 
-defineEmits(["update:isExpanded"]);
+const emit = defineEmits(["update:isExpanded"]);
 const { isExpanded, currentPath, counters } = toRefs(props);
 const activeGroup = ref("");
+
+const toggleIcon = () => {
+  emit('update:isExpanded', !isExpanded.value)
+}
 
 provide("currentPath", currentPath);
 provide("isExpanded", isExpanded);
 provide("counters", counters);
 </script>
+
+
+<template>
+  <div class="transition app-side" :class="{ 'side-mini': !isExpanded }">
+    <div :class="brandContainerClass">
+      <slot name="brand" :toggleExpand="toggleIcon" >
+        <h1>
+          {{ title }}
+        </h1>
+      </slot>
+    </div>
+    <section class="flex-col">
+      <slot name="start" :toggleExpand="toggleIcon" />
+      <AtSideNav
+        v-model="activeGroup"
+        class="w-full mx-auto"
+        :class="navContainerClass"
+        role="tablist"
+        aria-orientation="vertical"
+        :menu="menu"
+        :item-property="itemProperty"
+        :icon-class="iconClass"
+        :child-class="childClass"
+        :child-active-class="childActiveClass"
+        :item-class="itemClass"
+        :item-active-class="itemActiveClass"
+        :counters="counters"
+      />
+    </section>
+
+    <div class="flex flex-col justify-end nav-container">
+      <AtSideNav
+        class="nav flex-column nav-pills"
+        id="v-pills-tab"
+        role="tablist"
+        aria-orientation="vertical"
+        v-if="headerMenu"
+        v-model="activeGroup"
+        :menu="headerMenu"
+        :item-property="itemProperty"
+        :icon-class="iconClass"
+        :child-class="childClass"
+        :child-active-class="childActiveClass"
+        :item-class="itemClass"
+        :item-active-class="itemActiveClass"
+        :counters="counters"
+      />
+
+      <div class="flex justify-end w-full pr-4" v-if="isExpandable && !hideIcon">
+        <slot name="close-icon">
+          <div
+            class="p-2 transform rounded-full cursor-pointer hover:bg-white/80"
+            :class="[isExpanded ? 'rotate-180' : 'rotate-0', iconClass]"
+            @click="toggleIcon"
+          >
+            <svg width="32" height="32" viewBox="0 0 16 16">
+              <g fill="none">
+                <path
+                  d="M6.293 8.5l-.647.647a.5.5 0 1 0 .708.707l1.5-1.5a.5.5 0 0 0 0-.707l-1.5-1.5a.5.5 0 1 0-.708.707l.647.646H4.502a.5.5 0 1 0 0 1h1.79z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M12 13.001a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v6.002a2 2 0 0 0 2 2h8zm1-2a1 1 0 0 1-1 1H9.998V4H12a1 1 0 0 1 1 1v6.002zM8.998 4v8.002H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h4.998z"
+                  fill="currentColor"
+                />
+              </g>
+            </svg>
+          </div>
+        </slot>
+      </div>
+      <slot name="end" :toggleExpand="toggleIcon" />
+    </div>
+  </div>
+</template>
+
 
 <style lang="scss" scoped>
 .app-side {

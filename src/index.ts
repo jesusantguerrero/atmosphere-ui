@@ -58,6 +58,7 @@ export { default as AtDateSelect } from "./components/organisms/AtDateSelect/AtD
 export { default as AtFormBlock } from "./components/organisms/AtFormBlock/AtFormBlock.vue";
 export { default as AtHeader } from "./components/organisms/AtHeader/AtHeader.vue";
 export { default as AtSide } from "./components/organisms/AtSide/AtSide.vue";
+export { default as AtSideAccountItem } from "./components/organisms/AtSide/AtSideAccountItem.vue";
 export { default as AtSideNav } from "./components/organisms/AtSide/AtSideNav.vue";
 export { default as AtSteps } from "./components/organisms/AtSteps/AtSteps.vue";
 export { default as AtTable } from "./components/organisms/AtTable/AtTable.vue";

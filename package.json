@@ -1,6 +1,6 @@
 {
   "name": "atmosphere-ui",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "UI for jetstream/inertia and Vue 3",
   "type": "module",
   "keywords": [
@@ -12,25 +12,31 @@
   ],
   "scripts": {
     "dev": "npm run storybook",
-    "build": "run-p type-check build-only",
-    "preview": "vite preview --port 4173",
+    "build": "run-p  build-only",
+    "build-only": "npm run create-index-files && vite build",
+    "type-check": "vue-tsc --noEmit",
+    "type-gen": "vue-tsc --declaration --emitDeclarationOnly",
     "create-index-files": "node scripts/create-index-files.js",
     "test:unit": "vitest --environment jsdom",
     "test:coverage": "vitest run --coverage",
-    "build-only": "npm run create-index-files && vite build",
-    "type-check": "vue-tsc",
+    "storybook": "storybook dev -p 6006",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "prepublishOnly": "npm run build",
-    "storybook": "storybook dev -p 6006",
     "release": "npm run build && bumpp --commit --tag --push",
     "release-publish-only": "bumpp --commit --tag --push",
     "docs:build": "storybook build -o docs",
     "chromatic": "npx chromatic --project-token=170dcb534484"
   },
+  "resolutions": {
+    "jackspeak": "2.1.1"
+  },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
+    "floating-vue": "^2.0.0-beta.24",
     "lodash": "^4.17.21",
     "mathjs": "^11.10.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "vueuse-temporals": "^1.6.0"
   },
   "peerDependencies": {
@@ -43,14 +49,14 @@
     "@babel/core": "^7.21.8",
     "@inertiajs/vue3": "^1.0.6",
     "@rushstack/eslint-patch": "^1.2.0",
-    "@storybook/addon-actions": "^7.0.24",
-    "@storybook/addon-essentials": "^7.0.24",
-    "@storybook/addon-interactions": "^7.0.24",
-    "@storybook/addon-links": "^7.0.24",
-    "@storybook/addon-mdx-gfm": "^7.0.24",
-    "@storybook/testing-library": "0.2.0",
-    "@storybook/vue3": "^7.0.24",
-    "@storybook/vue3-vite": "^7.0.24",
+    "@storybook/addon-actions": "^7.4.5",
+    "@storybook/addon-essentials": "^7.4.5",
+    "@storybook/addon-interactions": "^7.4.5",
+    "@storybook/addon-links": "^7.4.5",
+    "@storybook/addon-mdx-gfm": "^7.4.5",
+    "@storybook/testing-library": "0.2.1",
+    "@storybook/vue3": "^7.4.5",
+    "@storybook/vue3-vite": "^7.4.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/user-event": "^14.4.3",
     "@testing-library/vue": "^7.0.0",
@@ -72,35 +78,35 @@
     "chromatic": "^6.17.4",
     "date-fns": "^2.30.0",
     "eslint": "^8.40.0",
-    "eslint-plugin-storybook": "^0.6.12",
+    "eslint-plugin-storybook": "^0.6.14",
     "eslint-plugin-vue": "^9.12.0",
     "jsdom": "^22.0.0",
-    "naive-ui": "^2.34.3",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.23",
     "prettier": "^2.8.8",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "sass": "^1.62.1",
     "standard-version": "^9.5.0",
     "start-server-and-test": "^1.15.5",
-    "storybook": "^7.0.24",
+    "storybook": "^7.4.5",
     "tailwindcss": "^3.3.2",
     "typescript": "~4.9.5",
     "vite": "^4.3.5",
+    "vite-plugin-dts": "^3.6.0",
     "vitest": "^0.31.0",
     "vue": "^3.3.2",
+    "glob": "^7.1.6",
     "vue-loader": "^17.1.1",
     "vue-tsc": "^1.7.3"
   },
   "main": "src/index.js",
   "module": "dist/atmosphere-ui.js",
   "files": [
-    "scripts/*",
     "src/*",
     "index.js",
     "dist/*"
   ],
+  "types": "./dist/index.d.ts",
+  "typings": "./dist/index.d.ts",
   "author": "Jesus Guerrero",
   "license": "MIT",
   "directories": {
@@ -117,8 +123,8 @@
   "homepage": "https://github.com/jesusantguerrero/atmosphere-ui#readme",
   "exports": {
     ".": {
-      "require": "./dist/atmosphere-ui.umd.js",
-      "import": "./dist/atmosphere-ui.js"
+      "require": "./dist/index.umd.js",
+      "import": "./dist/index.js"
     },
     "./*": "./dist/*"
   }

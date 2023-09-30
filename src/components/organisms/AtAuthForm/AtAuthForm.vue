@@ -80,6 +80,7 @@
         <i v-if="isLoading" class="ml-2 fa fa-spinner fa-pulse"></i>
       </AtButton>
     </slot>
+    <slot name="more-actions" />
 
     <div class="text-center" v-if="!hideLink">
       <div>

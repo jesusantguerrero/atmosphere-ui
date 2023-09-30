@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { computed, reactive, watch } from "vue";
+import { computed, reactive, watch, inject, ref } from "vue";
 import { cloneDeep, isEqual } from "lodash";
 import { toFormData } from "./useFormData";
 
@@ -37,6 +37,8 @@ export const useForm = (
     const defaults = cloneDeep(data);
     let transform = (data: Record<string, any>) => data;
     let validationSchema: ValidationSchema = {};
+    const axiosInstance = inject('axios', config.axiosInstance);
+    const isLoading = ref(false);
 
     const form: IFormState = reactive({
         ...data,
@@ -91,13 +93,17 @@ export const useForm = (
             if (typeof method === "function") {
                 method("submit", transform(form.data()));
             } else {
-                config.axiosInstance[method]({
+                isLoading.value = true;
+                return axiosInstance[method]({
                     ...options,
                     data: transform(form.data()),
-                });
+                }).then((data) => {
+                  options.onSuccess && options.onSuccess(data);
+                  return data
+                }).finally(() => {
+                  isLoading.value = false;
+                })
             }
-
-            options.onSuccess && options.onSuccess();
         },
 
         submit(name: string, options: Record<string, any>) {
@@ -106,6 +112,12 @@ export const useForm = (
             } else if (config.axiosInstance) {
                 form.submitForm(name, options);
             }
+        },
+        post(url: string, options: Record<string, any>) {
+          return form.submitForm('post', {
+            url,
+            ...options
+          });
         },
         formData() {
             return toFormData(form.data());
@@ -130,6 +142,9 @@ export const useForm = (
             }
             return !form.hasErrors;
         },
+        processing: computed(() => {
+
+        })
     });
 
     watch(

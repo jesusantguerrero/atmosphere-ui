@@ -15,12 +15,17 @@ defineProps({
       return {};
     },
   },
+  separatorClass: {
+    type: String,
+    default: "h-1 border-t w-full my-2 border-gray-200"
+  }
 });
 </script>
 
 <template>
   <div>
     <template v-for="route in menu">
+      <div v-if="route.separator" class="w-full"  :class="separatorClass" />
       <AtSideItem
         v-if="!route[itemProperty]"
         v-bind="route"

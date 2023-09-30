@@ -13,7 +13,7 @@ const Template = (args) => ({
   components: { AtSide },
   setup() {
     const isExpanded = ref(true);
-    return { args, isExpanded, teamProps };
+    return { args, isExpanded };
   },
   template: `
     <div :class="isExpanded ? 'w-96' : 'w-32'">

@@ -19,12 +19,13 @@ const pathUtilsRoot = path.resolve(_dirname, "..", "src/utils");
 
 const pathsVueComponents = glob.sync("*/*/At*.vue", {
     cwd: pathVueComponentsRoot,
-    ignore: ["**/**.spec.js", "**/**.stories.js"],
+    ignore: ["**/**.spec.{js,ts}", "**/**.stories.{js,ts}"],
 });
 
 const pathsUtils = glob.sync("**/use**.{js,ts}", {
     cwd: pathUtilsRoot,
-    ignore: ["**/use**.spec.js"],
+    ignore: ["**/use**.spec.{js,ts}"],
+    
 });
 
 export function createIndexFiles() {

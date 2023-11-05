@@ -38,6 +38,33 @@ describe("AuthForm component", () => {
     });
   });
 
+  it("Should emit on password enter", async () => {
+    const { emitted, getByTestId } = render(AuthForm, {
+      props: {
+        mode: "login",
+      },
+    });
+
+    await fireEvent.update(
+      screen.getByTestId("input-email"),
+      "jesus@gmail.com"
+    );
+    await fireEvent.update(screen.getByTestId("input-password"), "1234");
+    await fireEvent.keyDown(screen.getByTestId("input-password"), {
+      key: 'Enter',
+      code: 'Enter',
+      charCode: 13
+    });
+
+    expect(emitted()).toHaveProperty("submit");
+
+    expect(emitted()["submit"][0][0]).toEqual({
+      email: "jesus@gmail.com",
+      password: "1234",
+      confirmPassword: "",
+    });
+  });
+
   it("Should render the component register", async () => {
     const { emitted } = render(AuthForm, {
       props: {

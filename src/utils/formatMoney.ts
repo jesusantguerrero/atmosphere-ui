@@ -9,7 +9,7 @@ export const formatMoney = (
       currency: symbol,
       currencyDisplay: "symbol",
       ...options,
-    }).format(Number(value.toString().replaceAll(",", "")) || 0);
+    }).format(Number(value?.toString().replaceAll(",", "")) || 0);
   } catch (err) {
     console.error(err);
     console.error(err);
@@ -27,7 +27,7 @@ export const formatNumber = (
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
       ...options,
-    }).format(Number(value.toString().replaceAll(",", "")) || 0);
+    }).format(Number(value?.toString().replaceAll(",", "") ?? 0) || 0);
   } catch (err) {
     console.error("atmosphere-ui:error", err);
     return value;

@@ -47,7 +47,7 @@ export function useDateTime(dateRef: Ref<Date | null>) {
         }
     };
 
-    const formatDate = (date: Date, formatString: string) => {
+    const formatDate = (date: Date, formatString: string = "yyyy-MM-dd") => {
         return format(date || new Date(), formatString || "yyyy-MM-dd");
     };
 

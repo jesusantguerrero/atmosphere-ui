@@ -38,8 +38,9 @@
           :is="AtInputPassword"
           data-testid="input-password"
           class="bg-white"
-          v-model="formData.password"
           required
+          v-model="formData.password"
+          @keydown.enter="loginUser()"
         />
       </component>
 
@@ -54,10 +55,11 @@
           data-testid="input-confirm-password"
           class="bg-white"
           v-model="formData.confirmPassword"
-          @blur="isDirty = true"
-          :class="{ 'error-input': isConfirmationInvalid }"
           required
+          :class="{ 'error-input': isConfirmationInvalid }"
           :errors="errors"
+          @blur="isDirty = true"
+          @keydown.enter="loginUser()"
         />
         <small v-if="isConfirmationInvalid" class="text-red-200">
           {{ passwordNotEqualLabel }}
@@ -67,13 +69,13 @@
 
     <slot name="action">
       <AtButton
+        v-if="!hideAction"
         class="w-full"
-        :class="btnClass"
         type="primary"
         data-testid="btn-submit"
         attr-type="button"
+        :class="btnClass"
         :disabled="isConfirmationInvalid"
-        v-if="!hideAction"
         @click.prevent.stop="loginUser()"
       >
         {{ modeLabel }}
@@ -87,9 +89,9 @@
         {{ linkDescription }}
         <slot name="link">
           <a
-            @click.prevent="$emit('link-pressed', mode)"
             class="font-bold cursor-pointer"
             :class="linkClass"
+            @click.prevent="$emit('link-pressed', mode)"
           >
             {{ state.linkLabel }}
           </a>

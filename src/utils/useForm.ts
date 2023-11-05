@@ -37,7 +37,13 @@ export const useForm = (
     const defaults = cloneDeep(data);
     let transform = (data: Record<string, any>) => data;
     let validationSchema: ValidationSchema = {};
-    const axiosInstance = inject('axios', config.axiosInstance);
+
+    let axiosInstance = config.axiosInstance;
+    try {
+      axiosInstance = inject('axios', config.axiosInstance);
+    } catch (err) {
+      axiosInstance = config.axiosInstance;
+    }
     const isLoading = ref(false);
 
     const form: IFormState = reactive({

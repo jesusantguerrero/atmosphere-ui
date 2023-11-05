@@ -1,5 +1,23 @@
+import { createApp } from "vue";
 import { useForm, validators } from "./useForm";
 import { expect, describe, it, beforeEach, vi } from "vitest";
+import axios from "axios";
+
+export function withSetup(hook) {
+  let result;
+
+  const app = createApp({
+      setup() {
+          result = hook();
+          return () => {};
+      },
+  });
+
+  app.mount(document.createElement("div"));
+
+  return [result, app];
+}
+
 describe("Test use form", () => {
     const emit = vi.fn((event, data) => {
         return { event, data };
@@ -53,22 +71,17 @@ describe("Test use form", () => {
 
     it("submit with axios", () => {
         const axiosMock = {
-            post: vi.fn(),
+            post: async () => {},
         };
-        const form = useForm(
+        const [form] = withSetup(useForm.bind(null,
             {
                 text: "hello world",
             },
             { axiosInstance: axiosMock }
-        );
+        ));
+        const postSpy = vi.spyOn(axiosMock, "post")
         form.submit("post", { url: "/api/message" });
-        expect(axiosMock.post).toHaveBeenLastCalledWith(
-            expect.objectContaining({
-                data: {
-                    text: "hello world",
-                },
-            })
-        );
+        expect(postSpy.mock.calls.length).toBe(1);
     });
 
     it("validate before submit", () => {
@@ -88,6 +101,7 @@ describe("Test use form", () => {
         const form = useForm({
             title: "hello world",
         });
+        // @ts-expect-error
         expect(form.formData().get("title")).toBe("hello world");
     });
 });

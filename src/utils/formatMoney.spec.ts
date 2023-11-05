@@ -7,4 +7,7 @@ describe("Test formatMoney", () => {
   it("formats numbers with commas", () => {
     expect(formatNumber("1,000")).toBe("1,000.00");
   });
+  it("formats null to 0", () => {
+    expect(formatNumber(null)).toBe("0.00");
+  });
 });

@@ -84,7 +84,12 @@ provide("counters", counters);
         :item-class="itemClass"
         :item-active-class="itemActiveClass"
         :counters="counters"
-      />
+      >
+        <template v-for="item in menu">
+          <slot :name="item.name" />
+        </template>
+      </AtSideNav>
+      <slot name="end-main" :toggleExpand="toggleIcon" />
     </section>
 
     <div class="flex flex-col justify-end nav-container">

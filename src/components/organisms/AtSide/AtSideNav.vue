@@ -26,26 +26,28 @@ defineProps({
   <div>
     <template v-for="route in menu">
       <div v-if="route.separator" class="w-full"  :class="separatorClass" />
-      <AtSideItem
-        v-if="!route[itemProperty]"
-        v-bind="route"
-        :item-class="itemClass"
-        :item-active-class="itemActiveClass"
-        :key="route.label"
-      />
+      <slot :name="route.name" v-if="!route[itemProperty]">
+        <AtSideItem
+          v-bind="route"
+          :item-class="itemClass"
+          :item-active-class="itemActiveClass"
+          :key="route.label"
+        />
+      </slot>
 
       <div v-else-if="route.section" :key="`${route.label}-section`">
         <p class="pl-5 mt-2 text-sm font-bold text-gray-400 capitalize">
           {{ route.section }}
         </p>
-        <AtSideItem
-          v-for="sectionItem in route[itemProperty]"
-          :key="`${sectionItem.section}-${route.label}`"
-          v-bind="sectionItem"
-          :item-class="itemClass"
-          :item-active-class="itemActiveClass"
-          :track-id="sectionItem.label"
-        />
+        <slot :name="sectionItem.name"  v-for="sectionItem in route[itemProperty]">
+          <AtSideItem
+            :key="`${sectionItem.section}-${route.label}`"
+            v-bind="sectionItem"
+            :item-class="itemClass"
+            :item-active-class="itemActiveClass"
+            :track-id="sectionItem.label"
+          />
+        </slot>
       </div>
 
       <AtSideItemGroup

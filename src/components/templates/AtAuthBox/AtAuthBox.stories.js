@@ -116,4 +116,5 @@ BackgroundSide.args = {
   brandContainerClass: "",
   backgroundImage: "https://www.sciencenewsforstudents.org/wp-content/uploads/2020/11/1030_Earth_atmosphere_explainer.jpg",
   backgroundPlacement: "right",
+  boxClass: "bg-white rounded-md"
 };

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, inject, ref } from "vue";
+import { computed, inject, onMounted, ref } from "vue";
 import AtSideItem from "../AtSideItem/AtSideItem.vue";
 
 interface IMenuItem {
@@ -63,6 +63,12 @@ const emitValue = () => {
 const isIconComponent = computed(() => {
   return typeof props.icon !== "string";
 });
+
+onMounted(() => {
+  if (hasActiveChild.value) {
+    emitValue()
+  }
+})
 </script>
 
 <template>

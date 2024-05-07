@@ -200,6 +200,16 @@ ItemActive.args = {
   itemActiveClass: "bg-gray-500 text-white",
 };
 
+export const SubItemActive = Template.bind({});
+SubItemActive.args = {
+  title: "Atmosphere UI",
+  class: "bg-gray-700 text-white",
+  menu,
+  currentPath: "/favorites/songs",
+  itemClass: "text-white hover:bg-gray-500 hover:text-white",
+  itemActiveClass: "bg-gray-500 text-white",
+};
+
 export const WithSections = Template.bind({});
 WithSections.args = {
   itemActiveClass: "bg-gray-500 text-white",

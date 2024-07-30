@@ -5,16 +5,13 @@ import { isSamePath } from "../../../utils";
 const props = withDefaults(
   defineProps<{
     to: string;
-    // eslint-disable-next-line @typescript-eslint/ban-types
     icon: string | Object;
     label: string;
     name: string;
     classes: string;
     itemClass?: string;
     itemActiveClass?: string;
-    // eslint-disable-next-line @typescript-eslint/ban-types
     as: string | Object;
-    // eslint-disable-next-line @typescript-eslint/ban-types
     isActiveFunction?: Function | null;
   }>(),
   {
@@ -24,13 +21,18 @@ const props = withDefaults(
 
 const currentPath = inject("currentPath", ref(""));
 const counters = inject("counters", ref({}));
+const isExpanded = inject("isExpanded", true);
 const classes = computed(() => {
-  const classes = "flex items-center w-full px-5 py-4 cursor-pointer";
+  const classes = ["flex items-center w-full py-4 cursor-pointer"];
+  if (isExpanded) {
+    classes.push("px-5");
+  }
+
   return [
     isActive(props.to) && props.itemActiveClass,
     props.classes,
     props.itemClass,
-    classes,
+    ...classes,
   ];
 });
 
@@ -43,14 +45,12 @@ function isActive(url: string) {
   return isActiveMethod(url, currentPath.value);
 }
 
-const isExpanded = inject("isExpanded", true);
-
 const isIconComponent = computed(() => {
   return typeof props.icon !== "string";
 });
 
 const itemCounter = computed(() => {
-  return counters.value[props.name] ?? null
+  return counters.value[props.name] ?? null;
 });
 </script>
 
@@ -81,7 +81,7 @@ const itemCounter = computed(() => {
         <div
           v-if="itemCounter"
           class="flex items-center justify-center w-5 h-5 text-xs text-white rounded-full shadow-md"
-          :class="[itemCounter.class ?? 'bg-error' , isExpanded && 'ml-4']"
+          :class="[itemCounter.class ?? 'bg-error', isExpanded && 'ml-4']"
         >
           {{ itemCounter.count }}
         </div>

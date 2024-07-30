@@ -83,14 +83,14 @@ s
   }
 
   &__footer {
-    .footer-title {
-      color: #8582d1;
-      font-weight: 600;
-    }
     max-width: 374px;
     color: #9b9b9b;
     font-size: 12px;
     text-align: center;
+    .footer-title {
+      color: #8582d1;
+      font-weight: 600;
+    }
   }
 }
 </style>

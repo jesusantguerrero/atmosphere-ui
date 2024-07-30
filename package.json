@@ -21,7 +21,6 @@
     "test:coverage": "vitest run --coverage",
     "storybook": "storybook dev -p 6006",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "prepublishOnly": "npm run build",
     "release": "npm run build && bumpp --commit --tag --push",
     "release-publish-only": "bumpp --commit --tag --push",
     "docs:build": "storybook build -o docs",

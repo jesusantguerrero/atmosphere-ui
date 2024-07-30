@@ -41,14 +41,11 @@ const props = withDefaults(
 const isExpanded = inject("isExpanded");
 const currentPath = inject("currentPath", ref(""));
 
-
 const isActive = computed(() => {
   return props.trackId == props.modelValue;
 });
 const hasActiveChild = computed(() => {
-  return (
-    !isActive.value && props.childs.find((item) => item.to == currentPath.value)
-  );
+  return !isActive.value && props.childs.find((item) => item.to == currentPath.value);
 });
 const arrowIcon = computed(() => {
   return isActive.value ? "chevron-down" : "chevron-right";
@@ -66,18 +63,19 @@ const isIconComponent = computed(() => {
 
 onMounted(() => {
   if (hasActiveChild.value) {
-    emitValue()
+    emitValue();
   }
-})
+});
 </script>
 
 <template>
   <div>
     <div
-      class="flex items-center justify-between px-5 text-left transition cursor-pointer"
+      class="flex items-center justify-between text-left transition cursor-pointer"
       v-bind="$attrs"
       :class="[
         isActive || (!isActive && hasActiveChild) ? itemActiveClass : itemClass,
+        isExpanded ? 'px-5' : 'px-3',
       ]"
       @click="emitValue()"
     >

@@ -24,7 +24,7 @@ const counters = inject("counters", ref({}));
 const isExpanded = inject("isExpanded", true);
 const classes = computed(() => {
   const classes = ["flex items-center w-full py-4 cursor-pointer"];
-  if (isExpanded) {
+  if (!isExpanded) {
     classes.push("px-5");
   }
 

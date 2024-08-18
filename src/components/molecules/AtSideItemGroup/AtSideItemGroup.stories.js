@@ -1,7 +1,7 @@
-import AtSideSideItemGroup from './AtSideItemGroup.vue'
+import AtSideSideItemGroup from "./AtSideItemGroup.vue";
 
 export default {
-  title: 'Molecules/AtSideItemGroup',
+  title: "Molecules/AtSideItemGroup",
   component: AtSideSideItemGroup,
 };
 
@@ -15,12 +15,12 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  icon: 'users',
-  label: 'Users',
+  icon: "users",
+  label: "Users",
   childs: [
-    { 
-      icon: 'user',
-      label: 'Edit',
-    }
-  ]
+    {
+      icon: "user",
+      label: "Edit",
+    },
+  ],
 };

@@ -3,16 +3,16 @@
         <div class="divider__inner"></div>
     </div>
 
-    <el-tooltip v-else class="item" effect="dark" :content="label" placement="right">
-        <inertia-link
+    <ElTooltip v-else class="item" effect="dark" :content="label" placement="right">
+        <InertiaLink
             class="flex items-center px-2 py-1 side-item"
             :class="{ active: isPath(to) }"
             :href="to"
             :title="label"
         >
             <i :class="`fa fa-${icon}`" class="ic-icon" />
-        </inertia-link>
-    </el-tooltip>
+        </InertiaLink>
+    </ElTooltip>
 </template>
 
 <script>
@@ -49,7 +49,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .divider {
     height: 1px;
     width: 100%;
@@ -72,7 +72,6 @@ export default {
     border-radius: 8px;
     font-weight: bolder;
     margin: 10px auto;
-    color: white;
     transition: all ease .3s;
 
     &:hover, &.active {

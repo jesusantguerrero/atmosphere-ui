@@ -1,8 +1,8 @@
-import { ref } from 'vue';
-import AtChoices from './AtChoices.vue';
+import { ref } from "vue";
+import AtChoices from "./AtChoices.vue";
 
 export default {
-  title: 'Molecules/AtChoices',
+  title: "Molecules/AtChoices",
   component: AtChoices,
 };
 
@@ -14,14 +14,21 @@ const Template = (args) => ({
   template: '<AtChoices v-bind="args" v-model="value" />',
 });
 
-const tooltips = ['Every day', 'A few times a week', 'A few times a month', 'Less often', 'I dont use it']
+const tooltips = [
+  "Every day",
+  "A few times a week",
+  "A few times a month",
+  "Less often",
+  "I dont use it",
+];
 
 export const Basic = Template.bind({});
 Basic.args = {
   value: 0,
-  itemClass: '',
-  selectedClass: 'text-blue-500 border-blue-500 ring ring-offset-0 ring-blue-200',
-  selectedLetterClass: 'bg-blue-500',
+  itemClass: "",
+  selectedClass:
+    "text-blue-500 border-blue-500 ring ring-offset-0 ring-blue-200",
+  selectedLetterClass: "bg-blue-500",
   max: 5,
   tooltips,
 };
@@ -33,8 +40,8 @@ Scale.args = {
   tooltips: [],
   showLetters: false,
   scale: true,
-  leftLabel: 'No.',
-  rightLabel: 'Definitely'
+  leftLabel: "No.",
+  rightLabel: "Definitely",
 };
 
 export const Readonly = Template.bind({});

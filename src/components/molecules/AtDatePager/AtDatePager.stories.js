@@ -33,8 +33,8 @@ const TemplateWithSlot = (args) => ({
       Range Selector
     </AtDatePager>
   </div>
-  `
-})
+  `,
+});
 
 export const Default = Template.bind({});
 Default.args = {

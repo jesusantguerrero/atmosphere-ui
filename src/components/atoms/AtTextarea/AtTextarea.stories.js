@@ -1,7 +1,7 @@
-import AtTextarea from './AtTextarea.vue';
+import AtTextarea from "./AtTextarea.vue";
 
 export default {
-  title: 'Atoms/AtTextarea',
+  title: "Atoms/AtTextarea",
   component: AtTextarea,
 };
 
@@ -15,7 +15,5 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  class: 'border px-4 py-1'
+  class: "border px-4 py-1",
 };
-
-

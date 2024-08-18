@@ -1,7 +1,7 @@
 import AtBackgroundIconCard from "./AtBackgroundIconCard.vue";
 
 export default {
-  title: 'Molecules/AtBackgroundIconCard',
+  title: "Molecules/AtBackgroundIconCard",
   component: AtBackgroundIconCard,
 };
 
@@ -27,7 +27,7 @@ IconLeft.args = {
   icon: "fas fa-wallet",
   value: "10,000.00",
   title: "Accounts",
-  iconPosition: 'left'
+  iconPosition: "left",
 };
 
 export const WithIconClass = Template.bind({});
@@ -36,6 +36,5 @@ WithIconClass.args = {
   icon: "fas fa-wallet",
   value: "10,000.00",
   title: "Accounts",
-  iconClass: 'text-red-500'
+  iconClass: "text-red-500",
 };
-

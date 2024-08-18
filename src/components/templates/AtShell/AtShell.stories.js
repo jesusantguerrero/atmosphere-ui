@@ -6,16 +6,16 @@ import * as AtSideStories from "../../organisms/AtSide/AtSide.stories";
 import * as AtHeaderStories from "../../organisms/AtHeader/AtHeader.stories";
 
 export default {
-    title: "Templates/AtShell",
-    component: AtShell,
+  title: "Templates/AtShell",
+  component: AtShell,
 };
 
 const Template = (args) => ({
-    components: { AtShell, AtSide, AtHeader },
-    setup() {
-        return { args };
-    },
-    template: `<AtShell>
+  components: { AtShell, AtSide, AtHeader },
+  setup() {
+    return { args };
+  },
+  template: `<AtShell>
         <template #navigation>
             <AtHeader v-bind="args.header" />
         </template>
@@ -30,6 +30,6 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-    aside: AtSideStories.ProductionExample.args,
-    header: AtHeaderStories.Default.args,
+  aside: AtSideStories.ProductionExample.args,
+  header: AtHeaderStories.Default.args,
 };

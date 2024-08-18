@@ -1,7 +1,7 @@
-import AtBadge from './AtBadge.vue';
+import AtBadge from "./AtBadge.vue";
 
 export default {
-  title: 'Atoms/AtBadge',
+  title: "Atoms/AtBadge",
   component: AtBadge,
 };
 
@@ -15,27 +15,25 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  type: 'primary'
+  type: "primary",
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
-  type: 'secondary'
+  type: "secondary",
 };
 
 export const Success = Template.bind({});
 Success.args = {
-  type: 'success'
+  type: "success",
 };
 
 export const Warning = Template.bind({});
 Warning.args = {
-  type: 'warning'
+  type: "warning",
 };
 
 export const Danger = Template.bind({});
 Danger.args = {
-  type: 'danger'
+  type: "danger",
 };
-
-

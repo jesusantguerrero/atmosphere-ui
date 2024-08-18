@@ -1,8 +1,8 @@
-import { ref } from 'vue';
-import AtFieldCheck from './AtFieldCheck.vue'
+import { ref } from "vue";
+import AtFieldCheck from "./AtFieldCheck.vue";
 
 export default {
-  title: 'Molecules/AtFieldCheck',
+  title: "Molecules/AtFieldCheck",
   component: AtFieldCheck,
 };
 
@@ -16,6 +16,6 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  label: 'End date',
-  class: "w-32"
+  label: "End date",
+  class: "w-32",
 };

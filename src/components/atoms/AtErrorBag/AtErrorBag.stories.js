@@ -1,7 +1,7 @@
-import AtErrorBag from './AtErrorBag.vue';
+import AtErrorBag from "./AtErrorBag.vue";
 
 export default {
-  title: 'Atoms/AtErrorBag',
+  title: "Atoms/AtErrorBag",
   component: AtErrorBag,
 };
 
@@ -15,9 +15,8 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  field: 'email',
+  field: "email",
   errors: {
-    email: 'An email error'
-  }
+    email: "An email error",
+  },
 };
-

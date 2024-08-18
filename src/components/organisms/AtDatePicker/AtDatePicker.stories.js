@@ -1,13 +1,13 @@
-import AtDatePicker from './AtDatePicker.vue'
+import AtDatePicker from "./AtDatePicker.vue";
 
 export default {
-  title: 'Organisms/AtDatePicker',
+  title: "Organisms/AtDatePicker",
   component: AtDatePicker,
   argTypes: {
     acceptEndDate: {
-      type: Boolean
-    }
-  }
+      type: Boolean,
+    },
+  },
 };
 
 const Template = (args) => ({
@@ -23,12 +23,12 @@ Default.args = {};
 
 export const WithEndDate = Template.bind({});
 WithEndDate.args = {
-  acceptEndDate: true
+  acceptEndDate: true,
 };
 
 export const WithTime = Template.bind({});
 WithTime.args = {
-  acceptTime: true
+  acceptTime: true,
 };
 
 export const FullFeatured = Template.bind({});

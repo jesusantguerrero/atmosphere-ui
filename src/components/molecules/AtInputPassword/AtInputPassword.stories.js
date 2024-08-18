@@ -1,16 +1,16 @@
-import AtInput from './AtInputPassword.vue';
-import { ref } from "vue"
+import AtInput from "./AtInputPassword.vue";
+import { ref } from "vue";
 export default {
-  title: 'Molecules/AtInputPassword',
+  title: "Molecules/AtInputPassword",
   component: AtInput,
 };
 
 const Template = (args) => ({
   components: { AtInput },
   setup() {
-    return { 
+    return {
       args,
-      value: ref(args.value || ''), 
+      value: ref(args.value || ""),
     };
   },
   template: '<AtInput v-bind="args" v-model="value" class="w-64" />',
@@ -18,7 +18,7 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  value: 'hola mundo'
+  value: "hola mundo",
 };
 
 export const Disabled = Template.bind({});
@@ -33,18 +33,17 @@ Rounded.args = {
 
 export const Prefix = Template.bind({});
 Prefix.args = {
-  prefix:'$',
+  prefix: "$",
 };
 
 export const Suffix = Template.bind({});
 Suffix.args = {
-  suffix: '%',
+  suffix: "%",
 };
 
 export const WithFormatting = Template.bind({});
 WithFormatting.args = {
-  prefix: '$',
+  prefix: "$",
   numberFormat: true,
-  isBorderless: true
+  isBorderless: true,
 };
-

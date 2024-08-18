@@ -36,7 +36,8 @@ const HeaderSlotTemplate = (args) => ({
           avatar: "https://via.placeholder.com/150",
         },
       ],
-      imageUrl:"blob:http://neatlancer.test/f87e1fb3-c9f4-42dd-8604-8d6e61b74779",
+      imageUrl:
+        "blob:http://neatlancer.test/f87e1fb3-c9f4-42dd-8604-8d6e61b74779",
       colors: "bg-white text-gray-700 hover:bg-gray-200 transition",
       rounded: false,
       fullHeight: true,
@@ -90,7 +91,6 @@ const HeaderSlotTemplate = (args) => ({
     </div>
   `,
 });
-
 
 export const ExampleOne = HeaderSlotTemplate.bind({});
 ExampleOne.args = {
@@ -150,7 +150,7 @@ ExampleOne.args = {
       name: "categories",
       to: "/categories",
       as: AtSideAccountItem,
-    }
+    },
   ],
   headerMenu: [
     {
@@ -172,7 +172,7 @@ ExampleOne.args = {
   counters: {
     housing: {
       count: 7,
-      class: 'bg-orange-400'
+      class: "bg-orange-400",
     },
   },
 };

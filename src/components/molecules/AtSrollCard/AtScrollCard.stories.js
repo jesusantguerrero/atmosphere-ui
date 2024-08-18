@@ -1,16 +1,16 @@
 import AtScrollCard from "./AtScrollCard.vue";
 
 export default {
-    title: "Molecules/AtScrollCard",
-    component: AtScrollCard,
+  title: "Molecules/AtScrollCard",
+  component: AtScrollCard,
 };
 
 const Template = (args) => ({
-    components: { AtScrollCard },
-    setup() {
-        return { args };
-    },
-    template: `<div class="w-full">
+  components: { AtScrollCard },
+  setup() {
+    return { args };
+  },
+  template: `<div class="w-full">
         <AtScrollCard v-bind="args" v-on="args" class="w-full bg-gray-900 text-white" v-slot:default="{ item }">
             <div
                 v-if="item"
@@ -27,21 +27,21 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-    list: [
-        {
-            name: "Desayuno",
-        },
-        {
-            name: "Comida",
-        },
-        {
-            name: "Cena",
-        },
-        {
-            name: "Cena",
-        },
-        {
-            name: "Cena",
-        },
-    ],
+  list: [
+    {
+      name: "Desayuno",
+    },
+    {
+      name: "Comida",
+    },
+    {
+      name: "Cena",
+    },
+    {
+      name: "Cena",
+    },
+    {
+      name: "Cena",
+    },
+  ],
 };

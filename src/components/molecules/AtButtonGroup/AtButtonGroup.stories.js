@@ -1,70 +1,68 @@
-import { ref } from 'vue';
-import AtButtonGroup from './AtButtonGroup.vue';
+import { ref } from "vue";
+import AtButtonGroup from "./AtButtonGroup.vue";
 
 export default {
-  title: 'Molecules/AtButtonGroup',
+  title: "Molecules/AtButtonGroup",
   component: AtButtonGroup,
 };
 
 const Template = (args) => ({
   components: { AtButtonGroup },
   setup() {
-    return { args, selected: ref('MONTHLY') };
+    return { args, selected: ref("MONTHLY") };
   },
   template: '<at-button-group v-model="selected" v-bind="args" />',
 });
 
 const options = [
   {
-    value: 'MONTHLY',
-    label: 'Monthly'
-},
-{
-    value: 'WEEKLY',
-    label: 'Weekly'
-},
-{
-    value: 'DATE',
-    label: 'By Date'
-}
-]
+    value: "MONTHLY",
+    label: "Monthly",
+  },
+  {
+    value: "WEEKLY",
+    label: "Weekly",
+  },
+  {
+    value: "DATE",
+    label: "By Date",
+  },
+];
 export const Default = Template.bind({});
 Default.args = {
-  theme: 'primary',
+  theme: "primary",
   options: [
     {
-      value: 'MONTHLY',
-      label: 'Monthly'
-  },
-  {
-      value: 'WEEKLY',
-      label: 'Weekly'
-  },
-  {
-      value: 'DATE',
-      label: 'By Date'
-  }
-  ]
+      value: "MONTHLY",
+      label: "Monthly",
+    },
+    {
+      value: "WEEKLY",
+      label: "Weekly",
+    },
+    {
+      value: "DATE",
+      label: "By Date",
+    },
+  ],
 };
 
 export const NoticeType = Template.bind({});
 NoticeType.args = {
-  theme: 'notice',
-  options
+  theme: "notice",
+  options,
 };
 
 export const CompactStyle = Template.bind({});
 CompactStyle.args = {
-  theme: 'notice',
+  theme: "notice",
   options,
-  compact: true
+  compact: true,
 };
 
 export const Rounded = Template.bind({});
 Rounded.args = {
-  theme: 'secondary',
+  theme: "secondary",
   options,
-  rounded: true
+  rounded: true,
 };
-
-

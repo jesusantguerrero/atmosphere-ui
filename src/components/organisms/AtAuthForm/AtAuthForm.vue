@@ -18,7 +18,6 @@
           :is="AtInput"
           v-model.trim="formData.email"
           v-bind="getFieldConfig('email')"
-          :disabled="true"
           data-testid="input-email"
           required
         />

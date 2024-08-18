@@ -22,11 +22,11 @@ describe("AuthForm component", () => {
       },
     });
 
-    await fireEvent.update(
+    await userEvent.type(
       screen.getByTestId("input-email"),
       "jesus@gmail.com"
     );
-    await fireEvent.update(screen.getByTestId("input-password"), "1234");
+    await userEvent.type(screen.getByTestId("input-password"), "1234");
     await fireEvent.click(getByTestId("btn-submit"));
 
     expect(emitted()).toHaveProperty("submit");
@@ -45,11 +45,11 @@ describe("AuthForm component", () => {
       },
     });
 
-    await fireEvent.update(
+    await userEvent.type(
       screen.getByTestId("input-email"),
       "jesus@gmail.com"
     );
-    await fireEvent.update(screen.getByTestId("input-password"), "1234");
+    await userEvent.type(screen.getByTestId("input-password"), "1234");
     await fireEvent.keyDown(screen.getByTestId("input-password"), {
       key: 'Enter',
       code: 'Enter',
@@ -73,15 +73,15 @@ describe("AuthForm component", () => {
     });
 
     screen.getByText("Atmosphere");
-    await fireEvent.update(
+    await userEvent.type(
       screen.getByTestId("input-email"),
       "jesus@gmail.com"
     );
-    await fireEvent.update(
+    await userEvent.type(
       screen.getByTestId("input-confirm-password"),
       "1234"
     );
-    await fireEvent.update(screen.getByTestId("input-password"), "1234");
+    await userEvent.type(screen.getByTestId("input-password"), "1234");
 
     await fireEvent.click(screen.getByTestId("btn-submit"));
     expect(emitted()).toHaveProperty("submit");

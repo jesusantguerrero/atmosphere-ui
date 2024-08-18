@@ -80,7 +80,7 @@ onMounted(() => {
       :title="label"
       @click="emitValue()"
     >
-      <span class="w-full py-4 side-item">
+      <span class="w-full py-4 text-current side-item">
         <component :is="icon" class="mr-2" v-if="isIconComponent" />
         <i :class="`fa fa-${icon} mr-2`" v-else-if="icon" />
         <span v-if="isExpanded">

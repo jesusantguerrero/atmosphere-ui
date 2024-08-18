@@ -19,5 +19,5 @@ Default.args = {
   description: "the information",
   body: "In this section we'll figureout all the information related to the application.",
   actionButtonText: "Get Started",
-  footerNote: "Build your web project using atmosphere-ui"
+  footerNote: "Build your web project using atmosphere-ui",
 };

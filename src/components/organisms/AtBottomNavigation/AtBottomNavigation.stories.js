@@ -1,13 +1,13 @@
-import AtBottomNavigation from './AtBottomNavigation.vue'
+import AtBottomNavigation from "./AtBottomNavigation.vue";
 
 export default {
-  title: 'Organisms/AtBottomNavigation',
+  title: "Organisms/AtBottomNavigation",
   component: AtBottomNavigation,
   argTypes: {
     menu: {
-      type: Object
-    }
-  }
+      type: Object,
+    },
+  },
 };
 
 const Template = (args) => ({
@@ -18,44 +18,44 @@ const Template = (args) => ({
   template: `<AtBottomNavigation v-bind="args"></AtBottomNavigation>`,
 });
 
-const menuItems =  [
-    {
-      icon: 'users',
-      name: 'users',
-      label: 'People',
-      childs: [
-        { 
-          icon: 'user',
-          label: 'Edit',
-        }
-      ]
-    },
-    {
-      icon: 'star',
-      name: 'favorites',
-      label: 'Favorites',
-      childs: [
-        { 
-          icon: 'user',
-          label: 'Edit',
-        }
-      ]
-    }, {
-  
-    }, {
-      icon: 'home',
-      name: 'home',
-      label: 'Dashboard',
-      childs: [
-        { 
-          icon: 'user',
-          label: 'Edit',
-        }
-      ]
-    }
+const menuItems = [
+  {
+    icon: "users",
+    name: "users",
+    label: "People",
+    childs: [
+      {
+        icon: "user",
+        label: "Edit",
+      },
+    ],
+  },
+  {
+    icon: "star",
+    name: "favorites",
+    label: "Favorites",
+    childs: [
+      {
+        icon: "user",
+        label: "Edit",
+      },
+    ],
+  },
+  {},
+  {
+    icon: "home",
+    name: "home",
+    label: "Dashboard",
+    childs: [
+      {
+        icon: "user",
+        label: "Edit",
+      },
+    ],
+  },
 ];
 
 export const Default = Template.bind({});
 Default.args = {
-    menuItems
+  menuItems,
 };

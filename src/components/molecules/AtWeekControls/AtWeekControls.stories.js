@@ -1,7 +1,7 @@
-import AtWeekControls from './AtWeekControls.vue';
+import AtWeekControls from "./AtWeekControls.vue";
 
 export default {
-  title: 'Molecules/AtWeekControls',
+  title: "Molecules/AtWeekControls",
   component: AtWeekControls,
   argTypes: {},
 };
@@ -23,29 +23,29 @@ const Template = (args) => ({
 export const Default = Template.bind({});
 Default.args = {
   value: new Date(),
-  placeholder: "Select a date"
+  placeholder: "Select a date",
 };
 
 export const WeekMode = Template.bind({});
 WeekMode.args = {
   value: new Date(),
-  nextMode: 'week',
-  placeholder: "Select a date"
+  nextMode: "week",
+  placeholder: "Select a date",
 };
 
 export const RelativeDates = Template.bind({});
 RelativeDates.args = {
   value: new Date(),
-  nextMode: 'week',
+  nextMode: "week",
   placeholder: "Select a date",
-  relativeDates: true
+  relativeDates: true,
 };
 
 export const TodayHighlighted = Template.bind({});
 TodayHighlighted.args = {
   value: new Date(),
-  nextMode: 'week',
+  nextMode: "week",
   placeholder: "Select a date",
   relativeDates: true,
-  highlightToday: true
+  highlightToday: true,
 };

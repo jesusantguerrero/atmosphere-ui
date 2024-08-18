@@ -1,7 +1,7 @@
-import AtField from './AtField.vue';
+import AtField from "./AtField.vue";
 
 export default {
-  title: 'Atoms/AtField',
+  title: "Atoms/AtField",
   component: AtField,
 };
 
@@ -15,10 +15,9 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  field: 'email',
-  label: 'Email',
+  field: "email",
+  label: "Email",
   errors: {
-    email: 'An email error'
-  }
+    email: "An email error",
+  },
 };
-

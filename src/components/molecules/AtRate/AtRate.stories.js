@@ -1,8 +1,8 @@
-import { ref } from 'vue';
-import AtRate from './AtRate.vue';
+import { ref } from "vue";
+import AtRate from "./AtRate.vue";
 
 export default {
-  title: 'Molecules/AtRate',
+  title: "Molecules/AtRate",
   component: AtRate,
 };
 
@@ -17,8 +17,8 @@ const Template = (args) => ({
 export const Default = Template.bind({});
 Default.args = {
   value: 0,
-  itemClass: 'hover:text-blue-500',
-  selectedClass: 'text-blue-500',
+  itemClass: "hover:text-blue-500",
+  selectedClass: "text-blue-500",
   max: 5,
 };
 
@@ -33,8 +33,8 @@ const TemplateWithSlot = (args) => ({
 export const WithCustomSlot = TemplateWithSlot.bind({});
 WithCustomSlot.args = {
   value: 0,
-  itemClass: 'hover:text-blue-500',
-  selectedClass: 'text-blue-500',
+  itemClass: "hover:text-blue-500",
+  selectedClass: "text-blue-500",
 };
 export const Basic = Template.bind({});
 Basic.args = {
@@ -47,7 +47,7 @@ Half.args = {
 export const Copywriting = Template.bind({});
 Copywriting.args = {
   ...Default.args,
-  tooltips: ['terrible', 'bad', 'ok', 'good', 'great'],
+  tooltips: ["terrible", "bad", "ok", "good", "great"],
 };
 
 export const Readonly = Template.bind({});

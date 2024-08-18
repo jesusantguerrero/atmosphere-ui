@@ -1,7 +1,7 @@
-import AtFeedbackButton from './AtFeedbackButton.vue';
+import AtFeedbackButton from "./AtFeedbackButton.vue";
 
 export default {
-  title: 'Molecules/AtFeedbackButton',
+  title: "Molecules/AtFeedbackButton",
   component: AtFeedbackButton,
 };
 
@@ -12,12 +12,11 @@ const Template = (args) => ({
   },
   template: `<div class="w-6/12 flex justify-center">
     <AtFeedbackButton v-bind="args" class="w-9" />
-  </div>`
+  </div>`,
 });
-
 
 export const Basic = Template.bind({});
 Basic.args = {
-  name: 'Starter plan',
-  status: 'active'
+  name: "Starter plan",
+  status: "active",
 };

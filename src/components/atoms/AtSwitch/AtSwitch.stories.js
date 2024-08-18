@@ -1,8 +1,8 @@
-import { ref } from 'vue';
-import AtSwitch from './AtSwitch.vue';
+import { ref } from "vue";
+import AtSwitch from "./AtSwitch.vue";
 
 export default {
-  title: 'Atoms/AtSwitch',
+  title: "Atoms/AtSwitch",
   component: AtSwitch,
 };
 
@@ -16,9 +16,8 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  field: 'email',
+  field: "email",
   errors: {
-    email: 'An email error'
-  }
+    email: "An email error",
+  },
 };
-

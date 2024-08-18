@@ -114,6 +114,7 @@ BackgroundSide.args = {
   linkClass: "text-blue-500 hover:text-blue-600",
   hideLink: true,
   brandContainerClass: "",
-  backgroundImage: "https://www.sciencenewsforstudents.org/wp-content/uploads/2020/11/1030_Earth_atmosphere_explainer.jpg",
+  backgroundImage:
+    "https://www.sciencenewsforstudents.org/wp-content/uploads/2020/11/1030_Earth_atmosphere_explainer.jpg",
   backgroundPlacement: "right",
 };

@@ -1,19 +1,27 @@
-import { ref } from 'vue';
-import AtFormBlock from './AtFormBlock.vue';
+import { ref } from "vue";
+import AtFormBlock from "./AtFormBlock.vue";
 import AtTextArea from "../../atoms/AtTextarea/AtTextarea.vue";
 import AtRate from "../../molecules/AtRate/AtRate.vue";
 import AtChoices from "../../molecules/AtChoices/AtChoices.vue";
 import AtBinaryChoice from "../../molecules/AtBinaryChoice/AtBinaryChoice.vue";
 import AtOptionsCreator from "../../molecules/AtOptionsCreator/AtOptionsCreator.vue";
-import SimpleSelect from "../../molecules/AtSimpleSelect/AtSimpleSelect.vue"
+import SimpleSelect from "../../molecules/AtSimpleSelect/AtSimpleSelect.vue";
 
 export default {
-  title: 'Organisms/AtFormBlock',
+  title: "Organisms/AtFormBlock",
   component: AtFormBlock,
 };
 
 const Template = (args) => ({
-  components: { AtFormBlock, AtTextArea, AtRate, AtChoices, AtBinaryChoice, AtOptionsCreator, SimpleSelect },
+  components: {
+    AtFormBlock,
+    AtTextArea,
+    AtRate,
+    AtChoices,
+    AtBinaryChoice,
+    AtOptionsCreator,
+    SimpleSelect,
+  },
   setup() {
     return { args, field: ref(args.field) };
   },
@@ -23,71 +31,73 @@ const Template = (args) => ({
 export const Basic = Template.bind({});
 Basic.args = {
   field: {
-    type: 'multipleSelect',
+    type: "multipleSelect",
     is_required: false,
     should_accept_comment: false,
     options: [],
   },
   fieldTypes: [
     {
-        name: 'input',
-        label: 'Short Text',
-        component: 'input'
+      name: "input",
+      label: "Short Text",
+      component: "input",
     },
     {
-        name: 'textarea',
-        label: 'Long Text',
-        component: AtTextArea,
-    }, {
-        name: 'singleSelect',
-        label: 'Options',
-        component: AtOptionsCreator,
-    }, {
-        name: 'multipleSelect',
-        label: 'Multiple',
-        component: AtOptionsCreator,
+      name: "textarea",
+      label: "Long Text",
+      component: AtTextArea,
     },
     {
-        name: 'multipleChoice',
-        label: 'Multiple Choice',
-        component: AtOptionsCreator,
+      name: "singleSelect",
+      label: "Options",
+      component: AtOptionsCreator,
     },
     {
-        name: 'statement',
-        label: 'Statement',
-        component: AtTextArea,
+      name: "multipleSelect",
+      label: "Multiple",
+      component: AtOptionsCreator,
     },
     {
-        name: 'pictureChoice',
-        label: 'Picture Choice',
-        component: AtOptionsCreator,
+      name: "multipleChoice",
+      label: "Multiple Choice",
+      component: AtOptionsCreator,
     },
     {
-        name: 'ranking',
-        label: 'Ranking',
-        component: AtRate
+      name: "statement",
+      label: "Statement",
+      component: AtTextArea,
     },
     {
-        name: 'yesno',
-        label: 'Yes/No',
-        component: AtBinaryChoice
+      name: "pictureChoice",
+      label: "Picture Choice",
+      component: AtOptionsCreator,
     },
     {
-        name: 'email',
-        label: 'Email',
-        component: 'input'
+      name: "ranking",
+      label: "Ranking",
+      component: AtRate,
     },
     {
-        name: 'opinionScale',
-        label: 'Opinion Scale',
-        component: AtChoices,
+      name: "yesno",
+      label: "Yes/No",
+      component: AtBinaryChoice,
     },
     {
-        name: 'phonenumber',
-        label: 'Phone Number',
-        component: 'input'
-    }
-    ],
+      name: "email",
+      label: "Email",
+      component: "input",
+    },
+    {
+      name: "opinionScale",
+      label: "Opinion Scale",
+      component: AtChoices,
+    },
+    {
+      name: "phonenumber",
+      label: "Phone Number",
+      component: "input",
+    },
+  ],
   disabled: false,
   index: 0,
 };

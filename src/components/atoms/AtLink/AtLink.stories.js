@@ -1,7 +1,7 @@
-import AtLink from './AtLink.vue';
+import AtLink from "./AtLink.vue";
 
 export default {
-  title: 'Atoms/AtLink',
+  title: "Atoms/AtLink",
   component: AtLink,
 };
 
@@ -15,26 +15,25 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  type: 'primary'
+  type: "primary",
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
-  type: 'secondary'
+  type: "secondary",
 };
 
 export const Success = Template.bind({});
 Success.args = {
-  type: 'success'
+  type: "success",
 };
 
 export const Warning = Template.bind({});
 Warning.args = {
-  type: 'warning'
+  type: "warning",
 };
 
 export const Danger = Template.bind({});
 Danger.args = {
-  type: 'danger'
+  type: "danger",
 };
-

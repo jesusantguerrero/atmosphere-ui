@@ -1,14 +1,14 @@
-import { ref } from 'vue';
-import AtDateSelect from './AtDateSelect.vue'
+import { ref } from "vue";
+import AtDateSelect from "./AtDateSelect.vue";
 
 export default {
-  title: 'Organisms/AtDateSelect',
+  title: "Organisms/AtDateSelect",
   component: AtDateSelect,
   argTypes: {
     acceptEndDate: {
-      type: Boolean
-    }
-  }
+      type: Boolean,
+    },
+  },
 };
 
 const Template = (args) => ({
@@ -23,18 +23,16 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  value: null
-}
-;
+  value: null,
+};
 export const AcceptTime = Template.bind({});
 AcceptTime.args = {
   value: null,
   acceptTime: true,
-  showTimeResult: true
+  showTimeResult: true,
 };
-
 
 export const WidthOverflow = Template.bind({});
 WidthOverflow.args = {
-  class: 'w-32 overflow-hidden'
+  class: "w-32 overflow-hidden",
 };

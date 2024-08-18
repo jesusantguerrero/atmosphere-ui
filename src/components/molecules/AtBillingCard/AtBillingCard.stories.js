@@ -1,8 +1,8 @@
-import { ref } from 'vue';
-import AtBillingCard from './AtBillingCard.vue';
+import { ref } from "vue";
+import AtBillingCard from "./AtBillingCard.vue";
 
 export default {
-  title: 'Molecules/AtBillingCard',
+  title: "Molecules/AtBillingCard",
   component: AtBillingCard,
 };
 
@@ -14,9 +14,8 @@ const Template = (args) => ({
   template: '<AtBillingCard v-bind="args"  />',
 });
 
-
 export const Basic = Template.bind({});
 Basic.args = {
-  name: 'Starter plan',
-  status: 'active'
+  name: "Starter plan",
+  status: "active",
 };

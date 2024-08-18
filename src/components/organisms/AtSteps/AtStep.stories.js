@@ -4,25 +4,25 @@ import AtButton from "../../atoms/AtButton/AtButton.vue";
 import { ref } from "vue";
 
 export default {
-    title: "Organisms/AtSteps  ",
-    component: AtSteps,
+  title: "Organisms/AtSteps  ",
+  component: AtSteps,
 };
 
 const Template = (args) => ({
-    components: { AtSteps, AtStep, AtButton },
-    setup() {
-        const finished = () => {
-            alert("Completed");
+  components: { AtSteps, AtStep, AtButton },
+  setup() {
+    const finished = () => {
+      alert("Completed");
     };
-        const afterChange = (step) => {
-            alert(`Changed to step ${step}`);
-        };
-        const beforeChange = () => {
-            return new Promise((resolve) => resolve(true));
-        };
-        return { args, step: ref(0), finished, afterChange, beforeChange };
-    },
-    template: `
+    const afterChange = (step) => {
+      alert(`Changed to step ${step}`);
+    };
+    const beforeChange = () => {
+      return new Promise((resolve) => resolve(true));
+    };
+    return { args, step: ref(0), finished, afterChange, beforeChange };
+  },
+  template: `
     <div style="{width: '500px'}" class="px-10">
       <AtSteps v-model="step" @finished="finished" v-bind="args">
         <AtStep name="step1" title="Step 1" :after-change="afterChange.bind(null, 1)"> Hola Uno </AtStep>
@@ -41,20 +41,20 @@ const Template = (args) => ({
 });
 
 const CustomHeaderTemplate = (args) => ({
-    components: { AtSteps, AtStep, AtButton },
-    setup() {
-        const finished = () => {
-            alert("Completed");
-        };
-        const afterChange = (step) => {
-            alert(`Changed to step ${step}`);
-        };
-        const beforeChange = () => {
-            return new Promise((resolve) => resolve(true));
-        };
-        return { args, step: ref(0), finished, afterChange, beforeChange };
-    },
-    template: `
+  components: { AtSteps, AtStep, AtButton },
+  setup() {
+    const finished = () => {
+      alert("Completed");
+    };
+    const afterChange = (step) => {
+      alert(`Changed to step ${step}`);
+    };
+    const beforeChange = () => {
+      return new Promise((resolve) => resolve(true));
+    };
+    return { args, step: ref(0), finished, afterChange, beforeChange };
+  },
+  template: `
   <div style="{width: '500px'}" class="px-10">
     <AtSteps v-model="step" @finished="finished" v-bind="args">
       <AtStep name="step1" title="Step 1" :after-change="afterChange.bind(null, 1)"> 
@@ -78,29 +78,29 @@ const CustomHeaderTemplate = (args) => ({
 });
 
 const RefTemplate = (args) => ({
-    components: { AtSteps, AtStep, AtButton },
-    setup() {
-        const finished = () => {
-            alert("Completed");
-        };
-        const afterChange = (step) => {
-            alert(`Changed to step ${step}`);
-        };
-        const beforeChange = () => {
-            const isInvalid = new Promise((resolve) => resolve(true));
-            return isInvalid;
-        };
+  components: { AtSteps, AtStep, AtButton },
+  setup() {
+    const finished = () => {
+      alert("Completed");
+    };
+    const afterChange = (step) => {
+      alert(`Changed to step ${step}`);
+    };
+    const beforeChange = () => {
+      const isInvalid = new Promise((resolve) => resolve(true));
+      return isInvalid;
+    };
 
-        const step = ref(0);
-        const next = () => {
-            step.value += 1;
-        };
-        const prev = () => {
-            step.value -= 1;
-        };
-        return { args, step, finished, afterChange, beforeChange, next, prev };
-    },
-    template: `
+    const step = ref(0);
+    const next = () => {
+      step.value += 1;
+    };
+    const prev = () => {
+      step.value -= 1;
+    };
+    return { args, step, finished, afterChange, beforeChange, next, prev };
+  },
+  template: `
     <div style="{width: '500px'}" class="px-10">
       <AtSteps v-model="step" @finished="finished" v-bind="args">
         <AtStep name="step1" title="Step 1" :after-change="afterChange.bind(null, 1)"> Hola Uno </AtStep>
@@ -118,30 +118,30 @@ const RefTemplate = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-    activeClass: "bg-blue-400 text-white",
+  activeClass: "bg-blue-400 text-white",
 };
 
 export const Simple = Template.bind({});
 Simple.args = {
-    simple: true,
-    activeClass: "bg-blue-400 text-white",
-    circleActiveColor: "bg-blue-500 text-white",
-    loadShadowColor: "shadow-blue-400",
+  simple: true,
+  activeClass: "bg-blue-400 text-white",
+  circleActiveColor: "bg-blue-500 text-white",
+  loadShadowColor: "shadow-blue-400",
 };
 
 export const ExternalControls = RefTemplate.bind({});
 ExternalControls.args = {
-    activeClass: "bg-gray-700 text-white",
+  activeClass: "bg-gray-700 text-white",
 };
 
 export const HiddenLabels = Template.bind({});
 HiddenLabels.args = {
-    showLabels: false,
+  showLabels: false,
 };
 
 export const HiddenSteps = Template.bind({});
 HiddenSteps.args = {
-    showSteps: false,
+  showSteps: false,
 };
 
 export const CustomHeader = CustomHeaderTemplate.bind({});

@@ -1,12 +1,12 @@
-import AtUserButton from './AtUserButton.vue';
+import AtUserButton from "./AtUserButton.vue";
 
 export default {
-  title: 'Organisms/AtUserButton',
+  title: "Organisms/AtUserButton",
   component: AtUserButton,
 };
 
 const Template = (args) => ({
-  components: { AtUserButton},
+  components: { AtUserButton },
   setup() {
     return { args };
   },
@@ -21,34 +21,32 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-    options: {
-      account: {
-        label: "General options",
-        sections: [
-          ["Profile", "/settings/profile"],
-          ["Favorites", "/favorites"],
-          ["My Collection", "/my-items"],
-          ["Favorites", "/settings"],
-          ["Logout", { emit: 'logout', separator: true }],
-        ]
-      }
-    }
+  options: {
+    account: {
+      label: "General options",
+      sections: [
+        ["Profile", "/settings/profile"],
+        ["Favorites", "/favorites"],
+        ["My Collection", "/my-items"],
+        ["Favorites", "/settings"],
+        ["Logout", { emit: "logout", separator: true }],
+      ],
+    },
+  },
 };
 
 export const HiddenOption = Template.bind({});
 HiddenOption.args = {
-    options: {
-      account: {
-        label: "General options",
-        sections: [
-          ["Profile", "/settings/profile"],
-          ["Favorites", "/favorites"],
-          ["My Collection", "/my-items"],
-          ["Favorites", "/settings"],
-          ["Logout", { emit: 'logout', hide: true }],
-        ]
-      }
-    }
+  options: {
+    account: {
+      label: "General options",
+      sections: [
+        ["Profile", "/settings/profile"],
+        ["Favorites", "/favorites"],
+        ["My Collection", "/my-items"],
+        ["Favorites", "/settings"],
+        ["Logout", { emit: "logout", hide: true }],
+      ],
+    },
+  },
 };
-
-

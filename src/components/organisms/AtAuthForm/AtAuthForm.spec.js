@@ -4,7 +4,7 @@
 import userEvent from "@testing-library/user-event";
 import { render, screen, fireEvent } from "@testing-library/vue";
 import { describe, expect, it } from "vitest";
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import AuthForm from "./AtAuthForm.vue";
 
 describe("AuthForm component", () => {
@@ -92,9 +92,57 @@ describe("AuthForm component", () => {
     });
   });
 
-  it("Should render the component register", async () => {
+  it("Should change email on initial value change", async () => {
+    const initialValues = ref({
+      email: "",
+    });
+
+    const email = "jonhdoe@example.com";
+
+    const component = render(AuthForm, {
+      props: {
+        mode: "register",
+        initialValues: initialValues,
+        config: {
+          email: {
+            disabled: true
+          }
+        }
+      },
+    });
+
+    initialValues.value.email = email;
+    const inputEmail = await component.findByTestId("input-email");
+    expect(inputEmail.value).toBe(email);
+  });
+  it("Should disable email on config set", async () => {
+    const initialValues = ref({
+      email: "",
+    });
+
+    const email = "jonhdoe@example.com";
+
+    const component = render(AuthForm, {
+      props: {
+        mode: "register",
+        initialValues: initialValues,
+        config: {
+          email: {
+            disabled: true
+          }
+        }
+      },
+    });
+
+    initialValues.value.email = email;
+    const inputEmail = await component.findByTestId("input-email");
+    await userEvent.type(inputEmail, "dan@example.com")
+    expect(inputEmail.value).toBe(email);
+  });
+
+  it("Should disable email after initialization in register", async () => {
     const initialValues = reactive({
-      email: "jonhdoe@example.com",
+      email: "",
     });
 
     const component = render(AuthForm, {
@@ -102,6 +150,8 @@ describe("AuthForm component", () => {
         mode: "register",
       },
     });
+
+    initialValues.email = "jonhdoe@example.com"
 
     component.findByText("johndoe@example.com");
     initialValues.email = "john@doe.com";

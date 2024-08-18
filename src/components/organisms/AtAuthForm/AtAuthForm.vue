@@ -1,9 +1,6 @@
 <template>
   <form @submit.prevent="loginUser()">
-    <div
-      class="flex items-center justify-center w-full"
-      :class="brandContainerClass"
-    >
+    <div class="flex items-center justify-center w-full" :class="brandContainerClass">
       <div
         class="text-6xl text-center cursor-pointer brand-font"
         @click="$emit('home-pressed')"
@@ -20,6 +17,8 @@
         <component
           :is="AtInput"
           v-model.trim="formData.email"
+          v-bind="getFieldConfig('email')"
+          :disabled="true"
           data-testid="input-email"
           required
         />
@@ -28,12 +27,7 @@
         </template>
       </component>
 
-      <component
-        :is="AtField"
-        field="password"
-        label="Password"
-        :errors="errors"
-      >
+      <component :is="AtField" field="password" label="Password" :errors="errors">
         <component
           :is="AtInputPassword"
           data-testid="input-password"
@@ -103,7 +97,7 @@
   </form>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { reactive, computed, toRefs, provide, watch } from "vue";
 import AtButton from "../../atoms/AtButton/AtButton.vue";
 import AtField from "../../atoms/AtField/AtField.vue";
@@ -113,6 +107,8 @@ import AtInputPassword from "../../molecules/AtInputPassword/AtInputPassword.vue
 
 const emit = defineEmits({
   submit: null,
+  "link-pressed": null,
+  "home-pressed": null
 });
 
 const props = defineProps({
@@ -209,10 +205,7 @@ const state = reactive({
   }),
 
   linkLabel: computed(() => {
-    return (
-      props.customLinkLabel ??
-      (mode.value == "register" ? "Login" : "Create One")
-    );
+    return props.customLinkLabel ?? (mode.value == "register" ? "Login" : "Create One");
   }),
   // validation
   isDirty: false,
@@ -225,21 +218,28 @@ const state = reactive({
   }),
 });
 
+
+const getFieldConfig = (field: string) => {
+  return props.config?.[field] ?? {};
+} 
+
 watch(
   initialValues,
   (formValues) => {
+   
     Object.keys(state.formData).forEach((key) => {
       const fieldConfig = props.config?.[key];
-      if (
-        fieldConfig &&
-        state.formData[key] !== formValues[fieldConfig.mapper || key]
-      ) {
-        state.formData[key] = formValues[fieldConfig.mapper || key];
+      let fieldName = key
+      if (fieldConfig && state.formData[key] !== formValues[fieldConfig.mapper || key]) {
+        fieldName = fieldConfig.mapper || key
       }
+
+      state.formData[key] = formValues[fieldName] ?? "";
     });
   },
   {
     immediate: true,
+    deep: true
   }
 );
 

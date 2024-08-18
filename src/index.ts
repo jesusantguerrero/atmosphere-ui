@@ -60,6 +60,9 @@ export { default as AtHeader } from "./components/organisms/AtHeader/AtHeader.vu
 export { default as AtSide } from "./components/organisms/AtSide/AtSide.vue";
 export { default as AtSideAccountItem } from "./components/organisms/AtSide/AtSideAccountItem.vue";
 export { default as AtSideNav } from "./components/organisms/AtSide/AtSideNav.vue";
+export { default as AtSideCollapsed } from "./components/organisms/AtSideSunday/AtSideCollapsed.vue";
+export { default as AtSideCollapsedItem } from "./components/organisms/AtSideSunday/AtSideCollapsedItem.vue";
+export { default as AtSideCollapsedItemGroup } from "./components/organisms/AtSideSunday/AtSideCollapsedItemGroup.vue";
 export { default as AtSteps } from "./components/organisms/AtSteps/AtSteps.vue";
 export { default as AtTable } from "./components/organisms/AtTable/AtTable.vue";
 export { default as AtTeamSelect } from "./components/organisms/AtTeamSelect/AtTeamSelect.vue";

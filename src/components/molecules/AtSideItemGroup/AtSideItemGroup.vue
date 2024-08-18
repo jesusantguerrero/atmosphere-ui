@@ -77,6 +77,7 @@ onMounted(() => {
         isActive || (!isActive && hasActiveChild) ? itemActiveClass : itemClass,
         isExpanded ? 'px-5' : 'px-3',
       ]"
+      :title="label"
       @click="emitValue()"
     >
       <span class="w-full py-4 side-item">

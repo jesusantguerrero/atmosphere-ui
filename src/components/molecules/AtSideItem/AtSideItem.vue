@@ -21,10 +21,10 @@ const props = withDefaults(
 
 const currentPath = inject("currentPath", ref(""));
 const counters = inject("counters", ref({}));
-const isExpanded = inject("isExpanded", true);
+const isExpanded = inject("isExpanded", ref(true));
 const classes = computed(() => {
   const classes = ["flex items-center w-full py-4 cursor-pointer"];
-  if (!isExpanded) {
+  if (!isExpanded.value) {
     classes.push("px-5");
   }
 
@@ -59,7 +59,7 @@ const itemCounter = computed(() => {
     <div class="divider__inner"></div>
   </div>
 
-  <div v-else class="item" v-bind="$attrs">
+  <div v-else class="item" v-bind="$attrs" :title="label">
     <slot :label="label" :to="to" :class="classes" :icon="icon">
       <component :is="componentName" :class="classes" :href="to" :label="label">
         <component

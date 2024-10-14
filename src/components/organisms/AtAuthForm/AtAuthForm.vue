@@ -223,11 +223,9 @@ const getFieldConfig = (field: string) => {
   return props.config?.[field] ?? {};
 } 
 
-watchOnce(
+watch(
   initialValues,
   (formValues) => {
-    console.log(formValues)
-   
     Object.keys(state.formData).forEach((key) => {
       const fieldConfig = props.config?.[key];
       let fieldName = key

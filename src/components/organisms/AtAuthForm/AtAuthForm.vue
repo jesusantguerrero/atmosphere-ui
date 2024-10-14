@@ -33,7 +33,7 @@
           class="bg-white"
           required
           v-model="formData.password"
-          @keydown.enter="loginUser()"
+          @keydown.enter.stop="loginUser()"
         />
       </component>
 
@@ -52,7 +52,7 @@
           :class="{ 'error-input': isConfirmationInvalid }"
           :errors="errors"
           @blur="isDirty = true"
-          @keydown.enter="loginUser()"
+          @keydown.enter.stop="loginUser()"
         />
         <small v-if="isConfirmationInvalid" class="text-red-200">
           {{ passwordNotEqualLabel }}
@@ -103,6 +103,7 @@ import AtField from "../../atoms/AtField/AtField.vue";
 import AtErrorBag from "../../atoms/AtErrorBag/AtErrorBag.vue";
 import AtInput from "../../atoms/AtInput/AtInput.vue";
 import AtInputPassword from "../../molecules/AtInputPassword/AtInputPassword.vue";
+import { watchOnce } from "@vueuse/core";
 
 const emit = defineEmits({
   submit: null,
@@ -225,7 +226,6 @@ const getFieldConfig = (field: string) => {
 watch(
   initialValues,
   (formValues) => {
-   
     Object.keys(state.formData).forEach((key) => {
       const fieldConfig = props.config?.[key];
       let fieldName = key
@@ -248,6 +248,8 @@ const loginUser = () => {
   if (!validateRegistration()) {
     return;
   }
+
+  console.log("emitted login")
 
   emit("submit", {
     ...state.formData,

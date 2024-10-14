@@ -116,11 +116,12 @@ describe("AuthForm component", () => {
     expect(inputEmail.value).toBe(email);
   });
   it("Should disable email on config set", async () => {
-    const initialValues = ref({
+    const initialValues = reactive({
       email: "",
     });
 
     const email = "jonhdoe@example.com";
+    const newEmail = "dan@example.com"
 
     const component = render(AuthForm, {
       props: {
@@ -134,9 +135,9 @@ describe("AuthForm component", () => {
       },
     });
 
-    initialValues.value.email = email;
+    initialValues.email = email;
     const inputEmail = await component.findByTestId("input-email");
-    await userEvent.type(inputEmail, "dan@example.com")
+    await userEvent.type(inputEmail, newEmail)
     expect(inputEmail.value).toBe(email);
   });
 

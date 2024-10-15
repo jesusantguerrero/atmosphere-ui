@@ -46,6 +46,7 @@
     "@babel/core": "^7.23.5",
     "@chromatic-com/storybook": "1",
     "@inertiajs/vue3": "^1.0.16",
+    "@playwright/test": "^1.48.0",
     "@rushstack/eslint-patch": "^1.10.2",
     "@storybook/addon-actions": "^8.3.5",
     "@storybook/addon-essentials": "^8.3.5",

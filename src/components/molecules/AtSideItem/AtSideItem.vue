@@ -61,7 +61,7 @@ const itemCounter = computed(() => {
 
   <div v-else class="item" v-bind="$attrs" :title="label">
     <slot :label="label" :to="to" :class="classes" :icon="icon">
-      <component :is="componentName" :class="classes" :href="to" :label="label">
+      <component :is="componentName" :class="classes" :href="to" :to="to" :label="label">
         <component
           :class="[isExpanded ? 'mr-2' : 'mx-auto']"
           :is="icon"

@@ -63,7 +63,7 @@
 
             <!-- Team Settings -->
             <AtDropdownLink as="button" @click="$emit('settings')">
-              {{ resourceName }} Settings
+              {{ settingsLabel ?? (resourceName + ' Settings') }}
             </AtDropdownLink>
 
             <AtDropdownLink
@@ -71,7 +71,7 @@
               @click="$emit('create')"
               v-if="canCreateTeams"
             >
-              Create New {{ resourceName }}
+              {{ createLabel ?? ('Create New ' + resourceName) }}
             </AtDropdownLink>
 
             <div class="border-t border-gray-100"></div>
@@ -79,7 +79,7 @@
             <!-- Team Switcher -->
             <section v-if="teams.length > 1">
               <h5 class="block px-4 py-2 text-xs text-gray-400">
-                Switch {{ resourceName }}
+                {{ switchLabel ?? ('Switch ' + resourceName) }}
               </h5>
   
               <AtDropdownLink
@@ -131,6 +131,9 @@ withDefaults(
     teams: Team[];
     sectionTitle: string;
     resourceName: string;
+    settingsLabel?: string;
+    createLabel?: string;
+    switchLabel?: string;
     imageUrl?: string;
     rounded: boolean;
     fullHeight?: boolean;
